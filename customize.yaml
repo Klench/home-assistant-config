@@ -1,0 +1,39 @@
+
+light.sovrum:
+  friendly_name: "Lampor sovrum"
+light.vardagsrum:
+  friendly_name: "Lampor vardagsrum"
+light.hall:
+  friendly_name: "Lampor hall"
+
+media_player.tv:
+  icon: mdi:television-classic
+
+automation.wakeup_weekdays:
+  icon: mdi:weather-sunny
+automation.enable_sonos_alarm:
+  icon: mdi:speaker-wireless
+automation.wakeup_weekend:
+  icon: mdi:weather-sunny
+automation.go_to_bed_weekdays:
+  icon: mdi:weather-night
+automation.go_to_bed_weekend:
+  icon: mdi:weather-night
+automation.evening_relaxed:
+  icon: mdi:lightbulb-on-outline
+automation.evening_bright:
+  icon: mdi:lightbulb-on-outline
+automation.coming_home:
+  icon: mdi:home-outline
+automation.car_coming_home:
+  icon: mdi:car
+automation.leaving_home:
+  icon: mdi:home-outline
+automation.morning_not_home:
+  icon: mdi:lightbulb
+automation.kodi_playing:
+  icon: mdi:youtube-tv
+automation.tv_turned_off:
+  icon: mdi:television-classic-off
+automation.car_heater_weekdays:
+  icon: mdi:radiator

@@ -1,0 +1,10 @@
+- platform: template
+  switches:
+    sonos_night_mode:
+      friendly_name: 'Nattläge'
+      icon_template: mdi:sleep
+      value_template: '{{ states.media_player.vardagsrum.attributes.night_sound }}'
+      turn_on:
+        service: script.sonos_enable_night_mode
+      turn_off:
+        service: script.sonos_disable_night_mode

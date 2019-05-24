@@ -1,0 +1,305 @@
+title: Stenman
+
+resources:
+  - url: /local/mini-media-player-bundle.js?v=1.0.4
+    type: module
+  - url: /customcards/github/custom-cards/tracker-card.js?track=true
+    type: module
+
+views:
+
+################# HOME #################
+
+  - title: Hem
+    cards:
+
+      - type: glance
+        entities:
+          - sensor.outside_temperature
+          - entity: sun.sun
+            name: 'Sol'
+          - device_tracker.davidsiphone
+          - device_tracker.nelliesiphone
+          - device_tracker.volvo_lgd321
+          - entity: sensor.lgd321_range
+            name: 'Räckvidd'
+          - entity: switch.lgd321_heater
+            name: 'Värmare'
+          - sensor.plex
+          - media_player.tv
+
+      - type: light
+        entity: light.vardagsrum
+
+      - type: light
+        entity: light.hall
+
+      - type: light
+        entity: light.sovrum
+
+      - type: entities
+        title: Vardagsrum
+        show_header_toggle: false
+        entities:
+          - scene.vardagsrum_bright
+          - scene.vardagsrum_relaxed
+          - light.hue_ambiance_lamp_1
+          - light.hue_ambiance_lamp_1_3
+
+      - type: entities
+        title: Hall
+        show_header_toggle: false
+        entities:
+          - scene.hall_bright
+          - scene.hall_relaxed
+          - light.hue_ambiance_lamp_1_4
+
+      - type: entities
+        title: Sovrum
+        show_header_toggle: false
+        entities:
+          - scene.sovrum_bright
+          - scene.sovrum_relaxed
+          - light.hue_ambiance_lamp_2
+
+      - type: custom:mini-media-player
+        entity: media_player.kodi
+        toggle_power: false
+        replace_mute: 'stop'
+        hide:
+          volume: true
+          mute: true
+          power_state: false
+        show_progress: true
+        artwork: full-cover
+        icon: mdi:television-classic
+
+      - type: weather-forecast
+        entity: weather.smhi_hem
+
+      - type: sensor
+        entity: sensor.outside_temperature
+        graph: line
+        name: 'Yttertemperatur'
+        unit: '°C'
+        detail: 2
+
+      - type: custom:tracker-card
+        title: 'Custom updater'
+
+      # - type: iframe
+      #   url: http://install.egain.se/?gid=4A2877A9-98DE-42BB-B984-CE16AD3E8C56
+      #   aspect_ratio: 190%
+      #   title: 'Inomhusklimat'
+
+################# WAKEUP #################
+
+  - title: Väckning
+    cards:
+     
+      - type: entities
+        title: Väckning vardagar
+        show_header_toggle: false
+        entities:
+          - sensor.alarm_clock_time_weekdays
+          - input_number.alarm_hours_weekdays
+          - input_number.alarm_minutes_weekdays
+          - input_number.alarm_heater_offset
+          - entity: automation.wakeup_weekdays
+            name: 'Väckning vardagar'
+          - entity: automation.enable_sonos_alarm
+            name: 'Sonos alarm'
+          - input_boolean.wakeup_override
+          - entity: automation.car_heater_weekdays
+            name: 'Bränslevärmare'
+
+      - type: entities
+        title: Väckning helg
+        show_header_toggle: false
+        entities:
+          - sensor.alarm_clock_time_weekend
+          - input_number.alarm_hours_weekend
+          - input_number.alarm_minutes_weekend
+          - entity: automation.wakeup_weekend
+            name: 'Väckning helg'
+
+################# SONOS #################
+
+  - title: Sonos
+    cards:
+
+      - type: entity-button
+        entity: script.sonos_manual_group_speakers
+        icon: mdi:speaker-wireless
+        name: "Gruppera högtalare"
+        tap_action:
+          action: call-service
+          service: script.sonos_manual_group_speakers
+
+      - type: entity-button
+        entity: script.sonos_sync_group_volume
+        icon: mdi:volume-high
+        name: "Synkronisera volym"
+        tap_action:
+          action: call-service
+          service: script.sonos_sync_group_volume
+
+      - entity: media_player.kok
+        type: custom:mini-media-player
+        hide:
+          power: true
+          source: true
+          volume: false
+        show_progress: true
+        artwork: full-cover
+        icon: mdi:speaker-multiple
+        speaker_group:
+          platform: sonos
+          sync_volume: true
+          expanded: true
+          show_group_count: true
+          entities:
+            - entity_id: media_player.kok
+              name: Sonos kök
+            - entity_id: media_player.sovrum
+              name: Sonos sovrum
+            - entity_id: media_player.vardagsrum
+              name: Sonos vardagsrum
+#        tts:
+#          platform: sonos
+#          language: english
+#          entity_id:
+#            - media_player.kok
+#            - media_player.sovrum
+#            - media_player.vardagsrum
+#          volume: 0.3
+
+      - type: custom:mini-media-player
+        entity: media_player.sovrum
+        artwork: cover
+        icon: mdi:speaker
+        show_progress: true
+        hide:
+          power: true
+          source: true
+        speaker_group:
+          platform: sonos
+          show_group_count: false
+
+      - type: custom:mini-media-player
+        entity: media_player.vardagsrum
+        artwork: cover
+        icon: mdi:speaker
+        show_progress: true
+        hide:
+          power: true
+          source: true
+        speaker_group:
+          platform: sonos
+          show_group_count: false
+
+      - type: entities
+        title: Nattläge Sonos Beam
+        show_header_toggle: false
+        entities:
+          - switch.sonos_night_mode
+
+################# WORK TIME ################# 
+
+  - title: Arbetstid
+    cards:
+
+      - type: entities
+        title: Arbetstid
+        show_header_toggle: false
+        entities:
+          - sensor.work_time
+          - sensor.work_time_in
+          - input_number.work_time_hours_in
+          - input_number.work_time_minutes_in
+          - sensor.work_time_out
+          - input_number.work_time_hours_out
+          - input_number.work_time_minutes_out
+          - input_number.work_time_minutes_lunch
+
+################# AUTOMATIONS #################
+
+  - title: Automationer
+    cards:
+
+      - type: entity-button
+        entity: group.all_automations
+        name: 'Toggle automations'
+        icon: mdi:home-automation
+        tap_action:
+          action: toggle
+
+      - type: entities
+        title: Automationer
+        show_header_toggle: false
+        entities:
+          - automation.wakeup_weekdays
+          - automation.enable_sonos_alarm
+          - automation.wakeup_weekend
+          - automation.go_to_bed_weekdays
+          - automation.go_to_bed_weekend
+          - automation.evening_relaxed
+          - automation.evening_bright
+          - automation.coming_home
+          - automation.car_coming_home
+          - automation.leaving_home
+          - automation.morning_not_home
+          - automation.kodi_playing
+          - automation.tv_turned_off
+          - automation.car_heater_weekdays
+
+################# ESPHome #################
+
+  - title: ESPHome
+    cards:
+
+      - type: light
+        entity: light.led_strip_2
+
+################# CAR #################
+
+  - title: Bil
+    cards:
+      
+      - type: entities
+        title: Översikt
+        show_header_toggle: false
+        entities:
+          - binary_sensor.lgd321_doors
+          - binary_sensor.lgd321_windows
+          - binary_sensor.lgd321_hood
+          - binary_sensor.lgd321_brake_fluid
+          - binary_sensor.lgd321_bulbs
+          - binary_sensor.lgd321_service
+          - binary_sensor.lgd321_washer_fluid
+          - sensor.lgd321_fuel_level
+          - sensor.lgd321_fuel_amount
+          - sensor.lgd321_range
+          - sensor.lgd321_fuel_consumption
+          - switch.lgd321_heater
+
+      - type: entities
+        title: Detaljer
+        show_header_toggle: false
+        entities:
+          - sensor.lgd321_last_trip
+          - sensor.lgd321_odometer
+          - sensor.lgd321_trip_meter_1
+          - sensor.lgd321_trip_meter_2
+          - binary_sensor.lgd321_front_left_door
+          - binary_sensor.lgd321_front_right_door
+          - binary_sensor.lgd321_rear_left_door
+          - binary_sensor.lgd321_rear_right_door
+          - binary_sensor.lgd321_front_left_window
+          - binary_sensor.lgd321_front_right_window
+          - binary_sensor.lgd321_rear_left_window
+          - binary_sensor.lgd321_rear_right_window
+          - binary_sensor.lgd321_front_left_tyre
+          - binary_sensor.lgd321_front_right_tyre
+          - binary_sensor.lgd321_rear_left_tyre
+          - binary_sensor.lgd321_rear_right_tyre

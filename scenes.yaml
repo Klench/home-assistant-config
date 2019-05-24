@@ -1,0 +1,126 @@
+################# COMMON #################
+
+- name: 'All lights bright'
+  entities:
+    group.all_lights:
+      state: true
+      brightness: 255
+      color_temp: 372
+      transition: 2
+
+- name: 'All lights relaxed'
+  entities:
+    group.all_lights:
+      state: true
+      brightness: 144
+      color_temp: 443
+      transition: 2
+
+- name: 'All lights off'
+  entities:
+    group.all_lights:
+      state: false
+      transition: 1
+
+################# ROOM #################
+
+- name: 'Vardagsrum bright'
+  entities:
+    light.vardagsrum:
+      state: true
+      brightness: 255
+      color_temp: 372
+      transition: 2
+
+- name: 'Sovrum bright'
+  entities:
+    light.sovrum:
+      state: true
+      brightness: 255
+      color_temp: 372
+      transition: 2
+
+- name: 'Hall bright'
+  entities:
+    light.hall:
+      state: true
+      brightness: 255
+      color_temp: 372
+      transition: 2
+
+- name: 'Vardagsrum relaxed'
+  entities:
+    light.vardagsrum:
+      state: true
+      brightness: 144
+      color_temp: 443
+      transition: 2
+
+- name: 'Sovrum relaxed'
+  entities:
+    light.sovrum:
+      state: true
+      brightness: 144
+      color_temp: 443
+      transition: 2
+
+- name: 'Hall relaxed'
+  entities:
+    light.hall:
+      state: true
+      brightness: 144
+      color_temp: 443
+      transition: 2
+
+################# WAKEUP #################
+
+- name: 'Wakeup'
+  entities:
+    light.vardagsrum:
+      state: true
+      brightness: 255
+      color_temp: 372
+      transition: 1800
+    light.hall:
+      state: true
+      brightness: 255
+      color_temp: 372
+      transition: 1800
+    light.sovrum:
+      state: true
+#      brightness: 144
+#      color_temp: 372
+#      transition: 1800
+      brightness: 255
+      color_temp: 372
+      transition: 2700
+
+################# GO TO BED #################
+
+- name: 'Go to bed'
+  entities:
+    light.vardagsrum:
+      state: false
+      transition: 1800
+    light.hall:
+      state: false
+      transition: 1800
+    light.sovrum:
+      state: false
+      transition: 300
+
+################# MEDIA SCENES #################
+
+- name: 'Watching TV'
+  entities:
+#    light.vardagsrum:
+    light.hue_ambiance_lamp_1_3:
+      state: true
+      brightness: 144
+      color_temp: 443
+      transition: 2
+#    light.hall:
+#      state: true
+#      brightness: 144
+#      color_temp: 443
+#      transition: 2

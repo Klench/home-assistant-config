@@ -1,0 +1,168 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Stenman
+  # Location required to calculate the time the sun rises and sets
+  latitude: !secret home_latitude
+  longitude: !secret home_longitude
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: !secret home_elevation
+  # metric for Metric, imperial for Imperial
+  unit_system: metric
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: Europe/Stockholm
+  # Customization file
+  customize: !include customize.yaml
+
+# Show links to resources in log and frontend
+#introduction:
+
+# Enables the frontend
+frontend:
+  javascript_version: latest
+
+lovelace:
+  mode: yaml
+
+# Enables configuration UI
+config:
+
+http:
+  # Secrets are defined in the file secrets.yaml
+#  api_password: !secret http_password
+  # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+#  base_url: example.duckdns.org:8123
+  base_url: !secret base_url
+
+# Checks for available updates
+# Note: This component will send some information about your system to
+# the developers to assist with development of Home Assistant.
+# For more information, please see:
+# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
+# updater:
+  # Optional, allows Home Assistant developers to focus on popular components.
+  # include_used_components: true
+
+custom_updater:
+  card_urls:
+    - https://raw.githubusercontent.com/kalkih/mini-media-player/master/tracker.json
+  component_urls:
+    - https://raw.githubusercontent.com/robmarkcole/Hue-sensors-HASS/master/custom_updater.json
+  track:
+    - cards
+    - components
+
+# Discover some devices automatically
+discovery:
+  ignore:
+    - igd
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+# conversation:
+
+# Enables support for tracking state changes over time
+history:
+
+# View all events in a logbook
+logbook:
+
+# Enables a map showing the location of tracked devices
+map:
+
+# Track the sun
+sun:
+
+# System health
+system_health:
+
+# iOS app
+ios:
+
+# Text to speech
+tts:
+ - platform: google_translate
+   base_url: !secret local_ip
+
+# Cloud
+# cloud:
+
+################# ZIGBEE #################
+
+zha:
+  usb_path: /dev/bus/usb/005/004
+  database_path: /config/zigbee.db
+  baudrate: 250000
+
+################# VOLVO ON CALL #################
+
+volvooncall:
+  username: !secret volvo_username
+  password: !secret volvo_password
+
+################# MEDIA PLAYERS #################
+
+media_player:
+  - platform: kodi
+    host: 192.168.2.4
+    port: 8080
+    username: osmc
+    password: !secret kodi_password
+    turn_off_action:
+      service: media_player.kodi_call_method
+      data:
+        entity_id: media_player.kodi
+        method: System.Reboot
+  - platform: samsungtv
+    host: 192.168.2.32
+    port: 8001
+    name: 'TV'
+#  - platform: spotify
+#    client_id: !secret spotify_client_id
+#    client_secret: !secret spotify_client_secret
+
+sonos:
+  media_player:
+    hosts:
+      - 192.168.2.94
+      - 192.168.2.115
+      - 192.168.2.207
+
+panel_iframe:
+  kodi:
+    title: Kodi
+    url: http://192.168.2.4:8080/#remote
+    icon: mdi:kodi
+  configurator:
+    title: Configurator
+    icon: mdi:wrench
+    url: http://192.168.2.2:3218
+  esphome:
+    title: ESPHome
+    icon: mdi:developer-board
+    url: http://192.168.2.2:6052
+
+################# DEVICE TRACKER #################
+
+device_tracker:
+  - platform: unifi
+    host: 192.168.2.2
+    username: !secret unifi_username
+    password: !secret unifi_password
+    verify_ssl: false
+    detection_time: 30
+    ssid_filter:
+    - 'Yggdrasil'
+    new_device_defaults:
+      track_new_devices: false
+      hide_if_away: false
+
+################# INCLUDE #################
+
+group: !include groups.yaml
+scene: !include scenes.yaml
+automation: !include automations.yaml
+sensor: !include sensors.yaml
+binary_sensor: !include binary_sensors.yaml
+script: !include scripts.yaml
+input_number: !include input_numbers.yaml
+input_boolean: !include input_boolean.yaml
+switch: !include switches.yaml

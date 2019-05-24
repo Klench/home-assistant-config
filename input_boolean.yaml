@@ -1,0 +1,4 @@
+wakeup_override:
+  name: Manuell aktivering
+  icon: mdi:alarm-check
+  initial: off

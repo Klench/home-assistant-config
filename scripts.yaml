@@ -1,0 +1,121 @@
+################# SONOS #################
+
+sonos_group_speakers:
+  alias: Sonos group speakers
+  sequence:
+    - service: sonos.join
+      data:
+        master: media_player.kok
+        entity_id:
+          - media_player.sovrum
+          - media_player.vardagsrum
+
+sonos_set_group_volume:
+  alias: Sonos set group volume
+  sequence:
+    - service: media_player.volume_set
+      data_template:
+        entity_id: group.sonos_all_speakers
+        volume_level: '{{ volume }}'
+
+sonos_sync_group_volume:
+  alias: Sonos sync group volume
+  sequence:
+    - service: media_player.volume_set
+      data_template:
+        entity_id:
+          - media_player.sovrum
+          - media_player.vardagsrum
+        volume_level: '{{  states.media_player.kok.attributes.volume_level | float  }}'
+
+sonos_manual_group_speakers:
+  alias: 'Sonos manual group speakers'
+  sequence:
+    - service: script.sonos_group_speakers
+    - service: script.sonos_sync_group_volume
+
+sonos_increase_volume:
+  alias: 'Sonos increase volume'
+  sequence:
+    - service: media_player.volume_set
+      data_template:
+        entity_id: group.sonos_all_speakers
+        volume_level: '{{  states.media_player.kok.attributes.volume_level | float + 0.1  }}'
+
+sonos_decrease_volume:
+  alias: 'Sonos decrease volume'
+  sequence:
+    - service: media_player.volume_set
+      data_template:
+        entity_id: group.sonos_all_speakers
+        volume_level: '{{  states.media_player.kok.attributes.volume_level | float - 0.1  }}'
+
+sonos_say:
+  alias: "Sonos TTS script"
+  sequence:
+    - service: sonos.snapshot
+      data_template:
+        entity_id: "{{ 'media_player.' ~ sonos_entity }}"
+    - service: sonos.unjoin
+      data_template:
+        entity_id:  "{{ 'media_player.' ~ sonos_entity }}"
+    - service: media_player.volume_set
+      data_template:
+        entity_id:  "{{ 'media_player.' ~ sonos_entity }}"
+        volume_level: "{{ volume }}"
+    - service: tts.google_translate_say
+      data_template:
+        entity_id:  "{{ 'media_player.' ~ sonos_entity }}"
+        message: "{{ message }}"
+    - delay: '00:00:01'
+    - delay: >-
+        {% set duration = states.media_player[sonos_entity].attributes.media_duration %}
+        {% if duration > 0 %}
+          {% set duration = duration - 1 %}
+        {% endif %}
+        {% set seconds = duration % 60 %}
+        {% set minutes = (duration / 60)|int % 60 %}
+        {% set hours = (duration / 3600)|int %}
+        {{ [hours, minutes, seconds]|join(':') }}
+    - service: sonos.restore
+      data_template:
+        entity_id:  "{{ 'media_player.' ~ sonos_entity }}"
+        with_group: true
+
+sonos_set_alarm:
+  alias: 'Sonos set alarm'
+  sequence:
+    - service: sonos.update_alarm
+      data_template:
+        entity_id: media_player.sovrum
+        alarm_id: 7
+        time: '{{ states.sensor.alarm_clock_time_weekdays.state }}'
+        enabled: true
+
+sonos_disable_alarm:
+  alias: 'Sonos disable alarm'
+  sequence:
+    - service: sonos.update_alarm
+      data_template:
+        entity_id: media_player.sovrum
+        alarm_id: 7
+        enabled: false
+
+sonos_enable_night_mode:
+  alias: 'Sonos enable night mode'
+  sequence:
+    - service: sonos.set_option
+      data:
+         entity_id: media_player.vardagsrum
+         night_sound: true
+         speech_enhance: true
+
+sonos_disable_night_mode:
+  alias: 'Sonos disable night mode'
+  sequence:
+    - service: sonos.set_option
+      data:
+         entity_id: media_player.vardagsrum
+         night_sound: false
+         speech_enhance: false
+

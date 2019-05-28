@@ -128,21 +128,21 @@ views:
   - title: Sonos
     cards:
 
-      - type: entity-button
-        entity: script.sonos_manual_group_speakers
-        icon: mdi:speaker-wireless
-        name: "Gruppera högtalare"
-        tap_action:
-          action: call-service
-          service: script.sonos_manual_group_speakers
-
-      - type: entity-button
-        entity: script.sonos_sync_group_volume
-        icon: mdi:volume-high
-        name: "Synkronisera volym"
-        tap_action:
-          action: call-service
-          service: script.sonos_sync_group_volume
+      # - type: entity-button
+      #   entity: script.sonos_manual_group_speakers
+      #   icon: mdi:speaker-wireless
+      #   name: "Gruppera högtalare"
+      #   tap_action:
+      #     action: call-service
+      #     service: script.sonos_manual_group_speakers
+      #
+      # - type: entity-button
+      #   entity: script.sonos_sync_group_volume
+      #   icon: mdi:volume-high
+      #   name: "Synkronisera volym"
+      #   tap_action:
+      #     action: call-service
+      #     service: script.sonos_sync_group_volume
 
       - entity: media_player.kok
         type: custom:mini-media-player

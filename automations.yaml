@@ -74,8 +74,9 @@
 - alias: 'Wakeup weekend'
   initial_state: off
   trigger:
-    platform: time
-    at: '08:00:00'
+    platform: state
+    entity_id: binary_sensor.alarm_clock_trigger_weekend
+    to: 'on'
   condition:
     condition: and
     conditions:
@@ -355,6 +356,10 @@
     platform: state
     entity_id: media_player.tv
     to: 'off'
+  condition:
+    condition: state
+    entity_id: binary_sensor.sonos_livingroom_source_tv
+    state: 'on'
   action:
     - service: script.sonos_group_speakers
     - service: script.sonos_sync_group_volume
@@ -365,8 +370,9 @@
 - alias: 'Car heater weekdays'
   initial_state: off
   trigger:
-    platform: time
-    at: '06:35:00'
+    platform: state
+    entity_id: binary_sensor.car_heater_trigger_workdays
+    to: 'on'
   condition:
     condition: and
     conditions:

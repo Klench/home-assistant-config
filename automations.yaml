@@ -107,6 +107,9 @@
       - condition: state
         entity_id: group.device_tracker_family
         state: 'home'
+      - condition: state
+        entity_id: automation.wakeup_weekdays
+        state: 'on'
   action:
     service: script.sonos_set_alarm
 
@@ -350,7 +353,7 @@
     service: scene.turn_on
     entity_id: scene.watching_tv
 
-- alias: 'TV turned off'
+- alias: 'TV off group speakers'
   initial_state: on
   trigger:
     platform: state
@@ -358,12 +361,20 @@
     to: 'off'
   condition:
     condition: state
-    entity_id: binary_sensor.sonos_livingroom_source_tv
-    state: 'on'
+    entity_id: binary_sensor.sonos_livingroom_playing_music
+    state: 'off'
   action:
     - service: script.sonos_group_speakers
     - service: script.sonos_sync_group_volume
-    - service: script.sonos_disable_night_mode
+
+- alias: 'TV off disable night mode'
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: media_player.tv
+    to: 'off'
+  action:
+    service: script.sonos_disable_night_mode
 
 ################# CAR HEATER #################
 

@@ -85,13 +85,6 @@ tts:
 # Cloud
 # cloud:
 
-################# ZIGBEE #################
-
-zha:
-  usb_path: /dev/bus/usb/005/004
-  database_path: /config/zigbee.db
-  baudrate: 250000
-
 ################# VOLVO ON CALL #################
 
 volvooncall:

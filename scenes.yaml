@@ -15,12 +15,16 @@
       brightness: 144
       color_temp: 443
       transition: 2
+    switch.tradfri_outlet:
+      state: 'on'
 
 - name: 'All lights off'
   entities:
     group.all_lights:
       state: false
       transition: 1
+    switch.tradfri_outlet:
+      state: 'off'
 
 ################# ROOM #################
 
@@ -55,6 +59,8 @@
       brightness: 144
       color_temp: 443
       transition: 2
+    switch.tradfri_outlet:
+      state: 'on'
 
 - name: 'Sovrum relaxed'
   entities:

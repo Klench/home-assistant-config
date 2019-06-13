@@ -43,6 +43,8 @@ views:
         entities:
           - scene.vardagsrum_bright
           - scene.vardagsrum_relaxed
+          - entity: switch.tradfri_outlet
+            name: 'Fönsterlampa vardagsrum'
           - light.hue_ambiance_lamp_1
           - light.hue_ambiance_lamp_1_3
 

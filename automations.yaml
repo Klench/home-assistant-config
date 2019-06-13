@@ -284,8 +284,8 @@
     entity_id: group.device_tracker_family
     to: 'not_home'
   action:
-    service: light.turn_off
-    entity_id: group.all_lights
+    service: scene.turn_on
+    entity_id: scene.all_lights_off
 
 - alias: 'Coming home'
   initial_state: on

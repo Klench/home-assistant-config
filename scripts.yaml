@@ -40,7 +40,7 @@ sonos_increase_volume:
     - service: media_player.volume_set
       data_template:
         entity_id: group.sonos_all_speakers
-        volume_level: '{{  states.media_player.kok.attributes.volume_level | float + 0.1  }}'
+        volume_level: '{{  states.media_player.kok.attributes.volume_level | float + 0.07  }}'
 
 sonos_decrease_volume:
   alias: 'Sonos decrease volume'
@@ -48,7 +48,7 @@ sonos_decrease_volume:
     - service: media_player.volume_set
       data_template:
         entity_id: group.sonos_all_speakers
-        volume_level: '{{  states.media_player.kok.attributes.volume_level | float - 0.1  }}'
+        volume_level: '{{  states.media_player.kok.attributes.volume_level | float - 0.07  }}'
 
 sonos_say:
   alias: "Sonos TTS script"

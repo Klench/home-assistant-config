@@ -7,6 +7,31 @@
   username: !secret plex_username
   password: !secret plex_password
 
+- platform: plex_recently_added
+  host: 192.168.2.2
+  port: 32400
+  token: !secret plex_token
+  ssl: true
+  ssl_cert: false
+  download_images: true
+  max: 5
+  section_types:
+    - movie
+    - show
+
+- platform: trakt
+  id: !secret trakt_id
+  secret: !secret trakt_secret
+  username: !secret trakt_username
+  days: 10
+
+- platform: krisinformation
+  name: "Krisinformation Västra Götaland"
+  county: "Västra Götalands län"
+  latitude: !secret home_latitude
+  longitude: !secret home_longitude
+  radius: 100
+
 - platform: time_date
   display_options:
     - 'time'

@@ -1,18 +1,5 @@
 ################# TIME #################
 
-- alias: 'Evening relaxed'
-  initial_state: on
-  trigger:
-    platform: time
-    at: '22:00:00'
-  condition:
-    condition: state
-    entity_id: group.device_tracker_family
-    state: 'home'
-  action:
-    service: scene.turn_on
-    entity_id: scene.all_lights_relaxed
-
 - alias: 'Evening bright'
   initial_state: on
   trigger:
@@ -24,8 +11,29 @@
     entity_id: group.device_tracker_family
     state: 'home'
   action:
-    service: scene.turn_on
-    entity_id: scene.all_lights_bright
+    - service: scene.turn_on
+      entity_id: scene.vardagsrum_bright
+    - service: scene.turn_on
+      entity_id: scene.sovrum_bright
+    - service: scene.turn_on
+      entity_id: scene.hall_bright
+
+- alias: 'Evening relaxed'
+  initial_state: on
+  trigger:
+    platform: time
+    at: '21:30:00'
+  condition:
+    condition: state
+    entity_id: group.device_tracker_family
+    state: 'home'
+  action:
+    - service: scene.turn_on
+      entity_id: scene.vardagsrum_relaxed
+    - service: scene.turn_on
+      entity_id: scene.sovrum_relaxed
+    - service: scene.turn_on
+      entity_id: scene.hall_relaxed
 
 - alias: 'Morning not home'
   initial_state: on
@@ -42,8 +50,8 @@
         entity_id: group.all_lights
         state: 'on'
   action:
-    service: light.turn_off
-    entity_id: group.all_lights
+    service: scene.turn_on
+    entity_id: scene.all_lights_off
 
 ################# WAKEUP #################
 
@@ -209,8 +217,12 @@
     entity_id: sensor.hallway_switch
     state: '1_hold'
   action:
-    service: scene.turn_on
-    entity_id: scene.all_lights_relaxed
+    - service: scene.turn_on
+      entity_id: scene.vardagsrum_relaxed
+    - service: scene.turn_on
+      entity_id: scene.sovrum_relaxed
+    - service: scene.turn_on
+      entity_id: scene.hall_relaxed
 
 - alias: 'Hue switch turn off lighs'
   initial_state: on
@@ -304,7 +316,11 @@
         before_offset: '1:00:00'
   action:
     - service: scene.turn_on
-      entity_id: scene.all_lights_bright
+      entity_id: scene.vardagsrum_bright
+    - service: scene.turn_on
+      entity_id: scene.sovrum_bright
+    - service: scene.turn_on
+      entity_id: scene.hall_bright
 
 - alias: 'Car coming home'
   initial_state: on
@@ -326,7 +342,43 @@
       state: 'not_home'
   action:
     - service: scene.turn_on
-      entity_id: scene.all_lights_bright
+      entity_id: scene.vardagsrum_bright
+    - service: scene.turn_on
+      entity_id: scene.sovrum_bright
+    - service: scene.turn_on
+      entity_id: scene.hall_bright
+
+################# BATHROOM #################
+
+- alias: 'Closing bathroom door'
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: binary_sensor.bathroom_door
+    to: 'off'
+  condition:
+    - condition: or
+      conditions:
+        - condition: time
+          after: '22:30:00'
+        - condition: time
+          before: '07:00:00'
+    - condition: state
+      entity_id: group.device_tracker_family
+      state: 'home'
+  action:
+    service: scene.turn_on
+    entity_id: scene.bathroom_led_relaxed
+
+- alias: 'Opening bathroom door'
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: binary_sensor.bathroom_door
+    to: 'on'
+  action:
+    service: light.turn_off
+    entity_id: light.led_strip_2
 
 ################# MEDIA #################
 
@@ -419,13 +471,3 @@
       sonos_entity: kok
       volume: 0.1
       message: 'Car heater turned on'
-
-################# CUSTOM UPDATER #################
-
-- alias: 'Custom updater'
-  initial_state: on
-  trigger:
-    platform: time
-    at: '14:00:00'
-  action:
-    service: custom_updater.check_all

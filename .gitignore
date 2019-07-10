@@ -1,9 +1,6 @@
 *
 !*.yaml
-!*.py
+secrets.yaml
 !*.gitignore
 !/custom_components/**/**
-/deps/**
-known_devices.yaml
-groups.yaml
-secrets.yaml
+!/www/**/**

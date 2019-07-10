@@ -1,10 +1,18 @@
 title: Stenman
 
 resources:
-  - url: /local/mini-media-player-bundle.js?v=1.0.4
+  - url: /community_plugin/mini-media-player/mini-media-player.js
     type: module
-  - url: /customcards/github/custom-cards/tracker-card.js?track=true
+  - url: /community_plugin/mini-graph-card/mini-graph-card.js
     type: module
+  - url: /community_plugin/upcoming-media-card/upcoming-media-card.js
+    type: js
+  - url: /community_plugin/krisinfo-card/krisinfo-card.js
+    type: js
+  - url: /local/plugins/card-mod.js?v=1
+    type: js
+  - url: /local/plugins/card-tools.js?v=1
+    type: js
 
 views:
 
@@ -18,8 +26,12 @@ views:
           - sensor.outside_temperature
           - entity: sun.sun
             name: 'Sol'
-          - device_tracker.davidsiphone
-          - device_tracker.nelliesiphone
+          - entity: device_tracker.davids_iphone
+            name: 'David'
+            icon: mdi:human-male
+          - entity: device_tracker.nellies_iphone
+            name: 'Nellie'
+            icon: mdi:human-female
           - device_tracker.volvo_lgd321
           - entity: sensor.lgd321_range
             name: 'Räckvidd'
@@ -27,6 +39,9 @@ views:
             name: 'Värmare'
           - sensor.plex
           - media_player.tv
+          - entity: sensor.potential_breaking_changes
+            name: 'Ändringar'
+            icon: mdi:briefcase-download-outline
 
       - type: light
         entity: light.vardagsrum
@@ -43,8 +58,7 @@ views:
         entities:
           - scene.vardagsrum_bright
           - scene.vardagsrum_relaxed
-          - entity: switch.tradfri_outlet
-            name: 'Fönsterlampa vardagsrum'
+          - light.window_lamp_livingroom
           - light.hue_ambiance_lamp_1
           - light.hue_ambiance_lamp_1_3
 
@@ -62,6 +76,7 @@ views:
         entities:
           - scene.sovrum_bright
           - scene.sovrum_relaxed
+          - light.bedside_lamp_bedroom
           - light.hue_ambiance_lamp_2
 
       - type: custom:mini-media-player
@@ -78,21 +93,25 @@ views:
 
       - type: weather-forecast
         entity: weather.smhi_hem
-
-      - type: sensor
-        entity: sensor.outside_temperature
-        graph: line
+        
+      - type: custom:mini-graph-card
+        entities:
+          - sensor.outside_temperature
         name: 'Yttertemperatur'
         unit: '°C'
-        detail: 2
-
-      - type: custom:tracker-card
-        title: 'Custom updater'
-
-      # - type: iframe
-      #   url: http://install.egain.se/?gid=4A2877A9-98DE-42BB-B984-CE16AD3E8C56
-      #   aspect_ratio: 190%
-      #   title: 'Inomhusklimat'
+        line_color: '#5c8dd1'
+        hour24: true
+        animate: true
+        decimals: 1
+        points_per_hour: 1
+        font_size_header: 18
+        show:
+          extrema: true
+          labels: true
+          fill: fade
+        
+      - type: custom:krisinfo-card
+        entity: sensor.krisinformation_vastra_gotaland
 
 ################# WAKEUP #################
 
@@ -161,8 +180,6 @@ views:
           expanded: true
           show_group_count: true
           entities:
-            - entity_id: media_player.kok
-              name: Sonos kök
             - entity_id: media_player.sovrum
               name: Sonos sovrum
             - entity_id: media_player.vardagsrum
@@ -206,6 +223,24 @@ views:
         entities:
           - switch.sonos_night_mode
 
+################# TV #################
+
+  - title: TV
+    cards:
+
+      - type: custom:upcoming-media-card
+        entity: sensor.plex_recently_added
+        title: Plex senast tillagt
+        clock: 24
+        image_style: fanart
+
+      - type: custom:upcoming-media-card
+        entity: sensor.trakt_upcoming_calendar
+        title: Kommande TV-serier
+        clock: 24
+        image_style: fanart
+        hide_empty: true
+
 ################# WORK TIME ################# 
 
   - title: Arbetstid
@@ -247,12 +282,14 @@ views:
           - automation.go_to_bed_weekend
           - automation.evening_relaxed
           - automation.evening_bright
+          - automation.closing_bathroom_door
+          - automation.opening_bathroom_door
           - automation.coming_home
           - automation.car_coming_home
           - automation.leaving_home
           - automation.morning_not_home
           - automation.kodi_playing
-          - automation.tv_turned_off
+          - automation.tv_off_group_speakers
           - automation.car_heater_weekdays
 
 ################# ESPHome #################
@@ -260,8 +297,16 @@ views:
   - title: ESPHome
     cards:
 
-      - type: light
-        entity: light.led_strip_2
+      - type: entities
+        title: Badrum
+        show_header_toggle: false
+        entities:
+          - entity: binary_sensor.bathroom_door
+            name: 'Badrumsdörr'
+          - entity: light.led_strip_2
+            name: LED-belysning
+          - automation.closing_bathroom_door
+          - automation.opening_bathroom_door
 
 ################# CAR #################
 

@@ -23,6 +23,10 @@ automation.evening_relaxed:
   icon: mdi:lightbulb-on-outline
 automation.evening_bright:
   icon: mdi:lightbulb-on-outline
+automation.closing_bathroom_door:
+  icon: mdi:toilet
+automation.opening_bathroom_door:
+  icon: mdi:toilet
 automation.coming_home:
   icon: mdi:home-outline
 automation.car_coming_home:
@@ -33,7 +37,7 @@ automation.morning_not_home:
   icon: mdi:lightbulb
 automation.kodi_playing:
   icon: mdi:youtube-tv
-automation.tv_turned_off:
+automation.tv_off_group_speakers:
   icon: mdi:television-classic-off
 automation.car_heater_weekdays:
   icon: mdi:radiator

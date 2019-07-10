@@ -1,0 +1,20 @@
+- platform: template
+  lights:
+    window_lamp_livingroom:
+      friendly_name: "Fönsterlampa vardagsrum"
+      value_template: '{{ states.switch.tradfri_outlet.state }}'
+      turn_on:
+        service: switch.turn_on
+        entity_id: switch.tradfri_outlet
+      turn_off:
+        service: switch.turn_off
+        entity_id: switch.tradfri_outlet
+    bedside_lamp_bedroom:
+      friendly_name: "Sänglampa sovrum"
+      value_template: '{{ states.switch.bedside_lamp_bedroom.state }}'
+      turn_on:
+        service: switch.turn_on
+        entity_id: switch.bedside_lamp_bedroom
+      turn_off:
+        service: switch.turn_off
+        entity_id: switch.bedside_lamp_bedroom

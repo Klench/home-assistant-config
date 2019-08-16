@@ -2,5 +2,3 @@
 !*.yaml
 secrets.yaml
 !*.gitignore
-!/custom_components/**/**
-!/www/**/**

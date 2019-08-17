@@ -119,3 +119,37 @@ sonos_disable_night_mode:
          night_sound: false
          speech_enhance: false
 
+################# Lights #################
+
+all_rooms_bright:
+  alias: 'Hög ljusstyrka'
+  sequence:
+    - service: scene.turn_on
+      data:
+        entity_id: scene.vardagsrum_bright
+    - service: scene.turn_on
+      data:
+        entity_id: scene.sovrum_bright
+    - service: scene.turn_on
+      data:
+        entity_id: scene.hall_bright
+
+all_rooms_relaxed:
+  alias: 'Mysbelysning'
+  sequence:
+    - service: scene.turn_on
+      data:
+        entity_id: scene.vardagsrum_relaxed
+    - service: scene.turn_on
+      data:
+        entity_id: scene.sovrum_relaxed
+    - service: scene.turn_on
+      data:
+        entity_id: scene.hall_relaxed
+
+all_lights_off:
+  alias: 'Allt släckt'
+  sequence:
+    - service: scene.turn_on
+      data:
+        entity_id: scene.all_lights_off

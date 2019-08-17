@@ -43,14 +43,16 @@ views:
             name: 'Ändringar'
             icon: mdi:briefcase-download-outline
 
-      - type: light
-        entity: light.vardagsrum
-
-      - type: light
-        entity: light.hall
-
-      - type: light
-        entity: light.sovrum
+      - type: entities
+        title: Rumsbelysning
+        show_header_toggle: false
+        entities:
+          - entity: script.all_rooms_bright
+            icon: mdi:lightbulb-on-outline
+          - entity: script.all_rooms_relaxed
+            icon: mdi:lightbulb-on
+          - entity: script.all_lights_off
+            icon: mdi:lightbulb-off
 
       - type: entities
         title: Vardagsrum
@@ -90,9 +92,6 @@ views:
         show_progress: true
         artwork: full-cover
         icon: mdi:television-classic
-
-      - type: weather-forecast
-        entity: weather.smhi_hem
         
       - type: custom:mini-graph-card
         entities:
@@ -109,6 +108,9 @@ views:
           extrema: true
           labels: true
           fill: fade
+          
+      - type: weather-forecast
+        entity: weather.smhi_hem
         
       - type: custom:krisinfo-card
         entity: sensor.krisinformation_vastra_gotaland

@@ -190,6 +190,16 @@
     service: scene.turn_on
     entity_id: scene.go_to_bed
 
+- alias: 'Turn off bedroom lights'
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: light.bedside_lamp_bedroom
+    to: 'off'
+  action:
+    service: light.turn_off
+    entity_id: light.sovrum
+
 ################# HUE SWITCH #################
 
 - alias: 'Hue switch bright'
@@ -411,10 +421,10 @@
     platform: state
     entity_id: media_player.tv
     to: 'off'
-  condition:
-    condition: state
-    entity_id: binary_sensor.sonos_livingroom_playing_music
-    state: 'off'
+  # condition:
+  #   condition: state
+  #   entity_id: binary_sensor.sonos_livingroom_playing_music
+  #   state: 'off'
   action:
     - service: script.sonos_group_speakers
     - service: script.sonos_sync_group_volume

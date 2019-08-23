@@ -93,7 +93,7 @@ volvooncall:
 
 media_player:
   - platform: kodi
-    host: 192.168.2.4
+    host: 192.168.2.82
     port: 8080
     username: osmc
     password: !secret kodi_password
@@ -122,7 +122,7 @@ sonos:
 panel_iframe:
   kodi:
     title: Kodi
-    url: http://192.168.2.4:8080/#remote
+    url: http://192.168.2.82:8080/#remote
     icon: mdi:kodi
   configurator:
     title: Configurator

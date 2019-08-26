@@ -93,8 +93,8 @@ volvooncall:
 
 media_player:
   - platform: kodi
-    host: 192.168.2.82
-    port: 8080
+    host: !secret kodi_ip
+    port: 80
     username: osmc
     password: !secret kodi_password
     turn_off_action:
@@ -122,7 +122,7 @@ sonos:
 panel_iframe:
   kodi:
     title: Kodi
-    url: http://192.168.2.82:8080/#remote
+    url: !secret kodi_address
     icon: mdi:kodi
   configurator:
     title: Configurator
@@ -135,14 +135,14 @@ panel_iframe:
 
 ################# UNIFI #################
 
-device_tracker:
-  - platform: unifi_direct
-    host: 192.168.2.24
-    username: !secret unifi_username
-    password: !secret unifi_password
-    consider_home: 30
-    new_device_defaults:
-      track_new_devices: false
+# device_tracker:
+#   - platform: unifi_direct
+#     host: 192.168.2.24
+#     username: !secret unifi_username
+#     password: !secret unifi_password
+#     consider_home: 30
+#     new_device_defaults:
+#       track_new_devices: false
 
 ################# INCLUDE #################
 

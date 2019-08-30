@@ -374,8 +374,12 @@
   condition:
     condition: and
     conditions:
-      - condition: time
-        after: '20:30:00'
+      - condition: or
+        conditions:
+          - condition: time
+            after: '20:30:00'
+          - condition: time
+            before: '10:00:00'
       - condition: or
         conditions:
           - condition: sun

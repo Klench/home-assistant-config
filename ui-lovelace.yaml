@@ -305,7 +305,7 @@ views:
         entities:
           - entity: binary_sensor.bathroom_door
             name: 'Badrumsdörr'
-          - entity: light.led_strip_2
+          - entity: light.bathroom_led
             name: LED-belysning
           - automation.closing_bathroom_door
           - automation.opening_bathroom_door

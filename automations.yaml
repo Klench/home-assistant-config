@@ -11,12 +11,7 @@
     entity_id: group.device_tracker_family
     state: 'home'
   action:
-    - service: scene.turn_on
-      entity_id: scene.vardagsrum_bright
-    - service: scene.turn_on
-      entity_id: scene.sovrum_bright
-    - service: scene.turn_on
-      entity_id: scene.hall_bright
+    - service: script.all_lights_bright
 
 - alias: 'Evening relaxed'
   initial_state: on
@@ -28,12 +23,7 @@
     entity_id: group.device_tracker_family
     state: 'home'
   action:
-    - service: scene.turn_on
-      entity_id: scene.vardagsrum_relaxed
-    - service: scene.turn_on
-      entity_id: scene.sovrum_relaxed
-    - service: scene.turn_on
-      entity_id: scene.hall_relaxed
+    - service: script.all_lights_relaxed
 
 - alias: 'Morning not home'
   initial_state: on
@@ -76,8 +66,7 @@
             entity_id: group.device_tracker_family
             state: 'home'
   action:
-    service: scene.turn_on
-    entity_id: scene.wakeup
+    service: script.wakeup_lights
 
 - alias: 'Wakeup weekend'
   initial_state: off
@@ -96,8 +85,7 @@
         entity_id: group.device_tracker_family
         state: 'home'
   action:
-    service: scene.turn_on
-    entity_id: scene.wakeup
+    service: script.wakeup_lights
 
 ################# SONOS #################
 
@@ -227,12 +215,7 @@
     entity_id: sensor.hallway_switch
     state: '1_hold'
   action:
-    - service: scene.turn_on
-      entity_id: scene.vardagsrum_relaxed
-    - service: scene.turn_on
-      entity_id: scene.sovrum_relaxed
-    - service: scene.turn_on
-      entity_id: scene.hall_relaxed
+    - service: script.all_rooms_relaxed
 
 - alias: 'Hue switch turn off lighs'
   initial_state: on
@@ -325,12 +308,7 @@
         before: sunrise
         before_offset: '1:00:00'
   action:
-    - service: scene.turn_on
-      entity_id: scene.vardagsrum_bright
-    - service: scene.turn_on
-      entity_id: scene.sovrum_bright
-    - service: scene.turn_on
-      entity_id: scene.hall_bright
+    - service: script.all_rooms_bright
 
 - alias: 'Car coming home'
   initial_state: on
@@ -351,12 +329,7 @@
       entity_id: group.device_tracker_family
       state: 'not_home'
   action:
-    - service: scene.turn_on
-      entity_id: scene.vardagsrum_bright
-    - service: scene.turn_on
-      entity_id: scene.sovrum_bright
-    - service: scene.turn_on
-      entity_id: scene.hall_bright
+    - service: script.all_rooms_bright
 
 ################# BATHROOM #################
 
@@ -388,7 +361,7 @@
     to: 'on'
   action:
     service: light.turn_off
-    entity_id: light.led_strip_2
+    entity_id: light.bathroom_led
 
 ################# MEDIA #################
 

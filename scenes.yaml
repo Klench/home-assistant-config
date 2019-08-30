@@ -60,7 +60,7 @@
 
 - name: 'Bathroom led relaxed'
   entities:
-    light.led_strip_2:
+    light.bathroom_led:
       state: true
       brightness: 255
       rgb_color: [255,145,36]
@@ -86,6 +86,30 @@
       brightness: 255
       color_temp: 372
       transition: 2700
+
+- name: 'Wakeup bedroom'
+  entities:
+    light.sovrum:
+      state: true
+      brightness: 255
+      color_temp: 372
+      transition: 2700
+
+- name: 'Wakeup livingroom'
+  entities:
+    light.vardagsrum:
+      state: true
+      brightness: 255
+      color_temp: 372
+      transition: 1800
+      
+- name: 'Wakeup hallway'
+  entities:
+    light.hall:
+      state: true
+      brightness: 255
+      color_temp: 372
+      transition: 1800
 
 ################# GO TO BED #################
 

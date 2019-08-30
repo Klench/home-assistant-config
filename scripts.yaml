@@ -153,3 +153,16 @@ all_lights_off:
     - service: scene.turn_on
       data:
         entity_id: scene.all_lights_off
+
+wakeup_lights:
+  alias: 'Väckning'
+  sequence:
+    - service: scene.turn_on
+      data:
+        entity_id: scene.wakeup_bedroom
+    - service: scene.turn_on
+      data:
+        entity_id: scene.wakeup_livingroom
+    - service: scene.turn_on
+      data:
+        entity_id: scene.wakeup_hallway

@@ -71,6 +71,8 @@ views:
           - scene.hall_bright
           - scene.hall_relaxed
           - light.hue_ambiance_lamp_1_4
+          - entity: light.ceiling_lamp_hallway
+            name: 'Taklampa hall IKEA'
 
       - type: entities
         title: Sovrum

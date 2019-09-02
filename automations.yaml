@@ -17,7 +17,7 @@
   initial_state: on
   trigger:
     platform: time
-    at: '21:00:00'
+    at: '20:30:00'
   condition:
     condition: state
     entity_id: group.device_tracker_family

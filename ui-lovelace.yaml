@@ -252,12 +252,12 @@ views:
         clock: 24
         image_style: fanart
 
-      - type: custom:upcoming-media-card
-        entity: sensor.trakt_upcoming_calendar
-        title: Kommande TV-serier
-        clock: 24
-        image_style: fanart
-        hide_empty: true
+      # - type: custom:upcoming-media-card
+      #   entity: sensor.trakt_upcoming_calendar
+      #   title: Kommande TV-serier
+      #   clock: 24
+      #   image_style: fanart
+      #   hide_empty: true
 
 ################# WORK TIME ################# 
 

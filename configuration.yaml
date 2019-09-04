@@ -98,7 +98,7 @@ media_player:
     username: osmc
     password: !secret kodi_password
     turn_off_action:
-      service: media_player.kodi_call_method
+      service: kodi.call_method
       data:
         entity_id: media_player.kodi
         method: System.Reboot

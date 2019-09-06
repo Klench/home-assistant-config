@@ -339,16 +339,6 @@
     platform: state
     entity_id: binary_sensor.bathroom_door
     to: 'off'
-  condition:
-    - condition: or
-      conditions:
-        - condition: time
-          after: '22:30:00'
-        - condition: time
-          before: '07:00:00'
-    - condition: state
-      entity_id: group.device_tracker_family
-      state: 'home'
   action:
     service: scene.turn_on
     entity_id: scene.bathroom_led_relaxed

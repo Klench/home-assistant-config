@@ -109,26 +109,6 @@
   action:
     service: script.sonos_set_alarm
 
-#- alias: 'Disable Sonos alarm'
-#  initial_state: off
-#  trigger:
-#    platform: time
-#    at: '03:00:00'
-#  condition:
-#    condition: or
-#    conditions:
-#      - condition: state
-#        entity_id: binary_sensor.workday_sensor
-#       state: 'off'
-#     - condition: state
-#        entity_id: group.device_tracker_family
-#        state: 'not_home'
-#      - condition: state
-#        entity_id: automation.wakeup_weekdays
-#        state: 'off'
-# action:
-#    service: script.sonos_disable_alarm
-
 - alias: 'Coming home group Sonos speakers'
   initial_state: on
   trigger:
@@ -279,6 +259,19 @@
     state: '3_click_up'
   action:
     service: script.sonos_decrease_volume
+    
+- alias: 'Hue switch turn on bathroom led'
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: sensor.hallway_switch_updated
+  condition:
+    condition: state
+    entity_id: sensor.hallway_switch
+    state: '4_hold'
+  action:
+    service: scene.turn_on
+    entity_id: scene.bathroom_led_relaxed
 
 ################# LEAVING/COMING HOME #################
 
@@ -295,18 +288,13 @@
 - alias: 'Coming home'
   initial_state: on
   trigger:
-    - platform: state
-      entity_id: group.device_tracker_family
-      to: 'home'
+    platform: state
+    entity_id: group.device_tracker_family
+    to: 'home'
   condition:
-    condition: or
-    conditions:
-      - condition: sun
-        after: sunset
-        after_offset: '-01:00:00'
-      - condition: sun
-        before: sunrise
-        before_offset: '1:00:00'
+    condition: sun
+    after: sunset
+    after_offset: '-01:00:00'
   action:
     - service: script.all_rooms_bright
 
@@ -317,14 +305,9 @@
     entity_id: device_tracker.volvo_lgd321
     to: 'home'
   condition:
-    - condition: or
-      conditions:
-        - condition: sun
-          after: sunset
-          after_offset: '-01:00:00'
-        - condition: sun
-          before: sunrise
-          before_offset: '1:00:00'
+    - condition: sun
+      after: sunset
+      after_offset: '-01:00:00'
     - condition: state
       entity_id: group.device_tracker_family
       state: 'not_home'

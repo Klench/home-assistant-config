@@ -385,6 +385,10 @@
     platform: state
     entity_id: media_player.tv
     to: 'off'
+  condition:
+    condition: state
+    entity_id: binary_sensor.sonos_night_mode
+    state: 'on'
   action:
     service: script.sonos_disable_night_mode
 

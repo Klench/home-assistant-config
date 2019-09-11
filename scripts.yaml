@@ -127,9 +127,13 @@ all_rooms_bright:
     - service: scene.turn_on
       data:
         entity_id: scene.vardagsrum_bright
+    - delay:
+        milliseconds: 10
     - service: scene.turn_on
       data:
         entity_id: scene.sovrum_bright
+    - delay:
+        milliseconds: 10
     - service: scene.turn_on
       data:
         entity_id: scene.hall_bright
@@ -140,9 +144,13 @@ all_rooms_relaxed:
     - service: scene.turn_on
       data:
         entity_id: scene.vardagsrum_relaxed
+    - delay:
+        milliseconds: 10
     - service: scene.turn_on
       data:
         entity_id: scene.sovrum_relaxed
+    - delay:
+        milliseconds: 10
     - service: scene.turn_on
       data:
         entity_id: scene.hall_relaxed
@@ -150,6 +158,8 @@ all_rooms_relaxed:
 all_lights_off:
   alias: 'Allt släckt'
   sequence:
+    - delay:
+        milliseconds: 10
     - service: scene.turn_on
       data:
         entity_id: scene.all_lights_off
@@ -160,9 +170,11 @@ wakeup_lights:
     - service: scene.turn_on
       data:
         entity_id: scene.wakeup_bedroom
+    - delay: '00:00:01'
     - service: scene.turn_on
       data:
         entity_id: scene.wakeup_livingroom
+    - delay: '00:00:01'
     - service: scene.turn_on
       data:
         entity_id: scene.wakeup_hallway

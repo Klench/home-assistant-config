@@ -180,10 +180,7 @@
     entity_id: sensor.hallway_switch
     state: '1_click_up'
   action:
-    - service: scene.turn_on
-      entity_id: scene.vardagsrum_bright
-    - service: scene.turn_on
-      entity_id: scene.hall_bright
+    - service: script.all_rooms_bright
 
 - alias: 'Hue switch relaxed'
   initial_state: on

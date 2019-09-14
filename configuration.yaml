@@ -123,8 +123,8 @@ sonos:
 panel_iframe:
   kodi:
     title: Kodi
-    url: !secret kodi_address
     icon: mdi:kodi
+    url: !secret kodi_address
   configurator:
     title: Configurator
     icon: mdi:wrench
@@ -133,6 +133,10 @@ panel_iframe:
     title: ESPHome
     icon: mdi:developer-board
     url: http://192.168.2.2:6052
+  tautully:
+    title: Tautully
+    icon: mdi:plex
+    url: http://192.168.2.2:8181
 
 ################# UNIFI #################
 

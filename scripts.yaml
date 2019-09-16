@@ -170,11 +170,13 @@ wakeup_lights:
     - service: scene.turn_on
       data:
         entity_id: scene.wakeup_bedroom
-    - delay: '00:00:01'
+    - delay:
+        milliseconds: 10
     - service: scene.turn_on
       data:
         entity_id: scene.wakeup_livingroom
-    - delay: '00:00:01'
+    - delay:
+        milliseconds: 10
     - service: scene.turn_on
       data:
         entity_id: scene.wakeup_hallway

@@ -76,7 +76,6 @@ views:
             name: 'Hög ljusstyrka'
           - entity: scene.hall_relaxed
             name: 'Mysbelysning'
-          - light.hue_ambiance_lamp_1_4
           - entity: light.ceiling_lamp_hallway
             name: 'Taklampa hall IKEA'
 

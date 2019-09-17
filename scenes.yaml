@@ -26,11 +26,6 @@
 
 - name: 'Hall bright'
   entities:
-    light.hall:
-      state: true
-      brightness: 255
-      color_temp: 372
-      transition: 2
     light.ceiling_lamp_hallway:
       state: true
       brightness: 255
@@ -56,11 +51,6 @@
 
 - name: 'Hall relaxed'
   entities:
-    light.hall:
-      state: true
-      brightness: 144
-      color_temp: 443
-      transition: 2
     light.ceiling_lamp_hallway:
       state: true
       brightness: 144
@@ -95,11 +85,6 @@
       
 - name: 'Wakeup hallway'
   entities:
-    light.hall:
-      state: true
-      brightness: 255
-      color_temp: 372
-      transition: 1800
     light.ceiling_lamp_hallway:
       state: true
       brightness: 255
@@ -110,9 +95,6 @@
 - name: 'Go to bed'
   entities:
     light.vardagsrum:
-      state: false
-      transition: 1800
-    light.hall:
       state: false
       transition: 1800
     light.ceiling_lamp_hallway:
@@ -126,15 +108,13 @@
 
 - name: 'Watching TV'
   entities:
-#    light.vardagsrum:
     light.hue_ambiance_lamp_1_3:
       state: true
       brightness: 144
       color_temp: 443
       transition: 2
     light.window_lamp_livingroom: true
-#    light.hall:
-#      state: true
-#      brightness: 144
-#      color_temp: 443
-#      transition: 2
+    light.ceiling_lamp_hallway:
+      state: true
+      brightness: 144
+      transition: 2

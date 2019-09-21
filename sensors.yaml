@@ -3,10 +3,6 @@
     - symbol
     - temperature
 
-- platform: plex
-  username: !secret plex_username
-  password: !secret plex_password
-
 - platform: plex_recently_added
   host: 192.168.2.2
   port: 32400

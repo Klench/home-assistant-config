@@ -25,9 +25,6 @@ views:
 
       - type: glance
         entities:
-          - sensor.outside_temperature
-          - entity: sun.sun
-            name: 'Sol'
           - entity: device_tracker.davids_iphone
             name: 'David'
             icon: mdi:human-male
@@ -39,8 +36,11 @@ views:
             name: 'Räckvidd'
           - entity: switch.lgd321_heater
             name: 'Värmare'
+          - sensor.outside_temperature
           - sensor.plex
           - media_player.tv
+          - entity: sensor.hacs
+            name: 'HACS'
           - entity: sensor.potential_breaking_changes
             name: 'Ändringar'
             icon: mdi:briefcase-download-outline
@@ -77,7 +77,7 @@ views:
           - entity: scene.hall_relaxed
             name: 'Mysbelysning'
           - entity: light.ceiling_lamp_hallway
-            name: 'Taklampa hall IKEA'
+            name: 'Taklampa hall'
 
       - type: entities
         title: Sovrum

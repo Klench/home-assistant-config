@@ -84,6 +84,11 @@ tts:
 # Cloud
 # cloud:
 
+pi_hole:
+  host: !secret pi-hole_ip
+  ssl: false
+  verify_ssl: false
+
 ################# VOLVO ON CALL #################
 
 volvooncall:

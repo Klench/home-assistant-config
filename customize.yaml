@@ -23,6 +23,10 @@ automation.evening_relaxed:
   icon: mdi:lightbulb-on-outline
 automation.evening_bright:
   icon: mdi:lightbulb-on-outline
+automation.sunset:
+  icon: mdi:weather-sunset
+automation.lights_after_sunset:
+  icon: mdi:weather-sunset
 automation.closing_bathroom_door:
   icon: mdi:toilet
 automation.opening_bathroom_door:

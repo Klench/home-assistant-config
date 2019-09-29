@@ -43,6 +43,39 @@
     service: scene.turn_on
     entity_id: scene.all_lights_off
 
+################# VARIOUS LIGHT AUTOMATIONS #################
+
+- alias: 'Sunset'
+  initial_state: on
+  trigger:
+    platform: sun
+    event: sunset
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: group.device_tracker_family
+        state: 'home'
+      - condition: state
+        entity_id: group.all_lights
+        state: 'on'
+  action:
+    service: scene.turn_on
+    entity_id: scene.sunset
+
+- alias: 'Lights after sunset'
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: script.all_rooms_bright
+    to: 'on'
+  condition:
+    condition: sun
+    after: sunset
+  action:
+    service: scene.turn_on
+    entity_id: scene.sunset
+
 ################# WAKEUP #################
 
 - alias: 'Wakeup weekdays'
@@ -231,7 +264,7 @@
   action:
     service: script.sonos_set_group_volume
     data:
-      volume: 0.05
+      volume: 0.1
 
 - alias: 'Hue switch increase Sonos group volume'
   initial_state: on

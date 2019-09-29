@@ -305,6 +305,8 @@ views:
           - automation.go_to_bed_weekend
           - automation.evening_relaxed
           - automation.evening_bright
+          - automation.sunset
+          - automation.lights_after_sunset
           - automation.closing_bathroom_door
           - automation.opening_bathroom_door
           - automation.coming_home

@@ -6,6 +6,11 @@
       state: false
       transition: 1
 
+- name: 'Sunset'
+  entities:
+    light.window_lamp_livingroom: true
+    light.bedside_lamp_bedroom: true
+
 ################# ROOM #################
 
 - name: 'Vardagsrum bright'

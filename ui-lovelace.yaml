@@ -20,7 +20,7 @@ views:
 
 ################# HOME #################
 
-  - title: Hem
+  - icon: mdi:home-assistant
     cards:
 
       - type: glance
@@ -138,7 +138,7 @@ views:
 
 ################# WAKEUP #################
 
-  - title: Väckning
+  - icon: mdi:alarm
     cards:
      
       - type: entities
@@ -169,7 +169,7 @@ views:
 
 ################# SONOS #################
 
-  - title: Sonos
+  - icon: mdi:speaker-wireless
     cards:
 
       # - type: entity-button
@@ -248,7 +248,7 @@ views:
 
 ################# TV #################
 
-  - title: TV
+  - icon: mdi:television-classic
     cards:
 
       - type: custom:upcoming-media-card
@@ -266,7 +266,7 @@ views:
 
 ################# WORK TIME ################# 
 
-  - title: Arbetstid
+  - icon: mdi:briefcase-clock-outline
     cards:
 
       - type: entities
@@ -282,44 +282,9 @@ views:
           - input_number.work_time_minutes_out
           - input_number.work_time_minutes_lunch
 
-################# AUTOMATIONS #################
-
-  - title: Automationer
-    cards:
-
-      - type: entity-button
-        entity: group.all_automations
-        name: 'Toggle automations'
-        icon: mdi:home-automation
-        tap_action:
-          action: toggle
-
-      - type: entities
-        title: Automationer
-        show_header_toggle: false
-        entities:
-          - automation.wakeup_weekdays
-          - automation.enable_sonos_alarm
-          - automation.wakeup_weekend
-          - automation.go_to_bed_weekdays
-          - automation.go_to_bed_weekend
-          - automation.evening_relaxed
-          - automation.evening_bright
-          - automation.sunset
-          - automation.lights_after_sunset
-          - automation.closing_bathroom_door
-          - automation.opening_bathroom_door
-          - automation.coming_home
-          - automation.car_coming_home
-          - automation.leaving_home
-          - automation.morning_not_home
-          - automation.kodi_playing
-          - automation.tv_off_group_speakers
-          - automation.car_heater_weekdays
-
 ################# ESPHome #################
 
-  - title: ESPHome
+  - icon: mdi:developer-board
     cards:
 
       - type: entities
@@ -335,7 +300,7 @@ views:
 
 ################# CAR #################
 
-  - title: Bil
+  - icon: mdi:car
     cards:
       
       - type: entities
@@ -375,3 +340,38 @@ views:
           - binary_sensor.lgd321_front_right_tyre
           - binary_sensor.lgd321_rear_left_tyre
           - binary_sensor.lgd321_rear_right_tyre
+
+################# AUTOMATIONS #################
+
+  - icon: mdi:robot-industrial
+    cards:
+
+      - type: entity-button
+        entity: group.all_automations
+        name: 'Toggle automations'
+        icon: mdi:home-automation
+        tap_action:
+          action: toggle
+
+      - type: entities
+        title: Automationer
+        show_header_toggle: false
+        entities:
+          - automation.wakeup_weekdays
+          - automation.enable_sonos_alarm
+          - automation.wakeup_weekend
+          - automation.go_to_bed_weekdays
+          - automation.go_to_bed_weekend
+          - automation.evening_relaxed
+          - automation.evening_bright
+          - automation.sunset
+          - automation.lights_after_sunset
+          - automation.closing_bathroom_door
+          - automation.opening_bathroom_door
+          - automation.coming_home
+          - automation.car_coming_home
+          - automation.leaving_home
+          - automation.morning_not_home
+          - automation.kodi_playing
+          - automation.tv_off_group_speakers
+          - automation.car_heater_weekdays

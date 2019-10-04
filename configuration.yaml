@@ -36,15 +36,6 @@ http:
 #  base_url: example.duckdns.org:8123
   base_url: !secret base_url
 
-# custom_updater:
-#   card_urls:
-#     - https://raw.githubusercontent.com/kalkih/mini-media-player/master/tracker.json
-#   component_urls:
-#     - https://raw.githubusercontent.com/robmarkcole/Hue-sensors-HASS/master/custom_updater.json
-#   track:
-#     - cards
-#     - components
-
 hacs:
   token: !secret hacs_token
 
@@ -54,9 +45,6 @@ breaking_changes:
 discovery:
   ignore:
     - igd
-
-# Allows you to issue voice commands from the frontend in enabled browsers
-# conversation:
 
 # Enables support for tracking state changes over time
 history:
@@ -81,13 +69,22 @@ tts:
  - platform: google_translate
    base_url: !secret local_ip
 
-# Cloud
-# cloud:
-
 pi_hole:
   host: !secret pi-hole_ip
   ssl: false
   verify_ssl: false
+
+homekit:
+  ip_address: 192.168.2.2
+  safe_mode: true
+  filter:
+    include_entities:
+      - script.all_rooms_bright
+      - script.all_rooms_relaxed
+      - script.all_lights_off
+      - script.sonos_manual_group_speakers
+      - light.bathroom_led
+      - sensor.outside_temperature
 
 ################# VOLVO ON CALL #################
 

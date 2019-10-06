@@ -164,6 +164,17 @@ all_lights_off:
       data:
         entity_id: scene.all_lights_off
 
+baby_light:
+  alias: 'Bebisbelysning'
+  sequence:
+    - service: light.turn_off
+      data:
+        entity_id: light.bedside_lamp_bedroom
+    - delay:
+        milliseconds: 100
+    - service: scene.turn_on
+      entity_id: scene.baby_light
+
 wakeup_lights:
   alias: 'Väckning'
   sequence:

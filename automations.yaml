@@ -197,6 +197,10 @@
     platform: state
     entity_id: light.bedside_lamp_bedroom
     to: 'off'
+  condition:
+    condition: state
+    entity_id: script.baby_light
+    state: 'off'
   action:
     service: light.turn_off
     entity_id: light.sovrum
@@ -290,7 +294,7 @@
   action:
     service: script.sonos_decrease_volume
     
-- alias: 'Hue switch turn on bathroom led'
+- alias: 'Hue switch turn on baby light'
   initial_state: on
   trigger:
     platform: state
@@ -300,8 +304,7 @@
     entity_id: sensor.hallway_switch
     state: '4_hold'
   action:
-    service: scene.turn_on
-    entity_id: scene.bathroom_led_relaxed
+    service: script.baby_light
 
 ################# LEAVING/COMING HOME #################
 

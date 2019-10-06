@@ -61,6 +61,14 @@
       brightness: 144
       transition: 2
 
+- name: 'Baby light'
+  entities:
+    light.sovrum:
+      state: true
+      brightness: 40
+      color_temp: 454
+      transition: 2
+
 - name: 'Bathroom led relaxed'
   entities:
     light.bathroom_led:

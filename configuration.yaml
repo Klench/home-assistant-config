@@ -83,6 +83,7 @@ homekit:
       - script.all_rooms_relaxed
       - script.all_lights_off
       - script.sonos_manual_group_speakers
+      - script.baby_light
       - light.bathroom_led
       - sensor.outside_temperature
 

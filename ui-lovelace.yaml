@@ -55,6 +55,8 @@ views:
             icon: mdi:lightbulb-on
           - entity: script.all_lights_off
             icon: mdi:lightbulb-off
+          - entity: script.baby_light
+            icon: mdi:baby
 
       - type: entities
         title: Vardagsrum
@@ -69,6 +71,19 @@ views:
           - light.hue_ambiance_lamp_1_3
 
       - type: entities
+        title: Sovrum
+        show_header_toggle: false
+        entities:
+          - entity: scene.sovrum_bright
+            name: 'Hög ljusstyrka'
+          - entity: scene.sovrum_relaxed
+            name: 'Mysbelysning'
+          - entity: script.baby_light
+            icon: mdi:baby
+          - light.bedside_lamp_bedroom
+          - light.hue_ambiance_lamp_2
+
+      - type: entities
         title: Hall
         show_header_toggle: false
         entities:
@@ -78,17 +93,6 @@ views:
             name: 'Mysbelysning'
           - entity: light.ceiling_lamp_hallway
             name: 'Taklampa hall'
-
-      - type: entities
-        title: Sovrum
-        show_header_toggle: false
-        entities:
-          - entity: scene.sovrum_bright
-            name: 'Hög ljusstyrka'
-          - entity: scene.sovrum_relaxed
-            name: 'Mysbelysning'
-          - light.bedside_lamp_bedroom
-          - light.hue_ambiance_lamp_2
 
       - type: custom:mini-media-player
         entity: media_player.kodi

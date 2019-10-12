@@ -9,6 +9,16 @@ light.hall:
 media_player.tv:
   icon: mdi:television-classic
 
+sensor.buss_19:
+  icon: mdi:bus-clock
+
+device_tracker.davids_iphone:
+  friendly_name: 'David'
+  icon: mdi:human-male
+device_tracker.nellies_iphone:
+  friendly_name: 'Nellie'
+  icon: mdi:human-female
+
 automation.wakeup_weekdays:
   icon: mdi:weather-sunny
 automation.enable_sonos_alarm:

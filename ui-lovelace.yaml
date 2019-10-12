@@ -25,12 +25,8 @@ views:
 
       - type: glance
         entities:
-          - entity: device_tracker.davids_iphone
-            name: 'David'
-            icon: mdi:human-male
-          - entity: device_tracker.nellies_iphone
-            name: 'Nellie'
-            icon: mdi:human-female
+          - device_tracker.davids_iphone
+          - device_tracker.nellies_iphone
           - device_tracker.volvo_lgd321
           - entity: sensor.lgd321_range
             name: 'Räckvidd'
@@ -38,12 +34,13 @@ views:
             name: 'Värmare'
           - sensor.outside_temperature
           - sensor.plex
-          - media_player.tv
+          # - media_player.tv
           - entity: sensor.hacs
             name: 'HACS'
           - entity: sensor.potential_breaking_changes
             name: 'Ändringar'
             icon: mdi:briefcase-download-outline
+          - sensor.buss_19
 
       - type: entities
         title: Rumsbelysning
@@ -349,13 +346,6 @@ views:
 
   - icon: mdi:robot-industrial
     cards:
-
-      - type: entity-button
-        entity: group.all_automations
-        name: 'Toggle automations'
-        icon: mdi:home-automation
-        tap_action:
-          action: toggle
 
       - type: entities
         title: Automationer

@@ -15,11 +15,11 @@
     - movie
     - show
 
-- platform: trakt
-  id: !secret trakt_id
-  secret: !secret trakt_secret
-  username: !secret trakt_username
-  days: 10
+# - platform: trakt
+#   id: !secret trakt_id
+#   secret: !secret trakt_secret
+#   username: !secret trakt_username
+#   days: 10
 
 - platform: krisinformation
   name: "Krisinformation Västra Götaland"
@@ -35,6 +35,13 @@
     - 'date_time'
 
 - platform: huesensor
+
+- platform: vasttrafik
+  key: !secret vasttrafik_key
+  secret: !secret vasttrafik_secret
+  departures:
+    - name: Buss 19
+      from: Sörgårdsskolan
 
 - platform: template
   sensors:

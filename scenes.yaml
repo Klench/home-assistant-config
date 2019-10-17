@@ -84,7 +84,7 @@
   entities:
     light.sovrum:
       state: true
-      brightness: 200
+      brightness: 75
       color_temp: 372
       transition: 2700
 

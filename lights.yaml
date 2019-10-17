@@ -1,7 +1,8 @@
 - platform: template
   lights:
     window_lamp_livingroom:
-      friendly_name: "Fönsterlampa vardagsrum"
+      friendly_name: 'Fönsterlampa vardagsrum'
+      icon_template: mdi:outdoor-lamp
       value_template: '{{ states.switch.tradfri_outlet.state }}'
       turn_on:
         service: switch.turn_on
@@ -10,7 +11,8 @@
         service: switch.turn_off
         entity_id: switch.tradfri_outlet
     bedside_lamp_bedroom:
-      friendly_name: "Sänglampa sovrum"
+      friendly_name: 'Sänglampa sovrum'
+      icon_template: mdi:lamp
       value_template: '{{ states.switch.bedside_lamp_bedroom.state }}'
       turn_on:
         service: switch.turn_on

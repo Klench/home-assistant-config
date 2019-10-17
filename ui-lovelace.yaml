@@ -33,8 +33,9 @@ views:
           - entity: switch.lgd321_heater
             name: 'Värmare'
           - sensor.outside_temperature
-          - sensor.plex
-          # - media_player.tv
+          - entity: sensor.plex
+            name: Plex
+            icon: mdi:plex
           - entity: sensor.hacs
             name: 'HACS'
           - entity: sensor.potential_breaking_changes
@@ -43,7 +44,7 @@ views:
           - sensor.buss_19
 
       - type: entities
-        title: Rumsbelysning
+        title: Belysning
         show_header_toggle: false
         entities:
           - entity: script.all_rooms_bright
@@ -63,8 +64,8 @@ views:
             name: 'Hög ljusstyrka'
           - entity: scene.vardagsrum_relaxed
             name: 'Mysbelysning'
-          - light.window_lamp_livingroom
           - light.hue_ambiance_lamp_1
+          - light.window_lamp_livingroom
           - light.hue_ambiance_lamp_1_3
 
       - type: entities
@@ -77,8 +78,8 @@ views:
             name: 'Mysbelysning'
           - entity: script.baby_light
             icon: mdi:baby
-          - light.bedside_lamp_bedroom
           - light.hue_ambiance_lamp_2
+          - light.bedside_lamp_bedroom
 
       - type: entities
         title: Hall
@@ -88,8 +89,7 @@ views:
             name: 'Hög ljusstyrka'
           - entity: scene.hall_relaxed
             name: 'Mysbelysning'
-          - entity: light.ceiling_lamp_hallway
-            name: 'Taklampa hall'
+          - light.ceiling_lamp_hallway
 
       - type: custom:mini-media-player
         entity: media_player.kodi

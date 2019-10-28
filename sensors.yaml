@@ -53,7 +53,7 @@
       friendly_name: 'Väckningstid'
       icon_template: 'mdi:alarm'
       value_template: '{{ "%0.02d:%0.02d" | format(states.input_number.alarm_hours_weekend.state | int, states.input_number.alarm_minutes_weekend.state | int ) }}'
-    outside_temperature:
+    outdoor_temperature:
       friendly_name: 'Temperatur'
       icon_template: mdi:thermometer
       unit_of_measurement: '°C'

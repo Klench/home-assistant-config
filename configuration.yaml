@@ -85,7 +85,7 @@ homekit:
       - script.sonos_manual_group_speakers
       - script.baby_light
       - light.bathroom_led
-      - sensor.outside_temperature
+      - sensor.outdoor_temperature
 
 ################# VOLVO ON CALL #################
 
@@ -110,6 +110,11 @@ media_player:
     host: 192.168.2.32
     port: 8001
     name: 'TV'
+  - platform: samsungtv_custom
+    host: 192.168.2.32
+    port: 8001
+    name: 'TV_custom'
+    sourcelist: '{"TV": "KEY_TV", "OSMC": "KEY_HDMI1"}'
 #  - platform: spotify
 #    client_id: !secret spotify_client_id
 #    client_secret: !secret spotify_client_secret

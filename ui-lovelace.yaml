@@ -32,7 +32,7 @@ views:
             name: 'Räckvidd'
           - entity: switch.lgd321_heater
             name: 'Värmare'
-          - sensor.outside_temperature
+          - sensor.outdoor_temperature
           - entity: sensor.plex
             name: Plex
             icon: mdi:plex
@@ -65,8 +65,8 @@ views:
           - entity: scene.vardagsrum_relaxed
             name: 'Mysbelysning'
           - light.hue_ambiance_lamp_1
-          - light.window_lamp_livingroom
           - light.hue_ambiance_lamp_1_3
+          - light.window_lamp_livingroom
 
       - type: entities
         title: Sovrum
@@ -105,7 +105,7 @@ views:
         
       - type: custom:mini-graph-card
         entities:
-          - sensor.outside_temperature
+          - sensor.outdoor_temperature
         name: 'Yttertemperatur'
         unit: '°C'
         line_color: '#5c8dd1'

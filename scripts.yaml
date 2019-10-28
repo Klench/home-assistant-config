@@ -1,7 +1,7 @@
 ################# SONOS #################
 
-sonos_group_speakers:
-  alias: Sonos group speakers
+sonos_group_all_speakers:
+  alias: Sonos group all speakers
   sequence:
     - service: sonos.join
       data:
@@ -10,12 +10,30 @@ sonos_group_speakers:
           - media_player.sovrum
           - media_player.vardagsrum
 
+sonos_group_kitchen_livingroom_speakers:
+  alias: Sonos group kitchen livingroom speakers
+  sequence:
+    - service: sonos.join
+      data:
+        master: media_player.kok
+        entity_id:
+          - media_player.vardagsrum
+
+sonos_ungroup_bedroom_speaker:
+  alias: Sonos ungroup bedroom speaker
+  sequence:
+    - service: sonos.unjoin
+      entity_id: media_player.sovrum
+
 sonos_set_group_volume:
   alias: Sonos set group volume
   sequence:
     - service: media_player.volume_set
       data_template:
-        entity_id: group.sonos_all_speakers
+        entity_id: >
+          {%- for sonos_speaker in states.media_player.kok.attributes.sonos_group -%}
+          {{sonos_speaker}}{%- if not loop.last %},{% endif %}
+          {%- endfor %}
         volume_level: '{{ volume }}'
 
 sonos_sync_group_volume:
@@ -23,23 +41,23 @@ sonos_sync_group_volume:
   sequence:
     - service: media_player.volume_set
       data_template:
-        entity_id:
-          - media_player.sovrum
-          - media_player.vardagsrum
+        entity_id: >
+          {%- for sonos_speaker in states.media_player.kok.attributes.sonos_group %}
+          {%- if not loop.first -%}
+          {{sonos_speaker}}{%- if not loop.last %},{% endif %}
+          {%- endif %}
+          {%- endfor %}
         volume_level: '{{  states.media_player.kok.attributes.volume_level | float  }}'
-
-sonos_manual_group_speakers:
-  alias: 'Sonos manual group speakers'
-  sequence:
-    - service: script.sonos_group_speakers
-    - service: script.sonos_sync_group_volume
 
 sonos_increase_volume:
   alias: 'Sonos increase volume'
   sequence:
     - service: media_player.volume_set
       data_template:
-        entity_id: group.sonos_all_speakers
+        entity_id: >
+          {%- for sonos_speaker in states.media_player.kok.attributes.sonos_group -%}
+          {{sonos_speaker}}{%- if not loop.last %},{% endif %}
+          {%- endfor %}
         volume_level: '{{  states.media_player.kok.attributes.volume_level | float + 0.07  }}'
 
 sonos_decrease_volume:
@@ -47,8 +65,17 @@ sonos_decrease_volume:
   sequence:
     - service: media_player.volume_set
       data_template:
-        entity_id: group.sonos_all_speakers
+        entity_id: >
+          {%- for sonos_speaker in states.media_player.kok.attributes.sonos_group -%}
+          {{sonos_speaker}}{%- if not loop.last %},{% endif %}
+          {%- endfor %}
         volume_level: '{{  states.media_player.kok.attributes.volume_level | float - 0.07  }}'
+
+sonos_manual_group_speakers:
+  alias: 'Sonos manual group speakers'
+  sequence:
+    - service: script.sonos_group_all_speakers
+    - service: script.sonos_sync_group_volume
 
 sonos_say:
   alias: "Sonos TTS script"

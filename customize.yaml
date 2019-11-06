@@ -47,6 +47,8 @@ automation.sunset:
   icon: mdi:weather-sunset
 automation.lights_after_sunset:
   icon: mdi:weather-sunset
+automation.turn_off_bedroom_lights:
+  icon: mdi:baby
 automation.closing_bathroom_door:
   icon: mdi:toilet
 automation.opening_bathroom_door:

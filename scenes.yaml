@@ -61,13 +61,24 @@
       brightness: 144
       transition: 2
 
-- name: 'Baby light'
+- name: 'Baby light bedroom'
   entities:
     light.sovrum:
       state: true
       brightness: 40
-      color_temp: 454
+      color_temp: 455
       transition: 2
+
+- name: 'Nursery light livingroom'
+  entities:
+    light.hue_ambiance_lamp_1_3:
+      state: true
+      brightness: 200
+      color_temp: 455
+      transition: 2
+    light.hue_ambiance_lamp_1: false
+    light.window_lamp_livingroom: false
+    light.ceiling_lamp_hallway: false
 
 - name: 'Bathroom led relaxed'
   entities:

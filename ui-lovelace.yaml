@@ -53,8 +53,6 @@ views:
             icon: mdi:lightbulb-on
           - entity: script.all_lights_off
             icon: mdi:lightbulb-off
-          - entity: script.baby_light
-            icon: mdi:baby
 
       - type: entities
         title: Vardagsrum
@@ -64,6 +62,9 @@ views:
             name: 'Hög ljusstyrka'
           - entity: scene.vardagsrum_relaxed
             name: 'Mysbelysning'
+          - entity: script.livingroom_nursery
+            icon: mdi:baby
+            name: 'Amning'
           - light.hue_ambiance_lamp_1
           - light.hue_ambiance_lamp_1_3
           - light.window_lamp_livingroom
@@ -76,7 +77,7 @@ views:
             name: 'Hög ljusstyrka'
           - entity: scene.sovrum_relaxed
             name: 'Mysbelysning'
-          - entity: script.baby_light
+          - entity: script.baby_light_bedroom
             icon: mdi:baby
           - light.hue_ambiance_lamp_2
           - light.bedside_lamp_bedroom
@@ -360,6 +361,7 @@ views:
           - automation.evening_bright
           - automation.sunset
           - automation.lights_after_sunset
+          - automation.turn_off_bedroom_lights
           - automation.closing_bathroom_door
           - automation.opening_bathroom_door
           - automation.coming_home

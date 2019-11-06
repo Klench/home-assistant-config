@@ -191,7 +191,7 @@ all_lights_off:
       data:
         entity_id: scene.all_lights_off
 
-baby_light:
+baby_light_bedroom:
   alias: 'Bebisbelysning'
   sequence:
     - service: light.turn_off
@@ -200,7 +200,7 @@ baby_light:
     - delay:
         milliseconds: 100
     - service: scene.turn_on
-      entity_id: scene.baby_light
+      entity_id: scene.baby_light_bedroom  
 
 wakeup_lights:
   alias: 'Väckning'
@@ -218,3 +218,19 @@ wakeup_lights:
     - service: scene.turn_on
       data:
         entity_id: scene.wakeup_hallway
+
+################# VARIOUS #################
+
+livingroom_nursery:
+  alias: 'Amning vardagsrum'
+  sequence:
+    - service: scene.turn_on
+      data:
+        entity_id: scene.nursery_light_livingroom
+    - service: scene.turn_on
+      data:
+        entity_id: scene.bathroom_led_relaxed
+    - service: script.sonos_enable_night_mode
+    - delay: '01:00'
+    - service: script.sonos_disable_night_mode
+    

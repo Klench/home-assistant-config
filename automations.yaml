@@ -79,7 +79,6 @@
 ################# WAKEUP #################
 
 - alias: 'Wakeup weekdays'
-  initial_state: on
   trigger:
     platform: state
     entity_id: binary_sensor.alarm_clock_trigger_weekdays
@@ -199,7 +198,7 @@
     to: 'off'
   condition:
     condition: state
-    entity_id: script.baby_light
+    entity_id: script.baby_light_bedroom
     state: 'off'
   action:
     service: light.turn_off
@@ -295,7 +294,7 @@
   action:
     service: script.sonos_decrease_volume
     
-- alias: 'Hue switch turn on baby light'
+- alias: 'Hue switch turn on nursery livingroom'
   initial_state: on
   trigger:
     platform: state
@@ -305,7 +304,7 @@
     entity_id: sensor.hallway_switch
     state: '4_hold'
   action:
-    service: script.baby_light
+    service: script.livingroom_nursery
 
 ################# LEAVING/COMING HOME #################
 

@@ -152,7 +152,7 @@
     entity_id: media_player.tv
     state: 'off'
   action:
-    - service: script.sonos_group_speakers
+    - service: script.sonos_group_all_speakers
     - service: script.sonos_set_group_volume
       data:
         volume: 0.2
@@ -163,7 +163,7 @@
   initial_state: on
   trigger:
     platform: time
-    at: '22:30:00'
+    at: '23:00:00'
   condition:
     condition: time
     weekday:
@@ -243,7 +243,7 @@
     service: scene.turn_on
     entity_id: scene.all_lights_off
 
-- alias: 'Hue switch group Sonos speakers'
+- alias: 'Hue switch group all Sonos speakers'
   initial_state: on
   trigger:
     platform: state
@@ -267,8 +267,8 @@
     state: '3_hold'
   action:
     - service: script.sonos_group_kitchen_livingroom_speakers
-    - service: script.sonos_sync_group_volume
     - service: script.sonos_ungroup_bedroom_speaker
+    - service: script.sonos_sync_group_volume
 
 - alias: 'Hue switch increase Sonos group volume'
   initial_state: on
@@ -413,7 +413,6 @@
   action:
     - service: script.sonos_group_kitchen_livingroom_speakers
     - service: script.sonos_sync_group_volume
-    - service: script.sonos_ungroup_bedroom_speaker
 
 - alias: 'TV off disable night mode'
   initial_state: on

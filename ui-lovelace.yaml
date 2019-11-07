@@ -11,8 +11,8 @@ resources:
     type: js
   - url: /local/plugins/card-mod.js?v=1
     type: js
-  - url: /local/plugins/card-tools.js?v=1
-    type: js
+  - url: /community_plugin/lovelace-card-tools/card-tools.js
+    type: module
   - url: /community_plugin/monster-card/monster-card.js
     type: js
 

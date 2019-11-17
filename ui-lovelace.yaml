@@ -5,15 +5,15 @@ resources:
     type: module
   - url: /community_plugin/mini-graph-card/mini-graph-card.js
     type: module
+  - url: /community_plugin/lovelace-card-tools/card-tools.js
+    type: module
+  - url: /community_plugin/lovelace-auto-entities/auto-entities.js
+    type: module
   - url: /community_plugin/upcoming-media-card/upcoming-media-card.js
     type: js
   - url: /community_plugin/krisinfo-card/krisinfo-card.js
     type: js
   - url: /local/plugins/card-mod.js?v=1
-    type: js
-  - url: /community_plugin/lovelace-card-tools/card-tools.js
-    type: module
-  - url: /community_plugin/monster-card/monster-card.js
     type: js
 
 views:
@@ -33,7 +33,7 @@ views:
           - entity: switch.lgd321_heater
             name: 'Värmare'
           - sensor.outdoor_temperature
-          - entity: sensor.plex
+          - entity: sensor.plex_oden
             name: Plex
             icon: mdi:plex
           - entity: sensor.hacs
@@ -126,17 +126,18 @@ views:
       - type: custom:krisinfo-card
         entity: sensor.krisinformation_vastra_gotaland
 
-      - type: custom:monster-card
+      - type: custom:auto-entities
         show_empty: false
         card:
           type: entities
-          title: 'Gästnätverk'
+          title: Gästnätverk
           show_header_toggle: false
         filter:
           include:
             - domain: device_tracker
+              state: home
               attributes:
-                essid: 'Stenman_guest'
+                essid: "Stenman_guest"
 
 ################# WAKEUP #################
 
@@ -266,7 +267,28 @@ views:
       #   image_style: fanart
       #   hide_empty: true
 
-################# WORK TIME ################# 
+      - type: custom:auto-entities
+        show_empty: false
+        card:
+          # type: custom:mini-media-player
+          # hide:
+          #   power: true
+          #   source: true
+          #   volume: false
+          # show_progress: true
+          # artwork: full-cover
+          # icon: mdi:plex
+          type: entities
+          title: Plex klienter
+          show_header_toggle: false
+        filter:
+          include:
+            - domain: media_player
+              # name: /plex/
+          exclude:
+            - state: "inactive"
+            - state: "unavailable"
+            - state: "idle"
 
   - icon: mdi:briefcase-clock-outline
     cards:
@@ -360,14 +382,13 @@ views:
           - automation.evening_relaxed
           - automation.evening_bright
           - automation.sunset
-          - automation.lights_after_sunset
+          - automation.bright_after_sunset
           - automation.turn_off_bedroom_lights
           - automation.closing_bathroom_door
           - automation.opening_bathroom_door
           - automation.coming_home
           - automation.car_coming_home
           - automation.leaving_home
-          - automation.morning_not_home
           - automation.kodi_playing
           - automation.tv_off_group_speakers
           - automation.car_heater_weekdays

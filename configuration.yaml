@@ -34,7 +34,7 @@ http:
 #  api_password: !secret http_password
   # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
 #  base_url: example.duckdns.org:8123
-  base_url: !secret base_url
+  base_url: !secret local_ip
 
 hacs:
   token: !secret hacs_token
@@ -75,7 +75,7 @@ pi_hole:
   verify_ssl: false
 
 homekit:
-  ip_address: 192.168.2.2
+  ip_address: !secret oden_ip
   safe_mode: true
   filter:
     include_entities:
@@ -94,6 +94,12 @@ volvooncall:
   password: !secret volvo_password
 
 ################# MEDIA PLAYERS #################
+
+plex:
+  token: !secret plex_token
+  server: Oden
+  ssl: true
+  verify_ssl: false
 
 media_player:
   - platform: kodi
@@ -133,6 +139,10 @@ panel_iframe:
     title: Kodi
     icon: mdi:kodi
     url: !secret kodi_address
+  tautully:
+    title: Tautully
+    icon: mdi:plex
+    url: http://192.168.2.2:8181
   configurator:
     title: Configurator
     icon: mdi:wrench
@@ -141,10 +151,6 @@ panel_iframe:
     title: ESPHome
     icon: mdi:developer-board
     url: http://192.168.2.2:6052
-  tautully:
-    title: Tautully
-    icon: mdi:plex
-    url: http://192.168.2.2:8181
 
 ################# UNIFI #################
 

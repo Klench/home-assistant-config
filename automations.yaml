@@ -1,7 +1,6 @@
 ################# TIME #################
 
 - alias: 'Evening bright'
-  initial_state: on
   trigger:
     platform: sun
     event: sunset
@@ -14,7 +13,6 @@
     - service: script.all_rooms_bright
 
 - alias: 'Evening relaxed'
-  initial_state: on
   trigger:
     platform: time
     at: '20:30:00'
@@ -25,25 +23,7 @@
   action:
     - service: script.all_rooms_relaxed
 
-- alias: 'Morning not home'
-  initial_state: on
-  trigger:
-    platform: time
-    at: '08:00:00'
-  condition:
-    condition: and
-    conditions:
-      - condition: state
-        entity_id: group.device_tracker_family
-        state: 'not_home'
-      - condition: state
-        entity_id: group.all_lights
-        state: 'on'
-  action:
-    service: scene.turn_on
-    entity_id: scene.all_lights_off
-
-################# VARIOUS LIGHT AUTOMATIONS #################
+################# LIGHT AUTOMATIONS FOR SUNSET #################
 
 - alias: 'Sunset'
   initial_state: on
@@ -63,7 +43,7 @@
     service: scene.turn_on
     entity_id: scene.sunset
 
-- alias: 'Lights after sunset'
+- alias: 'Bright after sunset'
   initial_state: on
   trigger:
     platform: state
@@ -160,7 +140,6 @@
 ################# GO TO BED #################
 
 - alias: 'Go to bed weekdays'
-  initial_state: on
   trigger:
     platform: time
     at: '23:00:00'
@@ -177,7 +156,6 @@
     entity_id: scene.go_to_bed
 
 - alias: 'Go to bed weekend'
-  initial_state: on
   trigger:
     platform: time
     at: '23:59:00'
@@ -374,7 +352,6 @@
 ################# MEDIA #################
 
 - alias: 'Kodi playing'
-  initial_state: on
   trigger:
     platform: state
     entity_id: media_player.kodi

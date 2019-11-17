@@ -45,7 +45,7 @@ automation.evening_bright:
   icon: mdi:lightbulb-on-outline
 automation.sunset:
   icon: mdi:weather-sunset
-automation.lights_after_sunset:
+automation.bright_after_sunset:
   icon: mdi:weather-sunset
 automation.turn_off_bedroom_lights:
   icon: mdi:hotel

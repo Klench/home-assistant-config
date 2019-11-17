@@ -3,20 +3,20 @@
 - name: 'All lights off'
   entities:
     group.all_lights:
-      state: false
+      state: off
       transition: 1
 
 - name: 'Sunset'
   entities:
-    light.window_lamp_livingroom: true
-    light.bedside_lamp_bedroom: true
+    light.window_lamp_livingroom: on
+    light.bedside_lamp_bedroom: on
 
 ################# ROOM #################
 
 - name: 'Vardagsrum bright'
   entities:
     light.vardagsrum:
-      state: true
+      state: on
       brightness: 255
       color_temp: 372
       transition: 2
@@ -24,7 +24,7 @@
 - name: 'Sovrum bright'
   entities:
     light.sovrum:
-      state: true
+      state: on
       brightness: 255
       color_temp: 372
       transition: 2
@@ -32,39 +32,39 @@
 - name: 'Hall bright'
   entities:
     light.ceiling_lamp_hallway:
-      state: true
+      state: on
       brightness: 255
       transition: 2
 
 - name: 'Vardagsrum relaxed'
   entities:
     light.vardagsrum:
-      state: true
+      state: on
       brightness: 144
       color_temp: 443
       transition: 2
-    light.window_lamp_livingroom: true
+    light.window_lamp_livingroom: on
 
 - name: 'Sovrum relaxed'
   entities:
     light.sovrum:
-      state: true
+      state: on
       brightness: 144
       color_temp: 443
       transition: 2
-    light.bedside_lamp_bedroom: true
+    light.bedside_lamp_bedroom: on
 
 - name: 'Hall relaxed'
   entities:
     light.ceiling_lamp_hallway:
-      state: true
+      state: on
       brightness: 144
       transition: 2
 
 - name: 'Baby light bedroom'
   entities:
     light.sovrum:
-      state: true
+      state: on
       brightness: 40
       color_temp: 455
       transition: 2
@@ -72,20 +72,20 @@
 - name: 'Nursery light livingroom'
   entities:
     light.hue_ambiance_lamp_1_3:
-      state: true
+      state: on
       brightness: 200
       color_temp: 455
       transition: 2
-    light.hue_ambiance_lamp_1: false
-    light.window_lamp_livingroom: false
-    light.ceiling_lamp_hallway: false
+    light.hue_ambiance_lamp_1: off
+    light.window_lamp_livingroom: off
+    light.ceiling_lamp_hallway: off
 
 - name: 'Bathroom led relaxed'
   entities:
     light.bathroom_led:
-      state: true
+      state: on
       brightness: 255
-      rgb_color: [255,145,36]
+      rgb_color: [255,168,38]
       transition: 2
       effect: None
 
@@ -94,7 +94,7 @@
 - name: 'Wakeup bedroom'
   entities:
     light.sovrum:
-      state: true
+      state: on
       brightness: 75
       color_temp: 372
       transition: 2700
@@ -102,7 +102,7 @@
 - name: 'Wakeup livingroom'
   entities:
     light.vardagsrum:
-      state: true
+      state: on
       brightness: 255
       color_temp: 372
       transition: 1800
@@ -110,7 +110,7 @@
 - name: 'Wakeup hallway'
   entities:
     light.ceiling_lamp_hallway:
-      state: true
+      state: on
       brightness: 255
       transition: 1800
 
@@ -119,13 +119,13 @@
 - name: 'Go to bed'
   entities:
     light.vardagsrum:
-      state: false
+      state: off
       transition: 1800
     light.ceiling_lamp_hallway:
-      state: false
+      state: off
       transition: 1800
     light.sovrum:
-      state: false
+      state: off
       transition: 300
 
 ################# MEDIA SCENES #################
@@ -133,12 +133,12 @@
 - name: 'Watching TV'
   entities:
     light.hue_ambiance_lamp_1_3:
-      state: true
+      state: on
       brightness: 144
       color_temp: 443
       transition: 2
-    light.window_lamp_livingroom: true
+    light.window_lamp_livingroom: on
     light.ceiling_lamp_hallway:
-      state: true
+      state: on
       brightness: 144
       transition: 2

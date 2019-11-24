@@ -84,6 +84,7 @@ homekit:
       - script.all_lights_off
       - script.sonos_manual_group_speakers
       - script.baby_light_bedroom
+      - script.livingroom_nursery
       - light.bathroom_led
       - sensor.outdoor_temperature
 
@@ -100,6 +101,11 @@ plex:
   server: Oden
   ssl: true
   verify_ssl: false
+
+apple_tv_mrp:
+  - name: Apple TV Vardagsrum
+    host: !secret apple_tv_livingroom_ip
+    port: 49152
 
 media_player:
   - platform: kodi

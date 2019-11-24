@@ -207,11 +207,6 @@ wakeup_lights:
   sequence:
     - service: scene.turn_on
       data:
-        entity_id: scene.wakeup_bedroom
-    - delay:
-        milliseconds: 10
-    - service: scene.turn_on
-      data:
         entity_id: scene.wakeup_livingroom
     - delay:
         milliseconds: 10

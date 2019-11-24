@@ -22,4 +22,6 @@
       friendly_name: 'Sonos livingroom playing music'
       value_template: >-
         {{ states.media_player.vardagsrum.attributes.media_artist != 'TV'}}
-        
+    sonos_livingroom_ungrouped:
+      value_template: >-
+        {{ states.media_player.vardagsrum.attributes.sonos_group == ['media_player.vardagsrum'] }}

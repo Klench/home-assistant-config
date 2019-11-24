@@ -1,7 +1,7 @@
 title: Stenman
 
 resources:
-  - url: /community_plugin/mini-media-player/mini-media-player.js
+  - url: /community_plugin/mini-media-player/mini-media-player-bundle.js
     type: module
   - url: /community_plugin/mini-graph-card/mini-graph-card.js
     type: module
@@ -103,7 +103,16 @@ views:
         show_progress: true
         artwork: full-cover
         icon: mdi:television-classic
-        
+
+      - type: custom:mini-media-player
+        entity: media_player.apple_tv_vardagsrum
+        replace_mute: 'stop'
+        hide:
+          volume: true
+          power_state: false
+        artwork: full-cover
+        icon: mdi:television-classic
+
       - type: custom:mini-graph-card
         entities:
           - sensor.outdoor_temperature
@@ -197,7 +206,6 @@ views:
           power: true
           source: true
           volume: false
-        show_progress: true
         artwork: full-cover
         icon: mdi:speaker-multiple
         speaker_group:
@@ -223,7 +231,6 @@ views:
         entity: media_player.sovrum
         artwork: cover
         icon: mdi:speaker
-        show_progress: true
         hide:
           power: true
           source: true
@@ -235,7 +242,17 @@ views:
         entity: media_player.vardagsrum
         artwork: cover
         icon: mdi:speaker
-        show_progress: true
+        hide:
+          power: true
+          source: true
+        speaker_group:
+          platform: sonos
+          show_group_count: false
+
+      - type: custom:mini-media-player
+        entity: media_player.kok
+        artwork: cover
+        icon: mdi:speaker
         hide:
           power: true
           source: true

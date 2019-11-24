@@ -102,7 +102,6 @@
 ################# SONOS #################
 
 - alias: 'Enable Sonos alarm'
-  initial_state: on
   trigger:
     platform: time
     at: '03:00:00'
@@ -383,7 +382,10 @@
     platform: state
     entity_id: media_player.tv
     to: 'off'
-  # condition:
+  condition:
+    condition: state
+    entity_id: binary_sensor.sonos_livingroom_ungrouped
+    state: 'on'
   #   condition: state
   #   entity_id: binary_sensor.sonos_livingroom_playing_music
   #   state: 'off'

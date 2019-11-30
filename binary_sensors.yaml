@@ -25,3 +25,6 @@
     sonos_livingroom_ungrouped:
       value_template: >-
         {{ states.media_player.vardagsrum.attributes.sonos_group == ['media_player.vardagsrum'] }}
+    sonos_kitchen_grouped:
+      value_template: >-
+        {{ states.media_player.kok.attributes.sonos_group != ['media_player.kok']}}

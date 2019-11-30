@@ -62,7 +62,7 @@ sun:
 system_health:
 
 # iOS app
-ios:
+mobile_app:
 
 # Text to speech
 tts:

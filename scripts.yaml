@@ -24,6 +24,10 @@ sonos_ungroup_bedroom_speaker:
   sequence:
     - service: sonos.unjoin
       entity_id: media_player.sovrum
+    - service: media_player.volume_set
+      data:
+        entity_id: media_player.sovrum
+        volume_level: 0.10
 
 sonos_set_group_volume:
   alias: Sonos set group volume
@@ -70,12 +74,6 @@ sonos_decrease_volume:
           {{sonos_speaker}}{%- if not loop.last %},{% endif %}
           {%- endfor %}
         volume_level: '{{  states.media_player.kok.attributes.volume_level | float - 0.05  }}'
-
-sonos_manual_group_speakers:
-  alias: 'Sonos manual group speakers'
-  sequence:
-    - service: script.sonos_group_all_speakers
-    - service: script.sonos_sync_group_volume
 
 sonos_say:
   alias: "Sonos TTS script"
@@ -148,48 +146,110 @@ sonos_disable_night_mode:
 
 ################# Lights #################
 
+##### HOME #####
+
 all_rooms_bright:
   alias: 'Hög ljusstyrka'
   sequence:
-    - service: scene.turn_on
+    - service: script.bedroom_bright
+    - service: script.livingroom_bright
+    - service: script.hallway_bright
+    - service: homeassistant.turn_on
       data:
-        entity_id: scene.vardagsrum_bright
+        entity_id: automation.opening_bathroom_door
     - delay:
         milliseconds: 10
-    - service: scene.turn_on
-      data:
-        entity_id: scene.sovrum_bright
-    - delay:
-        milliseconds: 10
-    - service: scene.turn_on
-      data:
-        entity_id: scene.hall_bright
 
 all_rooms_relaxed:
   alias: 'Mysbelysning'
   sequence:
-    - service: scene.turn_on
+    - service: script.bedroom_relaxed
+    - service: script.livingroom_relaxed
+    - service: script.hallway_relaxed
+    - service: script.bathroom_relaxed
+    - service: homeassistant.turn_off
       data:
-        entity_id: scene.vardagsrum_relaxed
+        entity_id: automation.opening_bathroom_door
     - delay:
         milliseconds: 10
-    - service: scene.turn_on
-      data:
-        entity_id: scene.sovrum_relaxed
-    - delay:
-        milliseconds: 10
-    - service: scene.turn_on
-      data:
-        entity_id: scene.hall_relaxed
 
 all_lights_off:
   alias: 'Allt släckt'
   sequence:
+    - service: light.turn_off
+      data:
+        entity_id: group.all_lights
+    - service: homeassistant.turn_on
+      data:
+        entity_id: automation.opening_bathroom_door
     - delay:
         milliseconds: 10
-    - service: scene.turn_on
+
+wakeup_lights:
+  alias: 'Väckning'
+  sequence:
+    - service: script.bedroom_wakeup
+    - delay:
+        milliseconds: 10
+    - service: script.livingroom_wakeup
+    - delay:
+        milliseconds: 10
+    - service: script.hallway_wakeup
+
+sunset_lights:
+  alias: 'Skymningsbelysning'
+  sequence:
+    - service: light.turn_on
       data:
-        entity_id: scene.all_lights_off
+        entity_id: light.bedside_lamp_bedroom
+    - service: light.turn_on
+      data:
+        entity_id: light.window_lamp_livingroom
+
+go_to_bed_lights:
+  alias: 'Gå till sängs'
+  sequence:
+    - service: light.turn_off
+      data:
+        entity_id: light.hue_ambiance_lamp_2
+        transition: 300
+    - service: light.turn_off
+      data:
+        entity_id: light.hue_ambiance_lamp_1
+        transition: 1800
+    - service: light.turn_off
+      data:
+        entity_id: light.hue_ambiance_lamp_1_3
+        transition: 1800
+    - service: light.turn_off
+      data:
+        entity_id: light.ceiling_lamp_hallway
+        transition: 1800
+
+##### BEDROOM #####
+
+bedroom_bright:
+  alias: 'Hög ljusstyrka'
+  sequence:
+    - service: light.turn_on
+      data:
+        entity_id: light.hue_ambiance_lamp_2
+        brightness: 200
+        color_temp: 372
+        transition: 2
+
+bedroom_relaxed:
+  alias: 'Mysbelysning'
+  sequence:
+    - service: light.turn_on
+      data:
+        entity_id: light.hue_ambiance_lamp_2
+        brightness: 144
+        color_temp: 443
+        transition: 2
+    - service: light.turn_on
+      data:
+        entity_id: light.bedside_lamp_bedroom
 
 baby_light_bedroom:
   alias: 'Bebisbelysning'
@@ -199,32 +259,140 @@ baby_light_bedroom:
         entity_id: light.bedside_lamp_bedroom
     - delay:
         milliseconds: 100
-    - service: scene.turn_on
-      entity_id: scene.baby_light_bedroom  
+    - service: light.turn_on
+      data:
+        entity_id: light.hue_ambiance_lamp_2
+        brightness: 40
+        color_temp: 455
+        transition: 2
 
-wakeup_lights:
-  alias: 'Väckning'
+bedroom_wakeup:
+  alias: 'Väckning sovrum'
   sequence:
-    - service: scene.turn_on
+    - service: light.turn_on
       data:
-        entity_id: scene.wakeup_livingroom
-    - delay:
-        milliseconds: 10
-    - service: scene.turn_on
+        entity_id: light.hue_ambiance_lamp_2
+        brightness: 30
+        color_temp: 372
+        transition: 1800
+
+##### LIVINGROOM #####
+
+livingroom_bright:
+  alias: 'Hög ljusstyrka'
+  sequence:
+    - service: light.turn_on
       data:
-        entity_id: scene.wakeup_hallway
+        entity_id: light.hue_ambiance_lamp_1
+        brightness: 200
+        color_temp: 372
+        transition: 2
+    - service: light.turn_on
+      data:
+        entity_id: light.hue_ambiance_lamp_1_3
+        brightness: 255
+        color_temp: 372
+        transition: 2
+
+livingroom_relaxed:
+  alias: 'Mysbelysning'
+  sequence:
+    - service: light.turn_on
+      data:
+        entity_id: light.hue_ambiance_lamp_1
+        brightness: 144
+        color_temp: 443
+        transition: 2
+    - service: light.turn_on
+      data:
+        entity_id: light.hue_ambiance_lamp_1_3
+        brightness: 144
+        color_temp: 443
+        transition: 2
+    - service: light.turn_on
+      data:
+        entity_id: light.window_lamp_livingroom
+
+livringroom_nursery_light:
+  alias: 'Amning vardagsrum'
+  sequence:
+    - service: light.turn_off
+      data:
+        entity_id: light.hue_ambiance_lamp_1
+    - service: light.turn_on
+      data:
+        entity_id: light.hue_ambiance_lamp_1_3
+        brightness: 255
+        color_temp: 372
+        transition: 2
+    - service: light.turn_off
+      data:
+        entity_id: light.window_lamp_livingroom
+
+livingroom_wakeup:
+  alias: 'Väckning vardagsrum'
+  sequence:
+    - service: light.turn_on
+      data:
+        entity_id: light.hue_ambiance_lamp_1
+        brightness: 255
+        color_temp: 372
+        transition: 1800
+    - service: light.turn_on
+      data:
+        entity_id: light.hue_ambiance_lamp_1_3
+        brightness: 255
+        color_temp: 372
+        transition: 1800
+
+##### HALLWAY #####
+
+hallway_bright:
+  alias: 'Hög ljusstyrka'
+  sequence:
+    - service: light.turn_on
+      data:
+        entity_id: light.ceiling_lamp_hallway
+        brightness: 255
+        transition: 2
+
+hallway_relaxed:
+  alias: 'Mysbelysning'
+  sequence:
+    - service: light.turn_on
+      data:
+        entity_id: light.ceiling_lamp_hallway
+        brightness: 144
+        transition: 2
+
+hallway_wakeup:
+  alias: 'Väckning sovrum'
+  sequence:
+    - service: light.turn_on
+      data:
+        entity_id: light.ceiling_lamp_hallway
+        brightness: 255
+        transition: 1800
+
+##### BATHROOM #####
+
+bathroom_relaxed:
+  alias: 'Badrumsbelysning'
+  sequence:
+    - service: light.turn_on
+      data:
+        brightness: 255
+        rgb_color: [255,168,38]
+        transition: 2
+        effect: None
 
 ################# VARIOUS #################
 
 livingroom_nursery:
-  alias: 'Amning vardagsrum'
+  alias: 'Amning'
   sequence:
-    - service: scene.turn_on
-      data:
-        entity_id: scene.nursery_light_livingroom
-    - service: scene.turn_on
-      data:
-        entity_id: scene.bathroom_led_relaxed
+    - service: script.livringroom_nursery_light
+    - service: script.bathroom_relaxed
     - service: script.sonos_enable_night_mode
     - delay: '01:00'
     - service: script.sonos_disable_night_mode

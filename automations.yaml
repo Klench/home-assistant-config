@@ -40,8 +40,7 @@
         entity_id: group.all_lights
         state: 'on'
   action:
-    service: scene.turn_on
-    entity_id: scene.sunset
+    service: script.sunset_lights
 
 - alias: 'Bright after sunset'
   initial_state: on
@@ -53,8 +52,7 @@
     condition: sun
     after: sunset
   action:
-    service: scene.turn_on
-    entity_id: scene.sunset
+    service: script.sunset_lights
 
 ################# WAKEUP #################
 
@@ -151,8 +149,7 @@
       - thu
       - sun
   action:
-    service: scene.turn_on
-    entity_id: scene.go_to_bed
+    service: script.go_to_bed_lights
 
 - alias: 'Go to bed weekend'
   trigger:
@@ -164,8 +161,7 @@
       - fri
       - sat
   action:
-    service: scene.turn_on
-    entity_id: scene.go_to_bed
+    service: script.go_to_bed_lights
 
 - alias: 'Turn off bedroom lights'
   initial_state: on
@@ -217,8 +213,7 @@
     entity_id: sensor.hallway_switch
     state: '4_click_up'
   action:
-    service: scene.turn_on
-    entity_id: scene.all_lights_off
+    service: script.all_lights_off
 
 - alias: 'Hue switch group all Sonos speakers'
   initial_state: on
@@ -292,8 +287,7 @@
     entity_id: group.device_tracker_family
     to: 'not_home'
   action:
-    service: scene.turn_on
-    entity_id: scene.all_lights_off
+    service: script.all_lighs_off
 
 - alias: 'Coming home'
   initial_state: on
@@ -335,8 +329,7 @@
     entity_id: binary_sensor.bathroom_door
     to: 'off'
   action:
-    service: scene.turn_on
-    entity_id: scene.bathroom_led_relaxed
+    service: script.bathroom_led_relaxed
 
 - alias: 'Opening bathroom door'
   initial_state: on

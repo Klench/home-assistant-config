@@ -172,7 +172,6 @@ panel_iframe:
 ################# INCLUDE #################
 
 group: !include groups.yaml
-scene: !include scenes.yaml
 automation: !include automations.yaml
 sensor: !include sensors.yaml
 binary_sensor: !include binary_sensors.yaml

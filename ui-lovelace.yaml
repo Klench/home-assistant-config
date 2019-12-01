@@ -410,6 +410,6 @@ views:
           - automation.coming_home
           - automation.car_coming_home
           - automation.leaving_home
-          - automation.kodi_playing
+          - automation.watching_tv
           - automation.tv_off_group_speakers
           - automation.car_heater_weekdays

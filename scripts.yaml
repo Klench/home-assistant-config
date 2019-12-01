@@ -226,6 +226,25 @@ go_to_bed_lights:
         entity_id: light.ceiling_lamp_hallway
         transition: 1800
 
+watching_tv_lights:
+  alias: 'Belysning TV-tittande'
+  sequence:
+    - service: light.turn_on
+      data:
+        entity_id: light.hue_ambiance_lamp_1_3
+        brightness: 144
+        color_temp: 443
+        transition: 2
+    - service: light.turn_on
+      data:
+        entity_id: light.window_lamp_livingroom
+    - service: light.turn_on
+      data:
+        entity_id: light.ceiling_lamp_hallway
+        brightness: 144
+        transition: 2
+  
+
 ##### BEDROOM #####
 
 bedroom_bright:

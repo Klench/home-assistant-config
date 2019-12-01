@@ -61,7 +61,7 @@ automation.leaving_home:
   icon: mdi:home-outline
 automation.morning_not_home:
   icon: mdi:lightbulb
-automation.kodi_playing:
+automation.watching_tv:
   icon: mdi:youtube-tv
 automation.tv_off_group_speakers:
   icon: mdi:television-classic-off

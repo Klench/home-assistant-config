@@ -88,6 +88,10 @@ homekit:
       - light.bathroom_led
       - sensor.outdoor_temperature
 
+speedtestdotnet:
+  server_id: 20854
+  scan_interval: '06:00'
+
 ################# VOLVO ON CALL #################
 
 volvooncall:

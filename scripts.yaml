@@ -303,7 +303,7 @@ livingroom_bright:
     - service: light.turn_on
       data:
         entity_id: light.hue_ambiance_lamp_1
-        brightness: 200
+        brightness: 150
         color_temp: 372
         transition: 2
     - service: light.turn_on
@@ -319,7 +319,7 @@ livingroom_relaxed:
     - service: light.turn_on
       data:
         entity_id: light.hue_ambiance_lamp_1
-        brightness: 144
+        brightness: 100
         color_temp: 443
         transition: 2
     - service: light.turn_on
@@ -332,19 +332,10 @@ livingroom_relaxed:
       data:
         entity_id: light.window_lamp_livingroom
 
-livringroom_nursery_light:
+livingroom_nursery_light:
   alias: 'Amning vardagsrum'
   sequence:
-    - service: light.turn_off
-      data:
-        entity_id: light.hue_ambiance_lamp_1
     - service: light.turn_on
-      data:
-        entity_id: light.hue_ambiance_lamp_1_3
-        brightness: 255
-        color_temp: 372
-        transition: 2
-    - service: light.turn_off
       data:
         entity_id: light.window_lamp_livingroom
 
@@ -385,7 +376,7 @@ hallway_relaxed:
         transition: 2
 
 hallway_wakeup:
-  alias: 'Väckning sovrum'
+  alias: 'Väckning hall'
   sequence:
     - service: light.turn_on
       data:
@@ -400,6 +391,7 @@ bathroom_relaxed:
   sequence:
     - service: light.turn_on
       data:
+        entity_id: light.bathroom_led
         brightness: 255
         rgb_color: [255,168,38]
         transition: 2
@@ -410,9 +402,15 @@ bathroom_relaxed:
 livingroom_nursery:
   alias: 'Amning'
   sequence:
-    - service: script.livringroom_nursery_light
+    - service: script.livingroom_nursery_light
     - service: script.bathroom_relaxed
     - service: script.sonos_enable_night_mode
+    - service: homeassistant.turn_off
+      data:
+        entity_id: automation.opening_bathroom_door
     - delay: '01:00'
     - service: script.sonos_disable_night_mode
+    - service: homeassistant.turn_on
+      data:
+        entity_id: automation.opening_bathroom_door
     

@@ -134,6 +134,24 @@ views:
       - type: custom:krisinfo-card
         entity: sensor.krisinformation_vastra_gotaland
 
+      - type: custom:mini-graph-card
+        entities:
+          - entity: sensor.speedtest_download
+        name: 'Nedladdningshastighet'
+        unit: 'mbit/s'
+        icon: mdi:download
+        line_color: '#5c8dd1'
+        hour24: true
+        hours_to_show: 168
+        animate: true
+        decimals: 0
+        points_per_hour: 0.25
+        font_size_header: 18
+        show:
+          extrema: true
+          labels: true
+          fill: fade
+
       - type: custom:auto-entities
         show_empty: false
         card:

@@ -329,7 +329,7 @@
     entity_id: binary_sensor.bathroom_door
     to: 'off'
   action:
-    service: script.bathroom_led_relaxed
+    service: script.bathroom_relaxed
 
 - alias: 'Opening bathroom door'
   initial_state: on

@@ -23,6 +23,18 @@
   action:
     - service: script.all_rooms_relaxed
 
+- alias: 'Advent light'
+  initial_state: on
+  trigger:
+    platform: time
+    at: '10:00:00'
+  condition:
+    condition: state
+    entity_id: group.device_tracker_family
+    state: 'home'
+  action:
+    - service: script.window_lights
+
 ################# LIGHT AUTOMATIONS FOR SUNSET #################
 
 - alias: 'Sunset'
@@ -40,7 +52,7 @@
         entity_id: group.all_lights
         state: 'on'
   action:
-    service: script.sunset_lights
+    service: script.window_lights
 
 - alias: 'Bright after sunset'
   initial_state: on
@@ -52,7 +64,7 @@
     condition: sun
     after: sunset
   action:
-    service: script.sunset_lights
+    service: script.window_lights
 
 ################# WAKEUP #################
 

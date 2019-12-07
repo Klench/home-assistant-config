@@ -139,7 +139,7 @@ views:
           - entity: sensor.speedtest_download
         name: 'Nedladdningshastighet'
         unit: 'mbit/s'
-        icon: mdi:download
+        icon: mdi:gauge
         line_color: '#5c8dd1'
         hour24: true
         hours_to_show: 168

@@ -196,7 +196,7 @@ wakeup_lights:
         milliseconds: 10
     - service: script.hallway_wakeup
 
-sunset_lights:
+window_lights:
   alias: 'Skymningsbelysning'
   sequence:
     - service: light.turn_on

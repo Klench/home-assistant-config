@@ -134,24 +134,6 @@ views:
       - type: custom:krisinfo-card
         entity: sensor.krisinformation_vastra_gotaland
 
-      - type: custom:mini-graph-card
-        entities:
-          - entity: sensor.speedtest_download
-        name: 'Nedladdningshastighet'
-        unit: 'mbit/s'
-        icon: mdi:gauge
-        line_color: '#5c8dd1'
-        hour24: true
-        hours_to_show: 168
-        animate: true
-        decimals: 0
-        points_per_hour: 0.25
-        font_size_header: 18
-        show:
-          extrema: true
-          labels: true
-          fill: fade
-
       - type: custom:auto-entities
         show_empty: false
         card:
@@ -329,6 +311,8 @@ views:
             - state: "unavailable"
             - state: "idle"
 
+################# WORK TIME #################
+
   - icon: mdi:briefcase-clock-outline
     cards:
 
@@ -344,6 +328,71 @@ views:
           - input_number.work_time_hours_out
           - input_number.work_time_minutes_out
           - input_number.work_time_minutes_lunch
+
+################# TRANSMISSION #################
+
+  - icon: mdi:download-network-outline
+    cards:
+
+      - type: entities
+        title: Transmission
+        show_header_toggle: false
+        entities:
+          - input_text.transmission_torrent_url
+          - entity: sensor.transmission_active_torrents
+            name: Aktiva torrents
+            icon: mdi:play
+          - entity: sensor.transmission_paused_torrents
+            name: Pausade torrents
+            icon: mdi:pause
+          - entity: sensor.transmission_completed_torrents
+            name: Slutförda torrents
+            icon: mdi:check
+          - entity: switch.transmission_turtle_mode
+            name: Turtle mode
+            icon: mdi:tortoise
+
+      - type: conditional
+        conditions:
+          - entity: binary_sensor.transmission_active
+            state: 'on'
+        card:
+          type: horizontal-stack
+          cards:
+            - type: custom:mini-graph-card
+              entities:
+                - entity: sensor.transmission_down_speed
+              name: 'Nedladdning'
+              unit: 'MB/s'
+              icon: mdi:file-download-outline
+              line_color: '#5c8dd1'
+              hour24: true
+              hours_to_show: 2
+              animate: true
+              decimals: 2
+              points_per_hour: 60
+              font_size_header: 18
+              show:
+                extrema: true
+                labels: true
+                fill: fade
+            - type: custom:mini-graph-card
+              entities:
+                - entity: sensor.transmission_up_speed
+              name: 'Uppladdning'
+              unit: 'MB/s'
+              icon: mdi:file-upload-outline
+              line_color: '#5c8dd1'
+              hour24: true
+              hours_to_show: 2
+              animate: true
+              decimals: 2
+              points_per_hour: 60
+              font_size_header: 18
+              show:
+                extrema: true
+                labels: true
+                fill: fade
 
 ################# ESPHome #################
 

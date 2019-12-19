@@ -27,7 +27,7 @@
   initial_state: on
   trigger:
     platform: time
-    at: '10:00:00'
+    at: '09:00:00'
   condition:
     condition: state
     entity_id: group.device_tracker_family
@@ -299,7 +299,7 @@
     entity_id: group.device_tracker_family
     to: 'not_home'
   action:
-    service: script.all_lighs_off
+    service: script.all_lights_off
 
 - alias: 'Coming home'
   initial_state: on
@@ -459,3 +459,13 @@
       sonos_entity: kok
       volume: 0.1
       message: 'Car heater turned on'
+
+################# TRANSMISSION #################
+
+- alias: 'Transmission add torrent'
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: input_text.transmission_torrent_url
+  action:
+    - service: script.transmission_add_torrent

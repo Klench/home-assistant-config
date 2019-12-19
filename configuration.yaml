@@ -88,9 +88,12 @@ homekit:
       - light.bathroom_led
       - sensor.outdoor_temperature
 
-speedtestdotnet:
-  server_id: 20854
-  scan_interval: '06:00'
+transmission:
+  host: !secret ubuntu_ip
+  name: 'Transmission'
+  username: !secret transmission_username
+  password: !secret transmission_password
+  scan_interval: 10
 
 ################# VOLVO ON CALL #################
 
@@ -182,5 +185,6 @@ binary_sensor: !include binary_sensors.yaml
 script: !include scripts.yaml
 input_number: !include input_numbers.yaml
 input_boolean: !include input_boolean.yaml
+input_text: !include input_text.yaml
 switch: !include switches.yaml
 light: !include lights.yaml

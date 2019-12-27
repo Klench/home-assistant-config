@@ -30,4 +30,4 @@
         {{ states.media_player.kok.attributes.sonos_group != ['media_player.kok']}}
     transmission_active:
       value_template: >-
-        {{ states.sensor.transmission_status.state != 'idle' }}
+        {{ (states.sensor.transmission_status.state != 'idle') and (states.sensor.transmission_status.state != 'unavailable') }}

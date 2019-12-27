@@ -283,7 +283,7 @@ baby_light_bedroom:
     - service: light.turn_on
       data:
         entity_id: light.hue_ambiance_lamp_2
-        brightness: 40
+        brightness: 20
         color_temp: 455
         transition: 2
 

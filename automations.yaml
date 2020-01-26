@@ -213,7 +213,7 @@
     entity_id: sensor.hallway_switch
     state: '1_hold'
   action:
-    - service: script.all_rooms_relaxed
+    - service: script.all_rooms_relaxed_baby_light
 
 - alias: 'Hue switch turn off lighs'
   initial_state: on
@@ -469,3 +469,13 @@
     entity_id: input_text.transmission_torrent_url
   action:
     - service: script.transmission_add_torrent
+
+################# CREATE ALL LIGHTS GROUP #################
+
+- alias: 'Create all lights group'
+  initial_state: on
+  trigger:
+    platform: homeassistant
+    event: start
+  action:
+    service: script.create_all_light_group

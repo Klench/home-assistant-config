@@ -163,7 +163,19 @@ all_rooms_bright:
 all_rooms_relaxed:
   alias: 'Mysbelysning'
   sequence:
-    - service: script.bedroom_relaxed
+    - service: script.livingroom_relaxed
+    - service: script.hallway_relaxed
+    - service: script.bathroom_relaxed
+    - service: homeassistant.turn_off
+      data:
+        entity_id: automation.opening_bathroom_door
+    - delay:
+        milliseconds: 10
+
+all_rooms_relaxed_baby_light:
+  alias: 'Mysbelysning 2'
+  sequence:
+    - service: script.baby_light_bedroom
     - service: script.livingroom_relaxed
     - service: script.hallway_relaxed
     - service: script.bathroom_relaxed
@@ -191,9 +203,6 @@ all_lights_off:
 wakeup_lights:
   alias: 'Väckning'
   sequence:
-    - service: script.bedroom_wakeup
-    - delay:
-        milliseconds: 10
     - service: script.livingroom_wakeup
     - delay:
         milliseconds: 10
@@ -246,6 +255,14 @@ watching_tv_lights:
         entity_id: light.ceiling_lamp_hallway
         brightness: 144
         transition: 2
+
+create_all_light_group:
+    sequence:
+      - service: group.set
+        data_template:
+          object_id: "all_lights"
+          entities: >
+            {{ states.light |  map(attribute='entity_id') | join(',') }}
 
 ##### BEDROOM #####
 

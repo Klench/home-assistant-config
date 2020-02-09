@@ -34,8 +34,6 @@
     - 'date'
     - 'date_time'
 
-- platform: huesensor
-
 - platform: vasttrafik
   key: !secret vasttrafik_key
   secret: !secret vasttrafik_secret
@@ -60,7 +58,7 @@
       value_template: '{{ (float(states.sensor.yr_temperature.state) * 0.4 + float(states.weather.smhi_hem.attributes.temperature) * 0.6) | round(1) }}'
     hallway_switch_updated:
       friendly_name: 'Hallway switch updated'
-      value_template: '{{ states.sensor.hallway_switch.attributes.last_updated }}'
+      value_template: '{{ states.remote.hallway_switch.attributes.last_updated }}'
     work_time_in:
       friendly_name: 'Inpasseringstid'
       icon_template: mdi:clock-in

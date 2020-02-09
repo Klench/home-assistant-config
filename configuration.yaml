@@ -95,6 +95,9 @@ transmission:
   password: !secret transmission_password
   scan_interval: 10
 
+remote:
+  - platform: huesensor
+
 ################# VOLVO ON CALL #################
 
 volvooncall:

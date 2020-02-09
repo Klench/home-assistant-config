@@ -198,7 +198,7 @@
     entity_id: sensor.hallway_switch_updated
   condition:
     condition: state
-    entity_id: sensor.hallway_switch
+    entity_id: remote.hallway_switch
     state: '1_click_up'
   action:
     - service: script.all_rooms_bright
@@ -210,8 +210,8 @@
     entity_id: sensor.hallway_switch_updated
   condition:
     condition: state
-    entity_id: sensor.hallway_switch
-    state: '1_hold'
+    entity_id: remote.hallway_switch
+    state: '1_hold_up'
   action:
     - service: script.all_rooms_relaxed_baby_light
 
@@ -222,7 +222,7 @@
     entity_id: sensor.hallway_switch_updated
   condition:
     condition: state
-    entity_id: sensor.hallway_switch
+    entity_id: remote.hallway_switch
     state: '4_click_up'
   action:
     service: script.all_lights_off
@@ -234,8 +234,8 @@
     entity_id: sensor.hallway_switch_updated
   condition:
     condition: state
-    entity_id: sensor.hallway_switch
-    state: '2_hold'
+    entity_id: remote.hallway_switch
+    state: '2_hold_up'
   action:
     - service: script.sonos_group_all_speakers
     - service: script.sonos_sync_group_volume
@@ -247,8 +247,8 @@
     entity_id: sensor.hallway_switch_updated
   condition:
     condition: state
-    entity_id: sensor.hallway_switch
-    state: '3_hold'
+    entity_id: remote.hallway_switch
+    state: '3_hold_up'
   action:
     - service: script.sonos_group_kitchen_livingroom_speakers
     - service: script.sonos_ungroup_bedroom_speaker
@@ -261,7 +261,7 @@
     entity_id: sensor.hallway_switch_updated
   condition:
     condition: state
-    entity_id: sensor.hallway_switch
+    entity_id: remote.hallway_switch
     state: '2_click_up'
   action:
     service: script.sonos_increase_volume
@@ -273,7 +273,7 @@
     entity_id: sensor.hallway_switch_updated
   condition:
     condition: state
-    entity_id: sensor.hallway_switch
+    entity_id: remote.hallway_switch
     state: '3_click_up'
   action:
     service: script.sonos_decrease_volume
@@ -285,8 +285,8 @@
     entity_id: sensor.hallway_switch_updated
   condition:
     condition: state
-    entity_id: sensor.hallway_switch
-    state: '4_hold'
+    entity_id: remote.hallway_switch
+    state: '4_hold_up'
   action:
     service: script.livingroom_nursery
 

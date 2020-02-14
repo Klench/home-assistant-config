@@ -62,7 +62,7 @@ sonos_increase_volume:
           {%- for sonos_speaker in states.media_player.kok.attributes.sonos_group -%}
           {{sonos_speaker}}{%- if not loop.last %},{% endif %}
           {%- endfor %}
-        volume_level: '{{  states.media_player.kok.attributes.volume_level | float + 0.05  }}'
+        volume_level: '{{  [((states.media_player.kok.attributes.volume_level | float * 1.1 + 0.03) | round(2)), 1] | min   }}'
 
 sonos_decrease_volume:
   alias: 'Sonos decrease volume'
@@ -73,7 +73,7 @@ sonos_decrease_volume:
           {%- for sonos_speaker in states.media_player.kok.attributes.sonos_group -%}
           {{sonos_speaker}}{%- if not loop.last %},{% endif %}
           {%- endfor %}
-        volume_level: '{{  states.media_player.kok.attributes.volume_level | float - 0.05  }}'
+        volume_level: '{{  [((states.media_player.kok.attributes.volume_level | float * 0.9 - 0.03) | round(2)), 0] | max   }}'
 
 sonos_say:
   alias: "Sonos TTS script"

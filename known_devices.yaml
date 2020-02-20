@@ -1,0 +1,7 @@
+volvo_lgd321:
+  hide_if_away: false
+  icon: mdi:car
+  mac:
+  name: Bilen
+  picture:
+  track: true

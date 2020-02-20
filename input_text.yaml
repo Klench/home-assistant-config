@@ -1,0 +1,5 @@
+transmission_torrent_url:
+  name: Torrent URL
+  min: 1
+  icon: mdi:file-link-outline
+  initial: 'url'

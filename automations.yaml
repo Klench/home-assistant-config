@@ -24,7 +24,7 @@
     - service: script.all_rooms_relaxed
 
 - alias: 'Advent light'
-  initial_state: on
+  initial_state: off
   trigger:
     platform: time
     at: '09:00:00'

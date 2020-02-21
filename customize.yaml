@@ -53,7 +53,7 @@ automation.closing_bathroom_door:
   icon: mdi:toilet
 automation.opening_bathroom_door:
   icon: mdi:toilet
-automation.coming_home:
+automation.coming_home_turn_on_lights:
   icon: mdi:home-outline
 automation.car_coming_home:
   icon: mdi:car

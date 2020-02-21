@@ -22,12 +22,15 @@
       friendly_name: 'Sonos livingroom playing music'
       value_template: >-
         {{ states.media_player.vardagsrum.attributes.media_artist != 'TV'}}
-    sonos_livingroom_ungrouped:
-      value_template: >-
-        {{ states.media_player.vardagsrum.attributes.sonos_group == ['media_player.vardagsrum'] }}
-    sonos_kitchen_grouped:
+    sonos_kitchen_is_grouped:
       value_template: >-
         {{ states.media_player.kok.attributes.sonos_group != ['media_player.kok']}}
+    sonos_livingroom_is_grouped:
+      value_template: >-
+        {{ states.media_player.vardagsrum.attributes.sonos_group != ['media_player.vardagsrum'] }}
+    sonos_bedroom_is_grouped:
+      value_template: >-
+        {{ states.media_player.sovrum.attributes.sonos_group != ['media_player.sovrum']}}
     transmission_active:
       value_template: >-
         {{ (states.sensor.transmission_status.state != 'idle') and (states.sensor.transmission_status.state != 'unavailable') }}

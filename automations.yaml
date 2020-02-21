@@ -191,6 +191,8 @@
 
 ################# HUE SWITCH #################
 
+##### LIGHTS #####
+
 - alias: 'Hue switch bright'
   initial_state: on
   trigger:
@@ -227,7 +229,7 @@
   action:
     service: script.all_lights_off
 
-- alias: 'Hue switch group all Sonos speakers'
+- alias: 'Hue switch turn on nursery livingroom'
   initial_state: on
   trigger:
     platform: state
@@ -235,24 +237,79 @@
   condition:
     condition: state
     entity_id: remote.hallway_switch
-    state: '2_hold_up'
+    state: '4_hold_up'
   action:
-    - service: script.sonos_group_all_speakers
-    - service: script.sonos_sync_group_volume
+    service: script.livingroom_nursery
 
-- alias: 'Hue switch group kitchen livingroom speakers'
+##### SONOS #####
+
+- alias: 'Hue switch group livingroom speaker'
   initial_state: on
   trigger:
     platform: state
     entity_id: sensor.hallway_switch_updated
   condition:
-    condition: state
-    entity_id: remote.hallway_switch
-    state: '3_hold_up'
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: remote.hallway_switch
+        state: '2_hold_up'
+      - condition: state
+        entity_id: binary_sensor.sonos_livingroom_is_grouped
+        state: 'off'
   action:
-    - service: script.sonos_group_kitchen_livingroom_speakers
-    - service: script.sonos_ungroup_bedroom_speaker
-    - service: script.sonos_sync_group_volume
+    service: script.sonos_group_livingroom_speaker
+
+- alias: 'Hue switch ungroup livingroom speaker'
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: sensor.hallway_switch_updated
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: remote.hallway_switch
+        state: '2_hold_up'
+      - condition: state
+        entity_id: binary_sensor.sonos_livingroom_is_grouped
+        state: 'on'
+  action:
+    service: script.sonos_ungroup_livingroom_speaker
+
+- alias: 'Hue switch group bedroom speaker'
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: sensor.hallway_switch_updated
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: remote.hallway_switch
+        state: '3_hold_up'
+      - condition: state
+        entity_id: binary_sensor.sonos_bedroom_is_grouped
+        state: 'off'
+  action:
+    service: script.sonos_group_bedroom_speaker
+
+- alias: 'Hue switch ungroup bedroom speaker'
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: sensor.hallway_switch_updated
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: remote.hallway_switch
+        state: '3_hold_up'
+      - condition: state
+        entity_id: binary_sensor.sonos_bedroom_is_grouped
+        state: 'on'
+  action:
+    service: script.sonos_ungroup_bedroom_speaker
 
 - alias: 'Hue switch increase Sonos group volume'
   initial_state: on
@@ -277,18 +334,6 @@
     state: '3_click_up'
   action:
     service: script.sonos_decrease_volume
-    
-- alias: 'Hue switch turn on nursery livingroom'
-  initial_state: on
-  trigger:
-    platform: state
-    entity_id: sensor.hallway_switch_updated
-  condition:
-    condition: state
-    entity_id: remote.hallway_switch
-    state: '4_hold_up'
-  action:
-    service: script.livingroom_nursery
 
 ################# LEAVING/COMING HOME #################
 
@@ -301,7 +346,7 @@
   action:
     service: script.all_lights_off
 
-- alias: 'Coming home'
+- alias: 'Coming home turn on lights'
   initial_state: on
   trigger:
     platform: state
@@ -312,9 +357,16 @@
     after: sunset
     after_offset: '-01:00:00'
   action:
-    - service: script.all_rooms_bright
-    - service: script.sonos_group_all_speakers
-    - service: script.sonos_sync_group_volume
+    service: script.all_rooms_bright
+
+- alias: 'Coming home group Sonos speakers'
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: group.device_tracker_family
+    to: 'home'
+  action:
+    service: script.sonos_group_all_speakers
 
 - alias: 'Car coming home'
   initial_state: on
@@ -394,14 +446,13 @@
     to: 'off'
   condition:
     condition: state
-    entity_id: binary_sensor.sonos_livingroom_ungrouped
-    state: 'on'
+    entity_id: binary_sensor.sonos_livingroom_is_grouped
+    state: 'off'
   #   condition: state
   #   entity_id: binary_sensor.sonos_livingroom_playing_music
   #   state: 'off'
   action:
-    - service: script.sonos_group_kitchen_livingroom_speakers
-    - service: script.sonos_sync_group_volume
+    service: script.sonos_group_livingroom_speaker
 
 - alias: 'TV off disable night mode'
   initial_state: on

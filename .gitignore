@@ -1,6 +1,6 @@
 *
+*._*
 !*.yaml
 secrets.yaml
-*._*
 !*.gitignore
 ._.gitignore

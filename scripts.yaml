@@ -1,33 +1,77 @@
 ################# SONOS #################
 
+##### GROUP/UNGROUP #####
+
 sonos_group_all_speakers:
   alias: Sonos group all speakers
   sequence:
+    - service: media_player.volume_set
+      data:
+        entity_id:
+          - media_player.vardagsrum
+          - media_player.sovrum
+        volume_level: 0.0
     - service: sonos.join
       data:
         master: media_player.kok
         entity_id:
           - media_player.sovrum
           - media_player.vardagsrum
+    - service: script.sonos_sync_group_volume
 
-sonos_group_kitchen_livingroom_speakers:
-  alias: Sonos group kitchen livingroom speakers
+sonos_group_speaker:
+  alias: Sonos group speaker
   sequence:
+    - service: media_player.volume_set
+      data_template:
+        entity_id: "{{ 'media_player.' ~ sonos_entity }}"
+        volume_level: 0.0
     - service: sonos.join
-      data:
+      data_template:
         master: media_player.kok
-        entity_id:
-          - media_player.vardagsrum
+        entity_id: "{{ 'media_player.' ~ sonos_entity }}"
+    - service: script.sonos_sync_group_volume
 
-sonos_ungroup_bedroom_speaker:
-  alias: Sonos ungroup bedroom speaker
+sonos_ungroup_speaker:
+  alias: Sonos ungroup speaker
   sequence:
     - service: sonos.unjoin
-      entity_id: media_player.sovrum
+      data_template:
+        entity_id: "{{ 'media_player.' ~ sonos_entity }}"
     - service: media_player.volume_set
-      data:
-        entity_id: media_player.sovrum
+      data_template:
+        entity_id: "{{ 'media_player.' ~ sonos_entity }}"
         volume_level: 0.10
+
+sonos_group_livingroom_speaker:
+  alias: Sonos group livingroom speaker
+  sequence:
+    - service: script.sonos_group_speaker
+      data:
+        sonos_entity: vardagsrum
+
+sonos_group_bedroom_speaker:
+  alias: Sonos group bedroom speaker
+  sequence:
+    - service: script.sonos_group_speaker
+      data:
+        sonos_entity: sovrum
+
+sonos_ungroup_livingroom_speaker:
+  alias: Sonos group livingroom speaker
+  sequence:
+    - service: script.sonos_ungroup_speaker
+      data:
+        sonos_entity: vardagsrum
+
+sonos_ungroup_bedroom_speaker:
+  alias: Sonos group bedroom speaker
+  sequence:
+    - service: script.sonos_ungroup_speaker
+      data:
+        sonos_entity: sovrum
+
+##### VOLUME #####
 
 sonos_set_group_volume:
   alias: Sonos set group volume
@@ -51,7 +95,7 @@ sonos_sync_group_volume:
           {{sonos_speaker}}{%- if not loop.last %},{% endif %}
           {%- endif %}
           {%- endfor %}
-        volume_level: '{{  states.media_player.kok.attributes.volume_level | float  }}'
+        volume_level: '{{ states.media_player.kok.attributes.volume_level | float }}'
 
 sonos_increase_volume:
   alias: 'Sonos increase volume'
@@ -62,7 +106,7 @@ sonos_increase_volume:
           {%- for sonos_speaker in states.media_player.kok.attributes.sonos_group -%}
           {{sonos_speaker}}{%- if not loop.last %},{% endif %}
           {%- endfor %}
-        volume_level: '{{  [((states.media_player.kok.attributes.volume_level | float * 1.1 + 0.03) | round(2)), 1] | min   }}'
+        volume_level: '{{ [((states.media_player.kok.attributes.volume_level | float * 1.1 + 0.03) | round(2)), 1] | min }}'
 
 sonos_decrease_volume:
   alias: 'Sonos decrease volume'
@@ -73,7 +117,9 @@ sonos_decrease_volume:
           {%- for sonos_speaker in states.media_player.kok.attributes.sonos_group -%}
           {{sonos_speaker}}{%- if not loop.last %},{% endif %}
           {%- endfor %}
-        volume_level: '{{  [((states.media_player.kok.attributes.volume_level | float * 0.9 - 0.03) | round(2)), 0] | max   }}'
+        volume_level: '{{ [((states.media_player.kok.attributes.volume_level | float * 0.9 - 0.03) | round(2)), 0] | max }}'
+
+##### SAY #####
 
 sonos_say:
   alias: "Sonos TTS script"
@@ -107,6 +153,8 @@ sonos_say:
         entity_id:  "{{ 'media_player.' ~ sonos_entity }}"
         with_group: true
 
+##### ALARM #####
+
 sonos_set_alarm:
   alias: 'Sonos set alarm'
   sequence:
@@ -125,6 +173,8 @@ sonos_disable_alarm:
         entity_id: media_player.sovrum
         alarm_id: 7
         enabled: false
+
+##### NIGHT MODE #####
 
 sonos_enable_night_mode:
   alias: 'Sonos enable night mode'

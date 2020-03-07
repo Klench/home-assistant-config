@@ -30,11 +30,7 @@ lovelace:
 config:
 
 http:
-  # Secrets are defined in the file secrets.yaml
-#  api_password: !secret http_password
-  # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
-#  base_url: example.duckdns.org:8123
-  base_url: !secret local_ip
+  base_url: !secret base_url
 
 hacs:
   token: !secret hacs_token
@@ -69,10 +65,10 @@ tts:
  - platform: google_translate
    base_url: !secret local_ip
 
-pi_hole:
-  host: !secret pi-hole_ip
-  ssl: false
-  verify_ssl: false
+# pi_hole:
+#   host: !secret pi-hole_ip
+#   ssl: false
+#   verify_ssl: false
 
 homekit:
   ip_address: !secret oden_ip
@@ -137,9 +133,10 @@ media_player:
     port: 8001
     name: 'TV_custom'
     sourcelist: '{"TV": "KEY_TV", "OSMC": "KEY_HDMI1"}'
-#  - platform: spotify
-#    client_id: !secret spotify_client_id
-#    client_secret: !secret spotify_client_secret
+
+spotify:
+  client_id: !secret spotify_client_id
+  client_secret: !secret spotify_client_secret
 
 sonos:
   media_player:

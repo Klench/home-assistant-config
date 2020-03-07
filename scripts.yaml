@@ -450,7 +450,7 @@ hallway_wakeup:
     - service: light.turn_on
       data:
         entity_id: light.ceiling_lamp_hallway
-        brightness: 200
+        brightness: 144
         transition: 1800
 
 ##### BATHROOM #####

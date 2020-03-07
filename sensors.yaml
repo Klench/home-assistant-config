@@ -41,6 +41,14 @@
     - name: Buss 19
       from: Sörgårdsskolan
 
+- platform: steam_online
+  api_key: !secret steam_api_key
+  accounts:
+    - !secret steam_id_klench
+    - !secret steam_id_mench
+    - !secret steam_id_bench
+    - !secret steam_id_lady_nelson
+
 - platform: template
   sensors:
     alarm_clock_time_weekdays:

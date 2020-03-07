@@ -112,6 +112,21 @@ views:
         artwork: full-cover
         icon: mdi:television-classic
 
+      - type: custom:mini-media-player
+        entity: media_player.spotify
+        artwork: full-cover
+        icon: mdi:spotify
+        name: Spotify
+        hide:
+          power: true
+          power_state: false
+          shuffle: false
+          runtime: false
+          volume: true
+        idle_view:
+          when_idle: true
+        toggle_power: false
+
       - type: custom:mini-graph-card
         entities:
           - sensor.outdoor_temperature
@@ -127,7 +142,7 @@ views:
           extrema: true
           labels: true
           fill: fade
-          
+
       - type: weather-forecast
         entity: weather.smhi_hem
         
@@ -146,6 +161,21 @@ views:
               state: home
               attributes:
                 essid: "Stenman_guest"
+
+      - type: custom:auto-entities
+        show_empty: false
+        card:
+          type: entities
+          title: Steam
+          show_header_toggle: false
+        filter:
+          include:
+            - domain: sensor
+              state: online
+          exclude:
+            - domain: sensor
+              attributes:
+                friendly_name: 'Klench'
 
 ################# WAKEUP #################
 
@@ -471,6 +501,7 @@ views:
           - automation.evening_bright
           - automation.sunset
           - automation.bright_after_sunset
+          - automation.sunset
           - automation.turn_off_bedroom_lights
           - automation.closing_bathroom_door
           - automation.opening_bathroom_door

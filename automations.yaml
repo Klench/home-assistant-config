@@ -346,6 +346,20 @@
   action:
     service: script.all_lights_off
 
+- alias: 'Leaving home pause Sonos'
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: group.device_tracker_family
+    to: 'not_home'
+  condition:
+    condition: state
+    entity_id: media_player.kok
+    state: 'playing'
+  action:
+    service: media_player.media_pause
+    entity_id: media_player.kok
+
 - alias: 'Coming home turn on lights'
   initial_state: on
   trigger:

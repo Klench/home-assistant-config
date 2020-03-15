@@ -15,13 +15,6 @@ light.ceiling_lamp_hallway:
   icon: mdi:ceiling-light
   friendly_name: 'Taklampa hall'
 
-
-media_player.tv:
-  icon: mdi:television-classic
-
-sensor.buss_19:
-  icon: mdi:bus-clock
-
 device_tracker.davids_iphone:
   friendly_name: 'David'
   icon: mdi:human-male

@@ -111,7 +111,7 @@ plex:
 apple_tv_mrp:
   - name: Apple TV Vardagsrum
     host: !secret apple_tv_livingroom_ip
-    port: 49152
+    port: 49153
 
 media_player:
   - platform: kodi
@@ -124,15 +124,15 @@ media_player:
       data:
         entity_id: media_player.kodi
         method: System.Reboot
-  - platform: samsungtv
-    host: 192.168.2.32
-    port: 8001
-    name: 'TV'
+  # - platform: samsungtv
+  #   host: !secret samsung_tv_ip
+  #   port: 8001
+  #   name: 'TV'
   - platform: samsungtv_custom
-    host: 192.168.2.32
+    host: !secret samsung_tv_ip
     port: 8001
     name: 'TV_custom'
-    sourcelist: '{"TV": "KEY_TV", "OSMC": "KEY_HDMI1"}'
+    sourcelist: '{"TV": "KEY_TV", "Apple TV": "KEY_HDMI1", "OSMC": "KEY_HDMI3"}'
 
 spotify:
   client_id: !secret spotify_client_id

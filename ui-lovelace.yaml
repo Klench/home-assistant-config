@@ -41,7 +41,9 @@ views:
           - entity: sensor.potential_breaking_changes
             name: 'Ändringar'
             icon: mdi:briefcase-download-outline
-          - sensor.buss_19
+          - entity: sensor.buss_19_backa
+            name: 'Buss 19'
+            icon: mdi:bus-clock
 
       - type: entities
         title: Belysning
@@ -125,6 +127,8 @@ views:
           volume: true
         idle_view:
           when_idle: true
+          when_paused: true
+          when_standby: true
         toggle_power: false
 
       - type: custom:mini-graph-card
@@ -229,7 +233,7 @@ views:
       #     action: call-service
       #     service: script.sonos_sync_group_volume
 
-      - entity: media_player.kok
+      - entity: media_player.sonos_kitchen
         type: custom:mini-media-player
         hide:
           power: true
@@ -243,21 +247,21 @@ views:
           expanded: true
           show_group_count: true
           entities:
-            - entity_id: media_player.sovrum
+            - entity_id: media_player.sonos_bedroom
               name: Sonos sovrum
-            - entity_id: media_player.vardagsrum
+            - entity_id: media_player.sonos_livingroom
               name: Sonos vardagsrum
 #        tts:
 #          platform: sonos
 #          language: english
 #          entity_id:
-#            - media_player.kok
-#            - media_player.sovrum
-#            - media_player.vardagsrum
+#            - media_player.sonos_kitchen
+#            - media_player.sonos_bedroom
+#            - media_player.sonos_livingroom
 #          volume: 0.3
 
       - type: custom:mini-media-player
-        entity: media_player.sovrum
+        entity: media_player.sonos_bedroom
         artwork: cover
         icon: mdi:speaker
         hide:
@@ -268,7 +272,7 @@ views:
           show_group_count: false
 
       - type: custom:mini-media-player
-        entity: media_player.vardagsrum
+        entity: media_player.sonos_livingroom
         artwork: cover
         icon: mdi:speaker
         hide:
@@ -284,7 +288,7 @@ views:
             state: 'on'
         card:
           type: custom:mini-media-player
-          entity: media_player.kok
+          entity: media_player.sonos_kitchen
           artwork: cover
           icon: mdi:speaker
           hide:
@@ -298,7 +302,8 @@ views:
         title: Nattläge Sonos Beam
         show_header_toggle: false
         entities:
-          - switch.sonos_night_mode
+          - entity: switch.sonos_night_mode
+            state_color: true
 
 ################# TV #################
 

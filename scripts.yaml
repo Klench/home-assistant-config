@@ -8,15 +8,15 @@ sonos_group_all_speakers:
     - service: media_player.volume_set
       data:
         entity_id:
-          - media_player.vardagsrum
-          - media_player.sovrum
+          - media_player.sonos_livingroom
+          - media_player.sonos_bedroom
         volume_level: 0.0
     - service: sonos.join
       data:
-        master: media_player.kok
+        master: media_player.sonos_kitchen
         entity_id:
-          - media_player.sovrum
-          - media_player.vardagsrum
+          - media_player.sonos_bedroom
+          - media_player.sonos_livingroom
     - service: script.sonos_sync_group_volume
 
 sonos_group_speaker:
@@ -24,12 +24,12 @@ sonos_group_speaker:
   sequence:
     - service: media_player.volume_set
       data_template:
-        entity_id: "{{ 'media_player.' ~ sonos_entity }}"
+        entity_id: "{{ sonos_entity }}"
         volume_level: 0.0
     - service: sonos.join
       data_template:
-        master: media_player.kok
-        entity_id: "{{ 'media_player.' ~ sonos_entity }}"
+        master: media_player.sonos_kitchen
+        entity_id: "{{ sonos_entity }}"
     - service: script.sonos_sync_group_volume
 
 sonos_ungroup_speaker:
@@ -37,10 +37,10 @@ sonos_ungroup_speaker:
   sequence:
     - service: sonos.unjoin
       data_template:
-        entity_id: "{{ 'media_player.' ~ sonos_entity }}"
+        entity_id: "{{ sonos_entity }}"
     - service: media_player.volume_set
       data_template:
-        entity_id: "{{ 'media_player.' ~ sonos_entity }}"
+        entity_id: "{{ sonos_entity }}"
         volume_level: 0.10
 
 sonos_group_livingroom_speaker:
@@ -48,28 +48,28 @@ sonos_group_livingroom_speaker:
   sequence:
     - service: script.sonos_group_speaker
       data:
-        sonos_entity: vardagsrum
+        sonos_entity: media_player.sonos_livingroom
 
 sonos_group_bedroom_speaker:
   alias: Sonos group bedroom speaker
   sequence:
     - service: script.sonos_group_speaker
       data:
-        sonos_entity: sovrum
+        sonos_entity: media_player.sonos_bedroom
 
 sonos_ungroup_livingroom_speaker:
   alias: Sonos group livingroom speaker
   sequence:
     - service: script.sonos_ungroup_speaker
       data:
-        sonos_entity: vardagsrum
+        sonos_entity: media_player.sonos_livingroom
 
 sonos_ungroup_bedroom_speaker:
   alias: Sonos group bedroom speaker
   sequence:
     - service: script.sonos_ungroup_speaker
       data:
-        sonos_entity: sovrum
+        sonos_entity: media_player.sonos_bedroom
 
 ##### VOLUME #####
 
@@ -79,7 +79,7 @@ sonos_set_group_volume:
     - service: media_player.volume_set
       data_template:
         entity_id: >
-          {%- for sonos_speaker in states.media_player.kok.attributes.sonos_group -%}
+          {%- for sonos_speaker in states.media_player.sonos_kitchen.attributes.sonos_group -%}
           {{sonos_speaker}}{%- if not loop.last %},{% endif %}
           {%- endfor %}
         volume_level: '{{ volume }}'
@@ -90,12 +90,12 @@ sonos_sync_group_volume:
     - service: media_player.volume_set
       data_template:
         entity_id: >
-          {%- for sonos_speaker in states.media_player.kok.attributes.sonos_group %}
+          {%- for sonos_speaker in states.media_player.sonos_kitchen.attributes.sonos_group %}
           {%- if not loop.first -%}
           {{sonos_speaker}}{%- if not loop.last %},{% endif %}
           {%- endif %}
           {%- endfor %}
-        volume_level: '{{ states.media_player.kok.attributes.volume_level | float }}'
+        volume_level: '{{ states.media_player.sonos_kitchen.attributes.volume_level | float }}'
 
 sonos_increase_volume:
   alias: 'Sonos increase volume'
@@ -103,10 +103,10 @@ sonos_increase_volume:
     - service: media_player.volume_set
       data_template:
         entity_id: >
-          {%- for sonos_speaker in states.media_player.kok.attributes.sonos_group -%}
+          {%- for sonos_speaker in states.media_player.sonos_kitchen.attributes.sonos_group -%}
           {{sonos_speaker}}{%- if not loop.last %},{% endif %}
           {%- endfor %}
-        volume_level: '{{ [((states.media_player.kok.attributes.volume_level | float * 1.1 + 0.03) | round(2)), 1] | min }}'
+        volume_level: '{{ [((states.media_player.sonos_kitchen.attributes.volume_level | float * 1.1 + 0.03) | round(2)), 1] | min }}'
 
 sonos_decrease_volume:
   alias: 'Sonos decrease volume'
@@ -114,10 +114,10 @@ sonos_decrease_volume:
     - service: media_player.volume_set
       data_template:
         entity_id: >
-          {%- for sonos_speaker in states.media_player.kok.attributes.sonos_group -%}
+          {%- for sonos_speaker in states.media_player.sonos_kitchen.attributes.sonos_group -%}
           {{sonos_speaker}}{%- if not loop.last %},{% endif %}
           {%- endfor %}
-        volume_level: '{{ [((states.media_player.kok.attributes.volume_level | float * 0.9 - 0.03) | round(2)), 0] | max }}'
+        volume_level: '{{ [((states.media_player.sonos_kitchen.attributes.volume_level | float * 0.9 - 0.03) | round(2)), 0] | max }}'
 
 ##### SAY #####
 
@@ -160,7 +160,7 @@ sonos_set_alarm:
   sequence:
     - service: sonos.update_alarm
       data_template:
-        entity_id: media_player.sovrum
+        entity_id: media_player.sonos_bedroom
         alarm_id: 7
         time: '{{ states.sensor.alarm_clock_time_weekdays.state }}'
         enabled: true
@@ -170,7 +170,7 @@ sonos_disable_alarm:
   sequence:
     - service: sonos.update_alarm
       data_template:
-        entity_id: media_player.sovrum
+        entity_id: media_player.sonos_bedroom
         alarm_id: 7
         enabled: false
 
@@ -181,7 +181,7 @@ sonos_enable_night_mode:
   sequence:
     - service: sonos.set_option
       data:
-         entity_id: media_player.vardagsrum
+         entity_id: media_player.sonos_livingroom
          night_sound: true
          speech_enhance: true
 
@@ -190,7 +190,7 @@ sonos_disable_night_mode:
   sequence:
     - service: sonos.set_option
       data:
-         entity_id: media_player.vardagsrum
+         entity_id: media_player.sonos_livingroom
          night_sound: false
          speech_enhance: false
 

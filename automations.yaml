@@ -138,7 +138,7 @@
       to: 'home'
   condition:
     condition: state
-    entity_id: media_player.tv
+    entity_id: media_player.tv_custom
     state: 'off'
   action:
     - service: script.sonos_group_all_speakers
@@ -354,11 +354,11 @@
     to: 'not_home'
   condition:
     condition: state
-    entity_id: media_player.kok
+    entity_id: media_player.sonos_kitchen
     state: 'playing'
   action:
     service: media_player.media_pause
-    entity_id: media_player.kok
+    entity_id: media_player.sonos_kitchen
 
 - alias: 'Coming home turn on lights'
   initial_state: on
@@ -456,7 +456,7 @@
   initial_state: on
   trigger:
     platform: state
-    entity_id: media_player.tv
+    entity_id: media_player.tv_custom
     to: 'off'
   condition:
     condition: state
@@ -472,7 +472,7 @@
   initial_state: on
   trigger:
     platform: state
-    entity_id: media_player.tv
+    entity_id: media_player.tv_custom
     to: 'off'
   condition:
     condition: state

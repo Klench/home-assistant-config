@@ -5,7 +5,7 @@
     sonos_night_mode:
       friendly_name: 'Status'
       icon_template: mdi:check-circle-outline
-      value_template: '{{ states.media_player.vardagsrum.attributes.night_sound }}'
+      value_template: '{{ states.media_player.sonos_livingroom.attributes.night_sound }}'
     alarm_clock_trigger_weekdays:
       friendly_name: 'Alarm clock trigger weekdays'
       value_template: >-
@@ -21,16 +21,16 @@
     sonos_livingroom_playing_music:
       friendly_name: 'Sonos livingroom playing music'
       value_template: >-
-        {{ states.media_player.vardagsrum.attributes.media_artist != 'TV'}}
+        {{ states.media_player.sonos_livingroom.attributes.media_artist != 'TV'}}
     sonos_kitchen_is_grouped:
       value_template: >-
-        {{ states.media_player.kok.attributes.sonos_group != ['media_player.kok']}}
+        {{ states.media_player.sonos_kitchen.attributes.sonos_group != ['media_player.sonos_kitchen']}}
     sonos_livingroom_is_grouped:
       value_template: >-
-        {{ states.media_player.vardagsrum.attributes.sonos_group != ['media_player.vardagsrum'] }}
+        {{ states.media_player.sonos_livingroom.attributes.sonos_group != ['media_player.sonos_livingroom'] }}
     sonos_bedroom_is_grouped:
       value_template: >-
-        {{ states.media_player.sovrum.attributes.sonos_group != ['media_player.sovrum']}}
+        {{ states.media_player.sonos_bedroom.attributes.sonos_group != ['media_player.sonos_bedroom']}}
     transmission_active:
       value_template: >-
         {{ (states.sensor.transmission_status.state != 'idle') and (states.sensor.transmission_status.state != 'unavailable') }}

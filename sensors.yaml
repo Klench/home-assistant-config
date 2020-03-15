@@ -38,8 +38,13 @@
   key: !secret vasttrafik_key
   secret: !secret vasttrafik_secret
   departures:
-    - name: Buss 19
+    - name: buss_19_backa
       from: Sörgårdsskolan
+    - name: buss_19_fredriksdal
+      from: Domkyrkan
+      heading: Fredriksdal
+      lines:
+        - 19
 
 - platform: steam_online
   api_key: !secret steam_api_key

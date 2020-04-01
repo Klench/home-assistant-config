@@ -15,9 +15,6 @@ homeassistant:
 
   auth_providers:
     - type: homeassistant
-    - type: trusted_networks
-      trusted_networks:
-        - 127.0.0.1
 
 # Enables the frontend
 frontend:
@@ -141,9 +138,9 @@ spotify:
 sonos:
   media_player:
     hosts:
-      - 192.168.2.94
-      - 192.168.2.115
-      - 192.168.2.207
+      - !secret sonos_kitchen_ip
+      - !secret sonos_livingroom_ip
+      - !secret sonos_bedroom_ip
 
 ################# PANEL IFRAME #################
 
@@ -151,30 +148,19 @@ panel_iframe:
   kodi:
     title: Kodi
     icon: mdi:kodi
-    url: !secret kodi_address
+    url: !secret kodi_url
   tautully:
     title: Tautully
     icon: mdi:plex
-    url: http://192.168.2.2:8181
+    url: !secret tautully_url
   configurator:
     title: Configurator
     icon: mdi:wrench
-    url: http://192.168.2.2:3218
+    url: !secret hass_configurator_url
   esphome:
     title: ESPHome
     icon: mdi:developer-board
-    url: http://192.168.2.2:6052
-
-################# UNIFI #################
-
-# device_tracker:
-#   - platform: unifi_direct
-#     host: 192.168.2.24
-#     username: !secret unifi_username
-#     password: !secret unifi_password
-#     consider_home: 30
-#     new_device_defaults:
-#       track_new_devices: false
+    url: !secret esphome_url
 
 ################# INCLUDE #################
 

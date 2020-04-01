@@ -506,7 +506,6 @@ views:
           - automation.evening_bright
           - automation.sunset
           - automation.bright_after_sunset
-          - automation.sunset
           - automation.turn_off_bedroom_lights
           - automation.closing_bathroom_door
           - automation.opening_bathroom_door

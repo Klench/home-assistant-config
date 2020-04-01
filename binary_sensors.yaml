@@ -21,7 +21,7 @@
     sonos_livingroom_playing_music:
       friendly_name: 'Sonos livingroom playing music'
       value_template: >-
-        {{ states.media_player.sonos_livingroom.attributes.media_artist != 'TV'}}
+        {{ states.media_player.sonos_livingroom.state == 'playing'}}
     sonos_kitchen_is_grouped:
       value_template: >-
         {{ states.media_player.sonos_kitchen.attributes.sonos_group != ['media_player.sonos_kitchen']}}

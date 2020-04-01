@@ -1,17 +1,17 @@
 title: Stenman
 
 resources:
-  - url: /community_plugin/mini-media-player/mini-media-player-bundle.js
+  - url: /hacsfiles/mini-media-player/mini-media-player-bundle.js
     type: module
-  - url: /community_plugin/mini-graph-card/mini-graph-card.js
+  - url: /hacsfiles/mini-graph-card/mini-graph-card.js
     type: module
-  - url: /community_plugin/lovelace-card-tools/card-tools.js
+  - url: /hacsfiles/lovelace-card-tools/card-tools.js
     type: module
-  - url: /community_plugin/lovelace-auto-entities/auto-entities.js
+  - url: /hacsfiles/lovelace-auto-entities/auto-entities.js
     type: module
-  - url: /community_plugin/upcoming-media-card/upcoming-media-card.js
+  - url: /hacsfiles/upcoming-media-card/upcoming-media-card.js
     type: js
-  - url: /community_plugin/krisinfo-card/krisinfo-card.js
+  - url: /hacsfiles/krisinfo-card/krisinfo-card.js
     type: js
   - url: /local/plugins/card-mod.js?v=1
     type: js

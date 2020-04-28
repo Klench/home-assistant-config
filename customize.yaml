@@ -32,9 +32,11 @@ automation.go_to_bed_weekdays:
   icon: mdi:weather-night
 automation.go_to_bed_weekend:
   icon: mdi:weather-night
-automation.evening_relaxed:
-  icon: mdi:lightbulb-on-outline
 automation.evening_bright:
+  icon: mdi:lightbulb-on-outline
+automation.evening_relaxed:
+  icon: mdi:lightbulb-on
+automation.hallway_bright:
   icon: mdi:lightbulb-on-outline
 automation.sunset:
   icon: mdi:weather-sunset

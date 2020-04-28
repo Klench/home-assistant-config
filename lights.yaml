@@ -10,8 +10,8 @@
       turn_off:
         service: switch.turn_off
         entity_id: switch.tradfri_outlet
-    bedside_lamp_bedroom:
-      friendly_name: 'Sänglampa sovrum'
+    bedside_lamp_bedroom_1:
+      friendly_name: 'Sänglampa 1 sovrum'
       icon_template: mdi:lamp
       value_template: '{{ states.switch.bedside_lamp_bedroom.state }}'
       turn_on:
@@ -20,3 +20,30 @@
       turn_off:
         service: switch.turn_off
         entity_id: switch.bedside_lamp_bedroom
+    bedside_lamp_bedroom_2:
+      friendly_name: 'Sänglampa 2 sovrum'
+      icon_template: mdi:lamp
+      value_template: '{{ states.switch.bedside_lamp_bedroom_2.state }}'
+      turn_on:
+        service: switch.turn_on
+        entity_id: switch.bedside_lamp_bedroom_2
+      turn_off:
+        service: switch.turn_off
+        entity_id: switch.bedside_lamp_bedroom_2
+
+- platform: group
+  name: 'Ceiling lamps hallway'
+  entities:
+    - light.ceiling_lamp_hallway_1_1
+    - light.ceiling_lamp_hallway_1_2
+    - light.ceiling_lamp_hallway_1_3
+    - light.ceiling_lamp_hallway_2_1
+    - light.ceiling_lamp_hallway_2_2
+    - light.ceiling_lamp_hallway_2_3
+    - light.ceiling_lamp_hallway
+- platform: group
+  name: 'Bedside lamps bedroom'
+  entities:
+    - light.bedside_lamp_bedroom_1
+    - light.bedside_lamp_bedroom_2
+  

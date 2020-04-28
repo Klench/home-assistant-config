@@ -106,7 +106,7 @@ sonos_increase_volume:
           {%- for sonos_speaker in states.media_player.sonos_kitchen.attributes.sonos_group -%}
           {{sonos_speaker}}{%- if not loop.last %},{% endif %}
           {%- endfor %}
-        volume_level: '{{ [((states.media_player.sonos_kitchen.attributes.volume_level | float * 1.1 + 0.03) | round(2)), 1] | min }}'
+        volume_level: '{{ [((states.media_player.sonos_kitchen.attributes.volume_level | float * 1.15 + 0.03) | round(2)), 1] | min }}'
 
 sonos_decrease_volume:
   alias: 'Sonos decrease volume'
@@ -117,7 +117,15 @@ sonos_decrease_volume:
           {%- for sonos_speaker in states.media_player.sonos_kitchen.attributes.sonos_group -%}
           {{sonos_speaker}}{%- if not loop.last %},{% endif %}
           {%- endfor %}
-        volume_level: '{{ [((states.media_player.sonos_kitchen.attributes.volume_level | float * 0.9 - 0.03) | round(2)), 0.05] | max }}'
+        volume_level: '{{ [((states.media_player.sonos_kitchen.attributes.volume_level | float * 0.85 - 0.03) | round(2)), 0.05] | max }}'
+
+media_player_transient_volume_set:
+  alias: 'Media player dynamic entity volume set'
+  sequence:
+    - service: python_script.media_player_volume_set
+      data:
+        entity_id: media_player.sonos_kitchen
+        volume_level: 0.30
 
 ##### SAY #####
 
@@ -265,7 +273,7 @@ window_lights:
   sequence:
     - service: light.turn_on
       data:
-        entity_id: light.bedside_lamp_bedroom
+        entity_id: light.bedside_lamps_bedroom
     - service: light.turn_on
       data:
         entity_id: light.window_lamp_livingroom
@@ -285,10 +293,10 @@ go_to_bed_lights:
       data:
         entity_id: light.hue_ambiance_lamp_1_3
         transition: 1800
+    - delay: '00:30'
     - service: light.turn_off
       data:
-        entity_id: light.ceiling_lamp_hallway
-        transition: 1800
+        entity_id: light.ceiling_lamps_hallway
 
 watching_tv_lights:
   alias: 'Belysning TV-tittande'
@@ -304,9 +312,16 @@ watching_tv_lights:
         entity_id: light.window_lamp_livingroom
     - service: light.turn_on
       data:
-        entity_id: light.ceiling_lamp_hallway
-        brightness: 144
-        transition: 2
+        entity_id: light.ceiling_lamps_hallway
+        brightness: 1
+        transition: 1
+    - delay:
+        milliseconds: 1100
+    - service: light.turn_on
+      data:
+        entity_id: light.ceiling_lamps_hallway
+        color_temp: 443
+        transition: 1
 
 create_all_light_group:
     sequence:
@@ -339,14 +354,14 @@ bedroom_relaxed:
         transition: 2
     - service: light.turn_on
       data:
-        entity_id: light.bedside_lamp_bedroom
+        entity_id: light.bedside_lamps_bedroom
 
 baby_light_bedroom:
   alias: 'Bebisbelysning'
   sequence:
     - service: light.turn_off
       data:
-        entity_id: light.bedside_lamp_bedroom
+        entity_id: light.bedside_lamps_bedroom
     - delay:
         milliseconds: 100
     - service: light.turn_on
@@ -433,26 +448,48 @@ hallway_bright:
   sequence:
     - service: light.turn_on
       data:
-        entity_id: light.ceiling_lamp_hallway
+        entity_id: light.ceiling_lamps_hallway
         brightness: 255
-        transition: 2
+        color_temp: 300
+        transition: 1
+    - delay:
+        milliseconds: 1100
+    - service: light.turn_on
+      data:
+        entity_id: light.ceiling_lamps_hallway
+        color_temp: 300
+        transition: 1
 
 hallway_relaxed:
   alias: 'Mysbelysning'
   sequence:
     - service: light.turn_on
       data:
-        entity_id: light.ceiling_lamp_hallway
-        brightness: 100
-        transition: 2
+        entity_id: light.ceiling_lamps_hallway
+        brightness: 1
+        transition: 1
+    - delay:
+        milliseconds: 1100
+    - service: light.turn_on
+      data:
+        entity_id: light.ceiling_lamps_hallway
+        color_temp: 443
+        transition: 1
 
 hallway_wakeup:
   alias: 'Väckning hall'
   sequence:
     - service: light.turn_on
       data:
-        entity_id: light.ceiling_lamp_hallway
+        entity_id: light.ceiling_lamps_hallway
         brightness: 144
+        transition: 1
+    - delay:
+        milliseconds: 1100
+    - service: light.turn_on
+      data:
+        entity_id: light.ceiling_lamps_hallway
+        color_temp: 372
         transition: 1800
 
 ##### BATHROOM #####

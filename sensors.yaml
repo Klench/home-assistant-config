@@ -22,8 +22,8 @@
 #   days: 10
 
 - platform: krisinformation
-  name: "Krisinformation Västra Götaland"
-  county: "Västra Götalands län"
+  name: "Krisinformation Skåne"
+  county: "Skåne län"
   latitude: !secret home_latitude
   longitude: !secret home_longitude
   radius: 100

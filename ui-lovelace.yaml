@@ -1,21 +1,5 @@
 title: Stenman
 
-resources:
-  - url: /hacsfiles/mini-media-player/mini-media-player-bundle.js
-    type: module
-  - url: /hacsfiles/mini-graph-card/mini-graph-card.js
-    type: module
-  - url: /hacsfiles/lovelace-card-tools/card-tools.js
-    type: module
-  - url: /hacsfiles/lovelace-auto-entities/auto-entities.js
-    type: module
-  - url: /hacsfiles/upcoming-media-card/upcoming-media-card.js
-    type: js
-  - url: /hacsfiles/krisinfo-card/krisinfo-card.js
-    type: js
-  - url: /local/plugins/card-mod.js?v=1
-    type: js
-
 views:
 
 ################# HOME #################
@@ -71,6 +55,18 @@ views:
           - light.window_lamp_livingroom
 
       - type: entities
+        title: Hall
+        show_header_toggle: false
+        entities:
+          - entity: script.hallway_bright
+            icon: mdi:lightbulb-on-outline
+          - entity: script.hallway_relaxed
+            icon: mdi:lightbulb-on
+          - entity: light.ceiling_lamps_hallway
+            icon: mdi:ceiling-light
+            name: 'Taklampor hall'
+
+      - type: entities
         title: Sovrum
         show_header_toggle: false
         entities:
@@ -81,17 +77,9 @@ views:
           - entity: script.baby_light_bedroom
             icon: mdi:baby
           - light.hue_ambiance_lamp_2
-          - light.bedside_lamp_bedroom
-
-      - type: entities
-        title: Hall
-        show_header_toggle: false
-        entities:
-          - entity: script.hallway_bright
-            icon: mdi:lightbulb-on-outline
-          - entity: script.hallway_relaxed
-            icon: mdi:lightbulb-on
-          - light.ceiling_lamp_hallway
+          - entity: light.bedside_lamps_bedroom
+            icon: mdi:lamp
+            name: 'Sänglampor'
 
       - type: custom:mini-media-player
         entity: media_player.kodi
@@ -111,7 +99,7 @@ views:
         hide:
           volume: true
           power_state: false
-        artwork: full-cover
+        artwork: cover
         icon: mdi:television-classic
 
       - type: custom:mini-media-player
@@ -151,7 +139,7 @@ views:
         entity: weather.smhi_hem
         
       - type: custom:krisinfo-card
-        entity: sensor.krisinformation_vastra_gotaland
+        entity: sensor.krisinformation_skane
 
       - type: custom:auto-entities
         show_empty: false
@@ -181,57 +169,10 @@ views:
               attributes:
                 friendly_name: 'Klench'
 
-################# WAKEUP #################
-
-  - icon: mdi:alarm
-    cards:
-     
-      - type: entities
-        title: Väckning vardagar
-        show_header_toggle: false
-        entities:
-          - sensor.alarm_clock_time_weekdays
-          - input_number.alarm_hours_weekdays
-          - input_number.alarm_minutes_weekdays
-          - input_number.alarm_heater_offset
-          - entity: automation.wakeup_weekdays
-            name: 'Väckning vardagar'
-          - entity: automation.enable_sonos_alarm
-            name: 'Sonos alarm'
-          - input_boolean.wakeup_override
-          - entity: automation.car_heater_weekdays
-            name: 'Bränslevärmare'
-
-      - type: entities
-        title: Väckning helg
-        show_header_toggle: false
-        entities:
-          - sensor.alarm_clock_time_weekend
-          - input_number.alarm_hours_weekend
-          - input_number.alarm_minutes_weekend
-          - entity: automation.wakeup_weekend
-            name: 'Väckning helg'
-
 ################# SONOS #################
 
   - icon: mdi:speaker-wireless
     cards:
-
-      # - type: entity-button
-      #   entity: script.sonos_manual_group_speakers
-      #   icon: mdi:speaker-wireless
-      #   name: "Gruppera högtalare"
-      #   tap_action:
-      #     action: call-service
-      #     service: script.sonos_manual_group_speakers
-      #
-      # - type: entity-button
-      #   entity: script.sonos_sync_group_volume
-      #   icon: mdi:volume-high
-      #   name: "Synkronisera volym"
-      #   tap_action:
-      #     action: call-service
-      #     service: script.sonos_sync_group_volume
 
       - entity: media_player.sonos_kitchen
         type: custom:mini-media-player
@@ -304,6 +245,37 @@ views:
         entities:
           - entity: switch.sonos_night_mode
             state_color: true
+
+################# WAKEUP #################
+
+  - icon: mdi:alarm
+    cards:
+     
+      - type: entities
+        title: Väckning vardagar
+        show_header_toggle: false
+        entities:
+          - sensor.alarm_clock_time_weekdays
+          - input_number.alarm_hours_weekdays
+          - input_number.alarm_minutes_weekdays
+          - input_number.alarm_heater_offset
+          - entity: automation.wakeup_weekdays
+            name: 'Väckning vardagar'
+          - entity: automation.enable_sonos_alarm
+            name: 'Sonos alarm'
+          - input_boolean.wakeup_override
+          - entity: automation.car_heater_weekdays
+            name: 'Bränslevärmare'
+
+      - type: entities
+        title: Väckning helg
+        show_header_toggle: false
+        entities:
+          - sensor.alarm_clock_time_weekend
+          - input_number.alarm_hours_weekend
+          - input_number.alarm_minutes_weekend
+          - entity: automation.wakeup_weekend
+            name: 'Väckning helg'
 
 ################# TV #################
 
@@ -502,8 +474,9 @@ views:
           - automation.wakeup_weekend
           - automation.go_to_bed_weekdays
           - automation.go_to_bed_weekend
-          - automation.evening_relaxed
           - automation.evening_bright
+          - automation.evening_relaxed
+          - automation.hallway_bright
           - automation.sunset
           - automation.bright_after_sunset
           - automation.turn_off_bedroom_lights

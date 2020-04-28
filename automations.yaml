@@ -23,6 +23,22 @@
   action:
     - service: script.all_rooms_relaxed
 
+- alias: 'Hallway bright'
+  trigger:
+    platform: time
+    at: '09:00:00'
+  condition:
+    condition: and
+    conditions:
+      condition: state
+      entity_id: group.device_tracker_family
+      state: 'home'
+      condition: state
+      entity_id: light.ceiling_lamps_hallway
+      state: 'off'
+  action:
+    - service: script.hallway_bright
+
 - alias: 'Advent light'
   initial_state: off
   trigger:
@@ -181,7 +197,7 @@
   initial_state: on
   trigger:
     platform: state
-    entity_id: light.bedside_lamp_bedroom
+    entity_id: light.bedside_lamps_bedroom
     to: 'off'
   condition:
     condition: state

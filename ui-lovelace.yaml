@@ -25,9 +25,6 @@ views:
           - entity: sensor.potential_breaking_changes
             name: 'Ändringar'
             icon: mdi:briefcase-download-outline
-          - entity: sensor.buss_19_backa
-            name: 'Buss 19'
-            icon: mdi:bus-clock
 
       - type: entities
         title: Belysning
@@ -82,6 +79,16 @@ views:
             name: 'Sänglampor'
 
       - type: custom:mini-media-player
+        entity: media_player.apple_tv_vardagsrum
+        replace_mute: 'stop'
+        hide:
+          volume: true
+          power_state: false
+        show_progress: true
+        artwork: full-cover
+        icon: mdi:television-classic
+
+      - type: custom:mini-media-player
         entity: media_player.kodi
         toggle_power: false
         replace_mute: 'stop'
@@ -91,15 +98,6 @@ views:
           power_state: false
         show_progress: true
         artwork: full-cover
-        icon: mdi:television-classic
-
-      - type: custom:mini-media-player
-        entity: media_player.apple_tv_vardagsrum
-        replace_mute: 'stop'
-        hide:
-          volume: true
-          power_state: false
-        artwork: cover
         icon: mdi:television-classic
 
       - type: custom:mini-media-player

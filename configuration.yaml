@@ -128,11 +128,6 @@ plex:
   ssl: true
   verify_ssl: false
 
-apple_tv_mrp:
-  - name: Apple TV Vardagsrum
-    host: !secret apple_tv_livingroom_ip
-    port: 49153
-
 media_player:
   - platform: kodi
     host: !secret kodi_ip

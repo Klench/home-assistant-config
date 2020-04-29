@@ -30,7 +30,10 @@ sonos_group_speaker:
       data_template:
         master: media_player.sonos_kitchen
         entity_id: "{{ sonos_entity }}"
-    - service: script.sonos_sync_group_volume
+    - service: python_script.media_player_volume_set
+      data_template:
+        entity_id: "{{ sonos_entity }}"
+        volume_level: '{{ states.media_player.sonos_kitchen.attributes.volume_level }}'
 
 sonos_ungroup_speaker:
   alias: Sonos ungroup speaker
@@ -118,14 +121,6 @@ sonos_decrease_volume:
           {{sonos_speaker}}{%- if not loop.last %},{% endif %}
           {%- endfor %}
         volume_level: '{{ [((states.media_player.sonos_kitchen.attributes.volume_level | float * 0.85 - 0.03) | round(2)), 0.05] | max }}'
-
-media_player_transient_volume_set:
-  alias: 'Media player dynamic entity volume set'
-  sequence:
-    - service: python_script.media_player_volume_set
-      data:
-        entity_id: media_player.sonos_kitchen
-        volume_level: 0.30
 
 ##### SAY #####
 
@@ -224,7 +219,6 @@ all_rooms_relaxed:
     - service: script.livingroom_relaxed
     - service: script.hallway_relaxed
     - service: script.bathroom_relaxed
-    - service: script.sonos_ungroup_bedroom_speaker
     - service: homeassistant.turn_off
       data:
         entity_id: automation.opening_bathroom_door

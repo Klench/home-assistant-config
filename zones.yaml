@@ -1,0 +1,23 @@
+- name: 'Home'
+  latitude: !secret home_latitude
+  longitude: !secret home_longitude
+  radius: 50
+  icon: mdi:home-outline
+
+- name: 'Hus'
+  latitude: !secret car_park_latitude
+  longitude: !secret car_park_longitude
+  radius: 100
+  icon: mdi:garage-open-variant
+
+- name: 'Gata'
+  latitude: !secret street_park_latitude
+  longitude: !secret street_park_longitude
+  radius: 150
+  icon: mdi:road-variant
+
+- name: 'Arbete'
+  latitude: !secret work_latitude
+  longitude: !secret work_longitude
+  radius: 200
+  icon: mdi:briefcase

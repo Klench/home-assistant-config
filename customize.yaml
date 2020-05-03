@@ -1,4 +1,3 @@
-
 light.sovrum:
   friendly_name: "Lampor sovrum"
 light.vardagsrum:
@@ -49,6 +48,8 @@ automation.closing_bathroom_door:
 automation.opening_bathroom_door:
   icon: mdi:toilet
 automation.coming_home_turn_on_lights:
+  icon: mdi:home-outline
+automation.coming_home_turn_on_hallway_lights:
   icon: mdi:home-outline
 automation.car_coming_home:
   icon: mdi:car

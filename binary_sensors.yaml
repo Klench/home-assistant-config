@@ -1,5 +1,19 @@
 - platform: workday
   country: SE
+  add_holidays:
+    - '2020-05-22'
+    - '2020-12-28'
+    - '2020-12-29'
+    - '2020-12-30'
+- platform: workday
+  name: 'Workday sensor offset'
+  days_offset: 1
+  country: SE
+  add_holidays:
+    - '2020-05-22'
+    - '2020-12-28'
+    - '2020-12-29'
+    - '2020-12-30'
 - platform: template
   sensors:
     sonos_night_mode:

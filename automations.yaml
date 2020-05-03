@@ -30,12 +30,12 @@
   condition:
     condition: and
     conditions:
-      condition: state
-      entity_id: group.device_tracker_family
-      state: 'home'
-      condition: state
-      entity_id: light.ceiling_lamps_hallway
-      state: 'off'
+      - condition: state
+        entity_id: group.device_tracker_family
+        state: 'home'
+      - condition: state
+        entity_id: light.ceiling_lamps_hallway
+        state: 'off'
   action:
     - service: script.hallway_bright
 
@@ -167,15 +167,22 @@
 - alias: 'Ungroup bedroom speaker'
   initial_state: on
   trigger:
-    platform: state
-    entity_id: script.all_rooms_relaxed
-    to: 'on'
+    - platform: state
+      entity_id: script.all_rooms_relaxed
+      to: 'on'
+    - platform: state
+      entity_id: script.all_rooms_relaxed_baby_light
+      to: 'on'
   condition:
     condition: state
     entity_id: binary_sensor.sonos_bedroom_is_grouped
     state: 'on'
   action:
     - service: script.sonos_ungroup_bedroom_speaker
+    - service: media_player.volume_set
+      data:
+        entity_id: media_player.sonos_bedroom
+        volume_level: 0.30
 
 ################# GO TO BED #################
 
@@ -184,13 +191,9 @@
     platform: time
     at: '23:00:00'
   condition:
-    condition: time
-    weekday:
-      - mon
-      - tue
-      - wed
-      - thu
-      - sun
+    condition: state
+    entity_id: binary_sensor.workday_sensor_offset
+    state: 'on'
   action:
     service: script.go_to_bed_lights
 
@@ -398,11 +401,34 @@
     entity_id: group.device_tracker_family
     to: 'home'
   condition:
-    condition: sun
-    after: sunset
-    after_offset: '-01:00:00'
+    condition: and
+    conditions:
+      - condition: sun
+        after: sunset
+        after_offset: '-01:00:00'
+      - condition: state
+        entity_id: group.all_lights
+        state: 'off'
   action:
     service: script.all_rooms_bright
+
+- alias: 'Coming home turn on hallway lights'
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: group.device_tracker_family
+    to: 'home'
+  condition:
+    condition: and
+    conditions:
+      - condition: sun
+        before: sunset
+        after_offset: '-01:00:00'
+      - condition: state
+        entity_id: group.all_lights
+        state: 'off'
+  action:
+    service: script.hallway_bright
 
 - alias: 'Coming home group Sonos speakers'
   initial_state: on

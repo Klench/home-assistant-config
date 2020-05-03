@@ -192,3 +192,5 @@ input_boolean: !include input_boolean.yaml
 input_text: !include input_text.yaml
 switch: !include switches.yaml
 light: !include lights.yaml
+timer: !include timers.yaml
+zone: !include zones.yaml

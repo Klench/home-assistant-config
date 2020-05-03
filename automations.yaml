@@ -516,12 +516,12 @@
     entity_id: media_player.tv_custom
     to: 'off'
   condition:
-    condition: state
-    entity_id: binary_sensor.sonos_livingroom_is_grouped
-    state: 'off'
-    condition: state
-    entity_id: binary_sensor.sonos_livingroom_playing_music
-    state: 'off'
+    - condition: state
+      entity_id: binary_sensor.sonos_livingroom_is_grouped
+      state: 'off'
+    - condition: state
+      entity_id: binary_sensor.sonos_livingroom_playing_music
+      state: 'off'
   action:
     service: script.sonos_group_livingroom_speaker
 
@@ -591,6 +591,30 @@
     entity_id: input_text.transmission_torrent_url
   action:
     - service: script.transmission_add_torrent
+
+################# TIMER #################
+
+- alias: 'Pause bedroom music'
+  initial_state: on
+  trigger:
+    platform: event
+    event_type: timer.finished
+    event_data:
+      entity_id: timer.bedroom_music_timer
+  condition:
+    - condition: state
+      entity_id: media_player.sonos_bedroom
+      state: 'playing'
+    - condition: state
+      entity_id: binary_sensor.sonos_bedroom_is_grouped
+      state: 'off'
+  action:
+    - service: python_script.media_player_volume_set
+      data:
+        entity_id: media_player.sonos_bedroom
+        volume_level: 0.10
+    - service: media_player.media_pause
+      entity_id: media_player.sonos_bedroom
 
 ################# CREATE ALL LIGHTS GROUP #################
 

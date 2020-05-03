@@ -525,3 +525,22 @@ transmission_add_torrent:
       data_template:
         name: Transmission
         torrent: '{{ states.input_text.transmission_torrent_url.state }}'
+
+################# TIMER #################
+
+bedroom_music_timer_start:
+  alias: 'Starta timer'
+  icon: mdi:timer-outline
+  sequence:
+    - service: timer.start
+      data_template:
+        entity_id: timer.bedroom_music_timer
+        duration: '{{ "00:%0.02d:00" | format(states.input_number.bedroom_music_timer_minutes.state | int) }}'
+
+bedroom_music_timer_cancel:
+  alias: 'Stoppa timer'
+  icon: mdi:timer-off-outline
+  sequence:
+    - service: timer.cancel
+      data:
+        entity_id: timer.bedroom_music_timer

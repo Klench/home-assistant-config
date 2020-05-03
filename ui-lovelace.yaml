@@ -244,6 +244,21 @@ views:
           - entity: switch.sonos_night_mode
             state_color: true
 
+      - type: conditional
+        conditions:
+          - entity: media_player.sonos_bedroom
+            state: 'playing'
+          - entity: binary_sensor.sonos_bedroom_is_grouped
+            state: 'off'
+        card:
+          type: entities
+          title: Timer sovrum
+          show_header_toggle: false
+          entities:
+            - script.bedroom_music_timer_start
+            - script.bedroom_music_timer_cancel
+            - input_number.bedroom_music_timer_minutes
+
 ################# WAKEUP #################
 
   - icon: mdi:alarm

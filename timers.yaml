@@ -1,3 +1,2 @@
-pause_music_bedroom:
+bedroom_music_timer:
   duration: '00:30:00'
-  icon: mdi:music

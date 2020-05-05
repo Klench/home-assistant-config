@@ -529,17 +529,13 @@ transmission_add_torrent:
 ################# TIMER #################
 
 bedroom_music_timer_start:
-  alias: 'Starta timer'
-  icon: mdi:timer-outline
   sequence:
     - service: timer.start
       data_template:
         entity_id: timer.bedroom_music_timer
-        duration: '{{ "00:%0.02d:00" | format(states.input_number.bedroom_music_timer_minutes.state | int) }}'
+        duration: '{{ states.sensor.bedroom_music_timer_duration.state }}'
 
 bedroom_music_timer_cancel:
-  alias: 'Stoppa timer'
-  icon: mdi:timer-off-outline
   sequence:
     - service: timer.cancel
       data:

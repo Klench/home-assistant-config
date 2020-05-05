@@ -73,3 +73,7 @@
       icon_template: mdi:calendar-clock
       value_template: >-
         {{ float((as_timestamp(strptime(states.sensor.work_time_out.state, '%H:%M')) | int - as_timestamp(strptime(states.sensor.work_time_in.state, '%H:%M')) | int - states.input_number.work_time_minutes_lunch.state | int * 60)/3600) | round(1) }}
+    bedroom_music_timer_duration:
+      friendly_name: 'Längd'
+      icon_template: mdi:timer
+      value_template: '{{ "00:%0.02d:00" | format(states.input_number.bedroom_music_timer_minutes.state | int) }}'

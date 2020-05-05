@@ -251,13 +251,32 @@ views:
           - entity: binary_sensor.sonos_bedroom_is_grouped
             state: 'off'
         card:
-          type: entities
+          type: vertical-stack
           title: Timer sovrum
-          show_header_toggle: false
-          entities:
-            - script.bedroom_music_timer_start
-            - script.bedroom_music_timer_cancel
-            - input_number.bedroom_music_timer_minutes
+          cards:
+            - type: horizontal-stack
+              cards:
+                - type: button
+                  name: 'Start'
+                  icon: mdi:play
+                  tap_action:
+                    action: call-service
+                    service: script.bedroom_music_timer_start
+                - type: button
+                  name: 'Stopp'
+                  icon: mdi:stop
+                  tap_action:
+                    action: call-service
+                    service: script.bedroom_music_timer_cancel
+                - type: entity
+                  # entity: sensor.bedroom_music_timer_duration
+                  entity: input_number.bedroom_music_timer_minutes
+            - type: entities
+              entities:
+                - entity: timer.bedroom_music_timer
+                  name: 'Status'
+                  icon: mdi:timelapse
+                - input_number.bedroom_music_timer_minutes
 
 ################# WAKEUP #################
 

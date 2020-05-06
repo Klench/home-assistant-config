@@ -270,7 +270,7 @@ views:
                     service: script.bedroom_music_timer_cancel
                 - type: entity
                   # entity: sensor.bedroom_music_timer_duration
-                  entity: input_number.bedroom_music_timer_minutes
+                  entity: sensor.bedroom_music_timer_minutes
             - type: entities
               entities:
                 - entity: timer.bedroom_music_timer

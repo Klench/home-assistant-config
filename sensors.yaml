@@ -74,6 +74,9 @@
       value_template: >-
         {{ float((as_timestamp(strptime(states.sensor.work_time_out.state, '%H:%M')) | int - as_timestamp(strptime(states.sensor.work_time_in.state, '%H:%M')) | int - states.input_number.work_time_minutes_lunch.state | int * 60)/3600) | round(1) }}
     bedroom_music_timer_duration:
+      value_template: '{{ "00:%0.02d:00" | format(states.input_number.bedroom_music_timer_minutes.state | int) }}'
+    bedroom_music_timer_minutes:
       friendly_name: 'Längd'
       icon_template: mdi:timer
-      value_template: '{{ "00:%0.02d:00" | format(states.input_number.bedroom_music_timer_minutes.state | int) }}'
+      unit_of_measurement: 'min'
+      value_template: '{{ states.input_number.bedroom_music_timer_minutes.state | round(0) }}'

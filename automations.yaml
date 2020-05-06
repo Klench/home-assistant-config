@@ -612,7 +612,7 @@
     - service: python_script.media_player_volume_set
       data:
         entity_id: media_player.sonos_bedroom
-        volume_level: 0
+        volume_level: 0.01
     - service: media_player.media_pause
       entity_id: media_player.sonos_bedroom
     - service: media_player.volume_set

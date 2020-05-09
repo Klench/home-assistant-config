@@ -225,10 +225,10 @@ all_rooms_relaxed:
     - delay:
         milliseconds: 10
 
-all_rooms_relaxed_baby_light:
+all_rooms_relaxed_bedroom_lights_off:
   alias: 'Mysbelysning 2'
   sequence:
-    - service: script.baby_light_bedroom
+    - service: script.bedroom_lights_turn_off
     - service: script.livingroom_relaxed
     - service: script.hallway_relaxed
     - service: script.bathroom_relaxed
@@ -301,21 +301,12 @@ watching_tv_lights:
         brightness: 144
         color_temp: 443
         transition: 2
+    - service: light.turn_off
+      data:
+        entity_id: light.hue_ambiance_lamp_1
     - service: light.turn_on
       data:
         entity_id: light.window_lamp_livingroom
-    - service: light.turn_on
-      data:
-        entity_id: light.ceiling_lamps_hallway
-        brightness: 1
-        transition: 1
-    - delay:
-        milliseconds: 1100
-    - service: light.turn_on
-      data:
-        entity_id: light.ceiling_lamps_hallway
-        color_temp: 443
-        transition: 1
 
 create_all_light_group:
     sequence:
@@ -350,20 +341,15 @@ bedroom_relaxed:
       data:
         entity_id: light.bedside_lamps_bedroom
 
-baby_light_bedroom:
-  alias: 'Bebisbelysning'
+bedroom_lights_turn_off:
+  alias: 'Släck'
   sequence:
     - service: light.turn_off
       data:
-        entity_id: light.bedside_lamps_bedroom
-    - delay:
-        milliseconds: 100
-    - service: light.turn_on
-      data:
         entity_id: light.hue_ambiance_lamp_2
-        brightness: 20
-        color_temp: 455
-        transition: 2
+    - service: light.turn_off
+      data:
+        entity_id: light.bedside_lamps_bedroom
 
 bedroom_wakeup:
   alias: 'Väckning sovrum'
@@ -408,13 +394,6 @@ livingroom_relaxed:
         brightness: 144
         color_temp: 443
         transition: 2
-    - service: light.turn_on
-      data:
-        entity_id: light.window_lamp_livingroom
-
-livingroom_nursery_light:
-  alias: 'Amning vardagsrum'
-  sequence:
     - service: light.turn_on
       data:
         entity_id: light.window_lamp_livingroom
@@ -500,21 +479,6 @@ bathroom_relaxed:
         effect: None
 
 ################# VARIOUS #################
-
-livingroom_nursery:
-  alias: 'Amning'
-  sequence:
-    - service: script.livingroom_nursery_light
-    - service: script.bathroom_relaxed
-    - service: script.sonos_enable_night_mode
-    - service: homeassistant.turn_off
-      data:
-        entity_id: automation.opening_bathroom_door
-    - delay: '01:00'
-    - service: script.sonos_disable_night_mode
-    - service: homeassistant.turn_on
-      data:
-        entity_id: automation.opening_bathroom_door
 
 ################# TRANSMISSION #################
 

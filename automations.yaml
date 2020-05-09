@@ -249,7 +249,7 @@
     entity_id: remote.hallway_switch
     state: '1_hold_up'
   action:
-    - service: script.all_rooms_relaxed_baby_light
+    - service: script.all_rooms_relaxed_bedroom_lights_off
 
 - alias: 'Hue switch turn off lighs'
   initial_state: on
@@ -262,18 +262,6 @@
     state: '4_click_up'
   action:
     service: script.all_lights_off
-
-- alias: 'Hue switch turn on nursery livingroom'
-  initial_state: on
-  trigger:
-    platform: state
-    entity_id: sensor.hallway_switch_updated
-  condition:
-    condition: state
-    entity_id: remote.hallway_switch
-    state: '4_hold_up'
-  action:
-    service: script.livingroom_nursery
 
 ##### SONOS #####
 

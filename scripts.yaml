@@ -423,7 +423,6 @@ hallway_bright:
       data:
         entity_id: light.ceiling_lamps_hallway
         brightness: 255
-        color_temp: 300
         transition: 1
     - delay:
         milliseconds: 1100

@@ -98,14 +98,12 @@ views:
 
       - type: custom:mini-media-player
         entity: media_player.spotify
-        artwork: full-cover
+        artwork: cover
         icon: mdi:spotify
         name: Spotify
         hide:
           power: true
           power_state: false
-          shuffle: false
-          runtime: false
           volume: true
         idle_view:
           when_idle: true
@@ -168,12 +166,11 @@ views:
   - icon: mdi:speaker-wireless
     cards:
 
-      - entity: media_player.sonos_kitchen
-        type: custom:mini-media-player
+      - type: custom:mini-media-player
+        entity: media_player.sonos_kitchen
         hide:
           power: true
           source: true
-          volume: false
         artwork: full-cover
         icon: mdi:speaker-multiple
         speaker_group:
@@ -182,10 +179,10 @@ views:
           expanded: true
           show_group_count: true
           entities:
-            - entity_id: media_player.sonos_bedroom
-              name: Sonos sovrum
             - entity_id: media_player.sonos_livingroom
               name: Sonos vardagsrum
+            - entity_id: media_player.sonos_bedroom
+              name: Sonos sovrum
 #        tts:
 #          platform: sonos
 #          language: english
@@ -273,6 +270,29 @@ views:
                   name: 'Status'
                   icon: mdi:timelapse
                 - input_number.bedroom_music_timer_minutes
+
+      - type: conditional
+        conditions:
+          - entity: binary_sensor.sonos_livingroom_tv_active
+            state: 'on'
+        card:
+          type: custom:mini-media-player
+          entity: media_player.sonos_livingroom
+          hide:
+            power: true
+            source: true
+          artwork: cover
+          icon: mdi:television-box
+          speaker_group:
+            platform: sonos
+            sync_volume: true
+            expanded: true
+            show_group_count: true
+            entities:
+              - entity_id: media_player.sonos_kitchen
+                name: Sonos kök
+              - entity_id: media_player.sonos_bedroom
+                name: Sonos sovrum
 
 ################# WAKEUP #################
 

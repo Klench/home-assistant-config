@@ -85,18 +85,6 @@ views:
         icon: mdi:television-classic
 
       - type: custom:mini-media-player
-        entity: media_player.kodi
-        toggle_power: false
-        replace_mute: 'stop'
-        hide:
-          volume: true
-          mute: true
-          power_state: false
-        show_progress: true
-        artwork: full-cover
-        icon: mdi:television-classic
-
-      - type: custom:mini-media-player
         entity: media_player.spotify
         artwork: cover
         icon: mdi:spotify

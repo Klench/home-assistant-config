@@ -53,8 +53,6 @@ python_script:
 
 # Discover some devices automatically
 discovery:
-  ignore:
-    - igd
 
 # Enables support for tracking state changes over time
 history:
@@ -110,9 +108,6 @@ transmission:
   username: !secret transmission_username
   password: !secret transmission_password
   scan_interval: 10
-
-remote:
-  - platform: huesensor
 
 ################# VOLVO ON CALL #################
 

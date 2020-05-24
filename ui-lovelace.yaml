@@ -250,7 +250,6 @@ views:
                     action: call-service
                     service: script.bedroom_music_timer_cancel
                 - type: entity
-                  # entity: sensor.bedroom_music_timer_duration
                   entity: sensor.bedroom_music_timer_minutes
             - type: entities
               entities:
@@ -270,10 +269,10 @@ views:
             power: true
             source: true
           artwork: cover
-          icon: mdi:television-box
+          icon: mdi:television-classic
           speaker_group:
             platform: sonos
-            sync_volume: true
+            sync_volume: false
             expanded: true
             show_group_count: true
             entities:

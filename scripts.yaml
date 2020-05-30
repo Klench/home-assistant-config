@@ -207,6 +207,7 @@ all_rooms_bright:
     - service: script.bedroom_bright
     - service: script.livingroom_bright
     - service: script.hallway_bright
+    - service: script.kitchen_bright
     - service: homeassistant.turn_on
       data:
         entity_id: automation.opening_bathroom_door
@@ -218,6 +219,7 @@ all_rooms_relaxed:
   sequence:
     - service: script.livingroom_relaxed
     - service: script.hallway_relaxed
+    - service: script.kitchen_relaxed
     - service: script.bathroom_relaxed
     - service: homeassistant.turn_off
       data:
@@ -231,6 +233,7 @@ all_rooms_relaxed_bedroom_lights_off:
     - service: script.bedroom_lights_turn_off
     - service: script.livingroom_relaxed
     - service: script.hallway_relaxed
+    - service: script.kitchen_relaxed
     - service: script.bathroom_relaxed
     - service: script.sonos_ungroup_bedroom_speaker
     - service: homeassistant.turn_off
@@ -307,6 +310,7 @@ watching_tv_lights:
     - service: light.turn_on
       data:
         entity_id: light.window_lamp_livingroom
+    - service: script.kitchen_relaxed
 
 create_all_light_group:
     sequence:
@@ -391,7 +395,7 @@ livingroom_relaxed:
     - service: light.turn_on
       data:
         entity_id: light.hue_ambiance_lamp_1_3
-        brightness: 144
+        brightness: 255
         color_temp: 443
         transition: 2
     - service: light.turn_on
@@ -463,6 +467,26 @@ hallway_wakeup:
         entity_id: light.ceiling_lamps_hallway
         color_temp: 372
         transition: 1800
+
+##### KITCHEN #####
+
+kitchen_bright:
+  alias: 'Hög ljusstyrka'
+  sequence:
+    - service: light.turn_on
+      data:
+        entity_id: light.table_lamp_kitchen
+        brightness_pct: 100
+        transition: 2
+
+kitchen_relaxed:
+  alias: 'Mysbelysning'
+  sequence:
+    - service: light.turn_on
+      data:
+        entity_id: light.table_lamp_kitchen
+        brightness_pct: 40
+        transition: 2
 
 ##### BATHROOM #####
 

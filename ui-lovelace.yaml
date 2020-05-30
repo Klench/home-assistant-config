@@ -74,6 +74,16 @@ views:
             icon: mdi:lamp
             name: 'Sänglampor'
 
+      - type: entities
+        title: Kök
+        show_header_toggle: false
+        entities:
+          - entity: script.kitchen_bright
+            icon: mdi:lightbulb-on-outline
+          - entity: script.kitchen_relaxed
+            icon: mdi:lightbulb-on
+          - light.table_lamp_kitchen
+
       - type: custom:mini-media-player
         entity: media_player.apple_tv_vardagsrum
         replace_mute: 'stop'

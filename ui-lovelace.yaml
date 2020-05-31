@@ -527,8 +527,7 @@ views:
           - automation.turn_off_bedroom_lights
           - automation.closing_bathroom_door
           - automation.opening_bathroom_door
-          - automation.coming_home_turn_on_lights
-          - automation.coming_home_turn_on_hallway_lights
+          - input_boolean.coming_home_turn_on_lights
           - automation.car_coming_home
           - automation.leaving_home
           - automation.watching_tv

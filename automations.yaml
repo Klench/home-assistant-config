@@ -171,13 +171,14 @@
       entity_id: script.all_rooms_relaxed
       to: 'on'
     - platform: state
-      entity_id: script.all_rooms_relaxed_baby_light
+      entity_id: script.all_rooms_relaxed_bedroom_lights_off
       to: 'on'
   condition:
     condition: state
     entity_id: binary_sensor.sonos_bedroom_is_grouped
     state: 'on'
   action:
+    - delay: '00:00:05'
     - service: script.sonos_ungroup_bedroom_speaker
     - service: media_player.volume_set
       data:
@@ -382,23 +383,47 @@
     service: media_player.media_pause
     entity_id: media_player.sonos_kitchen
 
-- alias: 'Coming home turn on lights'
+- alias: 'Coming home turn on lights bright'
   initial_state: on
   trigger:
     platform: state
     entity_id: group.device_tracker_family
     to: 'home'
   condition:
-    condition: and
-    conditions:
-      - condition: sun
-        after: sunset
-        after_offset: '-01:00:00'
-      - condition: state
-        entity_id: group.all_lights
-        state: 'off'
+    - condition: time
+      before: '19:15:00'
+    - condition: sun
+      after: sunset
+      after_offset: '-01:00:00'
+    - condition: state
+      entity_id: group.all_lights
+      state: 'off'
+    - condition: state
+      entity_id: input_boolean.coming_home_turn_on_lights
+      state: 'on'
   action:
     service: script.all_rooms_bright
+
+- alias: 'Coming home turn on lights relaxed'
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: group.device_tracker_family
+    to: 'home'
+  condition:
+    - condition: time
+      after: '19:15:00'
+    - condition: sun
+      after: sunset
+      after_offset: '-01:00:00'
+    - condition: state
+      entity_id: group.all_lights
+      state: 'off'
+    - condition: state
+      entity_id: input_boolean.coming_home_turn_on_lights
+      state: 'on'
+  action:
+    service: script.all_rooms_relaxed
 
 - alias: 'Coming home turn on hallway lights'
   initial_state: on
@@ -407,17 +432,18 @@
     entity_id: group.device_tracker_family
     to: 'home'
   condition:
-    condition: and
-    conditions:
-      - condition: sun
-        before: sunset
-        before_offset: '-01:00:00'
-      - condition: sun
-        after: sunrise
-        after_offset: '01:00:00'
-      - condition: state
-        entity_id: group.all_lights
-        state: 'off'
+    - condition: sun
+      before: sunset
+      before_offset: '-01:00:00'
+    - condition: sun
+      after: sunrise
+      after_offset: '01:00:00'
+    - condition: state
+      entity_id: group.all_lights
+      state: 'off'
+    - condition: state
+      entity_id: input_boolean.coming_home_turn_on_lights
+      state: 'on'
   action:
     service: script.hallway_bright
 

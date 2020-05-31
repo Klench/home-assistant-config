@@ -2,3 +2,7 @@ wakeup_override:
   name: Manuell aktivering
   icon: mdi:alarm-check
   initial: off
+coming_home_turn_on_lights:
+  name: Coming home turn on lights
+  icon: mdi:home-outline
+  initial: on

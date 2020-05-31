@@ -235,7 +235,6 @@ all_rooms_relaxed_bedroom_lights_off:
     - service: script.hallway_relaxed
     - service: script.kitchen_relaxed
     - service: script.bathroom_relaxed
-    - service: script.sonos_ungroup_bedroom_speaker
     - service: homeassistant.turn_off
       data:
         entity_id: automation.opening_bathroom_door
@@ -331,6 +330,8 @@ bedroom_bright:
         brightness: 200
         color_temp: 372
         transition: 2
+    - delay:
+        milliseconds: 10
 
 bedroom_relaxed:
   alias: 'Mysbelysning'
@@ -344,6 +345,8 @@ bedroom_relaxed:
     - service: light.turn_on
       data:
         entity_id: light.bedside_lamps_bedroom
+    - delay:
+        milliseconds: 10
 
 bedroom_lights_turn_off:
   alias: 'Släck'
@@ -478,6 +481,8 @@ kitchen_bright:
         entity_id: light.table_lamp_kitchen
         brightness_pct: 100
         transition: 2
+    - delay:
+        milliseconds: 10
 
 kitchen_relaxed:
   alias: 'Mysbelysning'
@@ -487,6 +492,8 @@ kitchen_relaxed:
         entity_id: light.table_lamp_kitchen
         brightness_pct: 40
         transition: 2
+    - delay:
+        milliseconds: 10
 
 ##### BATHROOM #####
 

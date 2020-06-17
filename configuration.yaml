@@ -117,12 +117,6 @@ volvooncall:
 
 ################# MEDIA PLAYERS #################
 
-plex:
-  token: !secret plex_token
-  server: Oden
-  ssl: true
-  verify_ssl: false
-
 media_player:
   - platform: kodi
     host: !secret kodi_ip

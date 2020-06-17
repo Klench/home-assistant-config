@@ -83,6 +83,8 @@ views:
           - entity: script.kitchen_relaxed
             icon: mdi:lightbulb-on
           - light.table_lamp_kitchen
+          - entity: light.ceiling_lamp_hallway
+            name: 'Taklampa kök'
 
       - type: custom:mini-media-player
         entity: media_player.apple_tv_vardagsrum
@@ -333,13 +335,6 @@ views:
         clock: 24
         image_style: fanart
 
-      # - type: custom:upcoming-media-card
-      #   entity: sensor.trakt_upcoming_calendar
-      #   title: Kommande TV-serier
-      #   clock: 24
-      #   image_style: fanart
-      #   hide_empty: true
-
       - type: custom:auto-entities
         show_empty: false
         card:
@@ -362,6 +357,13 @@ views:
             - state: "inactive"
             - state: "unavailable"
             - state: "idle"
+
+      - type: custom:upcoming-media-card
+        entity: sensor.trakt_upcoming_calendar
+        title: Kommande TV-serier
+        clock: 24
+        image_style: fanart
+        hide_empty: true
 
 ################# WORK TIME #################
 

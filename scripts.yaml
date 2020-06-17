@@ -385,6 +385,8 @@ livingroom_bright:
         brightness: 255
         color_temp: 372
         transition: 2
+    - delay:
+        milliseconds: 10
 
 livingroom_relaxed:
   alias: 'Mysbelysning'
@@ -404,6 +406,8 @@ livingroom_relaxed:
     - service: light.turn_on
       data:
         entity_id: light.window_lamp_livingroom
+    - delay:
+        milliseconds: 10
 
 livingroom_wakeup:
   alias: 'Väckning vardagsrum'
@@ -420,6 +424,29 @@ livingroom_wakeup:
         brightness: 255
         color_temp: 372
         transition: 1800
+
+livingroom_dimmed:
+  sequence:
+    - service: light.turn_off
+      data:
+        entity_id: light.hue_ambiance_lamp_1
+    - service: light.turn_off
+      data:
+        entity_id: light.window_lamp_livingroom
+    - service: light.turn_on
+      data:
+        entity_id: light.hue_ambiance_lamp_1_3
+        brightness: 50
+        color_temp: 443
+        transition: 2
+    - service: light.turn_off
+      data:
+        entity_id: light.ceiling_lamps_hallway
+    - service: light.turn_on
+      data:
+        entity_id: light.table_lamp_kitchen
+        brightness_pct: 40
+        transition: 2
 
 ##### HALLWAY #####
 

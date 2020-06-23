@@ -128,10 +128,6 @@ media_player:
       data:
         entity_id: media_player.kodi
         method: System.Reboot
-  # - platform: samsungtv
-  #   host: !secret samsung_tv_ip
-  #   port: 8001
-  #   name: 'TV'
   - platform: samsungtv_custom
     host: !secret samsung_tv_ip
     port: 8001

@@ -21,3 +21,9 @@
   longitude: !secret work_longitude
   radius: 200
   icon: mdi:briefcase
+
+- name: 'Päronen'
+  latitude: !secret albertssons_latitude
+  longitude: !secret albertssons_longitude
+  radius: 100
+  icon: mdi:home-outline

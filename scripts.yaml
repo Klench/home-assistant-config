@@ -306,7 +306,7 @@ watching_tv_lights:
     - service: light.turn_off
       data:
         entity_id: light.hue_ambiance_lamp_1
-    - service: light.turn_on
+    - service: light.turn_off
       data:
         entity_id: light.window_lamp_livingroom
     - service: script.kitchen_relaxed

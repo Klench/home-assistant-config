@@ -440,6 +440,8 @@
     entity_id: group.device_tracker_family
     to: 'home'
   condition:
+    - condition: time
+      before: '19:15:00'
     - condition: sun
       before: sunset
       before_offset: '-01:00:00'

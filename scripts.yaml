@@ -38,6 +38,10 @@ sonos_group_speaker:
 sonos_ungroup_speaker:
   alias: Sonos ungroup speaker
   sequence:
+    - service: python_script.media_player_volume_set
+      data_template:
+        entity_id: "{{ sonos_entity }}"
+        volume_level: 0.01
     - service: sonos.unjoin
       data_template:
         entity_id: "{{ sonos_entity }}"

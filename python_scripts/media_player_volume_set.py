@@ -1,17 +1,28 @@
-entity_id = data.get('entity_id')
-initial_volume_level = hass.states.get(entity_id).attributes['volume_level']
-volume_reference = float(data.get("volume_level"))
-volume_diff = volume_reference - initial_volume_level
-volume_diff_sign = volume_diff/abs(volume_diff)
+list_of_speaker_ids = list() # Dunno how you get these values
+dict_of_speaker_bools = dict((speaker_id, False) for speaker_id in list_of_speaker_ids)
 
-volume_increment = 0.015 * volume_diff_sign
-volume_level = initial_volume_level
+target_volume = float(data.get('volume_level'))
+volume_increment = 0.015
 
-while ((volume_level + volume_increment < volume_reference) and (volume_diff_sign > 0)) or ((volume_level + volume_increment > volume_reference) and (volume_diff_sign < 0)):
-    volume_level = volume_level + volume_increment
-    service_data = {"entity_id": entity_id, "volume_level": volume_level}
+while not all(dict_of_speaker_bools.values()):
+
+  for speaker_id in list_of_speaker_ids:
+    current_volume = hass.states.get(speaker_id).attributes['volume_level']
+
+    volume_diff = target_volume - current_volume
+
+    if abs(volume_diff) <= volume_increment:
+      dict_of_speaker_bools[speaker_id] = True
+      service_data = {"entity_id": speaker_id, "volume_level": target_volume}
+      hass.services.call("media_player", "volume_set", service_data)
+      continue
+
+    volume_diff_sign = volume_diff/abs(volume_diff)
+    volume_delta = volume_increment * volume_diff_sign
+    new_volume = current_volume + volume_delta
+
+    service_data = {"entity_id": speaker_id, "volume_level": new_volume}
     hass.services.call("media_player", "volume_set", service_data)
+
     time.sleep(.1)
 
-service_data_reference = {"entity_id": entity_id, "volume_level": volume_reference}
-hass.services.call("media_player", "volume_set", service_data_reference)

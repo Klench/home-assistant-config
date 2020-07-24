@@ -88,11 +88,13 @@ views:
 
       - type: custom:mini-media-player
         entity: media_player.apple_tv_vardagsrum
-        replace_mute: 'stop'
+        replace_mute: stop
         hide:
           volume: true
-          power_state: false
-        show_progress: true
+          power: true
+        idle_view:
+          when_idle: true
+          when_standby: true
         artwork: full-cover
         icon: mdi:television-classic
 
@@ -103,13 +105,11 @@ views:
         name: Spotify
         hide:
           power: true
-          power_state: false
           volume: true
         idle_view:
           when_idle: true
           when_paused: true
           when_standby: true
-        toggle_power: false
 
       - type: custom:mini-graph-card
         entities:
@@ -365,6 +365,49 @@ views:
         image_style: fanart
         hide_empty: true
 
+################# CAR #################
+
+  - icon: mdi:car
+    cards:
+      
+      - type: entities
+        title: Översikt
+        show_header_toggle: false
+        entities:
+          - binary_sensor.lgd321_doors
+          - binary_sensor.lgd321_windows
+          - binary_sensor.lgd321_hood
+          - binary_sensor.lgd321_brake_fluid
+          - binary_sensor.lgd321_bulbs
+          - binary_sensor.lgd321_service
+          - binary_sensor.lgd321_washer_fluid
+          - sensor.lgd321_fuel_level
+          - sensor.lgd321_fuel_amount
+          - sensor.lgd321_range
+          - sensor.lgd321_fuel_consumption
+          - switch.lgd321_heater
+
+      - type: entities
+        title: Detaljer
+        show_header_toggle: false
+        entities:
+          - sensor.lgd321_last_trip
+          - sensor.lgd321_odometer
+          - sensor.lgd321_trip_meter_1
+          - sensor.lgd321_trip_meter_2
+          - binary_sensor.lgd321_front_left_door
+          - binary_sensor.lgd321_front_right_door
+          - binary_sensor.lgd321_rear_left_door
+          - binary_sensor.lgd321_rear_right_door
+          - binary_sensor.lgd321_front_left_window
+          - binary_sensor.lgd321_front_right_window
+          - binary_sensor.lgd321_rear_left_window
+          - binary_sensor.lgd321_rear_right_window
+          - binary_sensor.lgd321_front_left_tyre
+          - binary_sensor.lgd321_front_right_tyre
+          - binary_sensor.lgd321_rear_left_tyre
+          - binary_sensor.lgd321_rear_right_tyre
+
 ################# WORK TIME #################
 
   - icon: mdi:briefcase-clock-outline
@@ -448,69 +491,18 @@ views:
                 labels: true
                 fill: fade
 
-################# ESPHome #################
-
-  - icon: mdi:developer-board
-    cards:
-
-      - type: entities
-        title: Badrum
-        show_header_toggle: false
-        entities:
-          - entity: binary_sensor.bathroom_door
-            name: 'Badrumsdörr'
-          - entity: light.bathroom_led
-            name: LED-belysning
-          - automation.closing_bathroom_door
-          - automation.opening_bathroom_door
-
-################# CAR #################
-
-  - icon: mdi:car
-    cards:
-      
-      - type: entities
-        title: Översikt
-        show_header_toggle: false
-        entities:
-          - binary_sensor.lgd321_doors
-          - binary_sensor.lgd321_windows
-          - binary_sensor.lgd321_hood
-          - binary_sensor.lgd321_brake_fluid
-          - binary_sensor.lgd321_bulbs
-          - binary_sensor.lgd321_service
-          - binary_sensor.lgd321_washer_fluid
-          - sensor.lgd321_fuel_level
-          - sensor.lgd321_fuel_amount
-          - sensor.lgd321_range
-          - sensor.lgd321_fuel_consumption
-          - switch.lgd321_heater
-
-      - type: entities
-        title: Detaljer
-        show_header_toggle: false
-        entities:
-          - sensor.lgd321_last_trip
-          - sensor.lgd321_odometer
-          - sensor.lgd321_trip_meter_1
-          - sensor.lgd321_trip_meter_2
-          - binary_sensor.lgd321_front_left_door
-          - binary_sensor.lgd321_front_right_door
-          - binary_sensor.lgd321_rear_left_door
-          - binary_sensor.lgd321_rear_right_door
-          - binary_sensor.lgd321_front_left_window
-          - binary_sensor.lgd321_front_right_window
-          - binary_sensor.lgd321_rear_left_window
-          - binary_sensor.lgd321_rear_right_window
-          - binary_sensor.lgd321_front_left_tyre
-          - binary_sensor.lgd321_front_right_tyre
-          - binary_sensor.lgd321_rear_left_tyre
-          - binary_sensor.lgd321_rear_right_tyre
-
 ################# AUTOMATIONS #################
 
   - icon: mdi:robot-industrial
     cards:
+
+      - type: entities
+        title: Tid för mysbelysning
+        show_header_toggle: false
+        entities:
+          - sensor.relaxed_mode_time
+          - input_number.relaxed_mode_hours
+          - input_number.relaxed_mode_minutes
 
       - type: entities
         title: Automationer
@@ -530,8 +522,23 @@ views:
           - automation.closing_bathroom_door
           - automation.opening_bathroom_door
           - input_boolean.coming_home_turn_on_lights
-          - automation.car_coming_home
           - automation.leaving_home
           - automation.watching_tv
           - automation.tv_off_group_speakers
           - automation.car_heater_weekdays
+
+################# ESPHome #################
+
+  - icon: mdi:developer-board
+    cards:
+
+      - type: entities
+        title: Badrum
+        show_header_toggle: false
+        entities:
+          - entity: binary_sensor.bathroom_door
+            name: 'Badrumsdörr'
+          - entity: light.bathroom_led
+            name: LED-belysning
+          - automation.closing_bathroom_door
+          - automation.opening_bathroom_door

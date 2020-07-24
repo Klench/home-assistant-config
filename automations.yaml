@@ -14,14 +14,15 @@
 
 - alias: 'Evening relaxed'
   trigger:
-    platform: time
-    at: '19:15:00'
+    platform: state
+    entity_id: binary_sensor.relaxed_mode
+    to: 'on'
   condition:
     condition: state
     entity_id: group.device_tracker_family
     state: 'home'
   action:
-    - service: script.all_rooms_relaxed
+    - service: script.all_rooms_relaxed_bedroom_lights_off
 
 - alias: 'Hallway bright'
   trigger:
@@ -147,22 +148,6 @@
         state: 'on'
   action:
     service: script.sonos_set_alarm
-
-- alias: 'Coming home group Sonos speakers'
-  initial_state: on
-  trigger:
-    platform: state
-    entity_id: group.device_tracker_family
-    to: 'home'
-  condition:
-    condition: state
-    entity_id: media_player.tv_custom
-    state: 'off'
-  action:
-    - service: script.sonos_group_all_speakers
-    - service: script.sonos_set_group_volume
-      data:
-        volume: 0.2
 
 - alias: 'Ungroup bedroom speaker'
   initial_state: on
@@ -394,12 +379,16 @@
 - alias: 'Coming home turn on lights bright'
   initial_state: on
   trigger:
-    platform: state
-    entity_id: group.device_tracker_family
-    to: 'home'
+    - platform: state
+      entity_id: group.device_tracker_family
+      to: 'home'
+    - platform: state
+      entity_id: device_tracker.volvo_lgd321
+      to: 'home'
   condition:
-    - condition: time
-      before: '19:15:00'
+    - condition: state
+      entity_id: binary_sensor.relaxed_mode
+      state: 'off'
     - condition: sun
       after: sunset
       after_offset: '-01:00:00'
@@ -415,12 +404,16 @@
 - alias: 'Coming home turn on lights relaxed'
   initial_state: on
   trigger:
-    platform: state
-    entity_id: group.device_tracker_family
-    to: 'home'
+    - platform: state
+      entity_id: group.device_tracker_family
+      to: 'home'
+    - platform: state
+      entity_id: device_tracker.volvo_lgd321
+      to: 'home'
   condition:
-    - condition: time
-      after: '19:15:00'
+    - condition: state
+      entity_id: binary_sensor.relaxed_mode
+      state: 'on'
     - condition: sun
       after: sunset
       after_offset: '-01:00:00'
@@ -436,12 +429,16 @@
 - alias: 'Coming home turn on hallway lights'
   initial_state: on
   trigger:
-    platform: state
-    entity_id: group.device_tracker_family
-    to: 'home'
+    - platform: state
+      entity_id: group.device_tracker_family
+      to: 'home'
+    - platform: state
+      entity_id: device_tracker.volvo_lgd321
+      to: 'home'
   condition:
-    - condition: time
-      before: '19:15:00'
+    - condition: state
+      entity_id: binary_sensor.relaxed_mode
+      state: 'off'
     - condition: sun
       before: sunset
       before_offset: '-01:00:00'
@@ -463,24 +460,15 @@
     platform: state
     entity_id: group.device_tracker_family
     to: 'home'
-  action:
-    service: script.sonos_group_all_speakers
-
-- alias: 'Car coming home'
-  initial_state: on
-  trigger:
-    platform: state
-    entity_id: device_tracker.volvo_lgd321
-    to: 'home'
   condition:
-    - condition: sun
-      after: sunset
-      after_offset: '-01:00:00'
-    - condition: state
-      entity_id: group.device_tracker_family
-      state: 'not_home'
+    condition: state
+    entity_id: media_player.tv_custom
+    state: 'off'
   action:
-    - service: script.all_rooms_bright
+    - service: script.sonos_group_all_speakers
+    - service: script.sonos_set_group_volume
+      data:
+        volume: 0.2
 
 ################# BATHROOM #################
 
@@ -642,6 +630,30 @@
       data:
         entity_id: media_player.sonos_bedroom
         volume_level: 0.10
+
+################# CHANGE FRONTEND THEME #################
+
+- alias: 'Turn on dark mode'
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: binary_sensor.relaxed_mode
+    to: 'on'
+  action:
+    service: frontend.set_theme
+    data:
+      name: Google Dark Theme
+
+- alias: 'Turn off dark mode'
+  initial_state: on
+  trigger:
+    platform: sun
+    event: sunrise
+    offset: '01:00:00'
+  action:
+    service: frontend.set_theme
+    data:
+      name: default
 
 ################# CREATE ALL LIGHTS GROUP #################
 

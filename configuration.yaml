@@ -18,7 +18,7 @@ homeassistant:
 
 # Enables the frontend
 frontend:
-  javascript_version: latest
+  themes: !include_dir_merge_named themes
 
 lovelace:
   mode: yaml
@@ -42,7 +42,6 @@ lovelace:
 config:
 
 http:
-  base_url: !secret base_url
 
 hacs:
   token: !secret hacs_token
@@ -79,10 +78,10 @@ tts:
  - platform: google_translate
    base_url: !secret local_ip
 
-# pi_hole:
-#   host: !secret pi-hole_ip
-#   ssl: false
-#   verify_ssl: false
+pi_hole:
+  host: !secret pi-hole_ip
+  ssl: false
+  verify_ssl: false
 
 homekit:
   ip_address: !secret oden_ip

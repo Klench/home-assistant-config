@@ -51,8 +51,6 @@ automation.coming_home_turn_on_lights:
   icon: mdi:home-outline
 automation.coming_home_turn_on_hallway_lights:
   icon: mdi:home-outline
-automation.car_coming_home:
-  icon: mdi:car
 automation.leaving_home:
   icon: mdi:home-outline
 automation.morning_not_home:

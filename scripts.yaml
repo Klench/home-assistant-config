@@ -449,7 +449,7 @@ livingroom_dimmed:
     - service: light.turn_on
       data:
         entity_id: light.table_lamp_kitchen
-        brightness_pct: 40
+        brightness_pct: 30
         transition: 2
 
 ##### HALLWAY #####

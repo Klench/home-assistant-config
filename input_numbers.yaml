@@ -28,6 +28,18 @@ alarm_heater_offset:
   min: 0
   max: 100
   step: 5
+relaxed_mode_hours:
+  name: Timmar
+  icon: mdi:timer
+  min: 15
+  max: 23
+  step: 1
+relaxed_mode_minutes:
+  name: Minuter
+  icon: mdi:timer
+  min: 0
+  max: 55
+  step: 5
 work_time_hours_in:
   name: Timme
   icon: mdi:timer

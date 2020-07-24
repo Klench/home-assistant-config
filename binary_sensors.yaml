@@ -32,6 +32,9 @@
       friendly_name: 'Car heater trigger workdays'
       value_template: >-
         {{ (as_timestamp(strptime(states.sensor.alarm_clock_time_weekdays.state, '%H:%M')) | int + 60*60 + states.input_number.alarm_heater_offset.state | int * 60) | timestamp_custom('%H:%M', false) == states.sensor.time.state }}
+    relaxed_mode:
+      value_template: >-
+        {{ (as_timestamp(strptime(states.sensor.relaxed_mode_time.state, '%H:%M')) | int) < (as_timestamp(strptime(states.sensor.time.state, '%H:%M')) | int) }}
     sonos_livingroom_tv_active:
       value_template: >-
         {{ states.media_player.sonos_livingroom.attributes.source == 'TV' }}

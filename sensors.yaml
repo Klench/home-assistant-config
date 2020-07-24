@@ -41,17 +41,22 @@
     - !secret steam_id_mench
     - !secret steam_id_bench
     - !secret steam_id_lady_nelson
+    - !secret steam_id_olrik_meister
 
 - platform: template
   sensors:
     alarm_clock_time_weekdays:
       friendly_name: 'Väckningstid'
-      icon_template: 'mdi:alarm'
+      icon_template: mdi:alarm
       value_template: '{{ "%0.02d:%0.02d" | format(states.input_number.alarm_hours_weekdays.state | int, states.input_number.alarm_minutes_weekdays.state | int ) }}'
     alarm_clock_time_weekend:
       friendly_name: 'Väckningstid'
-      icon_template: 'mdi:alarm'
+      icon_template: mdi:alarm
       value_template: '{{ "%0.02d:%0.02d" | format(states.input_number.alarm_hours_weekend.state | int, states.input_number.alarm_minutes_weekend.state | int ) }}'
+    relaxed_mode_time:
+      friendly_name: 'Klockslag'
+      icon_template: mdi:alarm
+      value_template: '{{ "%0.02d:%0.02d" | format(states.input_number.relaxed_mode_hours.state | int, states.input_number.relaxed_mode_minutes.state | int ) }}'
     outdoor_temperature:
       friendly_name: 'Temperatur'
       icon_template: mdi:thermometer

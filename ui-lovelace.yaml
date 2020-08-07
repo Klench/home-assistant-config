@@ -86,30 +86,40 @@ views:
           - entity: light.ceiling_lamp_hallway
             name: 'Taklampa kök'
 
-      - type: custom:mini-media-player
-        entity: media_player.apple_tv_vardagsrum
-        replace_mute: stop
-        hide:
-          volume: true
-          power: true
-        idle_view:
-          when_idle: true
-          when_standby: true
-        artwork: full-cover
-        icon: mdi:television-classic
+      - type: conditional
+        conditions:
+          - entity: media_player.apple_tv_vardagsrum
+            state_not: 'idle'
+        card:
+          type: custom:mini-media-player
+          entity: media_player.apple_tv_vardagsrum
+          replace_mute: stop
+          hide:
+            volume: true
+            power: true
+          idle_view:
+            when_idle: true
+            when_standby: true
+          artwork: full-cover
+          icon: mdi:television-classic
 
-      - type: custom:mini-media-player
-        entity: media_player.spotify
-        artwork: cover
-        icon: mdi:spotify
-        name: Spotify
-        hide:
-          power: true
-          volume: true
-        idle_view:
-          when_idle: true
-          when_paused: true
-          when_standby: true
+      - type: conditional
+        conditions:
+          - entity: media_player.spotify
+            state: 'playing'
+        card:
+          type: custom:mini-media-player
+          entity: media_player.spotify
+          artwork: cover
+          icon: mdi:spotify
+          name: Spotify
+          hide:
+            power: true
+            volume: true
+          idle_view:
+            when_idle: true
+            when_paused: true
+            when_standby: true
 
       - type: custom:mini-graph-card
         entities:
@@ -292,6 +302,20 @@ views:
                 name: Sonos kök
               - entity_id: media_player.sonos_bedroom
                 name: Sonos sovrum
+
+################# UNRAID #################
+
+  - icon: mdi:server-network
+    cards:
+
+      - type: custom:auto-entities
+        card:
+          type: entities
+          title: Unraid
+          show_header_toggle: false
+        filter:
+          include:
+            - entity_id: "sensor.unraid*"
 
 ################# WAKEUP #################
 

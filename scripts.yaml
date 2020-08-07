@@ -215,8 +215,6 @@ all_rooms_bright:
     - service: homeassistant.turn_on
       data:
         entity_id: automation.opening_bathroom_door
-    - delay:
-        milliseconds: 10
 
 all_rooms_relaxed:
   alias: 'Mysbelysning'
@@ -228,8 +226,6 @@ all_rooms_relaxed:
     - service: homeassistant.turn_off
       data:
         entity_id: automation.opening_bathroom_door
-    - delay:
-        milliseconds: 10
 
 all_rooms_relaxed_bedroom_lights_off:
   alias: 'Mysbelysning 2'
@@ -242,8 +238,6 @@ all_rooms_relaxed_bedroom_lights_off:
     - service: homeassistant.turn_off
       data:
         entity_id: automation.opening_bathroom_door
-    - delay:
-        milliseconds: 10
 
 all_lights_off:
   alias: 'Allt släckt'
@@ -257,8 +251,6 @@ all_lights_off:
     - service: script.sonos_set_group_volume
       data:
         volume: 0.1
-    - delay:
-        milliseconds: 10
 
 wakeup_lights:
   alias: 'Väckning'
@@ -334,8 +326,6 @@ bedroom_bright:
         brightness: 200
         color_temp: 372
         transition: 2
-    - delay:
-        milliseconds: 10
 
 bedroom_relaxed:
   alias: 'Mysbelysning'
@@ -349,8 +339,6 @@ bedroom_relaxed:
     - service: light.turn_on
       data:
         entity_id: light.bedside_lamps_bedroom
-    - delay:
-        milliseconds: 10
 
 bedroom_lights_turn_off:
   alias: 'Släck'
@@ -389,8 +377,6 @@ livingroom_bright:
         brightness: 255
         color_temp: 372
         transition: 2
-    - delay:
-        milliseconds: 10
 
 livingroom_relaxed:
   alias: 'Mysbelysning'
@@ -410,8 +396,6 @@ livingroom_relaxed:
     - service: light.turn_on
       data:
         entity_id: light.window_lamp_livingroom
-    - delay:
-        milliseconds: 10
 
 livingroom_wakeup:
   alias: 'Väckning vardagsrum'
@@ -512,8 +496,6 @@ kitchen_bright:
         entity_id: light.table_lamp_kitchen
         brightness_pct: 100
         transition: 2
-    - delay:
-        milliseconds: 10
 
 kitchen_relaxed:
   alias: 'Mysbelysning'
@@ -523,8 +505,6 @@ kitchen_relaxed:
         entity_id: light.table_lamp_kitchen
         brightness_pct: 40
         transition: 2
-    - delay:
-        milliseconds: 10
 
 ##### BATHROOM #####
 

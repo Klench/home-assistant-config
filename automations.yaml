@@ -558,20 +558,18 @@
     entity_id: binary_sensor.car_heater_trigger_workdays
     to: 'on'
   condition:
-    condition: and
-    conditions:
-      - condition: numeric_state
-        entity_id: sensor.outdoor_temperature
-        below: 3
-      - condition: state
-        entity_id: binary_sensor.workday_sensor
-        state: 'on'
-      - condition: state
-        entity_id: group.device_tracker_family
-        state: 'home'
-      - condition: state
-        entity_id: switch.lgd321_heater
-        state: 'off'
+    - condition: numeric_state
+      entity_id: sensor.outdoor_temperature
+      below: 3
+    - condition: state
+      entity_id: binary_sensor.workday_sensor
+      state: 'on'
+    - condition: state
+      entity_id: group.device_tracker_family
+      state: 'home'
+    - condition: state
+      entity_id: switch.lgd321_heater
+      state: 'off'
   action:
     - service: switch.turn_on
       entity_id: switch.lgd321_heater
@@ -636,9 +634,28 @@
 - alias: 'Turn on dark mode'
   initial_state: on
   trigger:
-    platform: state
-    entity_id: binary_sensor.relaxed_mode
-    to: 'on'
+    - platform: state
+      entity_id: binary_sensor.relaxed_mode
+      to: 'on'
+  action:
+    service: frontend.set_theme
+    data:
+      name: Google Dark Theme
+
+- alias: 'Turn on dark mode at startup'
+  initial_state: on
+  trigger:
+    platform: homeassistant
+    event: start
+  condition:
+    condition: or
+    conditions:
+      - condition: state
+        entity_id: binary_sensor.relaxed_mode
+        state: 'on'
+      - condition: sun
+        before: sunrise
+        before_offset: '01:00:00'
   action:
     service: frontend.set_theme
     data:

@@ -108,6 +108,10 @@ transmission:
   password: !secret transmission_password
   scan_interval: 10
 
+glances:
+  host: !secret oden_ip
+  name: unraid
+
 ################# VOLVO ON CALL #################
 
 volvooncall:

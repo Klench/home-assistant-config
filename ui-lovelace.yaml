@@ -156,20 +156,29 @@ views:
               attributes:
                 essid: "Stenman_guest"
 
-      - type: custom:auto-entities
-        show_empty: false
-        card:
-          type: entities
-          title: Steam
-          show_header_toggle: false
-        filter:
-          include:
-            - domain: sensor
-              state: online
-          exclude:
-            - domain: sensor
-              attributes:
-                friendly_name: 'Klench'
+      - type: entities
+        title: Steam
+        entities:
+        - type: custom:multiple-entity-row
+          entity: sensor.steam_76561198017790086
+          secondary_info:
+            attribute: game
+        - type: custom:multiple-entity-row
+          entity: sensor.steam_76561198105180724
+          secondary_info:
+            attribute: game
+        - type: custom:multiple-entity-row
+          entity: sensor.steam_76561198002571233
+          secondary_info:
+            attribute: game
+        - type: custom:multiple-entity-row
+          entity: sensor.steam_76561198024634860
+          secondary_info:
+            attribute: game
+        - type: custom:multiple-entity-row
+          entity: sensor.steam_76561198129920804
+          secondary_info:
+            attribute: game
 
 ################# SONOS #################
 
@@ -308,14 +317,41 @@ views:
   - icon: mdi:server-network
     cards:
 
-      - type: custom:auto-entities
-        card:
-          type: entities
-          title: Unraid
-          show_header_toggle: false
-        filter:
-          include:
-            - entity_id: "sensor.unraid*"
+      # - type: custom:auto-entities
+      #   card:
+      #     type: entities
+      #     title: Unraid
+      #     show_header_toggle: false
+      #   filter:
+      #     include:
+      #       - entity_id: "sensor.unraid*"
+
+      - type: entities
+        title: Unraid
+        show_header_toggle: false
+        entities:
+          - entity: sensor.unraid_mnt_disk1_used_percent
+            name: 'Diskanvändning disk 1'
+          - entity: sensor.unraid_mnt_disk2_used_percent
+            name: 'Diskanvändning disk 2'
+          - entity: sensor.unraid_mnt_disk3_used_percent
+            name: 'Diskanvändning disk 3'
+          - entity: sensor.unraid_cpu_used
+            name: 'Processoranvändning'
+          - entity: sensor.unraid_ram_used_percent
+            name: 'Ramanvändning'
+          - entity: sensor.unraid_ram_used
+            name: 'Ramanvändning'
+          - entity: sensor.unraid_containers_active
+            name: 'Aktiva docker containers'
+          - entity: sensor.unraid_containers_cpu_used
+            name: 'Processoranvänding docker containers'
+          - entity: sensor.unraid_containers_ram_used
+            name: 'Ramanvändning docker containers'
+          - entity: sensor.unraid_cputin_temp
+            name: 'Temperatur CPU'
+          - entity: sensor.unraid_auxtin0_temp
+            name: 'Temperatur moderkort'
 
 ################# WAKEUP #################
 

@@ -168,7 +168,7 @@
     - service: media_player.volume_set
       data:
         entity_id: media_player.sonos_bedroom
-        volume_level: 0.30
+        volume_level: 0.20
 
 ################# GO TO BED #################
 
@@ -435,6 +435,9 @@
     - platform: state
       entity_id: device_tracker.volvo_lgd321
       to: 'home'
+    - platform: state
+      entity_id: device_tracker.sela_ltjs4sl13
+      to: 'home'
   condition:
     - condition: state
       entity_id: binary_sensor.relaxed_mode
@@ -628,49 +631,6 @@
       data:
         entity_id: media_player.sonos_bedroom
         volume_level: 0.10
-
-################# CHANGE FRONTEND THEME #################
-
-- alias: 'Turn on dark mode'
-  initial_state: on
-  trigger:
-    - platform: state
-      entity_id: binary_sensor.relaxed_mode
-      to: 'on'
-  action:
-    service: frontend.set_theme
-    data:
-      name: Google Dark Theme
-
-- alias: 'Turn on dark mode at startup'
-  initial_state: on
-  trigger:
-    platform: homeassistant
-    event: start
-  condition:
-    condition: or
-    conditions:
-      - condition: state
-        entity_id: binary_sensor.relaxed_mode
-        state: 'on'
-      - condition: sun
-        before: sunrise
-        before_offset: '01:00:00'
-  action:
-    service: frontend.set_theme
-    data:
-      name: Google Dark Theme
-
-- alias: 'Turn off dark mode'
-  initial_state: on
-  trigger:
-    platform: sun
-    event: sunrise
-    offset: '01:00:00'
-  action:
-    service: frontend.set_theme
-    data:
-      name: default
 
 ################# CREATE ALL LIGHTS GROUP #################
 

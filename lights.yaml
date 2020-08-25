@@ -32,6 +32,18 @@
         entity_id: switch.bedside_lamp_bedroom_2
 
 - platform: group
+  name: 'Ceiling lamps hallway 1'
+  entities:
+    - light.ceiling_lamp_hallway_1_1
+    - light.ceiling_lamp_hallway_1_2
+    - light.ceiling_lamp_hallway_1_3
+- platform: group
+  name: 'Ceiling lamps hallway 2'
+  entities:
+    - light.ceiling_lamp_hallway_2_1
+    - light.ceiling_lamp_hallway_2_2
+    - light.ceiling_lamp_hallway_2_3
+- platform: group
   name: 'Ceiling lamps hallway'
   entities:
     - light.ceiling_lamp_hallway_1_1

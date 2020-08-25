@@ -31,6 +31,8 @@ lovelace:
     type: module
   - url: /hacsfiles/lovelace-auto-entities/auto-entities.js
     type: module
+  - url: /hacsfiles/lovelace-multiple-entity-row/multiple-entity-row.js
+    type: module
   - url: /hacsfiles/upcoming-media-card/upcoming-media-card.js
     type: js
   - url: /hacsfiles/krisinfo-card/krisinfo-card.js
@@ -78,10 +80,10 @@ tts:
  - platform: google_translate
    base_url: !secret local_ip
 
-pi_hole:
-  host: !secret pi-hole_ip
-  ssl: false
-  verify_ssl: false
+# pi_hole:
+#   host: !secret pi-hole_ip
+#   ssl: false
+#   verify_ssl: false
 
 homekit:
   ip_address: !secret oden_ip
@@ -121,16 +123,16 @@ volvooncall:
 ################# MEDIA PLAYERS #################
 
 media_player:
-  - platform: kodi
-    host: !secret kodi_ip
-    port: 80
-    username: osmc
-    password: !secret kodi_password
-    turn_off_action:
-      service: kodi.call_method
-      data:
-        entity_id: media_player.kodi
-        method: System.Reboot
+  # - platform: kodi
+  #   host: !secret kodi_ip
+  #   port: 80
+  #   username: osmc
+  #   password: !secret kodi_password
+  #   turn_off_action:
+  #     service: kodi.call_method
+  #     data:
+  #       entity_id: media_player.kodi
+  #       method: System.Reboot
   - platform: samsungtv_custom
     host: !secret samsung_tv_ip
     port: 8001

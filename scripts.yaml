@@ -457,16 +457,25 @@ hallway_bright:
 hallway_relaxed:
   alias: 'Mysbelysning'
   sequence:
+    - service: light.turn_off
+      data:
+        entity_id: light.ceiling_lamps_hallway_1
+        transition: 2
     - service: light.turn_on
       data:
-        entity_id: light.ceiling_lamps_hallway
+        entity_id: light.ceiling_lamp_hallway
+        brightness: 1
+        transition: 2
+    - service: light.turn_on
+      data:
+        entity_id: light.ceiling_lamps_hallway_2
         brightness: 1
         transition: 1
     - delay:
         milliseconds: 1100
     - service: light.turn_on
       data:
-        entity_id: light.ceiling_lamps_hallway
+        entity_id: light.ceiling_lamps_hallway_2
         color_temp: 443
         transition: 1
 

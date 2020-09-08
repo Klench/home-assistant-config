@@ -43,6 +43,18 @@
     - !secret steam_id_lady_nelson
     - !secret steam_id_olrik_meister
 
+- platform: apcupsd
+  resources:
+    - status
+    - date
+    - starttime
+    - linev
+    - loadpct
+    - bcharge
+    - timeleft
+    - mbattchg
+    - mintimel
+
 - platform: template
   sensors:
     alarm_clock_time_weekdays:

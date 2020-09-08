@@ -454,6 +454,22 @@ hallway_bright:
         color_temp: 300
         transition: 1
 
+hallway_low_brightness:
+  alias: 'Låg ljusstyrka'
+  sequence:
+    - service: light.turn_on
+      data:
+        entity_id: light.ceiling_lamps_hallway
+        brightness_pct: 40
+        transition: 1
+    - delay:
+        milliseconds: 1100
+    - service: light.turn_on
+      data:
+        entity_id: light.ceiling_lamps_hallway
+        color_temp: 300
+        transition: 1
+
 hallway_relaxed:
   alias: 'Mysbelysning'
   sequence:

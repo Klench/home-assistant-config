@@ -14,6 +14,7 @@
     - '2020-12-28'
     - '2020-12-29'
     - '2020-12-30'
+
 - platform: template
   sensors:
     sonos_night_mode:

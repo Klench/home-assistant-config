@@ -8,6 +8,7 @@ views:
     cards:
 
       - type: glance
+        # state_color: false
         entities:
           - device_tracker.davids_iphone
           - device_tracker.nellies_iphone
@@ -25,6 +26,9 @@ views:
           - entity: sensor.potential_breaking_changes
             name: 'Ändringar'
             icon: mdi:briefcase-download-outline
+          - entity: sensor.ups_status
+            name: 'UPS'
+            icon: mdi:power-plug-outline
 
       - type: entities
         title: Belysning
@@ -55,6 +59,8 @@ views:
         entities:
           - entity: script.hallway_bright
             icon: mdi:lightbulb-on-outline
+          - entity: script.hallway_low_brightness
+            icon: mdi:lightbulb-on
           - entity: script.hallway_relaxed
             icon: mdi:lightbulb-on
           - entity: light.ceiling_lamps_hallway
@@ -312,8 +318,6 @@ views:
               - entity_id: media_player.sonos_bedroom
                 name: Sonos sovrum
 
-################# UNRAID #################
-
   - icon: mdi:server-network
     cards:
 
@@ -352,6 +356,15 @@ views:
             name: 'Temperatur CPU'
           - entity: sensor.unraid_auxtin0_temp
             name: 'Temperatur moderkort'
+
+      - type: custom:auto-entities
+        card:
+          type: entities
+          title: Unraid UPS
+          show_header_toggle: false
+        filter:
+          include:
+            - entity_id: "sensor.ups*"
 
 ################# WAKEUP #################
 

@@ -85,6 +85,11 @@ tts:
 #   ssl: false
 #   verify_ssl: false
 
+shopping_list:
+
+apcupsd:
+  host: !secret oden_ip
+
 homekit:
   ip_address: !secret oden_ip
   safe_mode: true
@@ -94,6 +99,7 @@ homekit:
       - script.all_rooms_relaxed
       - script.all_lights_off
       - script.hallway_bright
+      - script.hallway_low_brightness
       - script.hallway_relaxed
       - script.sonos_manual_group_speakers
       - script.baby_light_bedroom

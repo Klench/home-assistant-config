@@ -27,7 +27,7 @@ tradfri.conf
 .homekit.state
 .ios.conf
 .trakt.conf
-
+.shopping_list.json
 
 # Temporary files
 *.db-journal

@@ -170,6 +170,10 @@ views:
           secondary_info:
             attribute: game
         - type: custom:multiple-entity-row
+          entity: sensor.steam_76561198005285582
+          secondary_info:
+            attribute: game
+        - type: custom:multiple-entity-row
           entity: sensor.steam_76561198105180724
           secondary_info:
             attribute: game
@@ -185,6 +189,8 @@ views:
           entity: sensor.steam_76561198129920804
           secondary_info:
             attribute: game
+
+
 
 ################# SONOS #################
 

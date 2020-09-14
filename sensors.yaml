@@ -42,6 +42,7 @@
     - !secret steam_id_bench
     - !secret steam_id_lady_nelson
     - !secret steam_id_olrik_meister
+    - !secret steam_id_tdq
 
 - platform: apcupsd
   resources:

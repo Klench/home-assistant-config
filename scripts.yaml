@@ -83,47 +83,37 @@ sonos_ungroup_bedroom_speaker:
 sonos_set_group_volume:
   alias: Sonos set group volume
   sequence:
-    - service: media_player.volume_set
+    - service: python_script.media_player_volume_set
       data_template:
-        entity_id: >
-          {%- for sonos_speaker in states.media_player.sonos_kitchen.attributes.sonos_group -%}
-          {{sonos_speaker}}{%- if not loop.last %},{% endif %}
-          {%- endfor %}
+        entity_id: media_player.sonos_kitchen
+        set_group_volume: true
         volume_level: '{{ volume }}'
 
 sonos_sync_group_volume:
   alias: Sonos sync group volume
   sequence:
-    - service: media_player.volume_set
+    - service: python_script.media_player_volume_set
       data_template:
-        entity_id: >
-          {%- for sonos_speaker in states.media_player.sonos_kitchen.attributes.sonos_group %}
-          {%- if not loop.first -%}
-          {{sonos_speaker}}{%- if not loop.last %},{% endif %}
-          {%- endif %}
-          {%- endfor %}
+        entity_id: media_player.sonos_kitchen
+        set_group_volume: true
         volume_level: '{{ states.media_player.sonos_kitchen.attributes.volume_level | float }}'
 
 sonos_increase_volume:
   alias: 'Sonos increase volume'
   sequence:
-    - service: media_player.volume_set
+    - service: python_script.media_player_volume_set
       data_template:
-        entity_id: >
-          {%- for sonos_speaker in states.media_player.sonos_kitchen.attributes.sonos_group -%}
-          {{sonos_speaker}}{%- if not loop.last %},{% endif %}
-          {%- endfor %}
+        entity_id: media_player.sonos_kitchen
+        set_group_volume: true
         volume_level: '{{ [((states.media_player.sonos_kitchen.attributes.volume_level | float * 1.15 + 0.03) | round(2)), 1] | min }}'
 
 sonos_decrease_volume:
   alias: 'Sonos decrease volume'
   sequence:
-    - service: media_player.volume_set
+    - service: python_script.media_player_volume_set
       data_template:
-        entity_id: >
-          {%- for sonos_speaker in states.media_player.sonos_kitchen.attributes.sonos_group -%}
-          {{sonos_speaker}}{%- if not loop.last %},{% endif %}
-          {%- endfor %}
+        entity_id: media_player.sonos_kitchen
+        set_group_volume: true
         volume_level: '{{ [((states.media_player.sonos_kitchen.attributes.volume_level | float * 0.85 - 0.03) | round(2)), 0.05] | max }}'
 
 ##### SAY #####

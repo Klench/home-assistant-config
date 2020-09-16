@@ -13,6 +13,9 @@ light.hue_ambiance_lamp_2:
 light.ceiling_lamp_hallway:
   icon: mdi:ceiling-light
   friendly_name: 'Taklampa hall'
+light.window_lamp_livingroom:
+  icon: mdi:outdoor-lamp
+  friendly_name: 'Fönsterlampa vardagsrum'
 
 device_tracker.davids_iphone:
   friendly_name: 'David'

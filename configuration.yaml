@@ -1,6 +1,8 @@
 homeassistant:
   # Name of the location where Home Assistant is running
   name: Stenman
+  external_url: !secret external_url
+  internal_url: !secret internal_url
   # Location required to calculate the time the sun rises and sets
   latitude: !secret home_latitude
   longitude: !secret home_longitude
@@ -12,6 +14,10 @@ homeassistant:
   time_zone: Europe/Stockholm
   # Customization file
   customize: !include customize.yaml
+  # Local media directory
+  media_dirs:
+    music: /media/music
+    audiobooks: /media/audiobooks
 
   auth_providers:
     - type: homeassistant
@@ -33,11 +39,13 @@ lovelace:
     type: module
   - url: /hacsfiles/lovelace-multiple-entity-row/multiple-entity-row.js
     type: module
-  - url: /hacsfiles/upcoming-media-card/upcoming-media-card.js
-    type: js
+  - url: /hacsfiles/kb-steam-card/kb-steam-card.js
+    type: module
   - url: /hacsfiles/krisinfo-card/krisinfo-card.js
-    type: js
-  - url: /local/plugins/card-mod.js?v=1
+    type: module
+  - url: /hacsfiles/lovelace-card-mod/card-mod.js
+    type: module
+  - url: /hacsfiles/upcoming-media-card/upcoming-media-card.js
     type: js
 
 # Enables configuration UI
@@ -78,7 +86,7 @@ mobile_app:
 # Text to speech
 tts:
  - platform: google_translate
-   base_url: !secret local_ip
+   base_url: !secret internal_url
 
 # pi_hole:
 #   host: !secret pi-hole_ip
@@ -92,6 +100,7 @@ apcupsd:
 
 homekit:
   ip_address: !secret oden_ip
+  port: 51829
   safe_mode: true
   filter:
     include_entities:
@@ -107,6 +116,7 @@ homekit:
       - light.bathroom_led
       - light.ceiling_lamps_hallway
       - light.bedside_lamps_bedroom
+      - light.window_lamp_livingroom
       - sensor.outdoor_temperature
 
 transmission:
@@ -156,6 +166,9 @@ sonos:
       - !secret sonos_livingroom_ip
       - !secret sonos_bedroom_ip
 
+# Local media source
+media_source:
+
 ################# PANEL IFRAME #################
 
 panel_iframe:
@@ -171,10 +184,10 @@ panel_iframe:
     title: Configurator
     icon: mdi:wrench
     url: !secret hass_configurator_url
-  esphome:
-    title: ESPHome
-    icon: mdi:developer-board
-    url: !secret esphome_url
+  # esphome:
+  #   title: ESPHome
+  #   icon: mdi:developer-board
+  #   url: !secret esphome_url
 
 ################# INCLUDE #################
 

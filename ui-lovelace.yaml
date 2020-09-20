@@ -114,18 +114,8 @@ views:
           - entity: media_player.spotify
             state: 'playing'
         card:
-          type: custom:mini-media-player
+          type: media-control
           entity: media_player.spotify
-          artwork: cover
-          icon: mdi:spotify
-          name: Spotify
-          hide:
-            power: true
-            volume: true
-          idle_view:
-            when_idle: true
-            when_paused: true
-            when_standby: true
 
       - type: custom:mini-graph-card
         entities:
@@ -162,35 +152,16 @@ views:
               attributes:
                 essid: "Stenman_guest"
 
-      - type: entities
-        title: Steam
+      - type: 'custom:kb-steam-card'
+        friendly_name: Steam
         entities:
-        - type: custom:multiple-entity-row
-          entity: sensor.steam_76561198017790086
-          secondary_info:
-            attribute: game
-        - type: custom:multiple-entity-row
-          entity: sensor.steam_76561198005285582
-          secondary_info:
-            attribute: game
-        - type: custom:multiple-entity-row
-          entity: sensor.steam_76561198105180724
-          secondary_info:
-            attribute: game
-        - type: custom:multiple-entity-row
-          entity: sensor.steam_76561198002571233
-          secondary_info:
-            attribute: game
-        - type: custom:multiple-entity-row
-          entity: sensor.steam_76561198024634860
-          secondary_info:
-            attribute: game
-        - type: custom:multiple-entity-row
-          entity: sensor.steam_76561198129920804
-          secondary_info:
-            attribute: game
-
-
+          - sensor.steam_76561198017790086
+          - sensor.steam_76561198005285582
+          - sensor.steam_76561198105180724
+          - sensor.steam_76561198948350533
+          - sensor.steam_76561198002571233
+          - sensor.steam_76561198024634860
+          - sensor.steam_76561198129920804
 
 ################# SONOS #################
 
@@ -214,14 +185,6 @@ views:
               name: Sonos vardagsrum
             - entity_id: media_player.sonos_bedroom
               name: Sonos sovrum
-#        tts:
-#          platform: sonos
-#          language: english
-#          entity_id:
-#            - media_player.sonos_kitchen
-#            - media_player.sonos_bedroom
-#            - media_player.sonos_livingroom
-#          volume: 0.3
 
       - type: custom:mini-media-player
         entity: media_player.sonos_bedroom
@@ -327,15 +290,6 @@ views:
   - icon: mdi:server-network
     cards:
 
-      # - type: custom:auto-entities
-      #   card:
-      #     type: entities
-      #     title: Unraid
-      #     show_header_toggle: false
-      #   filter:
-      #     include:
-      #       - entity_id: "sensor.unraid*"
-
       - type: entities
         title: Unraid
         show_header_toggle: false
@@ -355,9 +309,9 @@ views:
           - entity: sensor.unraid_containers_active
             name: 'Aktiva docker containers'
           - entity: sensor.unraid_containers_cpu_used
-            name: 'Processoranvänding docker containers'
+            name: 'Processoranvänding docker'
           - entity: sensor.unraid_containers_ram_used
-            name: 'Ramanvändning docker containers'
+            name: 'Ramanvändning docker'
           - entity: sensor.unraid_cputin_temp
             name: 'Temperatur CPU'
           - entity: sensor.unraid_auxtin0_temp
@@ -487,23 +441,23 @@ views:
           - binary_sensor.lgd321_rear_left_tyre
           - binary_sensor.lgd321_rear_right_tyre
 
-################# WORK TIME #################
+# ################# WORK TIME #################
 
-  - icon: mdi:briefcase-clock-outline
-    cards:
+#   - icon: mdi:briefcase-clock-outline
+#     cards:
 
-      - type: entities
-        title: Arbetstid
-        show_header_toggle: false
-        entities:
-          - sensor.work_time
-          - sensor.work_time_in
-          - input_number.work_time_hours_in
-          - input_number.work_time_minutes_in
-          - sensor.work_time_out
-          - input_number.work_time_hours_out
-          - input_number.work_time_minutes_out
-          - input_number.work_time_minutes_lunch
+#       - type: entities
+#         title: Arbetstid
+#         show_header_toggle: false
+#         entities:
+#           - sensor.work_time
+#           - sensor.work_time_in
+#           - input_number.work_time_hours_in
+#           - input_number.work_time_minutes_in
+#           - sensor.work_time_out
+#           - input_number.work_time_hours_out
+#           - input_number.work_time_minutes_out
+#           - input_number.work_time_minutes_lunch
 
 ################# TRANSMISSION #################
 
@@ -606,18 +560,18 @@ views:
           - automation.tv_off_group_speakers
           - automation.car_heater_weekdays
 
-################# ESPHome #################
+# ################# ESPHome #################
 
-  - icon: mdi:developer-board
-    cards:
+#   - icon: mdi:developer-board
+#     cards:
 
-      - type: entities
-        title: Badrum
-        show_header_toggle: false
-        entities:
-          - entity: binary_sensor.bathroom_door
-            name: 'Badrumsdörr'
-          - entity: light.bathroom_led
-            name: LED-belysning
-          - automation.closing_bathroom_door
-          - automation.opening_bathroom_door
+#       - type: entities
+#         title: Badrum
+#         show_header_toggle: false
+#         entities:
+#           - entity: binary_sensor.bathroom_door
+#             name: 'Badrumsdörr'
+#           - entity: light.bathroom_led
+#             name: LED-belysning
+#           - automation.closing_bathroom_door
+#           - automation.opening_bathroom_door

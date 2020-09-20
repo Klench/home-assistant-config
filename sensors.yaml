@@ -1,8 +1,3 @@
-- platform: yr
-  monitored_conditions:
-    - symbol
-    - temperature
-
 - platform: plex_recently_added
   host: !secret oden_ip
   port: 32400
@@ -43,6 +38,7 @@
     - !secret steam_id_lady_nelson
     - !secret steam_id_olrik_meister
     - !secret steam_id_tdq
+    - !secret steam_id_lesap
 
 - platform: apcupsd
   resources:
@@ -74,7 +70,7 @@
       friendly_name: 'Temperatur'
       icon_template: mdi:thermometer
       unit_of_measurement: '°C'
-      value_template: '{{ (float(states.sensor.yr_temperature.state) * 0.4 + float(states.weather.smhi_hem.attributes.temperature) * 0.6) | round(1) }}'
+      value_template: '{{ (float(states.weather.met_hem.attributes.temperature) * 0.4 + float(states.weather.smhi_hem.attributes.temperature) * 0.6) | round(1) }}'
     hallway_switch_updated:
       friendly_name: 'Hallway switch updated'
       value_template: '{{ states.remote.hallway_switch.attributes.last_updated }}'

@@ -23,15 +23,15 @@ sonos_group_speaker:
   alias: Sonos group speaker
   sequence:
     - service: media_player.volume_set
-      data_template:
+      data:
         entity_id: "{{ sonos_entity }}"
         volume_level: 0.0
     - service: sonos.join
-      data_template:
+      data:
         master: media_player.sonos_kitchen
         entity_id: "{{ sonos_entity }}"
     - service: python_script.media_player_volume_set
-      data_template:
+      data:
         entity_id: "{{ sonos_entity }}"
         volume_level: '{{ states.media_player.sonos_kitchen.attributes.volume_level }}'
 
@@ -39,14 +39,14 @@ sonos_ungroup_speaker:
   alias: Sonos ungroup speaker
   sequence:
     - service: python_script.media_player_volume_set
-      data_template:
+      data:
         entity_id: "{{ sonos_entity }}"
         volume_level: 0.01
     - service: sonos.unjoin
-      data_template:
+      data:
         entity_id: "{{ sonos_entity }}"
     - service: media_player.volume_set
-      data_template:
+      data:
         entity_id: "{{ sonos_entity }}"
         volume_level: 0.10
 
@@ -84,7 +84,7 @@ sonos_set_group_volume:
   alias: Sonos set group volume
   sequence:
     - service: python_script.media_player_volume_set
-      data_template:
+      data:
         entity_id: media_player.sonos_kitchen
         set_group_volume: true
         volume_level: '{{ volume }}'
@@ -93,7 +93,7 @@ sonos_sync_group_volume:
   alias: Sonos sync group volume
   sequence:
     - service: python_script.media_player_volume_set
-      data_template:
+      data:
         entity_id: media_player.sonos_kitchen
         set_group_volume: true
         volume_level: '{{ states.media_player.sonos_kitchen.attributes.volume_level | float }}'
@@ -102,7 +102,7 @@ sonos_increase_volume:
   alias: 'Sonos increase volume'
   sequence:
     - service: python_script.media_player_volume_set
-      data_template:
+      data:
         entity_id: media_player.sonos_kitchen
         set_group_volume: true
         volume_level: '{{ [((states.media_player.sonos_kitchen.attributes.volume_level | float * 1.15 + 0.03) | round(2)), 1] | min }}'
@@ -111,7 +111,7 @@ sonos_decrease_volume:
   alias: 'Sonos decrease volume'
   sequence:
     - service: python_script.media_player_volume_set
-      data_template:
+      data:
         entity_id: media_player.sonos_kitchen
         set_group_volume: true
         volume_level: '{{ [((states.media_player.sonos_kitchen.attributes.volume_level | float * 0.85 - 0.03) | round(2)), 0.05] | max }}'
@@ -122,17 +122,17 @@ sonos_say:
   alias: "Sonos TTS script"
   sequence:
     - service: sonos.snapshot
-      data_template:
+      data:
         entity_id: "{{ 'media_player.' ~ sonos_entity }}"
     - service: sonos.unjoin
-      data_template:
+      data:
         entity_id:  "{{ 'media_player.' ~ sonos_entity }}"
     - service: media_player.volume_set
-      data_template:
+      data:
         entity_id:  "{{ 'media_player.' ~ sonos_entity }}"
         volume_level: "{{ volume }}"
     - service: tts.google_translate_say
-      data_template:
+      data:
         entity_id:  "{{ 'media_player.' ~ sonos_entity }}"
         message: "{{ message }}"
     - delay: '00:00:01'
@@ -146,7 +146,7 @@ sonos_say:
         {% set hours = (duration / 3600)|int %}
         {{ [hours, minutes, seconds]|join(':') }}
     - service: sonos.restore
-      data_template:
+      data:
         entity_id:  "{{ 'media_player.' ~ sonos_entity }}"
         with_group: true
 
@@ -156,7 +156,7 @@ sonos_set_alarm:
   alias: 'Sonos set alarm'
   sequence:
     - service: sonos.update_alarm
-      data_template:
+      data:
         entity_id: media_player.sonos_bedroom
         alarm_id: 7
         time: '{{ states.sensor.alarm_clock_time_weekdays.state }}'
@@ -166,7 +166,7 @@ sonos_disable_alarm:
   alias: 'Sonos disable alarm'
   sequence:
     - service: sonos.update_alarm
-      data_template:
+      data:
         entity_id: media_player.sonos_bedroom
         alarm_id: 7
         enabled: false
@@ -300,7 +300,7 @@ watching_tv_lights:
 create_all_light_group:
     sequence:
       - service: group.set
-        data_template:
+        data:
           object_id: "all_lights"
           entities: >
             {{ states.light |  map(attribute='entity_id') | join(',') }}
@@ -542,7 +542,7 @@ transmission_add_torrent:
   alias: 'Lägg till torrent'
   sequence:
     - service: transmission.add_torrent
-      data_template:
+      data:
         name: Transmission
         torrent: '{{ states.input_text.transmission_torrent_url.state }}'
 
@@ -551,7 +551,7 @@ transmission_add_torrent:
 bedroom_music_timer_start:
   sequence:
     - service: timer.start
-      data_template:
+      data:
         entity_id: timer.bedroom_music_timer
         duration: '{{ states.sensor.bedroom_music_timer_duration.state }}'
 

@@ -1,7 +1,7 @@
 entity_id = data.get('entity_id')
 target_volume = float(data.get('volume_level'))
 set_group_volume = bool(data.get('set_group_volume'))
-volume_increment = 0.015
+volume_increment = 0.025
 
 if set_group_volume:
   speaker_entity_id_list = hass.states.get(entity_id).attributes['sonos_group']

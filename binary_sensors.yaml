@@ -1,4 +1,5 @@
 - platform: workday
+  name: 'Workday sensor'
   country: SE
   add_holidays:
     - '2020-05-22'

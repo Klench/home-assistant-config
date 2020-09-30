@@ -1,24 +1,24 @@
 alarm_hours_weekdays:
   name: Timmar
-  icon: mdi:timer
+  icon: mdi:timer-outline
   min: 0
   max: 23
   step: 1
 alarm_minutes_weekdays:
   name: Minuter
-  icon: mdi:timer
+  icon: mdi:timer-outline
   min: 0
   max: 55
   step: 5
 alarm_hours_weekend:
   name: Timmar
-  icon: mdi:timer
+  icon: mdi:timer-outline
   min: 0
   max: 23
   step: 1
 alarm_minutes_weekend:
   name: Minuter
-  icon: mdi:timer
+  icon: mdi:timer-outline
   min: 0
   max: 55
   step: 5
@@ -30,37 +30,37 @@ alarm_heater_offset:
   step: 5
 relaxed_mode_hours:
   name: Timmar
-  icon: mdi:timer
+  icon: mdi:timer-outline
   min: 15
   max: 23
   step: 1
 relaxed_mode_minutes:
   name: Minuter
-  icon: mdi:timer
+  icon: mdi:timer-outline
   min: 0
   max: 55
   step: 5
 work_time_hours_in:
   name: Timme
-  icon: mdi:timer
+  icon: mdi:timer-outline
   min: 6
   max: 12
   step: 1
 work_time_minutes_in:
   name: Minut
-  icon: mdi:timer
+  icon: mdi:timer-outline
   min: 0
   max: 55
   step: 5
 work_time_hours_out:
   name: Timme
-  icon: mdi:timer
+  icon: mdi:timer-outline
   min: 14
   max: 20
   step: 1
 work_time_minutes_out:
   name: Minut
-  icon: mdi:timer
+  icon: mdi:timer-outline
   min: 0
   max: 55
   step: 5
@@ -72,7 +72,7 @@ work_time_minutes_lunch:
   step: 5
 bedroom_music_timer_minutes:
   name: Längd
-  icon: mdi:timer
+  icon: mdi:timer-outline
   unit_of_measurement: 'minuter'
   min: 5
   max: 55

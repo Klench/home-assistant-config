@@ -229,6 +229,13 @@ all_rooms_relaxed_bedroom_lights_off:
       data:
         entity_id: automation.opening_bathroom_door
 
+low_brightness:
+  alias: 'Låg ljusstyrka'
+  sequence:
+    - service: script.livingroom_low_brightness
+    - service: script.hallway_low_brightness
+    - service: script.kitchen_bright
+
 all_lights_off:
   alias: 'Allt släckt'
   sequence:
@@ -426,6 +433,16 @@ livingroom_dimmed:
         brightness_pct: 30
         transition: 2
 
+livingroom_low_brightness:
+  alias: 'Låg ljusstyrka'
+  sequence:
+    - service: light.turn_on
+      data:
+        entity_id: light.hue_ambiance_lamp_1
+        brightness_pct: 100
+        color_temp: 372
+        transition: 2
+
 ##### HALLWAY #####
 
 hallway_bright:
@@ -518,7 +535,7 @@ kitchen_relaxed:
     - service: light.turn_on
       data:
         entity_id: light.table_lamp_kitchen
-        brightness_pct: 40
+        brightness_pct: 50
         transition: 2
 
 ##### BATHROOM #####

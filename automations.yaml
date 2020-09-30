@@ -29,14 +29,12 @@
     platform: time
     at: '09:00:00'
   condition:
-    condition: and
-    conditions:
-      - condition: state
-        entity_id: group.device_tracker_family
-        state: 'home'
-      - condition: state
-        entity_id: light.ceiling_lamps_hallway
-        state: 'off'
+    - condition: state
+      entity_id: group.device_tracker_family
+      state: 'home'
+    - condition: state
+      entity_id: light.ceiling_lamps_hallway
+      state: 'off'
   action:
     - service: script.hallway_bright
 
@@ -60,14 +58,12 @@
     platform: sun
     event: sunset
   condition:
-    condition: and
-    conditions:
-      - condition: state
-        entity_id: group.device_tracker_family
-        state: 'home'
-      - condition: state
-        entity_id: group.all_lights
-        state: 'on'
+    - condition: state
+      entity_id: group.device_tracker_family
+      state: 'home'
+    - condition: state
+      entity_id: group.all_lights
+      state: 'on'
   action:
     service: light.turn_on
     data:
@@ -116,15 +112,13 @@
     entity_id: binary_sensor.alarm_clock_trigger_weekend
     to: 'on'
   condition:
-    condition: and
-    conditions:
-      - condition: time
-        weekday:
-          - sat
-          - sun
-      - condition: state
-        entity_id: group.device_tracker_family
-        state: 'home'
+    - condition: time
+      weekday:
+        - sat
+        - sun
+    - condition: state
+      entity_id: group.device_tracker_family
+      state: 'home'
   action:
     service: script.wakeup_lights
 
@@ -135,17 +129,15 @@
     platform: time
     at: '03:00:00'
   condition:
-    condition: and
-    conditions:
-      - condition: state
-        entity_id: binary_sensor.workday_sensor
-        state: 'on'
-      - condition: state
-        entity_id: group.device_tracker_family
-        state: 'home'
-      - condition: state
-        entity_id: automation.wakeup_weekdays
-        state: 'on'
+    - condition: state
+      entity_id: binary_sensor.workday_sensor
+      state: 'on'
+    - condition: state
+      entity_id: group.device_tracker_family
+      state: 'home'
+    - condition: state
+      entity_id: automation.wakeup_weekdays
+      state: 'on'
   action:
     service: script.sonos_set_alarm
 
@@ -219,7 +211,7 @@
     entity_id: sensor.hue_hallway_switch
     state: '1_click_up'
   action:
-    - service: script.all_rooms_bright
+    service: script.all_rooms_bright
 
 - alias: 'Hue switch relaxed'
   initial_state: on
@@ -231,7 +223,7 @@
     entity_id: sensor.hue_hallway_switch
     state: '1_hold_up'
   action:
-    - service: script.all_rooms_relaxed_bedroom_lights_off
+    service: script.all_rooms_relaxed_bedroom_lights_off
 
 - alias: 'Hue switch turn off lighs'
   initial_state: on
@@ -251,11 +243,35 @@
     platform: state
     entity_id: sensor.hue_hallway_switch
   condition:
-    condition: state
-    entity_id: sensor.hue_hallway_switch
-    state: '4_hold_up'
+    - condition: state
+      entity_id: sensor.hue_hallway_switch
+      state: '4_hold_up'
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: binary_sensor.relaxed_mode
+          state: 'on'
+        - condition: time
+          before: '02:00:00'
   action:
-    - service: script.livingroom_dimmed
+    service: script.livingroom_dimmed
+
+- alias: 'Hue switch low brightness'
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: sensor.hue_hallway_switch
+  condition:
+    - condition: state
+      entity_id: sensor.hue_hallway_switch
+      state: '4_hold_up'
+    - condition: state
+      entity_id: binary_sensor.relaxed_mode
+      state: 'off'
+    - condition: time
+      after: '02:00:00'
+  action:
+    service: script.low_brightness
 
 ##### SONOS #####
 
@@ -265,14 +281,12 @@
     platform: state
     entity_id: sensor.hue_hallway_switch
   condition:
-    condition: and
-    conditions:
-      - condition: state
-        entity_id: sensor.hue_hallway_switch
-        state: '2_hold_up'
-      - condition: state
-        entity_id: binary_sensor.sonos_livingroom_is_grouped
-        state: 'off'
+    - condition: state
+      entity_id: sensor.hue_hallway_switch
+      state: '2_hold_up'
+    - condition: state
+      entity_id: binary_sensor.sonos_livingroom_is_grouped
+      state: 'off'
   action:
     service: script.sonos_group_livingroom_speaker
 
@@ -282,14 +296,12 @@
     platform: state
     entity_id: sensor.hue_hallway_switch
   condition:
-    condition: and
-    conditions:
-      - condition: state
-        entity_id: sensor.hue_hallway_switch
-        state: '2_hold_up'
-      - condition: state
-        entity_id: binary_sensor.sonos_livingroom_is_grouped
-        state: 'on'
+    - condition: state
+      entity_id: sensor.hue_hallway_switch
+      state: '2_hold_up'
+    - condition: state
+      entity_id: binary_sensor.sonos_livingroom_is_grouped
+      state: 'on'
   action:
     service: script.sonos_ungroup_livingroom_speaker
 
@@ -299,14 +311,12 @@
     platform: state
     entity_id: sensor.hue_hallway_switch
   condition:
-    condition: and
-    conditions:
-      - condition: state
-        entity_id: sensor.hue_hallway_switch
-        state: '3_hold_up'
-      - condition: state
-        entity_id: binary_sensor.sonos_bedroom_is_grouped
-        state: 'off'
+    - condition: state
+      entity_id: sensor.hue_hallway_switch
+      state: '3_hold_up'
+    - condition: state
+      entity_id: binary_sensor.sonos_bedroom_is_grouped
+      state: 'off'
   action:
     service: script.sonos_group_bedroom_speaker
 
@@ -316,14 +326,12 @@
     platform: state
     entity_id: sensor.hue_hallway_switch
   condition:
-    condition: and
-    conditions:
-      - condition: state
-        entity_id: sensor.hue_hallway_switch
-        state: '3_hold_up'
-      - condition: state
-        entity_id: binary_sensor.sonos_bedroom_is_grouped
-        state: 'on'
+    - condition: state
+      entity_id: sensor.hue_hallway_switch
+      state: '3_hold_up'
+    - condition: state
+      entity_id: binary_sensor.sonos_bedroom_is_grouped
+      state: 'on'
   action:
     service: script.sonos_ungroup_bedroom_speaker
 

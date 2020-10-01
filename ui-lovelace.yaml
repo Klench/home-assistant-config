@@ -51,8 +51,8 @@ views:
             icon: mdi:lightbulb-on-outline
           - entity: script.livingroom_relaxed
             icon: mdi:lightbulb-on
-          - light.hue_ambiance_lamp_1
-          - light.hue_ambiance_lamp_1_3
+          - light.ceiling_lamp_livingroom
+          - light.floor_lamp_livingroom
           - light.window_lamp_livingroom
 
       - type: entities
@@ -77,7 +77,7 @@ views:
             icon: mdi:lightbulb-on-outline
           - entity: script.bedroom_relaxed
             icon: mdi:lightbulb-on
-          - light.hue_ambiance_lamp_2
+          - light.ceiling_lamp_bedroom
           - entity: light.bedside_lamps_bedroom
             icon: mdi:lamp
             name: 'Sänglampor'

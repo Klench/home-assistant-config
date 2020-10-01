@@ -4,11 +4,11 @@ light.vardagsrum:
   friendly_name: "Lampor vardagsrum"
 light.hall:
   friendly_name: "Lampor hall"
-light.hue_ambiance_lamp_1:
+light.ceiling_lamp_livingroom:
   icon: mdi:ceiling-light
-light.hue_ambiance_lamp_1_3:
+light.floor_lamp_livingroom:
   icon: mdi:floor-lamp
-light.hue_ambiance_lamp_2:
+light.ceiling_lamp_bedroom:
   icon: mdi:ceiling-light
 light.ceiling_lamp_hallway:
   icon: mdi:ceiling-light

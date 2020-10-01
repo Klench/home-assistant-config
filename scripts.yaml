@@ -272,15 +272,15 @@ go_to_bed_lights:
   sequence:
     - service: light.turn_off
       data:
-        entity_id: light.hue_ambiance_lamp_2
+        entity_id: light.ceiling_lamp_bedroom
         transition: 300
     - service: light.turn_off
       data:
-        entity_id: light.hue_ambiance_lamp_1
+        entity_id: light.ceiling_lamp_livingroom
         transition: 1800
     - service: light.turn_off
       data:
-        entity_id: light.hue_ambiance_lamp_1_3
+        entity_id: light.floor_lamp_livingroom
         transition: 1800
     - delay: '00:30'
     - service: light.turn_off
@@ -292,13 +292,13 @@ watching_tv_lights:
   sequence:
     - service: light.turn_on
       data:
-        entity_id: light.hue_ambiance_lamp_1_3
+        entity_id: light.floor_lamp_livingroom
         brightness: 144
         color_temp: 443
         transition: 2
     - service: light.turn_off
       data:
-        entity_id: light.hue_ambiance_lamp_1
+        entity_id: light.ceiling_lamp_livingroom
     - service: light.turn_off
       data:
         entity_id: light.window_lamp_livingroom
@@ -319,7 +319,7 @@ bedroom_bright:
   sequence:
     - service: light.turn_on
       data:
-        entity_id: light.hue_ambiance_lamp_2
+        entity_id: light.ceiling_lamp_bedroom
         brightness: 200
         color_temp: 372
         transition: 2
@@ -329,7 +329,7 @@ bedroom_relaxed:
   sequence:
     - service: light.turn_on
       data:
-        entity_id: light.hue_ambiance_lamp_2
+        entity_id: light.ceiling_lamp_bedroom
         brightness: 144
         color_temp: 443
         transition: 2
@@ -342,7 +342,7 @@ bedroom_lights_turn_off:
   sequence:
     - service: light.turn_off
       data:
-        entity_id: light.hue_ambiance_lamp_2
+        entity_id: light.ceiling_lamp_bedroom
     - service: light.turn_off
       data:
         entity_id: light.bedside_lamps_bedroom
@@ -352,7 +352,7 @@ bedroom_wakeup:
   sequence:
     - service: light.turn_on
       data:
-        entity_id: light.hue_ambiance_lamp_2
+        entity_id: light.ceiling_lamp_bedroom
         brightness: 30
         color_temp: 372
         transition: 1800
@@ -364,13 +364,13 @@ livingroom_bright:
   sequence:
     - service: light.turn_on
       data:
-        entity_id: light.hue_ambiance_lamp_1
+        entity_id: light.ceiling_lamp_livingroom
         brightness: 150
         color_temp: 372
         transition: 2
     - service: light.turn_on
       data:
-        entity_id: light.hue_ambiance_lamp_1_3
+        entity_id: light.floor_lamp_livingroom
         brightness: 255
         color_temp: 372
         transition: 2
@@ -380,13 +380,13 @@ livingroom_relaxed:
   sequence:
     - service: light.turn_on
       data:
-        entity_id: light.hue_ambiance_lamp_1
+        entity_id: light.ceiling_lamp_livingroom
         brightness: 100
         color_temp: 443
         transition: 2
     - service: light.turn_on
       data:
-        entity_id: light.hue_ambiance_lamp_1_3
+        entity_id: light.floor_lamp_livingroom
         brightness: 255
         color_temp: 443
         transition: 2
@@ -399,13 +399,13 @@ livingroom_wakeup:
   sequence:
     - service: light.turn_on
       data:
-        entity_id: light.hue_ambiance_lamp_1
+        entity_id: light.ceiling_lamp_livingroom
         brightness: 150
         color_temp: 372
         transition: 1800
     - service: light.turn_on
       data:
-        entity_id: light.hue_ambiance_lamp_1_3
+        entity_id: light.floor_lamp_livingroom
         brightness: 255
         color_temp: 372
         transition: 1800
@@ -414,13 +414,13 @@ livingroom_dimmed:
   sequence:
     - service: light.turn_off
       data:
-        entity_id: light.hue_ambiance_lamp_1
+        entity_id: light.ceiling_lamp_livingroom
     - service: light.turn_off
       data:
         entity_id: light.window_lamp_livingroom
     - service: light.turn_on
       data:
-        entity_id: light.hue_ambiance_lamp_1_3
+        entity_id: light.floor_lamp_livingroom
         brightness: 50
         color_temp: 443
         transition: 2
@@ -438,7 +438,7 @@ livingroom_low_brightness:
   sequence:
     - service: light.turn_on
       data:
-        entity_id: light.hue_ambiance_lamp_1
+        entity_id: light.ceiling_lamp_livingroom
         brightness_pct: 100
         color_temp: 372
         transition: 2

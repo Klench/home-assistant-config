@@ -10,12 +10,6 @@
     - movie
     - show
 
-- platform: trakt
-  id: !secret trakt_id
-  secret: !secret trakt_secret
-  username: !secret trakt_username
-  days: 10
-
 - platform: krisinformation
   name: "Krisinformation Skåne"
   county: "Skåne län"

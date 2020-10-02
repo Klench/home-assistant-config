@@ -6,9 +6,12 @@
     event: sunset
     offset: '-01:00:00'
   condition:
-    condition: state
-    entity_id: group.device_tracker_family
-    state: 'home'
+    - condition: state
+      entity_id: group.device_tracker_family
+      state: 'home'
+    - condition: state
+      entity_id: binary_sensor.relaxed_mode
+      state: 'off'
   action:
     - service: script.all_rooms_bright
 

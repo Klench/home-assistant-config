@@ -172,14 +172,18 @@ media_source:
 ################# PANEL IFRAME #################
 
 panel_iframe:
-  kodi:
-    title: Kodi
-    icon: mdi:kodi
-    url: !secret kodi_url
+  # kodi:
+  #   title: Kodi
+  #   icon: mdi:kodi
+  #   url: !secret kodi_url
   tautully:
     title: Tautully
     icon: mdi:plex
     url: !secret tautully_url
+  kitana:
+    title: Kitana
+    icon: mdi:filmstrip
+    url: !secret kitana_url
   configurator:
     title: Configurator
     icon: mdi:wrench

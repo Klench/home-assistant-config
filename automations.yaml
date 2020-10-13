@@ -165,6 +165,16 @@
         entity_id: media_player.sonos_bedroom
         volume_level: 0.20
 
+- alias: 'Skip song tracks'
+  initial_state: on
+  trigger:
+    platform: template
+    value_template: "{{ states.media_player.sonos_bedroom.attributes.media_title == 'Perfect' }}"
+  action:
+    service: media_player.media_next_track
+    data:
+      entity_id: media_player.sonos_bedroom
+
 ################# GO TO BED #################
 
 - alias: 'Go to bed weekdays'

@@ -653,6 +653,25 @@
         entity_id: media_player.sonos_bedroom
         volume_level: 0.10
 
+- alias: 'Start bedroom music timer'
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: script.all_lights_off
+    to: 'on'
+  condition:
+    - condition: state
+      entity_id: media_player.sonos_bedroom
+      state: 'playing'
+    - condition: state
+      entity_id: binary_sensor.sonos_bedroom_is_grouped
+      state: 'off'
+    - condition: state
+      entity_id: binary_sensor.relaxed_mode
+      state: 'on'
+  action:
+    service: script.bedroom_music_timer_start
+
 ################# CREATE ALL LIGHTS GROUP #################
 
 - alias: 'Create all lights group'

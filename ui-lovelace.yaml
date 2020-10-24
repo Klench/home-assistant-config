@@ -51,9 +51,9 @@ views:
             icon: mdi:lightbulb-on-outline
           - entity: script.livingroom_relaxed
             icon: mdi:lightbulb-on
-          - light.ceiling_lamp_livingroom
-          - light.floor_lamp_livingroom
-          - light.window_lamp_livingroom
+          - light.livingroom_ceiling
+          - light.livingroom_floor
+          - light.livingroom_window
 
       - type: entities
         title: Hall
@@ -65,7 +65,7 @@ views:
             icon: mdi:lightbulb-on
           - entity: script.hallway_relaxed
             icon: mdi:lightbulb-on
-          - entity: light.ceiling_lamps_hallway
+          - entity: light.hallway_ceiling_group
             icon: mdi:ceiling-light
             name: 'Taklampor hall'
 
@@ -77,8 +77,8 @@ views:
             icon: mdi:lightbulb-on-outline
           - entity: script.bedroom_relaxed
             icon: mdi:lightbulb-on
-          - light.ceiling_lamp_bedroom
-          - entity: light.bedside_lamps_bedroom
+          - light.bedroom_ceiling
+          - entity: light.bedroom_bedside_group
             icon: mdi:lamp
             name: 'Sänglampor'
 
@@ -90,8 +90,8 @@ views:
             icon: mdi:lightbulb-on-outline
           - entity: script.kitchen_relaxed
             icon: mdi:lightbulb-on
-          - light.table_lamp_kitchen
-          - entity: light.ceiling_lamp_hallway
+          - light.kitchen_table
+          - entity: light.hallway_ceiling
             name: 'Taklampa kök'
 
       - type: conditional

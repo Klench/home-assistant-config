@@ -262,46 +262,46 @@ window_lights:
   sequence:
     - service: light.turn_on
       data:
-        entity_id: light.bedside_lamps_bedroom
+        entity_id: light.bedroom_bedside_group
     - service: light.turn_on
       data:
-        entity_id: light.window_lamp_livingroom
+        entity_id: light.livingroom_window
 
 go_to_bed_lights:
   alias: 'Gå till sängs'
   sequence:
     - service: light.turn_off
       data:
-        entity_id: light.ceiling_lamp_bedroom
+        entity_id: light.bedroom_ceiling
         transition: 300
     - service: light.turn_off
       data:
-        entity_id: light.ceiling_lamp_livingroom
+        entity_id: light.livingroom_ceiling
         transition: 1800
     - service: light.turn_off
       data:
-        entity_id: light.floor_lamp_livingroom
+        entity_id: light.livingroom_floor
         transition: 1800
     - delay: '00:30'
     - service: light.turn_off
       data:
-        entity_id: light.ceiling_lamps_hallway
+        entity_id: light.hallway_ceiling_group
 
 watching_tv_lights:
   alias: 'Belysning TV-tittande'
   sequence:
     - service: light.turn_on
       data:
-        entity_id: light.floor_lamp_livingroom
+        entity_id: light.livingroom_floor
         brightness: 144
         color_temp: 443
         transition: 2
     - service: light.turn_off
       data:
-        entity_id: light.ceiling_lamp_livingroom
+        entity_id: light.livingroom_ceiling
     - service: light.turn_off
       data:
-        entity_id: light.window_lamp_livingroom
+        entity_id: light.livingroom_window
     - service: script.kitchen_relaxed
 
 create_all_light_group:
@@ -319,7 +319,7 @@ bedroom_bright:
   sequence:
     - service: light.turn_on
       data:
-        entity_id: light.ceiling_lamp_bedroom
+        entity_id: light.bedroom_ceiling
         brightness: 200
         color_temp: 372
         transition: 2
@@ -329,30 +329,30 @@ bedroom_relaxed:
   sequence:
     - service: light.turn_on
       data:
-        entity_id: light.ceiling_lamp_bedroom
+        entity_id: light.bedroom_ceiling
         brightness: 144
         color_temp: 443
         transition: 2
     - service: light.turn_on
       data:
-        entity_id: light.bedside_lamps_bedroom
+        entity_id: light.bedroom_bedside_group
 
 bedroom_lights_turn_off:
   alias: 'Släck'
   sequence:
     - service: light.turn_off
       data:
-        entity_id: light.ceiling_lamp_bedroom
+        entity_id: light.bedroom_ceiling
     - service: light.turn_off
       data:
-        entity_id: light.bedside_lamps_bedroom
+        entity_id: light.bedroom_bedside_group
 
 bedroom_wakeup:
   alias: 'Väckning sovrum'
   sequence:
     - service: light.turn_on
       data:
-        entity_id: light.ceiling_lamp_bedroom
+        entity_id: light.bedroom_ceiling
         brightness: 30
         color_temp: 372
         transition: 1800
@@ -364,13 +364,13 @@ livingroom_bright:
   sequence:
     - service: light.turn_on
       data:
-        entity_id: light.ceiling_lamp_livingroom
+        entity_id: light.livingroom_ceiling
         brightness: 150
         color_temp: 372
         transition: 2
     - service: light.turn_on
       data:
-        entity_id: light.floor_lamp_livingroom
+        entity_id: light.livingroom_floor
         brightness: 255
         color_temp: 372
         transition: 2
@@ -380,32 +380,32 @@ livingroom_relaxed:
   sequence:
     - service: light.turn_on
       data:
-        entity_id: light.ceiling_lamp_livingroom
+        entity_id: light.livingroom_ceiling
         brightness: 100
         color_temp: 443
         transition: 2
     - service: light.turn_on
       data:
-        entity_id: light.floor_lamp_livingroom
+        entity_id: light.livingroom_floor
         brightness: 255
         color_temp: 443
         transition: 2
     - service: light.turn_on
       data:
-        entity_id: light.window_lamp_livingroom
+        entity_id: light.livingroom_window
 
 livingroom_wakeup:
   alias: 'Väckning vardagsrum'
   sequence:
     - service: light.turn_on
       data:
-        entity_id: light.ceiling_lamp_livingroom
+        entity_id: light.livingroom_ceiling
         brightness: 150
         color_temp: 372
         transition: 1800
     - service: light.turn_on
       data:
-        entity_id: light.floor_lamp_livingroom
+        entity_id: light.livingroom_floor
         brightness: 255
         color_temp: 372
         transition: 1800
@@ -414,22 +414,22 @@ livingroom_dimmed:
   sequence:
     - service: light.turn_off
       data:
-        entity_id: light.ceiling_lamp_livingroom
+        entity_id: light.livingroom_ceiling
     - service: light.turn_off
       data:
-        entity_id: light.window_lamp_livingroom
+        entity_id: light.livingroom_window
     - service: light.turn_on
       data:
-        entity_id: light.floor_lamp_livingroom
+        entity_id: light.livingroom_floor
         brightness: 50
         color_temp: 443
         transition: 2
     - service: light.turn_off
       data:
-        entity_id: light.ceiling_lamps_hallway
+        entity_id: light.hallway_ceiling_group
     - service: light.turn_on
       data:
-        entity_id: light.table_lamp_kitchen
+        entity_id: light.kitchen_table
         brightness_pct: 30
         transition: 2
 
@@ -438,7 +438,7 @@ livingroom_low_brightness:
   sequence:
     - service: light.turn_on
       data:
-        entity_id: light.ceiling_lamp_livingroom
+        entity_id: light.livingroom_ceiling
         brightness_pct: 100
         color_temp: 372
         transition: 2
@@ -450,14 +450,14 @@ hallway_bright:
   sequence:
     - service: light.turn_on
       data:
-        entity_id: light.ceiling_lamps_hallway
+        entity_id: light.hallway_ceiling_group
         brightness: 255
         transition: 1
     - delay:
         milliseconds: 1100
     - service: light.turn_on
       data:
-        entity_id: light.ceiling_lamps_hallway
+        entity_id: light.hallway_ceiling_group
         color_temp: 300
         transition: 1
 
@@ -466,14 +466,14 @@ hallway_low_brightness:
   sequence:
     - service: light.turn_on
       data:
-        entity_id: light.ceiling_lamps_hallway
+        entity_id: light.hallway_ceiling_group
         brightness_pct: 40
         transition: 1
     - delay:
         milliseconds: 1100
     - service: light.turn_on
       data:
-        entity_id: light.ceiling_lamps_hallway
+        entity_id: light.hallway_ceiling_group
         color_temp: 300
         transition: 1
 
@@ -482,23 +482,23 @@ hallway_relaxed:
   sequence:
     - service: light.turn_off
       data:
-        entity_id: light.ceiling_lamps_hallway_1
+        entity_id: light.hallway_ceiling_group_1
         transition: 2
     - service: light.turn_on
       data:
-        entity_id: light.ceiling_lamp_hallway
+        entity_id: light.hallway_ceiling
         brightness: 1
         transition: 2
     - service: light.turn_on
       data:
-        entity_id: light.ceiling_lamps_hallway_2
+        entity_id: light.hallway_ceiling_group_2
         brightness: 1
         transition: 1
     - delay:
         milliseconds: 1100
     - service: light.turn_on
       data:
-        entity_id: light.ceiling_lamps_hallway_2
+        entity_id: light.hallway_ceiling_group_2
         color_temp: 443
         transition: 1
 
@@ -507,14 +507,14 @@ hallway_wakeup:
   sequence:
     - service: light.turn_on
       data:
-        entity_id: light.ceiling_lamps_hallway
+        entity_id: light.hallway_ceiling_group
         brightness: 144
         transition: 1
     - delay:
         milliseconds: 1100
     - service: light.turn_on
       data:
-        entity_id: light.ceiling_lamps_hallway
+        entity_id: light.hallway_ceiling_group
         color_temp: 372
         transition: 1800
 
@@ -525,7 +525,7 @@ kitchen_bright:
   sequence:
     - service: light.turn_on
       data:
-        entity_id: light.table_lamp_kitchen
+        entity_id: light.kitchen_table
         brightness_pct: 100
         transition: 2
 
@@ -534,7 +534,7 @@ kitchen_relaxed:
   sequence:
     - service: light.turn_on
       data:
-        entity_id: light.table_lamp_kitchen
+        entity_id: light.kitchen_table
         brightness_pct: 50
         transition: 2
 

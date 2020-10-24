@@ -1,6 +1,6 @@
 - platform: template
   lights:
-    bedside_lamp_bedroom_1:
+    bedroom_bedside_1:
       friendly_name: 'Sänglampa 1 sovrum'
       icon_template: mdi:lamp
       value_template: '{{ states.switch.bedside_lamp_bedroom.state }}'
@@ -10,7 +10,7 @@
       turn_off:
         service: switch.turn_off
         entity_id: switch.bedside_lamp_bedroom
-    bedside_lamp_bedroom_2:
+    bedroom_bedside_2:
       friendly_name: 'Sänglampa 2 sovrum'
       icon_template: mdi:lamp
       value_template: '{{ states.switch.bedside_lamp_bedroom_2.state }}'
@@ -22,30 +22,30 @@
         entity_id: switch.bedside_lamp_bedroom_2
 
 - platform: group
-  name: 'Ceiling lamps hallway 1'
+  name: 'Hallway ceiling group 1'
   entities:
-    - light.ceiling_lamp_hallway_1_1
-    - light.ceiling_lamp_hallway_1_2
-    - light.ceiling_lamp_hallway_1_3
+    - light.hallway_ceiling_1_1
+    - light.hallway_ceiling_1_2
+    - light.hallway_ceiling_1_3
 - platform: group
-  name: 'Ceiling lamps hallway 2'
+  name: 'Hallway ceiling group 2'
   entities:
-    - light.ceiling_lamp_hallway_2_1
-    - light.ceiling_lamp_hallway_2_2
-    - light.ceiling_lamp_hallway_2_3
+    - light.hallway_ceiling_2_1
+    - light.hallway_ceiling_2_2
+    - light.hallway_ceiling_2_3
 - platform: group
-  name: 'Ceiling lamps hallway'
+  name: 'Hallway ceiling group'
   entities:
-    - light.ceiling_lamp_hallway_1_1
-    - light.ceiling_lamp_hallway_1_2
-    - light.ceiling_lamp_hallway_1_3
-    - light.ceiling_lamp_hallway_2_1
-    - light.ceiling_lamp_hallway_2_2
-    - light.ceiling_lamp_hallway_2_3
-    - light.ceiling_lamp_hallway
+    - light.hallway_ceiling_1_1
+    - light.hallway_ceiling_1_2
+    - light.hallway_ceiling_1_3
+    - light.hallway_ceiling_2_1
+    - light.hallway_ceiling_2_2
+    - light.hallway_ceiling_2_3
+    - light.hallway_ceiling
 - platform: group
-  name: 'Bedside lamps bedroom'
+  name: 'Bedroom bedside group'
   entities:
-    - light.bedside_lamp_bedroom_1
-    - light.bedside_lamp_bedroom_2
+    - light.bedroom_bedside_1
+    - light.bedroom_bedside_2
   

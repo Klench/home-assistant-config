@@ -114,9 +114,9 @@ homekit:
       - script.baby_light_bedroom
       - script.livingroom_nursery
       - light.bathroom_led
-      - light.ceiling_lamps_hallway
-      - light.bedside_lamps_bedroom
-      - light.window_lamp_livingroom
+      - light.hallway_ceiling_group
+      - light.bedroom_bedside_group
+      - light.livingroom_window
       - sensor.outdoor_temperature
 
 transmission:

@@ -4,16 +4,16 @@ light.vardagsrum:
   friendly_name: "Lampor vardagsrum"
 light.hall:
   friendly_name: "Lampor hall"
-light.ceiling_lamp_livingroom:
+light.livingroom_ceiling:
   icon: mdi:ceiling-light
-light.floor_lamp_livingroom:
+light.livingroom_floor:
   icon: mdi:floor-lamp
-light.ceiling_lamp_bedroom:
+light.bedroom_ceiling:
   icon: mdi:ceiling-light
-light.ceiling_lamp_hallway:
+light.hallway_ceiling:
   icon: mdi:ceiling-light
   friendly_name: 'Taklampa hall'
-light.window_lamp_livingroom:
+light.livingroom_window:
   icon: mdi:outdoor-lamp
   friendly_name: 'Fönsterlampa vardagsrum'
 

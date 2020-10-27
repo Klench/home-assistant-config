@@ -289,6 +289,8 @@ views:
               - entity_id: media_player.sonos_bedroom
                 name: Sonos sovrum
 
+################# UNRAID #################
+
   - icon: mdi:server-network
     cards:
 
@@ -373,21 +375,12 @@ views:
       - type: custom:auto-entities
         show_empty: false
         card:
-          # type: custom:mini-media-player
-          # hide:
-          #   power: true
-          #   source: true
-          #   volume: false
-          # show_progress: true
-          # artwork: full-cover
-          # icon: mdi:plex
           type: entities
           title: Plex klienter
           show_header_toggle: false
         filter:
           include:
-            - domain: media_player
-              # name: /plex/
+            - entity_id: "media_player.plex*"
           exclude:
             - state: "inactive"
             - state: "unavailable"

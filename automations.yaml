@@ -26,6 +26,11 @@
     state: 'home'
   action:
     - service: script.all_rooms_relaxed_bedroom_lights_off
+    - service: script.sonos_ungroup_bedroom_speaker
+    - service: media_player.volume_set
+      data:
+        entity_id: media_player.sonos_bedroom
+        volume_level: 0.2
 
 - alias: 'Hallway bright'
   trigger:
@@ -144,27 +149,6 @@
   action:
     service: script.sonos_set_alarm
 
-- alias: 'Ungroup bedroom speaker'
-  initial_state: on
-  trigger:
-    - platform: state
-      entity_id: script.all_rooms_relaxed
-      to: 'on'
-    - platform: state
-      entity_id: script.all_rooms_relaxed_bedroom_lights_off
-      to: 'on'
-  condition:
-    condition: state
-    entity_id: binary_sensor.sonos_bedroom_is_grouped
-    state: 'on'
-  action:
-    - delay: '00:00:05'
-    - service: script.sonos_ungroup_bedroom_speaker
-    - service: media_player.volume_set
-      data:
-        entity_id: media_player.sonos_bedroom
-        volume_level: 0.20
-
 - alias: 'Skip song tracks'
   initial_state: on
   trigger:
@@ -236,7 +220,12 @@
     entity_id: sensor.hue_hallway_switch
     state: '1_hold_up'
   action:
-    service: script.all_rooms_relaxed_bedroom_lights_off
+    - service: script.all_rooms_relaxed_bedroom_lights_off
+    - service: script.sonos_ungroup_bedroom_speaker
+    - service: media_player.volume_set
+      data:
+        entity_id: media_player.sonos_bedroom
+        volume_level: 0.2
 
 - alias: 'Hue switch turn off lighs'
   initial_state: on
@@ -561,10 +550,26 @@
     entity_id: media_player.tv_custom
     state: 'off'
   action:
-    - service: script.sonos_group_all_speakers
-    - service: script.sonos_set_group_volume
-      data:
-        volume: 0.2
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.relaxed_mode
+              state: 'on'
+          sequence:
+            - service: script.sonos_group_livingroom_speaker
+            - service: script.sonos_set_group_volume
+              data:
+                volume: 0.2
+            - service: script.sonos_ungroup_bedroom_speaker
+            - service: media_player.volume_set
+              data:
+                entity_id: media_player.sonos_bedroom
+                volume_level: 0.2
+      default:
+        - service: script.sonos_group_all_speakers
+        - service: script.sonos_set_group_volume
+          data:
+            volume: 0.2
 
 ################# BATHROOM #################
 

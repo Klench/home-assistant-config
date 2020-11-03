@@ -45,7 +45,7 @@ automation.sunset:
 automation.bright_after_sunset:
   icon: mdi:weather-sunset
 automation.turn_off_bedroom_lights:
-  icon: mdi:hotel
+  icon: mdi:bed-outline
 automation.closing_bathroom_door:
   icon: mdi:toilet
 automation.opening_bathroom_door:

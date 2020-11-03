@@ -354,9 +354,19 @@
     platform: state
     entity_id: sensor.hue_hallway_switch
   condition:
-    condition: state
-    entity_id: sensor.hue_hallway_switch
-    state: '2_click_up'
+    - condition: state
+      entity_id: sensor.hue_hallway_switch
+      state: '2_click_up'
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: media_player.sonos_bedroom
+          state:
+            - 'paused'
+            - 'idle'
+        - condition: state
+          entity_id: binary_sensor.sonos_bedroom_is_grouped
+          state: 'on'
   action:
     service: script.sonos_increase_volume
 
@@ -366,11 +376,73 @@
     platform: state
     entity_id: sensor.hue_hallway_switch
   condition:
-    condition: state
-    entity_id: sensor.hue_hallway_switch
-    state: '3_click_up'
+    - condition: state
+      entity_id: sensor.hue_hallway_switch
+      state: '3_click_up'
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: media_player.sonos_bedroom
+          state:
+            - 'paused'
+            - 'idle'
+        - condition: state
+          entity_id: binary_sensor.sonos_bedroom_is_grouped
+          state: 'on'
   action:
     service: script.sonos_decrease_volume
+
+- alias: 'Hue switch increase Sonos bedroom volume'
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: sensor.hue_hallway_switch
+  condition:
+    - condition: state
+      entity_id: sensor.hue_hallway_switch
+      state: '2_click_up'
+    - condition: state
+      entity_id: media_player.sonos_kitchen
+      state:
+        - 'paused'
+        - 'idle'
+    - condition: state
+      entity_id: media_player.sonos_bedroom
+      state: 'playing'
+    - condition: state
+      entity_id: binary_sensor.sonos_bedroom_is_grouped
+      state: 'off'
+  action:
+    service: python_script.media_player_volume_set
+    data:
+      entity_id: media_player.sonos_bedroom
+      volume_level: '{{ [((states.media_player.sonos_bedroom.attributes.volume_level | float * 1.15 + 0.03) | round(2)), 1] | min }}'
+
+- alias: 'Hue switch decrease Sonos bedroom volume'
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: sensor.hue_hallway_switch
+  condition:
+    - condition: state
+      entity_id: sensor.hue_hallway_switch
+      state: '3_click_up'
+    - condition: state
+      entity_id: media_player.sonos_kitchen
+      state:
+        - 'paused'
+        - 'idle'
+    - condition: state
+      entity_id: media_player.sonos_bedroom
+      state: 'playing'
+    - condition: state
+      entity_id: binary_sensor.sonos_bedroom_is_grouped
+      state: 'off'
+  action:
+    service: python_script.media_player_volume_set
+    data:
+      entity_id: media_player.sonos_bedroom
+      volume_level: '{{ [((states.media_player.sonos_bedroom.attributes.volume_level | float * 0.85 - 0.03) | round(2)), 0.05] | max }}'
 
 ################# LEAVING/COMING HOME #################
 
@@ -666,9 +738,13 @@
     - condition: state
       entity_id: binary_sensor.sonos_bedroom_is_grouped
       state: 'off'
-    - condition: state
-      entity_id: binary_sensor.relaxed_mode
-      state: 'on'
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: binary_sensor.relaxed_mode
+          state: 'on'
+        - condition: time
+          before: '05:00:00'
   action:
     service: script.bedroom_music_timer_start
 

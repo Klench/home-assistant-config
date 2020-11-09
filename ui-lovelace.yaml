@@ -175,6 +175,7 @@ views:
         hide:
           power: true
           source: true
+          shuffle: false
         artwork: full-cover
         icon: mdi:speaker-multiple
         speaker_group:
@@ -195,6 +196,7 @@ views:
         hide:
           power: true
           source: true
+          shuffle: false
         speaker_group:
           platform: sonos
           show_group_count: false
@@ -206,6 +208,7 @@ views:
         hide:
           power: true
           source: true
+          shuffle: false
         speaker_group:
           platform: sonos
           show_group_count: false
@@ -222,6 +225,7 @@ views:
           hide:
             power: true
             source: true
+            shuffle: false
           speaker_group:
             platform: sonos
             show_group_count: false

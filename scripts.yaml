@@ -33,7 +33,8 @@ sonos_group_speaker:
     - service: python_script.media_player_volume_set
       data:
         entity_id: "{{ sonos_entity }}"
-        volume_level: '{{ states.media_player.sonos_kitchen.attributes.volume_level }}'
+        volume_level: >-
+          {{ state_attr('media_player.sonos_kitchen','volume_level') }}
 
 sonos_ungroup_speaker:
   alias: Sonos ungroup speaker
@@ -96,7 +97,8 @@ sonos_sync_group_volume:
       data:
         entity_id: media_player.sonos_kitchen
         set_group_volume: true
-        volume_level: '{{ states.media_player.sonos_kitchen.attributes.volume_level | float }}'
+        volume_level: >-
+          {{ state_attr('media_player.sonos_kitchen','volume_level') | float }}
 
 sonos_increase_volume:
   alias: 'Sonos increase volume'
@@ -105,7 +107,8 @@ sonos_increase_volume:
       data:
         entity_id: media_player.sonos_kitchen
         set_group_volume: true
-        volume_level: '{{ [((states.media_player.sonos_kitchen.attributes.volume_level | float * 1.15 + 0.03) | round(2)), 1] | min }}'
+        volume_level: >-
+          {{ [((state_attr('media_player.sonos_kitchen','volume_level') | float * 1.15 + 0.03) | round(2)), 1] | min }}
 
 sonos_decrease_volume:
   alias: 'Sonos decrease volume'
@@ -114,7 +117,8 @@ sonos_decrease_volume:
       data:
         entity_id: media_player.sonos_kitchen
         set_group_volume: true
-        volume_level: '{{ [((states.media_player.sonos_kitchen.attributes.volume_level | float * 0.85 - 0.03) | round(2)), 0.05] | max }}'
+        volume_level: >-
+          {{ [((state_attr('media_player.sonos_kitchen','volume_level') | float * 0.85 - 0.03) | round(2)), 0.05] | max }}
 
 ##### SAY #####
 
@@ -159,7 +163,8 @@ sonos_set_alarm:
       data:
         entity_id: media_player.sonos_bedroom
         alarm_id: 7
-        time: '{{ states.sensor.alarm_clock_time_weekdays.state }}'
+        time: >-
+          {{ states('sensor.alarm_clock_time_weekdays') }}
         enabled: true
 
 sonos_disable_alarm:
@@ -561,7 +566,8 @@ transmission_add_torrent:
     - service: transmission.add_torrent
       data:
         name: Transmission
-        torrent: '{{ states.input_text.transmission_torrent_url.state }}'
+        torrent: >-
+          {{ states('input_text.transmission_torrent_url') }}
 
 ################# TIMER #################
 
@@ -570,7 +576,8 @@ bedroom_music_timer_start:
     - service: timer.start
       data:
         entity_id: timer.bedroom_music_timer
-        duration: '{{ states.sensor.bedroom_music_timer_duration.state }}'
+        duration: >-
+          {{ states('sensor.bedroom_music_timer_duration') }}
 
 bedroom_music_timer_cancel:
   sequence:

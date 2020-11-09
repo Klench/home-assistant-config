@@ -153,7 +153,8 @@
   initial_state: on
   trigger:
     platform: template
-    value_template: "{{ states.media_player.sonos_bedroom.attributes.media_title == 'Perfect' }}"
+    value_template: >-
+      {{ state_attr('media_player.sonos_bedroom','media_title')|regex_search('Perfect', ignorecase=False) }}
   action:
     service: media_player.media_next_track
     data:
@@ -405,7 +406,8 @@
     service: python_script.media_player_volume_set
     data:
       entity_id: media_player.sonos_bedroom
-      volume_level: '{{ [((states.media_player.sonos_bedroom.attributes.volume_level | float * 1.15 + 0.03) | round(2)), 1] | min }}'
+      volume_level: >-
+        {{ [((state_attr('media_player.sonos_bedroom','volume_level') | float * 1.15 + 0.03) | round(2)), 1] | min }}
 
 - alias: 'Hue switch decrease Sonos bedroom volume'
   initial_state: on
@@ -431,7 +433,8 @@
     service: python_script.media_player_volume_set
     data:
       entity_id: media_player.sonos_bedroom
-      volume_level: '{{ [((states.media_player.sonos_bedroom.attributes.volume_level | float * 0.85 - 0.03) | round(2)), 0.05] | max }}'
+      volume_level: >-
+        {{ [((state_attr('media_player.sonos_bedroom','volume_level') | float * 0.85 - 0.03) | round(2)), 0.05] | max }}
 
 ################# LEAVING/COMING HOME #################
 

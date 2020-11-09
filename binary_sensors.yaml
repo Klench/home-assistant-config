@@ -21,34 +21,35 @@
     sonos_night_mode:
       friendly_name: 'Status'
       icon_template: mdi:check-circle-outline
-      value_template: '{{ states.media_player.sonos_livingroom.attributes.night_sound }}'
+      value_template: >-
+        {{ state_attr('media_player.sonos_livingroom','night_sound') }}
     alarm_clock_trigger_weekdays:
       friendly_name: 'Alarm clock trigger weekdays'
       value_template: >-
-        {{ (as_timestamp(strptime(states.sensor.alarm_clock_time_weekdays.state, '%H:%M')) | int + 60*60 - 30*60) | timestamp_custom('%H:%M', false) == states.sensor.time.state }}
+        {{ (as_timestamp(strptime(states('sensor.alarm_clock_time_weekdays'), '%H:%M')) | int + 60*60 - 30*60) | timestamp_custom('%H:%M', false) == states('sensor.time') }}
     alarm_clock_trigger_weekend:
       friendly_name: 'Alarm clock trigger weekend'
       value_template: >-
-        {{ (as_timestamp(strptime(states.sensor.alarm_clock_time_weekend.state, '%H:%M')) | int + 60*60 - 30*60) | timestamp_custom('%H:%M', false) == states.sensor.time.state  }}
+        {{ (as_timestamp(strptime(states('sensor.alarm_clock_time_weekend'), '%H:%M')) | int + 60*60 - 30*60) | timestamp_custom('%H:%M', false) == states('sensor.time') }}
     car_heater_trigger_workdays:
       friendly_name: 'Car heater trigger workdays'
       value_template: >-
-        {{ (as_timestamp(strptime(states.sensor.alarm_clock_time_weekdays.state, '%H:%M')) | int + 60*60 + states.input_number.alarm_heater_offset.state | int * 60) | timestamp_custom('%H:%M', false) == states.sensor.time.state }}
+        {{ (as_timestamp(strptime(states('sensor.alarm_clock_time_weekdays'), '%H:%M')) | int + 60*60 + states('input_number.alarm_heater_offset') | int * 60) | timestamp_custom('%H:%M', false) == states('sensor.time') }}
     relaxed_mode:
       value_template: >-
-        {{ (as_timestamp(strptime(states.sensor.relaxed_mode_time.state, '%H:%M')) | int) < ((as_timestamp(strptime(states.sensor.time.state, '%H:%M')) + 60) | int) }}
+        {{ (as_timestamp(strptime(states('sensor.relaxed_mode_time'), '%H:%M')) | int) < ((as_timestamp(strptime(states('sensor.time'), '%H:%M')) + 60) | int) }}
     sonos_livingroom_tv_active:
       value_template: >-
-        {{ states.media_player.sonos_livingroom.attributes.source == 'TV' }}
+        {{ is_state_attr('media_player.sonos_livingroom','source','TV') }}
     sonos_kitchen_is_grouped:
       value_template: >-
-        {{ states.media_player.sonos_kitchen.attributes.sonos_group != ['media_player.sonos_kitchen']}}
+        {{ not is_state_attr('media_player.sonos_kitchen','sonos_group',['media_player.sonos_kitchen']) }}
     sonos_livingroom_is_grouped:
       value_template: >-
-        {{ states.media_player.sonos_livingroom.attributes.sonos_group != ['media_player.sonos_livingroom'] }}
+        {{ not is_state_attr('media_player.sonos_livingroom','sonos_group',['media_player.sonos_livingroom']) }}
     sonos_bedroom_is_grouped:
       value_template: >-
-        {{ states.media_player.sonos_bedroom.attributes.sonos_group != ['media_player.sonos_bedroom']}}
+        {{ not is_state_attr('media_player.sonos_bedroom','sonos_group',['media_player.sonos_bedroom']) }}
     transmission_active:
       value_template: >-
-        {{ (states.sensor.transmission_status.state != 'idle') and (states.sensor.transmission_status.state != 'unavailable') }}
+        {{ not (is_state('sensor.transmission_status','idle') or is_state('sensor.transmission_status','unavailable')) }}

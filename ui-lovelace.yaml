@@ -200,6 +200,24 @@ views:
         speaker_group:
           platform: sonos
           show_group_count: false
+        shortcuts:
+          label: Välj musik
+          list:
+            - name: Sov gott
+              type: music
+              id: spotify:playlist:4bG0SD913Hp5ugE4wDzKe8
+            - name: Instrumentala vaggvisor
+              type: music
+              id: spotify:playlist:0AN9INqQysBuGphdxgkfkw
+            - name: 'Disney Peaceful Piano: Lullaby'
+              type: music
+              id: spotify:album:2CE8v99s07pcaXQwOLYMlS
+            - name: Be Held
+              type: music
+              id: spotify:album:36mfScdTe8zFlaHQAmIMuf
+            - name: Be Held Instrumental
+              type: music
+              id: spotify:album:5bf51FjqhwkiYMQyRiEhlh
 
       - type: custom:mini-media-player
         entity: media_player.sonos_livingroom

@@ -160,6 +160,25 @@
     data:
       entity_id: media_player.sonos_bedroom
 
+- alias: 'Activate repeat on Sonos bedroom'
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: media_player.sonos_bedroom
+    to: 'playing'
+  condition:
+    - condition: state
+      entity_id: binary_sensor.sonos_bedroom_is_grouped
+      state: 'off'
+    - condition: template
+      value_template: >-
+        {{ is_state_attr('media_player.sonos_bedroom','repeat','off') and is_state_attr('media_player.sonos_bedroom','media_content_type','music') }}
+  action:
+    service: media_player.repeat_set
+    data:
+      entity_id: media_player.sonos_bedroom
+      repeat: all
+
 ################# GO TO BED #################
 
 - alias: 'Go to bed weekdays'

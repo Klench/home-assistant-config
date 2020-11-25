@@ -26,6 +26,9 @@
     state: 'home'
   action:
     - service: script.all_rooms_relaxed_bedroom_lights_off
+    - condition: state
+      entity_id: binary_sensor.sonos_bedroom_is_grouped
+      state: 'on'
     - service: script.sonos_ungroup_bedroom_speaker
     - service: media_player.volume_set
       data:
@@ -166,6 +169,7 @@
     platform: state
     entity_id: media_player.sonos_bedroom
     to: 'playing'
+    for: "00:00:05"
   condition:
     - condition: state
       entity_id: binary_sensor.sonos_bedroom_is_grouped
@@ -241,6 +245,9 @@
     state: '1_hold_up'
   action:
     - service: script.all_rooms_relaxed_bedroom_lights_off
+    - condition: state
+      entity_id: binary_sensor.sonos_bedroom_is_grouped
+      state: 'on'
     - service: script.sonos_ungroup_bedroom_speaker
     - service: media_player.volume_set
       data:

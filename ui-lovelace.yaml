@@ -218,6 +218,12 @@ views:
             - name: Be Held Instrumental
               type: music
               id: spotify:album:5bf51FjqhwkiYMQyRiEhlh
+            - name: Piano dinner
+              type: music
+              id: spotify:playlist:37i9dQZF1DWZVU32KsYGUK
+            - name: Baby sleep
+              type: music
+              id: spotify:playlist:37i9dQZF1DX0DxcHtn4Hwo
 
       - type: custom:mini-media-player
         entity: media_player.sonos_livingroom

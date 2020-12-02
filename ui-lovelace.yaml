@@ -360,34 +360,34 @@ views:
 
 ################# WAKEUP #################
 
-  - icon: mdi:alarm
-    cards:
+  # - icon: mdi:alarm
+  #   cards:
      
-      - type: entities
-        title: Väckning vardagar
-        show_header_toggle: false
-        entities:
-          - sensor.alarm_clock_time_weekdays
-          - input_number.alarm_hours_weekdays
-          - input_number.alarm_minutes_weekdays
-          - input_number.alarm_heater_offset
-          - entity: automation.wakeup_weekdays
-            name: 'Väckning vardagar'
-          - entity: automation.enable_sonos_alarm
-            name: 'Sonos alarm'
-          - input_boolean.wakeup_override
-          - entity: automation.car_heater_weekdays
-            name: 'Bränslevärmare'
+  #     - type: entities
+  #       title: Väckning vardagar
+  #       show_header_toggle: false
+  #       entities:
+  #         - sensor.alarm_clock_time_weekdays
+  #         - input_number.alarm_hours_weekdays
+  #         - input_number.alarm_minutes_weekdays
+  #         - input_number.alarm_heater_offset
+  #         - entity: automation.wakeup_weekdays
+  #           name: 'Väckning vardagar'
+  #         - entity: automation.enable_sonos_alarm
+  #           name: 'Sonos alarm'
+  #         - input_boolean.wakeup_override
+  #         - entity: automation.car_heater_weekdays
+  #           name: 'Bränslevärmare'
 
-      - type: entities
-        title: Väckning helg
-        show_header_toggle: false
-        entities:
-          - sensor.alarm_clock_time_weekend
-          - input_number.alarm_hours_weekend
-          - input_number.alarm_minutes_weekend
-          - entity: automation.wakeup_weekend
-            name: 'Väckning helg'
+  #     - type: entities
+  #       title: Väckning helg
+  #       show_header_toggle: false
+  #       entities:
+  #         - sensor.alarm_clock_time_weekend
+  #         - input_number.alarm_hours_weekend
+  #         - input_number.alarm_minutes_weekend
+  #         - entity: automation.wakeup_weekend
+  #           name: 'Väckning helg'
 
 ################# TV #################
 
@@ -547,6 +547,14 @@ views:
                 labels: true
                 fill: fade
 
+      - type: conditional
+        conditions:
+          - entity: binary_sensor.transmission_active
+            state: 'on'
+        card:
+          type: custom:transmission-card
+
+
 ################# AUTOMATIONS #################
 
   - icon: mdi:robot-industrial
@@ -572,6 +580,7 @@ views:
           - automation.evening_bright
           - automation.evening_relaxed
           - automation.hallway_bright
+          - automation.advent_light
           - automation.sunset
           - automation.bright_after_sunset
           - automation.turn_off_bedroom_lights

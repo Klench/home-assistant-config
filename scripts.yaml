@@ -263,14 +263,13 @@ wakeup_lights:
     - service: script.hallway_wakeup
 
 window_lights:
-  alias: 'Skymningsbelysning'
+  alias: 'Fönsterbelysning'
   sequence:
     - service: light.turn_on
       data:
-        entity_id: light.bedroom_bedside_group
-    - service: light.turn_on
-      data:
-        entity_id: light.livingroom_window
+        entity_id:
+          - light.bedroom_bedside_group
+          - light.livingroom_window
 
 go_to_bed_lights:
   alias: 'Gå till sängs'

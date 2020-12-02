@@ -50,14 +50,12 @@
     - service: script.hallway_bright
 
 - alias: 'Advent light'
-  initial_state: off
   trigger:
-    platform: time
-    at: '09:00:00'
-  condition:
-    condition: state
-    entity_id: group.device_tracker_family
-    state: 'home'
+    - platform: time
+      at: '09:30:00'
+    - platform: state
+      entity_id: script.hallway_bright
+      to: 'on'
   action:
     - service: script.window_lights
 

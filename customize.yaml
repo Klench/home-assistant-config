@@ -64,3 +64,5 @@ automation.tv_off_group_speakers:
   icon: mdi:television-classic-off
 automation.car_heater_weekdays:
   icon: mdi:radiator
+automation.advent_light:
+  icon: mdi:judaism

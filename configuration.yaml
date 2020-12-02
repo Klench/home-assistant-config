@@ -29,24 +29,26 @@ frontend:
 lovelace:
   mode: yaml
   resources:
-  - url: /hacsfiles/mini-media-player/mini-media-player-bundle.js
-    type: module
-  - url: /hacsfiles/mini-graph-card/mini-graph-card-bundle.js
-    type: module
-  - url: /hacsfiles/lovelace-card-tools/card-tools.js
-    type: module
-  - url: /hacsfiles/lovelace-auto-entities/auto-entities.js
-    type: module
-  - url: /hacsfiles/lovelace-multiple-entity-row/multiple-entity-row.js
-    type: module
-  - url: /hacsfiles/kb-steam-card/kb-steam-card.js
-    type: module
-  - url: /hacsfiles/krisinfo-card/krisinfo-card.js
-    type: module
-  - url: /hacsfiles/lovelace-card-mod/card-mod.js
-    type: module
-  - url: /hacsfiles/upcoming-media-card/upcoming-media-card.js
-    type: js
+    - url: /hacsfiles/mini-media-player/mini-media-player-bundle.js
+      type: module
+    - url: /hacsfiles/mini-graph-card/mini-graph-card-bundle.js
+      type: module
+    - url: /hacsfiles/lovelace-card-tools/card-tools.js
+      type: module
+    - url: /hacsfiles/lovelace-auto-entities/auto-entities.js
+      type: module
+    - url: /hacsfiles/lovelace-multiple-entity-row/multiple-entity-row.js
+      type: module
+    - url: /hacsfiles/kb-steam-card/kb-steam-card.js
+      type: module
+    - url: /hacsfiles/krisinfo-card/krisinfo-card.js
+      type: module
+    - url: /hacsfiles/lovelace-card-mod/card-mod.js
+      type: module
+    - url: /hacsfiles/transmission-card/transmission-card.js
+      type: module
+    - url: /hacsfiles/upcoming-media-card/upcoming-media-card.js
+      type: js
 
 # Enables configuration UI
 config:
@@ -118,6 +120,9 @@ homekit:
       - light.bedroom_bedside_group
       - light.livingroom_window
       - sensor.outdoor_temperature
+
+# zha:
+#   database_path: /config/zigbee.db
 
 transmission:
   host: !secret ubuntu_ip

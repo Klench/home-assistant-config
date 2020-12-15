@@ -29,4 +29,4 @@ while False in speaker_entity_dict.values():
     service_data = {"entity_id": speaker_entity_id, "volume_level": new_volume}
     hass.services.call("media_player", "volume_set", service_data)
 
-  time.sleep(.05)
+  time.sleep(.08)

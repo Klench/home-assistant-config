@@ -256,7 +256,6 @@ views:
 
       - type: entities
         title: Nattläge Sonos Beam
-        show_header_toggle: false
         entities:
           - entity: switch.sonos_night_mode
             state_color: true
@@ -316,6 +315,50 @@ views:
                 name: Sonos kök
               - entity_id: media_player.sonos_bedroom
                 name: Sonos sovrum
+
+################# ROBOT VACUUM #################
+
+  - icon: mdi:robot-vacuum-variant
+    cards:
+
+      - type: custom:vacuum-card
+        entity: vacuum.neato_d7
+        map: camera.neato_d7_cleaning_map
+        stats:
+          default:
+            - attribute: clean_start
+              subtitle: Starttid
+            - attribute: clean_stop
+              subtitle: Sluttid
+            - attribute: clean_area
+              unit: 'm2'
+              subtitle: Cleaning area
+          cleaning:
+            - attribute: clean_start
+              subtitle: Starttid
+            - attribute: clean_area
+              unit: 'm2'
+              subtitle: Cleaning area
+        actions:
+          - service: script.vacuum_clean_home_neato_d7
+            icon: mdi:home
+          - service: script.vacuum_clean_entrance_neato_d7
+            icon: mdi:door
+          - service: script.vacuum_clean_hallway_neato_d7
+            icon: mdi:hanger
+          - service: script.vacuum_clean_kitchen_neato_d7
+            icon: mdi:silverware-fork-knife
+          - service: script.vacuum_clean_livingroom_neato_d7
+            icon: mdi:sofa-outline
+          - service: script.vacuum_clean_bedroom_neato_d7
+            icon: mdi:bed
+
+      - type: entities
+        title: Inställningar
+        show_header_toggle: false
+        entities:
+          - input_boolean.vacuum_eco_mode
+          - input_boolean.vacuum_extra_care
 
 ################# UNRAID #################
 
@@ -583,7 +626,6 @@ views:
           - automation.advent_light
           - automation.sunset
           - automation.bright_after_sunset
-          - automation.turn_off_bedroom_lights
           - automation.closing_bathroom_door
           - automation.opening_bathroom_door
           - input_boolean.coming_home_turn_on_lights

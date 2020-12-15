@@ -25,7 +25,7 @@
     entity_id: group.device_tracker_family
     state: 'home'
   action:
-    - service: script.all_rooms_relaxed_bedroom_lights_off
+    - service: script.all_rooms_relaxed
     - condition: state
       entity_id: binary_sensor.sonos_bedroom_is_grouped
       state: 'on'
@@ -232,7 +232,7 @@
     entity_id: sensor.hue_hallway_switch
     state: '1_hold_up'
   action:
-    - service: script.all_rooms_relaxed_bedroom_lights_off
+    - service: script.all_rooms_relaxed
     - condition: state
       entity_id: binary_sensor.sonos_bedroom_is_grouped
       state: 'on'

@@ -47,6 +47,8 @@ lovelace:
       type: module
     - url: /hacsfiles/transmission-card/transmission-card.js
       type: module
+    - url: /hacsfiles/vacuum-card/vacuum-card.js
+      type: module
     - url: /hacsfiles/upcoming-media-card/upcoming-media-card.js
       type: js
 
@@ -117,12 +119,10 @@ homekit:
       - script.livingroom_nursery
       - light.bathroom_led
       - light.hallway_ceiling_group
+      - light.hallway_ceiling
       - light.bedroom_bedside_group
       - light.livingroom_window
       - sensor.outdoor_temperature
-
-# zha:
-#   database_path: /config/zigbee.db
 
 transmission:
   host: !secret ubuntu_ip
@@ -141,9 +141,20 @@ volvooncall:
   username: !secret volvo_username
   password: !secret volvo_password
 
+################# ZHA #################
+
+zha:
+  zigpy_config:
+    ota:
+      ikea_provider: true
+
 ################# MEDIA PLAYERS #################
 
 media_player:
+  - platform: samsungtv_custom
+    host: !secret samsung_tv_ip
+    port: 8001
+    name: 'TV_custom'
   # - platform: kodi
   #   host: !secret kodi_ip
   #   port: 80
@@ -154,11 +165,6 @@ media_player:
   #     data:
   #       entity_id: media_player.kodi
   #       method: System.Reboot
-  - platform: samsungtv_custom
-    host: !secret samsung_tv_ip
-    port: 8001
-    name: 'TV_custom'
-    sourcelist: '{"TV": "KEY_TV", "Apple TV": "KEY_HDMI1", "OSMC": "KEY_HDMI3"}'
 
 spotify:
   client_id: !secret spotify_client_id

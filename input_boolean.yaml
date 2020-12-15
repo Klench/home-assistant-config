@@ -6,3 +6,9 @@ coming_home_turn_on_lights:
   name: Coming home turn on lights
   icon: mdi:home-outline
   initial: on
+vacuum_eco_mode:
+  name: Eko-läge
+  icon: mdi:fan-chevron-down
+vacuum_extra_care:
+  name: Extra försiktighet
+  icon: mdi:map-marker-path

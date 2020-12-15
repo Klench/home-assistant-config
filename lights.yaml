@@ -1,26 +1,3 @@
-- platform: template
-  lights:
-    bedroom_bedside_1:
-      friendly_name: 'Sänglampa 1 sovrum'
-      icon_template: mdi:lamp
-      value_template: '{{ states.switch.bedside_lamp_bedroom.state }}'
-      turn_on:
-        service: switch.turn_on
-        entity_id: switch.bedside_lamp_bedroom
-      turn_off:
-        service: switch.turn_off
-        entity_id: switch.bedside_lamp_bedroom
-    bedroom_bedside_2:
-      friendly_name: 'Sänglampa 2 sovrum'
-      icon_template: mdi:lamp
-      value_template: '{{ states.switch.bedside_lamp_bedroom_2.state }}'
-      turn_on:
-        service: switch.turn_on
-        entity_id: switch.bedside_lamp_bedroom_2
-      turn_off:
-        service: switch.turn_off
-        entity_id: switch.bedside_lamp_bedroom_2
-
 - platform: group
   name: 'Hallway ceiling group 1'
   entities:
@@ -46,6 +23,6 @@
 - platform: group
   name: 'Bedroom bedside group'
   entities:
-    - light.bedroom_bedside_1
-    - light.bedroom_bedside_2
+    - light.control_outlet_2
+    - light.control_outlet_3
   

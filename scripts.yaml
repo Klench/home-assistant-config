@@ -214,17 +214,6 @@ all_rooms_bright:
 all_rooms_relaxed:
   alias: 'Mysbelysning'
   sequence:
-    - service: script.livingroom_relaxed
-    - service: script.hallway_relaxed
-    - service: script.kitchen_relaxed
-    - service: script.bathroom_relaxed
-    - service: homeassistant.turn_off
-      data:
-        entity_id: automation.opening_bathroom_door
-
-all_rooms_relaxed_bedroom_lights_off:
-  alias: 'Mysbelysning 2'
-  sequence:
     - service: script.bedroom_lights_turn_off
     - service: script.livingroom_relaxed
     - service: script.hallway_relaxed
@@ -539,7 +528,7 @@ kitchen_relaxed:
     - service: light.turn_on
       data:
         entity_id: light.kitchen_table
-        brightness_pct: 50
+        brightness_pct: 70
         transition: 2
 
 ##### BATHROOM #####
@@ -554,6 +543,73 @@ bathroom_relaxed:
         rgb_color: [255,168,38]
         transition: 2
         effect: None
+
+################# ROBOT VACUUM #################
+
+vacuum_clean_home_neato_d7:
+  sequence:
+    - service: neato.custom_cleaning
+      data:
+        entity_id: vacuum.neato_d7
+        mode: >
+          {{ states('sensor.vacuum_mode_neato') }}
+        navigation: >
+          {{ states('sensor.vacuum_extra_care_neato') }}
+
+vacuum_clean_entrance_neato_d7:
+  sequence:
+    - service: neato.custom_cleaning
+      data:
+        entity_id: vacuum.neato_d7
+        mode: >
+          {{ states('sensor.vacuum_mode_neato') }}
+        navigation: >
+          {{ states('sensor.vacuum_extra_care_neato') }}
+        zone: Entrance
+
+vacuum_clean_hallway_neato_d7:
+  sequence:
+    - service: neato.custom_cleaning
+      data:
+        entity_id: vacuum.neato_d7
+        mode: >
+          {{ states('sensor.vacuum_mode_neato') }}
+        navigation: >
+          {{ states('sensor.vacuum_extra_care_neato') }}
+        zone: Hallway
+
+vacuum_clean_kitchen_neato_d7:
+  sequence:
+    - service: neato.custom_cleaning
+      data:
+        entity_id: vacuum.neato_d7
+        mode: >
+          {{ states('sensor.vacuum_mode_neato') }}
+        navigation: >
+          {{ states('sensor.vacuum_extra_care_neato') }}
+        zone: Kitchen
+
+vacuum_clean_livingroom_neato_d7:
+  sequence:
+    - service: neato.custom_cleaning
+      data:
+        entity_id: vacuum.neato_d7
+        mode: >
+          {{ states('sensor.vacuum_mode_neato') }}
+        navigation: >
+          {{ states('sensor.vacuum_extra_care_neato') }}
+        zone: Livingroom
+
+vacuum_clean_bedroom_neato_d7:
+  sequence:
+    - service: neato.custom_cleaning
+      data:
+        entity_id: vacuum.neato_d7
+        mode: >
+          {{ states('sensor.vacuum_mode_neato') }}
+        navigation: >
+          {{ states('sensor.vacuum_extra_care_neato') }}
+        zone: Bedroom
 
 ################# VARIOUS #################
 

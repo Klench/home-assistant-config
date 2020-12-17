@@ -33,7 +33,7 @@ sonos_group_speaker:
     - service: python_script.media_player_volume_set
       data:
         entity_id: "{{ sonos_entity }}"
-        volume_level: >-
+        volume_level: >
           {{ state_attr('media_player.sonos_kitchen','volume_level') }}
 
 sonos_ungroup_speaker:
@@ -97,7 +97,7 @@ sonos_sync_group_volume:
       data:
         entity_id: media_player.sonos_kitchen
         set_group_volume: true
-        volume_level: >-
+        volume_level: >
           {{ state_attr('media_player.sonos_kitchen','volume_level') | float }}
 
 sonos_increase_volume:
@@ -107,7 +107,7 @@ sonos_increase_volume:
       data:
         entity_id: media_player.sonos_kitchen
         set_group_volume: true
-        volume_level: >-
+        volume_level: >
           {{ [((state_attr('media_player.sonos_kitchen','volume_level') | float * 1.15 + 0.03) | round(2)), 1] | min }}
 
 sonos_decrease_volume:
@@ -117,7 +117,7 @@ sonos_decrease_volume:
       data:
         entity_id: media_player.sonos_kitchen
         set_group_volume: true
-        volume_level: >-
+        volume_level: >
           {{ [((state_attr('media_player.sonos_kitchen','volume_level') | float * 0.85 - 0.03) | round(2)), 0.05] | max }}
 
 ##### SAY #####
@@ -140,7 +140,7 @@ sonos_say:
         entity_id:  "{{ 'media_player.' ~ sonos_entity }}"
         message: "{{ message }}"
     - delay: '00:00:01'
-    - delay: >-
+    - delay: >
         {% set duration = states.media_player[sonos_entity].attributes.media_duration %}
         {% if duration > 0 %}
           {% set duration = duration - 1 %}
@@ -163,7 +163,7 @@ sonos_set_alarm:
       data:
         entity_id: media_player.sonos_bedroom
         alarm_id: 7
-        time: >-
+        time: >
           {{ states('sensor.alarm_clock_time_weekdays') }}
         enabled: true
 
@@ -613,7 +613,7 @@ transmission_add_torrent:
     - service: transmission.add_torrent
       data:
         name: Transmission
-        torrent: >-
+        torrent: >
           {{ states('input_text.transmission_torrent_url') }}
 
 ################# TIMER #################
@@ -623,7 +623,7 @@ bedroom_music_timer_start:
     - service: timer.start
       data:
         entity_id: timer.bedroom_music_timer
-        duration: >-
+        duration: >
           {{ states('sensor.bedroom_music_timer_duration') }}
 
 bedroom_music_timer_cancel:

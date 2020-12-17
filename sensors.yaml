@@ -51,51 +51,51 @@
     alarm_clock_time_weekdays:
       friendly_name: 'Väckningstid'
       icon_template: mdi:alarm
-      value_template: >-
+      value_template: >
         {{ "%0.02d:%0.02d" | format(states('input_number.alarm_hours_weekdays') | int, states('input_number.alarm_minutes_weekdays') | int ) }}
     alarm_clock_time_weekend:
       friendly_name: 'Väckningstid'
       icon_template: mdi:alarm
-      value_template: >-
+      value_template: >
         {{ "%0.02d:%0.02d" | format(states('input_number.alarm_hours_weekend') | int, states('input_number.alarm_minutes_weekend') | int ) }}
     relaxed_mode_time:
       friendly_name: 'Klockslag'
       icon_template: mdi:alarm
-      value_template: >-
+      value_template: >
         {{ "%0.02d:%0.02d" | format(states('input_number.relaxed_mode_hours') | int, states('input_number.relaxed_mode_minutes') | int ) }}
     outdoor_temperature:
       friendly_name: 'Temperatur'
       icon_template: mdi:thermometer
       unit_of_measurement: '°C'
-      value_template: >-
+      value_template: >
         {{ (state_attr('weather.met_hem','temperature') * 0.4 + state_attr('weather.smhi_hem','temperature') * 0.6) | round(1) }}
     hallway_switch_updated:
       friendly_name: 'Hallway switch updated'
-      value_template: >-
+      value_template: >
         {{ state_attr('remote.hallway_switch','last_updated') }}
     work_time_in:
       friendly_name: 'Inpasseringstid'
       icon_template: mdi:clock-in
-      value_template: >-
+      value_template: >
         {{ "%0.02d:%0.02d" | format(states('input_number.work_time_hours_in') | int, states('input_number.work_time_minutes_in') | int ) }}
     work_time_out:
       friendly_name: 'Utpasseringstid'
       icon_template: mdi:clock-out
-      value_template: >-
+      value_template: >
         {{ "%0.02d:%0.02d" | format(states('input_number.work_time_hours_out') | int, states('input_number.work_time_minutes_out') | int ) }}
     work_time:
       friendly_name: 'Arbetstid timmar'
       icon_template: mdi:calendar-clock
-      value_template: >-
+      value_template: >
         {{ float((as_timestamp(strptime(states('sensor.work_time_out'), '%H:%M')) | int - as_timestamp(strptime(states('sensor.work_time_in'), '%H:%M')) | int - states('input_number.work_time_minutes_lunch') | int * 60)/3600) | round(1) }}
     bedroom_music_timer_duration:
-      value_template: >-
+      value_template: >
         {{ "00:%0.02d:00" | format(states('input_number.bedroom_music_timer_minutes') | int) }}
     bedroom_music_timer_minutes:
       friendly_name: 'Längd'
       icon_template: mdi:timer-outline
       unit_of_measurement: 'min'
-      value_template: >-
+      value_template: >
         {{ states('input_number.bedroom_music_timer_minutes') | round(0) }}
     vacuum_mode_neato:
       value_template: >

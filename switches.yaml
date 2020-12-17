@@ -3,7 +3,7 @@
     sonos_night_mode:
       friendly_name: 'Nattläge'
       icon_template: mdi:sleep
-      value_template: >-
+      value_template: >
         {{ state_attr('media_player.sonos_livingroom','night_sound') }}
       turn_on:
         service: script.sonos_enable_night_mode

@@ -47,6 +47,7 @@ ozw_log.txt
 # Development files
 custom_components/
 themes/
+blueprints/
 .storage/
 
 # End of https://www.gitignore.io/api/homeassistant

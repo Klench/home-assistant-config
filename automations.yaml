@@ -206,6 +206,36 @@
   action:
     service: script.go_to_bed_lights
 
+################# IKEA SWITCHES #################
+
+- alias: 'Ikea switch bedroom on'
+  initial_state: on
+  trigger:
+    platform: event
+    event_type: zha_event
+    event_data:
+      device_id: 9f686575e6ad98784e2efbb0b4e78526
+      command: 'on'
+  action:
+    service: light.turn_on
+    data:
+      entity_id: light.bedroom_bedside_group
+
+- alias: 'Ikea switch bedroom off'
+  initial_state: on
+  trigger:
+    platform: event
+    event_type: zha_event
+    event_data:
+      device_id: 9f686575e6ad98784e2efbb0b4e78526
+      command: 'off'
+  action:
+    service: light.turn_off
+    data:
+      entity_id:
+        - light.bedroom_bedside_group
+        - light.bedroom_ceiling
+
 ################# HUE SWITCH #################
 
 ##### LIGHTS #####
@@ -289,36 +319,6 @@
       after: '02:00:00'
   action:
     service: script.low_brightness
-
-################# IKEA SWITCHES #################
-
-- alias: 'Ikea switch bedroom on'
-  initial_state: on
-  trigger:
-    platform: event
-    event_type: zha_event
-    event_data:
-      device_id: 9f686575e6ad98784e2efbb0b4e78526
-      command: 'on'
-  action:
-    service: light.turn_on
-    data:
-      entity_id: light.bedroom_bedside_group
-
-- alias: 'Ikea switch bedroom off'
-  initial_state: on
-  trigger:
-    platform: event
-    event_type: zha_event
-    event_data:
-      device_id: 9f686575e6ad98784e2efbb0b4e78526
-      command: 'off'
-  action:
-    service: light.turn_off
-    data:
-      entity_id:
-        - light.bedroom_bedside_group
-        - light.bedroom_ceiling
 
 ##### SONOS #####
 

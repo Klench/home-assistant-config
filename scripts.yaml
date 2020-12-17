@@ -203,13 +203,16 @@ sonos_disable_night_mode:
 all_rooms_bright:
   alias: 'Hög ljusstyrka'
   sequence:
-    - service: script.bedroom_bright
     - service: script.livingroom_bright
     - service: script.hallway_bright
     - service: script.kitchen_bright
     - service: homeassistant.turn_on
       data:
         entity_id: automation.opening_bathroom_door
+    - condition: template
+      value_template: >
+        {{ not (is_state('binary_sensor.sonos_bedroom_is_grouped','off') and is_state('media_player.sonos_bedroom','playing')) }}
+    - service: script.bedroom_bright
 
 all_rooms_relaxed:
   alias: 'Mysbelysning'

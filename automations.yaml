@@ -13,7 +13,7 @@
       entity_id: binary_sensor.relaxed_mode
       state: 'off'
   action:
-    - service: script.all_rooms_bright
+    service: script.all_rooms_bright
 
 - alias: 'Evening relaxed'
   trigger:
@@ -47,7 +47,7 @@
       entity_id: light.hallway_ceiling_group
       state: 'off'
   action:
-    - service: script.hallway_bright
+    service: script.hallway_bright
 
 - alias: 'Advent light'
   trigger:
@@ -57,7 +57,7 @@
       entity_id: script.hallway_bright
       to: 'on'
   action:
-    - service: script.window_lights
+    service: script.window_lights
 
 ################# LIGHT AUTOMATIONS FOR SUNSET #################
 
@@ -78,17 +78,33 @@
     data:
       entity_id: light.livingroom_window
 
-- alias: 'Bright after sunset'
+- alias: 'Bright after sunset bedroom'
   initial_state: on
   trigger:
     platform: state
-    entity_id: script.all_rooms_bright
+    entity_id: script.bedroom_bright
     to: 'on'
   condition:
     condition: sun
     after: sunset
   action:
-    service: script.window_lights
+    service: light.turn_on
+    data:
+      entity_id: light.bedroom_bedside_group
+
+- alias: 'Bright after sunset livingroom'
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: script.livingroom_bright
+    to: 'on'
+  condition:
+    condition: sun
+    after: sunset
+  action:
+    service: light.turn_on
+    data:
+      entity_id: light.livingroom_window
 
 ################# WAKEUP #################
 

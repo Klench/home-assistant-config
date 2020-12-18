@@ -57,7 +57,15 @@
       entity_id: script.hallway_bright
       to: 'on'
   action:
-    service: script.window_lights
+    - service: light.turn_on
+      data:
+        entity_id: light.livingroom_window
+    - condition: template
+      value_template: >
+        {{ not (is_state('binary_sensor.sonos_bedroom_is_grouped','off') and is_state('media_player.sonos_bedroom','playing')) }}
+    - service: light.turn_on
+      data:
+        entity_id: light.bedroom_bedside_group
 
 ################# LIGHT AUTOMATIONS FOR SUNSET #################
 
@@ -85,8 +93,11 @@
     entity_id: script.bedroom_bright
     to: 'on'
   condition:
-    condition: sun
-    after: sunset
+    - condition: sun
+      after: sunset
+    - condition: state
+      entity_id: input_boolean.window_lights_after_sunset
+      state: 'on'
   action:
     service: light.turn_on
     data:
@@ -99,8 +110,11 @@
     entity_id: script.livingroom_bright
     to: 'on'
   condition:
-    condition: sun
-    after: sunset
+    - condition: sun
+      after: sunset
+    - condition: state
+      entity_id: input_boolean.window_lights_after_sunset
+      state: 'on'
   action:
     service: light.turn_on
     data:
@@ -495,6 +509,20 @@
       entity_id: media_player.sonos_bedroom
       volume_level: >
         {{ [((state_attr('media_player.sonos_bedroom','volume_level') | float * 0.85 - 0.03) | round(2)), 0.05] | max }}
+
+##### POLLING INTERVAL #####
+
+- alias: 'Set Hue polling interval'
+  initial_state: on
+  trigger:
+    platform: homeassistant
+    event: start
+  action:
+    service: fasthue.set_update_interval
+    entity_id: sensor.hue_polling_interval
+    data:
+      scan_interval:
+        seconds: 1
 
 ################# LEAVING/COMING HOME #################
 

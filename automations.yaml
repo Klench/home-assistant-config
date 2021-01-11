@@ -51,11 +51,8 @@
 
 - alias: 'Advent light'
   trigger:
-    - platform: time
-      at: '09:30:00'
-    - platform: state
-      entity_id: script.hallway_bright
-      to: 'on'
+    platform: time
+    at: '09:30:00'
   action:
     - service: light.turn_on
       data:

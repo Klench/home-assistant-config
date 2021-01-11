@@ -156,14 +156,8 @@ views:
 
       - type: 'custom:kb-steam-card'
         friendly_name: Steam
-        entities:
-          - sensor.steam_76561198017790086
-          - sensor.steam_76561198005285582
-          - sensor.steam_76561198105180724
-          - sensor.steam_76561198948350533
-          - sensor.steam_76561198002571233
-          - sensor.steam_76561198024634860
-          - sensor.steam_76561198129920804
+        online_only: true
+        entities: sensor.steam_
 
 ################# SONOS #################
 
@@ -203,9 +197,9 @@ views:
         shortcuts:
           label: Välj musik
           list:
-            - name: Sov gott
+            - name: Peaceful Guitar
               type: music
-              id: spotify:playlist:4bG0SD913Hp5ugE4wDzKe8
+              id: spotify:playlist:37i9dQZF1DX0jgyAiPl8Af
             - name: Instrumentala vaggvisor
               type: music
               id: spotify:playlist:0AN9INqQysBuGphdxgkfkw
@@ -224,6 +218,9 @@ views:
             - name: Baby sleep
               type: music
               id: spotify:playlist:37i9dQZF1DX0DxcHtn4Hwo
+            - name: 'Hillsong: The Secret Place'
+              type: music
+              id: spotify:album:75atlwzG5ExdoFhCtWX8BM
 
       - type: custom:mini-media-player
         entity: media_player.sonos_livingroom

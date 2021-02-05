@@ -200,24 +200,28 @@ sonos_disable_night_mode:
 
 ##### HOME #####
 
-all_rooms_bright:
+indoor_lights_bright:
   alias: 'Hög ljusstyrka'
   sequence:
+    # - service: script.bedroom_bright
     - service: script.livingroom_bright
     - service: script.hallway_bright
     - service: script.kitchen_bright
+    - service: script.office_bright
     - service: homeassistant.turn_on
       data:
         entity_id: automation.opening_bathroom_door
     - condition: template
       value_template: >
         {{ not (is_state('binary_sensor.sonos_bedroom_is_grouped','off') and is_state('media_player.sonos_bedroom','playing')) }}
-    - service: script.bedroom_bright
+    - service: script.childroom_bright
 
-all_rooms_relaxed:
+indoor_lights_relaxed:
   alias: 'Mysbelysning'
   sequence:
-    - service: script.bedroom_lights_turn_off
+    - service: script.bedroom_relaxed
+    - service: script.childroom_turn_off
+    - service: script.office_relaxed
     - service: script.livingroom_relaxed
     - service: script.hallway_relaxed
     - service: script.kitchen_relaxed
@@ -233,12 +237,12 @@ low_brightness:
     - service: script.hallway_low_brightness
     - service: script.kitchen_bright
 
-all_lights_off:
+indoor_lights_off:
   alias: 'Allt släckt'
   sequence:
     - service: light.turn_off
       data:
-        entity_id: group.all_lights
+        entity_id: light.indoor
     - service: homeassistant.turn_on
       data:
         entity_id: automation.opening_bathroom_door
@@ -260,7 +264,7 @@ window_lights:
     - service: light.turn_on
       data:
         entity_id:
-          - light.bedroom_bedside_group
+          - light.bedroom_bedside
           - light.livingroom_window
 
 go_to_bed_lights:
@@ -300,44 +304,34 @@ create_all_light_group:
     sequence:
       - service: group.set
         data:
-          object_id: "all_lights"
+          object_id: "indoor_lights"
           entities: >
             {{ states.light |  map(attribute='entity_id') | join(',') }}
 
 ##### BEDROOM #####
 
-bedroom_bright:
-  alias: 'Hög ljusstyrka'
-  sequence:
-    - service: light.turn_on
-      data:
-        entity_id: light.bedroom_ceiling
-        brightness: 200
-        color_temp: 372
-        transition: 2
+# bedroom_bright:
+#   alias: 'Hög ljusstyrka'
+#   sequence:
+#     - service: light.turn_on
+#       data:
+#         entity_id: light.bedroom_ceiling
+#         brightness: 200
+#         color_temp: 372
+#         transition: 2
 
 bedroom_relaxed:
   alias: 'Mysbelysning'
   sequence:
+    # - service: light.turn_on
+    #   data:
+    #     entity_id: light.bedroom_ceiling
+    #     brightness: 144
+    #     color_temp: 443
+    #     transition: 2
     - service: light.turn_on
       data:
-        entity_id: light.bedroom_ceiling
-        brightness: 144
-        color_temp: 443
-        transition: 2
-    - service: light.turn_on
-      data:
-        entity_id: light.bedroom_bedside_group
-
-bedroom_lights_turn_off:
-  alias: 'Släck'
-  sequence:
-    - service: light.turn_off
-      data:
-        entity_id: light.bedroom_ceiling
-    - service: light.turn_off
-      data:
-        entity_id: light.bedroom_bedside_group
+        entity_id: light.bedroom_bedside
 
 bedroom_wakeup:
   alias: 'Väckning sovrum'
@@ -349,6 +343,70 @@ bedroom_wakeup:
         color_temp: 372
         transition: 1800
 
+##### CHILDREN ROOM #####
+
+childroom_bright:
+  alias: 'Hög ljusstyrka'
+  sequence:
+    - service: light.turn_on
+      data:
+        entity_id: light.childroom_ceiling
+        brightness_pct: 100
+        color_temp: 372
+        transition: 2
+
+childroom_relaxed:
+  alias: 'Mysbelysning'
+  sequence:
+    - service: light.turn_on
+      data:
+        entity_id: light.childroom_ceiling
+        brightness_pct: 40
+        color_temp: 443
+        transition: 2
+
+childroom_turn_off:
+  alias: 'Släck'
+  sequence:
+    - service: light.turn_off
+      data:
+        entity_id: light.childroom_ceiling
+
+##### OFFICE #####
+
+office_bright:
+  alias: 'Hög ljusstyrka'
+  sequence:
+    - service: light.turn_on
+      data:
+        entity_id: light.office_desk
+        brightness_pct: 100
+        transition: 2
+    - service: light.turn_on
+      data:
+        entity_id: light.office_ceiling
+        brightness_pct: 100
+        color_temp: 372
+        transition: 2
+
+office_relaxed:
+  alias: 'Mysbelysning'
+  sequence:
+    - service: light.turn_on
+      data:
+        entity_id: light.office_desk
+        brightness_pct: 40
+        transition: 2
+    - service: light.turn_on
+      data:
+        entity_id: light.office_window
+    - service: light.turn_on
+      data:
+        entity_id: light.office_ceiling
+        brightness_pct: 40
+        color_temp: 443
+        transition: 2
+
 ##### LIVINGROOM #####
 
 livingroom_bright:
@@ -356,9 +414,7 @@ livingroom_bright:
   sequence:
     - service: light.turn_on
       data:
-        entity_id:
-          - light.livingroom_ceiling
-          - light.livingroom_floor
+        entity_id: light.livingroom_floor
         brightness: 255
         color_temp: 372
         transition: 2
@@ -451,14 +507,14 @@ hallway_low_brightness:
   sequence:
     - service: light.turn_on
       data:
-        entity_id: light.hallway_ceiling_group
+        entity_id: light.hallway_ceiling_group_2
         brightness_pct: 40
         transition: 1
     - delay:
         milliseconds: 1100
     - service: light.turn_on
       data:
-        entity_id: light.hallway_ceiling_group
+        entity_id: light.hallway_ceiling_group_2
         color_temp: 300
         transition: 1
 
@@ -535,6 +591,24 @@ bathroom_relaxed:
         rgb_color: [255,168,38]
         transition: 2
         effect: None
+
+##### OUTDOOR #####
+
+turn_on_outdoor_lights:
+  alias: 'Tänd utomhusbelysning'
+  sequence:
+    - service: light.turn_on
+      data:
+        entity_id: light.outdoor_main_entrance
+        brightness_pct: 100
+        transition: 2
+
+turn_off_outdoor_lights:
+  alias: 'Släck utomhusbelysning'
+  sequence:
+    - service: light.turn_off
+      data:
+        entity_id: light.outdoor_main_entrance
 
 ################# ROBOT VACUUM #################
 

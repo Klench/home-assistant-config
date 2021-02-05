@@ -1,3 +1,40 @@
+- platform: template
+  lights:
+    livingroom_window:
+      friendly_name: 'Fönsterlampa vardagsrum'
+      icon_template: mdi:outdoor-lamp
+      value_template: '{{ states.switch.control_outlet_1.state }}'
+      turn_on:
+        service: switch.turn_on
+        entity_id: switch.control_outlet_1
+      turn_off:
+        service: switch.turn_off
+        entity_id: switch.control_outlet_1
+- platform: template
+  lights:
+    office_window:
+      friendly_name: 'Fönsterlampa arbetsrum'
+      icon_template: mdi:outdoor-lamp
+      value_template: '{{ states.switch.control_outlet_2.state }}'
+      turn_on:
+        service: switch.turn_on
+        entity_id: switch.control_outlet_2
+      turn_off:
+        service: switch.turn_off
+        entity_id: switch.control_outlet_2
+- platform: template
+  lights:
+    bedroom_bedside:
+      friendly_name: 'Sänglampor'
+      icon_template: mdi:lamp
+      value_template: '{{ states.switch.control_outlet_3.state }}'
+      turn_on:
+        service: switch.turn_on
+        entity_id: switch.control_outlet_3
+      turn_off:
+        service: switch.turn_off
+        entity_id: switch.control_outlet_3
+
 - platform: group
   name: 'Hallway ceiling group 1'
   entities:
@@ -21,8 +58,28 @@
     - light.hallway_ceiling_2_3
     - light.hallway_ceiling
 - platform: group
-  name: 'Bedroom bedside group'
+  name: 'Livingroom dinner table'
   entities:
-    - light.control_outlet_2
-    - light.control_outlet_3
-  
+    - light.livingroom_dinner_table_1
+    - light.livingroom_dinner_table_2
+    - light.livingroom_dinner_table_3
+- platform: group
+  name: 'Indoor'
+  entities:
+    - light.livingroom_floor
+    - light.livingroom_window
+    - light.livingroom_dinner_table_1
+    - light.livingroom_dinner_table_2
+    - light.livingroom_dinner_table_3
+    - light.bedroom_bedside
+    - light.kitchen_table
+    - light.childroom_ceiling
+    - light.office_window
+    - light.office_desk
+    - light.office_ceiling
+    - light.hallway_ceiling_1_1
+    - light.hallway_ceiling_1_2
+    - light.hallway_ceiling_1_3
+    - light.hallway_ceiling_2_1
+    - light.hallway_ceiling_2_2
+    - light.hallway_ceiling_2_3

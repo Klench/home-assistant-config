@@ -49,5 +49,6 @@ custom_components/
 themes/
 blueprints/
 .storage/
+neighbours/
 
 # End of https://www.gitignore.io/api/homeassistant

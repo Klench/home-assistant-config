@@ -49,6 +49,8 @@ lovelace:
       type: module
     - url: /hacsfiles/vacuum-card/vacuum-card.js
       type: module
+    - url: /hacsfiles/zha-network-card/zha-network-card.js
+      type: module
     - url: /hacsfiles/upcoming-media-card/upcoming-media-card.js
       type: js
 
@@ -108,9 +110,9 @@ homekit:
   safe_mode: true
   filter:
     include_entities:
-      - script.all_rooms_bright
-      - script.all_rooms_relaxed
-      - script.all_lights_off
+      - script.indoor_lights_bright
+      - script.indoor_lights_relaxed
+      - script.indoor_lights_off
       - script.hallway_bright
       - script.hallway_low_brightness
       - script.hallway_relaxed
@@ -120,7 +122,7 @@ homekit:
       - light.bathroom_led
       - light.hallway_ceiling_group
       - light.hallway_ceiling
-      - light.bedroom_bedside_group
+      - light.bedroom_bedside
       - light.livingroom_window
       - sensor.outdoor_temperature
 
@@ -147,6 +149,8 @@ zha:
   zigpy_config:
     ota:
       ikea_provider: true
+
+zha_map:
 
 ################# MEDIA PLAYERS #################
 

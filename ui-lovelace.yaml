@@ -8,7 +8,6 @@ views:
     cards:
 
       - type: glance
-        # state_color: false
         entities:
           - device_tracker.davids_iphone
           - device_tracker.nellies_iphone
@@ -34,13 +33,13 @@ views:
         title: Belysning
         show_header_toggle: false
         entities:
-          - entity: script.all_rooms_bright
+          - entity: script.indoor_lights_bright
             icon: mdi:lightbulb-on-outline
           - entity: script.low_brightness
             icon: mdi:lightbulb-on
-          - entity: script.all_rooms_relaxed
+          - entity: script.indoor_lights_relaxed
             icon: mdi:lightbulb-on
-          - entity: script.all_lights_off
+          - entity: script.indoor_lights_off
             icon: mdi:lightbulb-off
 
       - type: entities
@@ -51,7 +50,7 @@ views:
             icon: mdi:lightbulb-on-outline
           - entity: script.livingroom_relaxed
             icon: mdi:lightbulb-on
-          - light.livingroom_ceiling
+          - light.livingroom_dinner_table
           - light.livingroom_floor
           - light.livingroom_window
 
@@ -73,14 +72,34 @@ views:
         title: Sovrum
         show_header_toggle: false
         entities:
-          - entity: script.bedroom_bright
-            icon: mdi:lightbulb-on-outline
+          # - entity: script.bedroom_bright
+          #   icon: mdi:lightbulb-on-outline
           - entity: script.bedroom_relaxed
             icon: mdi:lightbulb-on
-          - light.bedroom_ceiling
-          - entity: light.bedroom_bedside_group
-            icon: mdi:lamp
-            name: 'Sänglampor'
+          # - light.bedroom_ceiling
+          - light.bedroom_bedside
+
+      - type: entities
+        title: Barnrum
+        show_header_toggle: false
+        entities:
+          - entity: script.childroom_bright
+            icon: mdi:lightbulb-on-outline
+          - entity: script.childroom_relaxed
+            icon: mdi:lightbulb-on
+          - light.childroom_ceiling
+
+      - type: entities
+        title: Arbetsrum
+        show_header_toggle: false
+        entities:
+          - entity: script.office_bright
+            icon: mdi:lightbulb-on-outline
+          - entity: script.office_relaxed
+            icon: mdi:lightbulb-on
+          - light.office_ceiling
+          - light.office_window
+          - light.office_desk
 
       - type: entities
         title: Kök
@@ -91,8 +110,8 @@ views:
           - entity: script.kitchen_relaxed
             icon: mdi:lightbulb-on
           - light.kitchen_table
-          - entity: light.hallway_ceiling
-            name: 'Taklampa kök'
+          # - entity: light.hallway_ceiling
+          #   name: 'Taklampa kök'
 
       - type: conditional
         conditions:
@@ -384,10 +403,39 @@ views:
             name: 'Processoranvänding docker'
           - entity: sensor.unraid_containers_ram_used
             name: 'Ramanvändning docker'
-          - entity: sensor.unraid_cputin_temp
+          - entity: sensor.unraid_cputin_temperature
             name: 'Temperatur CPU'
-          - entity: sensor.unraid_auxtin0_temp
+          - entity: sensor.unraid_auxtin0_temperature
             name: 'Temperatur moderkort'
+
+      - type: custom:mini-graph-card
+        name: Oden
+        icon: mdi:server
+        entities:
+          - entity: sensor.unraid_cputin_temperature
+            name: CPU temp
+            unit: '°C'
+            line_color: blue
+            show:
+              extrema: true
+              labels: true
+              fill: fade
+              average: true
+          - entity: sensor.ups_power_delivery
+            name: Power
+            unit: W
+            line_color: green
+            show:
+              extrema: true
+              labels: true
+              fill: fade
+              average: true
+        hours_to_show: 12
+        points_per_hour: 5
+        hour24: true
+        animate: true
+        decimals: 0
+        font_size_header: 18
 
       - type: custom:auto-entities
         card:
@@ -397,6 +445,36 @@ views:
         filter:
           include:
             - entity_id: "sensor.ups*"
+
+      - type: custom:zha-network-card
+        title: ZHA
+        clickable: true
+        sort_by: available
+        columns:
+          - name: Name
+            prop: name
+          - attr: available
+            id: available
+            modify: x || "false"
+            name: Online
+          - attr: manufacturer
+            name: Manufacturer
+          - attr: model
+            name: Model
+          - attr: ieee
+            name: IEEE
+          - name: NWK
+            prop: nwk
+          - attr: rssi
+            name: RSSI
+          - attr: lqi
+            name: LQI
+          - attr: last_seen
+            name: Last Seen
+          - attr: power_source
+            name: Power Source
+          - attr: quirk_class
+            name: Quirk
 
 ################# WAKEUP #################
 

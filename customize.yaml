@@ -1,21 +1,9 @@
-light.sovrum:
-  friendly_name: "Lampor sovrum"
-light.vardagsrum:
-  friendly_name: "Lampor vardagsrum"
-light.hall:
-  friendly_name: "Lampor hall"
-light.livingroom_ceiling:
-  icon: mdi:ceiling-light
-light.livingroom_floor:
-  icon: mdi:floor-lamp
-light.bedroom_ceiling:
-  icon: mdi:ceiling-light
 light.hallway_ceiling:
   icon: mdi:ceiling-light
   friendly_name: 'Taklampa hall'
-light.livingroom_window:
-  icon: mdi:outdoor-lamp
-  friendly_name: 'Fönsterlampa vardagsrum'
+light.livingroom_dinner_table:
+  icon: mdi:ceiling-light
+  friendly_name: 'Lampa middagsbord'
 
 device_tracker.davids_iphone:
   friendly_name: 'David'

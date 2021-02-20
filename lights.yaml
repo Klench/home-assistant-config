@@ -1,7 +1,7 @@
 - platform: template
   lights:
     livingroom_window:
-      friendly_name: 'Fönsterlampa vardagsrum'
+      friendly_name: 'Fönsterlampa'
       icon_template: mdi:outdoor-lamp
       value_template: '{{ states.switch.control_outlet_1.state }}'
       turn_on:
@@ -13,7 +13,7 @@
 - platform: template
   lights:
     office_window:
-      friendly_name: 'Fönsterlampa arbetsrum'
+      friendly_name: 'Fönsterlampa'
       icon_template: mdi:outdoor-lamp
       value_template: '{{ states.switch.control_outlet_2.state }}'
       turn_on:
@@ -25,7 +25,7 @@
 - platform: template
   lights:
     bedroom_bedside:
-      friendly_name: 'Sänglampor'
+      friendly_name: 'Nattduksbord'
       icon_template: mdi:lamp
       value_template: '{{ states.switch.control_outlet_3.state }}'
       turn_on:
@@ -36,13 +36,13 @@
         entity_id: switch.control_outlet_3
 
 - platform: group
-  name: 'Hallway ceiling group 1'
+  name: 'Hallway ceiling top floor'
   entities:
     - light.hallway_ceiling_1_1
     - light.hallway_ceiling_1_2
     - light.hallway_ceiling_1_3
 - platform: group
-  name: 'Hallway ceiling group 2'
+  name: 'Hallway ceiling bottom floor'
   entities:
     - light.hallway_ceiling_2_1
     - light.hallway_ceiling_2_2
@@ -71,6 +71,7 @@
     - light.livingroom_dinner_table_1
     - light.livingroom_dinner_table_2
     - light.livingroom_dinner_table_3
+    - light.livingroom_couch_table
     - light.bedroom_bedside
     - light.kitchen_table
     - light.childroom_ceiling

@@ -961,6 +961,27 @@
   action:
     service: script.bedroom_music_timer_start
 
+################# NOTIFICATIONS #################
+
+- alias: 'Car heater start'
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: switch.lgd321_heater
+    to: 'on'
+  condition:
+    condition: state
+    entity_id: device_tracker.volvo_lgd321
+    state: 'home'
+  action:
+    service: notify.mobile_app_davids_iphone
+    data:
+      message: 'Parkeringsvärmaren har startats'
+      title: 'Volvo V60'
+      data:
+        push:
+          category: 'carheater'
+
 ################# CREATE ALL LIGHTS GROUP #################
 
 - alias: 'Create all lights group'

@@ -46,6 +46,11 @@
     - mbattchg
     - mintimel
 
+- platform: nordpool
+  region: "SE4"
+  precision: 2
+  friendly_name: Elpris
+
 - platform: template
   sensors:
     alarm_clock_time_weekdays:

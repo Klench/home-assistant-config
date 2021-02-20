@@ -51,6 +51,7 @@ views:
           - entity: script.livingroom_relaxed
             icon: mdi:lightbulb-on
           - light.livingroom_dinner_table
+          - light.livingroom_couch_table
           - light.livingroom_floor
           - light.livingroom_window
 
@@ -64,9 +65,8 @@ views:
             icon: mdi:lightbulb-on
           - entity: script.hallway_relaxed
             icon: mdi:lightbulb-on
-          - entity: light.hallway_ceiling_group
-            icon: mdi:ceiling-light
-            name: 'Taklampor hall'
+          - light.hallway_ceiling_bottom_floor
+          - light.hallway_ceiling_top_floor
 
       - type: entities
         title: Sovrum
@@ -98,8 +98,8 @@ views:
           - entity: script.office_relaxed
             icon: mdi:lightbulb-on
           - light.office_ceiling
-          - light.office_window
           - light.office_desk
+          - light.office_window
 
       - type: entities
         title: Kök
@@ -177,6 +177,23 @@ views:
         friendly_name: Steam
         online_only: true
         entities: sensor.steam_
+
+      - type: custom:mini-graph-card
+        entities:
+          - sensor.nordpool_kwh_se4_sek_2_10_025
+        name: Elpris
+        unit: kr/kWh
+        line_color: '#5c8dd1'
+        hour24: true
+        animate: true
+        decimals: 2
+        hours_to_show: 120
+        points_per_hour: 1
+        font_size_header: 18
+        show:
+          extrema: true
+          labels: true
+          fill: fade
 
 ################# SONOS #################
 

@@ -1,9 +1,18 @@
 light.hallway_ceiling:
   icon: mdi:ceiling-light
-  friendly_name: 'Taklampa hall'
+  friendly_name: 'Taklampa'
+light.hallway_ceiling_bottom_floor:
+  icon: mdi:ceiling-light
+  friendly_name: 'Taklampa bottenvåning'
+light.hallway_ceiling_top_floor:
+  icon: mdi:ceiling-light
+  friendly_name: 'Taklampa ovanvåning'
 light.livingroom_dinner_table:
   icon: mdi:ceiling-light
-  friendly_name: 'Lampa middagsbord'
+  friendly_name: 'Middagsbord'
+light.hallway_ceiling_group:
+  icon: mdi:ceiling-light
+  friendly_name: 'Taklampor'
 
 device_tracker.davids_iphone:
   friendly_name: 'David'

@@ -624,7 +624,7 @@ turn_off_outdoor_lights:
 
 ################# ROBOT VACUUM #################
 
-vacuum_clean_home_neato_d7:
+vacuum_clean_bottom_floor_neato_d7:
   sequence:
     - service: neato.custom_cleaning
       data:
@@ -633,17 +633,7 @@ vacuum_clean_home_neato_d7:
           {{ states('sensor.vacuum_mode_neato') }}
         navigation: >
           {{ states('sensor.vacuum_extra_care_neato') }}
-
-vacuum_clean_entrance_neato_d7:
-  sequence:
-    - service: neato.custom_cleaning
-      data:
-        entity_id: vacuum.neato_d7
-        mode: >
-          {{ states('sensor.vacuum_mode_neato') }}
-        navigation: >
-          {{ states('sensor.vacuum_extra_care_neato') }}
-        zone: Entrance
+        zone: 'Bottom floor'
 
 vacuum_clean_hallway_neato_d7:
   sequence:
@@ -678,7 +668,7 @@ vacuum_clean_livingroom_neato_d7:
           {{ states('sensor.vacuum_extra_care_neato') }}
         zone: Livingroom
 
-vacuum_clean_bedroom_neato_d7:
+vacuum_clean_top_floor_neato_d7:
   sequence:
     - service: neato.custom_cleaning
       data:
@@ -687,7 +677,7 @@ vacuum_clean_bedroom_neato_d7:
           {{ states('sensor.vacuum_mode_neato') }}
         navigation: >
           {{ states('sensor.vacuum_extra_care_neato') }}
-        zone: Bedroom
+        zone: Top floor
 
 ################# VARIOUS #################
 

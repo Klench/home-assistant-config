@@ -373,18 +373,21 @@ views:
               unit: 'm2'
               subtitle: Cleaning area
         actions:
-          - service: script.vacuum_clean_home_neato_d7
+          - service: script.vacuum_clean_bottom_floor_neato_d7
             icon: mdi:home
-          - service: script.vacuum_clean_entrance_neato_d7
-            icon: mdi:door
+            name: Bottenvåning
           - service: script.vacuum_clean_hallway_neato_d7
-            icon: mdi:hanger
+            icon: mdi:door
+            name: Hall
           - service: script.vacuum_clean_kitchen_neato_d7
             icon: mdi:silverware-fork-knife
+            name: Kök
           - service: script.vacuum_clean_livingroom_neato_d7
             icon: mdi:sofa-outline
-          - service: script.vacuum_clean_bedroom_neato_d7
+            name: Vardagsrum
+          - service: script.vacuum_clean_top_floor_neato_d7
             icon: mdi:bed
+            name: Ovanvåning
 
       - type: entities
         title: Inställningar

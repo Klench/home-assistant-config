@@ -122,6 +122,10 @@ shopping_list:
 apcupsd:
   host: !secret oden_ip
 
+neato:
+  client_id: !secret neato_client_id
+  client_secret: !secret neato__client_secret
+
 homekit:
   ip_address: !secret oden_ip
   port: 51829

@@ -286,6 +286,18 @@ go_to_bed_lights:
       data:
         entity_id: light.hallway_ceiling_group
 
+not_home_lights:
+  sequence:
+    - delay: '00:00:10'
+    - service: script.hallway_relaxed
+    - service: script.kitchen_relaxed
+    - service: light.turn_on
+      data:
+        entity_id:
+          - light.bedroom_bedside
+          - light.office_window
+
+
 watching_tv_lights:
   alias: 'Belysning TV-tittande'
   sequence:

@@ -81,7 +81,9 @@
   action:
     service: light.turn_on
     data:
-      entity_id: light.livingroom_window
+      entity_id:
+        - light.livingroom_window
+        - light.office_window
 
 - alias: 'Bright after sunset bedroom'
   initial_state: on
@@ -115,7 +117,9 @@
   action:
     service: light.turn_on
     data:
-      entity_id: light.livingroom_window
+      entity_id:
+        - light.livingroom_window
+        - light.office_window
 
 - alias: 'Outdoor lights at sunset'
   initial_state: on
@@ -174,6 +178,53 @@
   action:
     service: script.wakeup_lights
 
+################# AWAY #################
+
+- alias: 'Not home turn on lights'
+  initial_state: on
+  trigger:
+    platform: sun
+    event: sunset
+  condition:
+    - condition: state
+      entity_id: input_boolean.not_home_lights
+      state: 'on'
+    - condition: state
+      entity_id: group.device_tracker_family
+      state: 'not_home'
+  action:
+    service: script.not_home_lights
+
+- alias: 'Leaving home turn on lights'
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: group.device_tracker_family
+    to: 'not_home'
+  condition:
+    - condition: state
+      entity_id: input_boolean.not_home_lights
+      state: 'on'
+    - condition: sun
+      after: sunset
+  action:
+    service: script.not_home_lights
+
+- alias: 'Not home turn off lights'
+  initial_state: on
+  trigger:
+    platform: time
+    at: '00:00:00'
+  condition:
+    - condition: state
+      entity_id: group.device_tracker_family
+      state: 'not_home'
+    - condition: state
+      entity_id: light.indoor_lights
+      state: 'on'
+  action:
+    service: script.indoor_lights_off
+
 ################# SONOS #################
 
 - alias: 'Enable Sonos alarm'
@@ -184,9 +235,6 @@
     - condition: state
       entity_id: binary_sensor.workday_sensor
       state: 'on'
-    - condition: state
-      entity_id: group.device_tracker_family
-      state: 'home'
     - condition: state
       entity_id: automation.wakeup_weekdays
       state: 'on'

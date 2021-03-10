@@ -187,13 +187,16 @@
     event: sunset
   condition:
     - condition: state
-      entity_id: input_boolean.not_home_lights
+      entity_id: input_boolean.enable_not_home_lights
       state: 'on'
     - condition: state
       entity_id: group.device_tracker_family
       state: 'not_home'
   action:
-    service: script.not_home_lights
+    - service: script.enable_not_home_lights
+    - service: input_boolean.turn_on
+      data:
+        entity_id: input_boolean.not_home_lights_active
 
 - alias: 'Leaving home turn on lights'
   initial_state: on
@@ -203,12 +206,15 @@
     to: 'not_home'
   condition:
     - condition: state
-      entity_id: input_boolean.not_home_lights
+      entity_id: input_boolean.enable_not_home_lights
       state: 'on'
     - condition: sun
       after: sunset
   action:
-    service: script.not_home_lights
+    - service: script.enable_not_home_lights
+    - service: input_boolean.turn_on
+      data:
+        entity_id: input_boolean.not_home_lights_active
 
 - alias: 'Not home turn off lights'
   initial_state: on
@@ -223,7 +229,10 @@
       entity_id: light.indoor_lights
       state: 'on'
   action:
-    service: script.indoor_lights_off
+    - service: script.indoor_lights_off
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.not_home_lights_active
 
 ################# SONOS #################
 
@@ -714,19 +723,27 @@
       to: 'home'
   condition:
     - condition: state
+      entity_id: input_boolean.coming_home_turn_on_lights
+      state: 'on'
+    - condition: state
       entity_id: binary_sensor.relaxed_mode
       state: 'off'
     - condition: sun
       after: sunset
       after_offset: '-01:00:00'
-    - condition: state
-      entity_id: light.indoor
-      state: 'off'
-    - condition: state
-      entity_id: input_boolean.coming_home_turn_on_lights
-      state: 'on'
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: light.indoor
+          state: 'off'
+        - condition: state
+          entity_id: input_boolean.not_home_lights_active
+          state: 'on'
   action:
-    service: script.indoor_lights_bright
+    - service: script.indoor_lights_bright
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.not_home_lights_active
 
 - alias: 'Coming home turn on lights relaxed'
   initial_state: on
@@ -739,19 +756,27 @@
       to: 'home'
   condition:
     - condition: state
+      entity_id: input_boolean.coming_home_turn_on_lights
+      state: 'on'
+    - condition: state
       entity_id: binary_sensor.relaxed_mode
       state: 'on'
     - condition: sun
       after: sunset
       after_offset: '-01:00:00'
-    - condition: state
-      entity_id: light.indoor
-      state: 'off'
-    - condition: state
-      entity_id: input_boolean.coming_home_turn_on_lights
-      state: 'on'
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: light.indoor
+          state: 'off'
+        - condition: state
+          entity_id: input_boolean.not_home_lights_active
+          state: 'on'
   action:
-    service: script.indoor_lights_relaxed
+    - service: script.indoor_lights_relaxed
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.not_home_lights_active
 
 - alias: 'Coming home turn on hallway lights'
   initial_state: on
@@ -767,6 +792,9 @@
       to: 'home'
   condition:
     - condition: state
+      entity_id: input_boolean.coming_home_turn_on_lights
+      state: 'on'
+    - condition: state
       entity_id: binary_sensor.relaxed_mode
       state: 'off'
     - condition: sun
@@ -775,14 +803,19 @@
     - condition: sun
       after: sunrise
       after_offset: '01:00:00'
-    - condition: state
-      entity_id: light.indoor
-      state: 'off'
-    - condition: state
-      entity_id: input_boolean.coming_home_turn_on_lights
-      state: 'on'
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: light.indoor
+          state: 'off'
+        - condition: state
+          entity_id: input_boolean.not_home_lights_active
+          state: 'on'
   action:
-    service: script.hallway_bright
+    - service: script.hallway_bright
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.not_home_lights_active
 
 - alias: 'Coming home group Sonos speakers'
   initial_state: on
@@ -815,6 +848,25 @@
         - service: script.sonos_set_group_volume
           data:
             volume: 0.2
+
+- alias: 'Nellie coming home'
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: device_tracker.volvo_lgd321
+    to: 'home'
+  condition:
+    - condition: state
+      entity_id: device_tracker.nellies_iphone
+      state: 'not_home'
+    - condition: state
+      entity_id: device_tracker.davids_iphone
+      state: 'home'
+  action:
+    service: light.turn_on
+    data:
+      entity_id: light.kitchen_table
+      flash: short
 
 ################# OFFICE #################
 

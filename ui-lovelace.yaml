@@ -721,7 +721,7 @@ views:
           - automation.advent_light
           - automation.sunset
           - input_boolean.window_lights_after_sunset
-          - input_boolean.not_home_lights
+          - input_boolean.enable_not_home_lights
           - automation.closing_bathroom_door
           - automation.opening_bathroom_door
           - input_boolean.coming_home_turn_on_lights

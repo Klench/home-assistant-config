@@ -286,7 +286,7 @@ go_to_bed_lights:
       data:
         entity_id: light.hallway_ceiling_group
 
-not_home_lights:
+enable_not_home_lights:
   sequence:
     - delay: '00:00:10'
     - service: script.hallway_relaxed

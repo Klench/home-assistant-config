@@ -173,8 +173,6 @@ zha:
     ota:
       ikea_provider: true
 
-zha_map:
-
 ################# MEDIA PLAYERS #################
 
 media_player:

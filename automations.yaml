@@ -76,11 +76,11 @@
       entity_id: group.device_tracker_family
       state: 'home'
     - condition: state
-      entity_id: light.indoor
+      entity_id: group.indoor_lights
       state: 'on'
   action:
     service: light.turn_on
-    data:
+    target:
       entity_id:
         - light.livingroom_window
         - light.office_window
@@ -99,7 +99,7 @@
       state: 'on'
   action:
     service: light.turn_on
-    data:
+    target:
       entity_id: light.bedroom_bedside
 
 - alias: 'Bright after sunset livingroom'
@@ -116,7 +116,7 @@
       state: 'on'
   action:
     service: light.turn_on
-    data:
+    target:
       entity_id:
         - light.livingroom_window
         - light.office_window
@@ -180,23 +180,23 @@
 
 ################# AWAY #################
 
-- alias: 'Not home turn on lights'
+- alias: 'Away turn on lights'
   initial_state: on
   trigger:
     platform: sun
     event: sunset
   condition:
     - condition: state
-      entity_id: input_boolean.enable_not_home_lights
+      entity_id: input_boolean.enable_away_lights
       state: 'on'
     - condition: state
       entity_id: group.device_tracker_family
       state: 'not_home'
   action:
-    - service: script.enable_not_home_lights
+    - service: script.enable_away_lights
     - service: input_boolean.turn_on
       data:
-        entity_id: input_boolean.not_home_lights_active
+        entity_id: input_boolean.away_lights_active
 
 - alias: 'Leaving home turn on lights'
   initial_state: on
@@ -206,33 +206,33 @@
     to: 'not_home'
   condition:
     - condition: state
-      entity_id: input_boolean.enable_not_home_lights
+      entity_id: input_boolean.enable_away_lights
       state: 'on'
     - condition: sun
       after: sunset
   action:
-    - service: script.enable_not_home_lights
+    - service: script.enable_away_lights
     - service: input_boolean.turn_on
       data:
-        entity_id: input_boolean.not_home_lights_active
+        entity_id: input_boolean.away_lights_active
 
-- alias: 'Not home turn off lights'
+- alias: 'Away turn off lights'
   initial_state: on
   trigger:
     platform: time
-    at: '00:00:00'
+    at: '23:30:00'
   condition:
     - condition: state
       entity_id: group.device_tracker_family
       state: 'not_home'
     - condition: state
-      entity_id: light.indoor_lights
+      entity_id: group.indoor_lights
       state: 'on'
   action:
     - service: script.indoor_lights_off
     - service: input_boolean.turn_off
-      data:
-        entity_id: input_boolean.not_home_lights_active
+      target:
+        entity_id: input_boolean.away_lights_active
 
 ################# SONOS #################
 
@@ -333,8 +333,10 @@
       command: 'off'
   action:
     service: light.turn_off
-    data:
-      entity_id: light.bedroom_bedside
+    target:
+      entity_id:
+        - light.bedroom_ceiling
+        - light.bedroom_bedside
 
 ##### CHILD ROOM #####
 
@@ -734,16 +736,16 @@
     - condition: or
       conditions:
         - condition: state
-          entity_id: light.indoor
+          entity_id: group.indoor_lights
           state: 'off'
         - condition: state
-          entity_id: input_boolean.not_home_lights_active
+          entity_id: input_boolean.away_lights_active
           state: 'on'
   action:
     - service: script.indoor_lights_bright
     - service: input_boolean.turn_off
       data:
-        entity_id: input_boolean.not_home_lights_active
+        entity_id: input_boolean.away_lights_active
 
 - alias: 'Coming home turn on lights relaxed'
   initial_state: on
@@ -767,16 +769,16 @@
     - condition: or
       conditions:
         - condition: state
-          entity_id: light.indoor
+          entity_id: group.indoor_lights
           state: 'off'
         - condition: state
-          entity_id: input_boolean.not_home_lights_active
+          entity_id: input_boolean.away_lights_active
           state: 'on'
   action:
     - service: script.indoor_lights_relaxed
     - service: input_boolean.turn_off
       data:
-        entity_id: input_boolean.not_home_lights_active
+        entity_id: input_boolean.away_lights_active
 
 - alias: 'Coming home turn on hallway lights'
   initial_state: on
@@ -806,16 +808,16 @@
     - condition: or
       conditions:
         - condition: state
-          entity_id: light.indoor
+          entity_id: group.indoor_lights
           state: 'off'
         - condition: state
-          entity_id: input_boolean.not_home_lights_active
+          entity_id: input_boolean.away_lights_active
           state: 'on'
   action:
     - service: script.hallway_bright
     - service: input_boolean.turn_off
       data:
-        entity_id: input_boolean.not_home_lights_active
+        entity_id: input_boolean.away_lights_active
 
 - alias: 'Coming home group Sonos speakers'
   initial_state: on
@@ -1090,4 +1092,4 @@
     platform: homeassistant
     event: start
   action:
-    service: script.create_all_light_group
+    service: script.create_indoor_light_group

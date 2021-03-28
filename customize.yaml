@@ -7,12 +7,12 @@ light.hallway_ceiling_bottom_floor:
 light.hallway_ceiling_top_floor:
   icon: mdi:ceiling-light
   friendly_name: 'Taklampa ovanvåning'
-light.livingroom_dinner_table:
-  icon: mdi:ceiling-light
-  friendly_name: 'Middagsbord'
 light.hallway_ceiling_group:
   icon: mdi:ceiling-light
   friendly_name: 'Taklampor'
+light.bedroom_bedside:
+  icon: mdi:lamp
+  friendly_name: 'Nattduksbord'
 
 device_tracker.davids_iphone:
   friendly_name: 'David'

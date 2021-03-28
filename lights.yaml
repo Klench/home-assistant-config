@@ -10,8 +10,6 @@
       turn_off:
         service: switch.turn_off
         entity_id: switch.control_outlet_1
-- platform: template
-  lights:
     office_window:
       friendly_name: 'Fönsterlampa'
       icon_template: mdi:outdoor-lamp
@@ -22,11 +20,7 @@
       turn_off:
         service: switch.turn_off
         entity_id: switch.control_outlet_2
-- platform: template
-  lights:
-    bedroom_bedside:
-      friendly_name: 'Nattduksbord'
-      icon_template: mdi:lamp
+    bedroom_bedside_1:
       value_template: '{{ states.switch.control_outlet_3.state }}'
       turn_on:
         service: switch.turn_on
@@ -34,6 +28,14 @@
       turn_off:
         service: switch.turn_off
         entity_id: switch.control_outlet_3
+    bedroom_bedside_2:
+      value_template: '{{ states.switch.control_outlet_4.state }}'
+      turn_on:
+        service: switch.turn_on
+        entity_id: switch.control_outlet_4
+      turn_off:
+        service: switch.turn_off
+        entity_id: switch.control_outlet_4
 
 - platform: group
   name: 'Hallway ceiling top floor'
@@ -58,29 +60,7 @@
     - light.hallway_ceiling_2_3
     - light.hallway_ceiling
 - platform: group
-  name: 'Livingroom dinner table'
+  name: 'Bedroom bedside'
   entities:
-    - light.livingroom_dinner_table_1
-    - light.livingroom_dinner_table_2
-    - light.livingroom_dinner_table_3
-- platform: group
-  name: 'Indoor'
-  entities:
-    - light.livingroom_floor
-    - light.livingroom_window
-    - light.livingroom_dinner_table_1
-    - light.livingroom_dinner_table_2
-    - light.livingroom_dinner_table_3
-    - light.livingroom_couch_table
-    - light.bedroom_bedside
-    - light.kitchen_table
-    - light.childroom_ceiling
-    - light.office_window
-    - light.office_desk
-    - light.office_ceiling
-    - light.hallway_ceiling_1_1
-    - light.hallway_ceiling_1_2
-    - light.hallway_ceiling_1_3
-    - light.hallway_ceiling_2_1
-    - light.hallway_ceiling_2_2
-    - light.hallway_ceiling_2_3
+    - light.bedroom_bedside_1
+    - light.bedroom_bedside_2

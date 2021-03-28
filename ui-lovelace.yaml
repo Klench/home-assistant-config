@@ -11,7 +11,7 @@ views:
         entities:
           - device_tracker.davids_iphone
           - device_tracker.nellies_iphone
-          - device_tracker.volvo_lgd321
+          - sensor.car_status
           - entity: sensor.lgd321_range
             name: 'Räckvidd'
           - entity: switch.lgd321_heater
@@ -50,7 +50,6 @@ views:
             icon: mdi:lightbulb-on-outline
           - entity: script.livingroom_relaxed
             icon: mdi:lightbulb-on
-          - light.livingroom_dinner_table
           - light.livingroom_couch_table
           - light.livingroom_floor
           - light.livingroom_window
@@ -72,11 +71,11 @@ views:
         title: Sovrum
         show_header_toggle: false
         entities:
-          # - entity: script.bedroom_bright
-          #   icon: mdi:lightbulb-on-outline
+          - entity: script.bedroom_bright
+            icon: mdi:lightbulb-on-outline
           - entity: script.bedroom_relaxed
             icon: mdi:lightbulb-on
-          # - light.bedroom_ceiling
+          - light.bedroom_ceiling
           - light.bedroom_bedside
 
       - type: entities
@@ -110,8 +109,7 @@ views:
           - entity: script.kitchen_relaxed
             icon: mdi:lightbulb-on
           - light.kitchen_table
-          # - entity: light.hallway_ceiling
-          #   name: 'Taklampa kök'
+          - switch.kitchen_relay
 
       - type: conditional
         conditions:
@@ -433,7 +431,7 @@ views:
         icon: mdi:server
         entities:
           - entity: sensor.unraid_cputin_temperature
-            name: CPU temp
+            name: Temperatur CPU
             unit: '°C'
             line_color: blue
             show:
@@ -442,7 +440,7 @@ views:
               fill: fade
               average: true
           - entity: sensor.ups_power_delivery
-            name: Power
+            name: Effekt
             unit: W
             line_color: green
             show:
@@ -721,7 +719,7 @@ views:
           - automation.advent_light
           - automation.sunset
           - input_boolean.window_lights_after_sunset
-          - input_boolean.enable_not_home_lights
+          - input_boolean.enable_away_lights
           - automation.closing_bathroom_door
           - automation.opening_bathroom_door
           - input_boolean.coming_home_turn_on_lights

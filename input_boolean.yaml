@@ -9,10 +9,10 @@ coming_home_turn_on_lights:
 window_lights_after_sunset:
   name: Window lights after sunset
   icon: mdi:weather-sunset
-enable_not_home_lights:
+enable_away_lights:
   name: Turn on lights when not home
   icon: mdi:home-outline
-not_home_lights_active:
+away_lights_active:
   initial: false
 vacuum_eco_mode:
   name: Eko-läge

@@ -236,15 +236,42 @@ indoor_lights_relaxed:
       target:
         entity_id: automation.opening_bathroom_door
 
-low_brightness:
+indoor_lights_low_brightness:
   alias: 'Låg ljusstyrka'
   sequence:
-    - service: script.turn_on
-      target:
-        entity_id:
-          - script.livingroom_low_brightness
-          - script.hallway_low_brightness
-          - script.kitchen_bright
+    choose:
+      conditions:
+        condition: or
+        conditions:
+          - condition: state
+            entity_id: binary_sensor.relaxed_mode
+            state: 'on'
+          - condition: time
+            before: '05:00:00'
+      sequence:
+        - service: light.turn_off
+          target:
+            entity_id:
+              - light.livingroom_window
+              - light.hallway_ceiling_group
+        - service: light.turn_on
+          data:
+            entity_id: light.livingroom_floor
+            brightness_pct: 20
+            color_temp: 443
+            transition: 2
+        - service: light.turn_on
+          data:
+            entity_id: light.kitchen_table
+            brightness_pct: 50
+            transition: 2
+    default:
+      - service: script.turn_on
+        target:
+          entity_id:
+            - script.livingroom_low_brightness
+            - script.hallway_low_brightness
+            - script.kitchen_bright
 
 indoor_lights_off:
   alias: 'Allt släckt'
@@ -265,8 +292,10 @@ wakeup_lights:
     - service: script.turn_on
       target:
         entity_id:
+          - script.bedroom_wakeup
           - script.livingroom_wakeup
           - script.hallway_wakeup
+          - script.kitchen_wakeup
 
 window_lights:
   alias: 'Fönsterbelysning'
@@ -363,9 +392,8 @@ bedroom_wakeup:
     - service: light.turn_on
       data:
         entity_id: light.bedroom_ceiling
-        brightness: 30
+        brightness_pct: 30
         color_temp: 372
-        transition: 1800
 
 ##### CHILDREN ROOM #####
 
@@ -444,7 +472,7 @@ livingroom_bright:
     - service: light.turn_on
       data:
         entity_id: light.livingroom_floor
-        brightness: 255
+        brightness_pct: 100
         color_temp: 372
         transition: 2
 
@@ -464,7 +492,7 @@ livingroom_relaxed:
     - service: light.turn_on
       data:
         entity_id: light.livingroom_floor
-        brightness: 255
+        brightness_pct: 100
         color_temp: 443
         transition: 2
     - service: light.turn_on
@@ -476,36 +504,10 @@ livingroom_wakeup:
   sequence:
     - service: light.turn_on
       data:
-        entity_id: light.livingroom_ceiling
-        brightness: 150
+        entity_id: light.livingroom_floor
+        brightness_pct: 100
         color_temp: 372
         transition: 1800
-    - service: light.turn_on
-      data:
-        entity_id: light.livingroom_floor
-        brightness: 255
-        color_temp: 372
-        transition: 1800
-
-livingroom_dimmed:
-  sequence:
-    - service: light.turn_off
-      target:
-        entity_id:
-          - light.livingroom_ceiling
-          - light.livingroom_window
-          - light.hallway_ceiling_group
-    - service: light.turn_on
-      data:
-        entity_id: light.livingroom_floor
-        brightness: 50
-        color_temp: 443
-        transition: 2
-    - service: light.turn_on
-      data:
-        entity_id: light.kitchen_table
-        brightness_pct: 30
-        transition: 2
 
 livingroom_low_brightness:
   alias: 'Låg ljusstyrka'
@@ -513,7 +515,7 @@ livingroom_low_brightness:
     - service: light.turn_on
       data:
         entity_id: light.livingroom_floor
-        brightness: 255
+        brightness_pct: 100
         color_temp: 372
         transition: 2
 
@@ -525,7 +527,7 @@ hallway_bright:
     - service: light.turn_on
       data:
         entity_id: light.hallway_ceiling_group
-        brightness: 255
+        brightness_pct: 100
         transition: 1
     - delay:
         milliseconds: 1100
@@ -560,13 +562,8 @@ hallway_relaxed:
         transition: 2
     - service: light.turn_on
       data:
-        entity_id: light.hallway_ceiling
-        brightness: 1
-        transition: 2
-    - service: light.turn_on
-      data:
         entity_id: light.hallway_ceiling_bottom_floor
-        brightness: 1
+        brightness_pct: 1
         transition: 1
     - delay:
         milliseconds: 1100
@@ -581,15 +578,22 @@ hallway_wakeup:
   sequence:
     - service: light.turn_on
       data:
-        entity_id: light.hallway_ceiling_group
-        brightness: 144
+        entity_id: light.hallway_ceiling_bottom_floor
+        brightness_pct: 1
         transition: 1
     - delay:
         milliseconds: 1100
     - service: light.turn_on
       data:
-        entity_id: light.hallway_ceiling_group
-        color_temp: 372
+        entity_id: light.hallway_ceiling_bottom_floor
+        color_temp: 300
+        transition: 1
+    - delay:
+        milliseconds: 1100
+    - service: light.turn_on
+      data:
+        entity_id: light.hallway_ceiling_bottom_floor
+        brightness_pct: 100
         transition: 1800
 
 ##### KITCHEN #####
@@ -612,6 +616,15 @@ kitchen_relaxed:
         brightness_pct: 70
         transition: 2
 
+kitchen_wakeup:
+  alias: 'Väckning kök'
+  sequence:
+    - service: light.turn_on
+      data:
+        entity_id: light.kitchen_table
+        brightness_pct: 100
+        transition: 1800
+
 ##### BATHROOM #####
 
 bathroom_relaxed:
@@ -620,7 +633,7 @@ bathroom_relaxed:
     - service: light.turn_on
       data:
         entity_id: light.bathroom_led
-        brightness: 255
+        brightness_pct: 100
         rgb_color: [255,168,38]
         transition: 2
         effect: None

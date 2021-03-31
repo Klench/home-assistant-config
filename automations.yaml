@@ -136,7 +136,6 @@
     event: sunrise
   action:
     service: script.turn_off_outdoor_lights
-
 ################# WAKEUP #################
 
 - alias: 'Wakeup weekdays'
@@ -418,7 +417,7 @@
       device_id: 3b531df34853b38343b729aacef15e48
       command: 'on'
   action:
-    service: script.low_brightness
+    service: script.indoor_lights_low_brightness
 
 - alias: 'Ikea switch turn off indoor lights'
   initial_state: on
@@ -479,41 +478,17 @@
   action:
     service: script.indoor_lights_off
 
-- alias: 'Hue switch livingroom dimmed'
-  initial_state: on
-  trigger:
-    platform: state
-    entity_id: sensor.hue_hallway_switch
-  condition:
-    - condition: state
-      entity_id: sensor.hue_hallway_switch
-      state: '4_hold_up'
-    - condition: or
-      conditions:
-        - condition: state
-          entity_id: binary_sensor.relaxed_mode
-          state: 'on'
-        - condition: time
-          before: '02:00:00'
-  action:
-    service: script.livingroom_dimmed
-
 - alias: 'Hue switch low brightness'
   initial_state: on
   trigger:
     platform: state
     entity_id: sensor.hue_hallway_switch
   condition:
-    - condition: state
-      entity_id: sensor.hue_hallway_switch
-      state: '4_hold_up'
-    - condition: state
-      entity_id: binary_sensor.relaxed_mode
-      state: 'off'
-    - condition: time
-      after: '02:00:00'
+    condition: state
+    entity_id: sensor.hue_hallway_switch
+    state: '4_hold_up'
   action:
-    service: script.low_brightness
+    service: script.indoor_lights_low_brightness
 
 ##### SONOS #####
 

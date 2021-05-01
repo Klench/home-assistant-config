@@ -12,6 +12,7 @@ window_lights_after_sunset:
 enable_away_lights:
   name: Turn on lights when not home
   icon: mdi:home-outline
+  initial: on
 away_lights_active:
   initial: false
 vacuum_eco_mode:

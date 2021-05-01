@@ -106,6 +106,15 @@ ios:
             activationMode: 'foreground'
             destructive: false
             behavior: 'default'
+      - name: Alarm status
+        identifier: 'alarmstatus'
+        actions:
+          - identifier: 'ok'
+            title: 'Ok'
+            activationMode: 'background'
+            authenticationRequired: false
+            destructive: false
+            behavior: 'default'
 
 # Text to speech
 tts:
@@ -128,7 +137,6 @@ neato:
 
 homekit:
   ip_address: !secret oden_ip
-  port: 51829
   filter:
     include_entities:
       - script.indoor_lights_bright
@@ -159,6 +167,8 @@ glances:
   name: unraid
 
 nordpool:
+
+wake_on_lan:
 
 ################# VOLVO ON CALL #################
 

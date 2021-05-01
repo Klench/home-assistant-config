@@ -25,9 +25,7 @@ views:
           - entity: sensor.potential_breaking_changes
             name: 'Ändringar'
             icon: mdi:briefcase-download-outline
-          - entity: sensor.ups_status
-            name: 'UPS'
-            icon: mdi:power-plug-outline
+          - alarm_control_panel.ajax_alarm_status
 
       - type: entities
         title: Belysning
@@ -35,7 +33,7 @@ views:
         entities:
           - entity: script.indoor_lights_bright
             icon: mdi:lightbulb-on-outline
-          - entity: script.low_brightness
+          - entity: script.indoor_lights_low_brightness
             icon: mdi:lightbulb-on
           - entity: script.indoor_lights_relaxed
             icon: mdi:lightbulb-on
@@ -60,8 +58,6 @@ views:
         entities:
           - entity: script.hallway_bright
             icon: mdi:lightbulb-on-outline
-          - entity: script.hallway_low_brightness
-            icon: mdi:lightbulb-on
           - entity: script.hallway_relaxed
             icon: mdi:lightbulb-on
           - light.hallway_ceiling_bottom_floor
@@ -111,6 +107,20 @@ views:
           - light.kitchen_table
           - switch.kitchen_relay
 
+      - type: custom:mini-media-player
+        entity: media_player.spotify
+        icon: mdi:spotify
+        replace_mute: stop
+        hide:
+          volume: true
+          power: true
+          progress: true
+        artwork: full-cover
+        idle_view:
+          when_idle: true
+          when_paused: true
+          when_standby: true
+
       - type: conditional
         conditions:
           - entity: media_player.apple_tv_vardagsrum
@@ -118,6 +128,7 @@ views:
         card:
           type: custom:mini-media-player
           entity: media_player.apple_tv_vardagsrum
+          icon: mdi:television
           replace_mute: stop
           hide:
             volume: true
@@ -126,15 +137,6 @@ views:
             when_idle: true
             when_standby: true
           artwork: full-cover
-          icon: mdi:television-classic
-
-      - type: conditional
-        conditions:
-          - entity: media_player.spotify
-            state: 'playing'
-        card:
-          type: media-control
-          entity: media_player.spotify
 
       - type: custom:mini-graph-card
         entities:
@@ -197,6 +199,9 @@ views:
 
   - icon: mdi:speaker-wireless
     cards:
+
+      - type: media-control
+        entity: media_player.sonos_kitchen
 
       - type: custom:mini-media-player
         entity: media_player.sonos_kitchen
@@ -371,21 +376,33 @@ views:
               unit: 'm2'
               subtitle: Cleaning area
         actions:
-          - service: script.vacuum_clean_bottom_floor_neato_d7
-            icon: mdi:home
-            name: Bottenvåning
-          - service: script.vacuum_clean_hallway_neato_d7
+          # - service: script.vacuum_clean_bottom_floor_neato_d7
+          #   icon: mdi:home
+          #   name: Bottenvåning
+          - service: script.vacuum_clean_entrance_neato_d7
             icon: mdi:door
-            name: Hall
+            name: Entré
           - service: script.vacuum_clean_kitchen_neato_d7
             icon: mdi:silverware-fork-knife
             name: Kök
           - service: script.vacuum_clean_livingroom_neato_d7
             icon: mdi:sofa-outline
             name: Vardagsrum
-          - service: script.vacuum_clean_top_floor_neato_d7
-            icon: mdi:bed
-            name: Ovanvåning
+          # - service: script.vacuum_clean_top_floor_neato_d7
+          #   icon: mdi:bed
+          #   name: Ovanvåning
+          - service: script.vacuum_clean_hallway_neato_d7
+            icon: mdi:stairs
+            name: Hall
+          - service: script.vacuum_clean_bedroom_neato_d7
+            icon: mdi:bed-double-outline
+            name: Sovrum
+          - service: script.vacuum_clean_childroom_neato_d7
+            icon: mdi:human-child
+            name: Barnrum
+          - service: script.vacuum_clean_hallway_neato_d7
+            icon: mdi:desk
+            name: Arbetsrum
 
       - type: entities
         title: Inställningar
@@ -496,34 +513,34 @@ views:
 
 ################# WAKEUP #################
 
-  # - icon: mdi:alarm
-  #   cards:
+  - icon: mdi:alarm
+    cards:
      
-  #     - type: entities
-  #       title: Väckning vardagar
-  #       show_header_toggle: false
-  #       entities:
-  #         - sensor.alarm_clock_time_weekdays
-  #         - input_number.alarm_hours_weekdays
-  #         - input_number.alarm_minutes_weekdays
-  #         - input_number.alarm_heater_offset
-  #         - entity: automation.wakeup_weekdays
-  #           name: 'Väckning vardagar'
-  #         - entity: automation.enable_sonos_alarm
-  #           name: 'Sonos alarm'
-  #         - input_boolean.wakeup_override
-  #         - entity: automation.car_heater_weekdays
-  #           name: 'Bränslevärmare'
+      - type: entities
+        title: Väckning vardagar
+        show_header_toggle: false
+        entities:
+          - sensor.alarm_clock_time_weekdays
+          - input_number.alarm_hours_weekdays
+          - input_number.alarm_minutes_weekdays
+          - input_number.alarm_heater_offset
+          - entity: automation.wakeup_weekdays
+            name: 'Väckning vardagar'
+          - entity: automation.enable_sonos_alarm
+            name: 'Sonos alarm'
+          - input_boolean.wakeup_override
+          - entity: automation.car_heater_weekdays
+            name: 'Bränslevärmare'
 
-  #     - type: entities
-  #       title: Väckning helg
-  #       show_header_toggle: false
-  #       entities:
-  #         - sensor.alarm_clock_time_weekend
-  #         - input_number.alarm_hours_weekend
-  #         - input_number.alarm_minutes_weekend
-  #         - entity: automation.wakeup_weekend
-  #           name: 'Väckning helg'
+      - type: entities
+        title: Väckning helg
+        show_header_toggle: false
+        entities:
+          - sensor.alarm_clock_time_weekend
+          - input_number.alarm_hours_weekend
+          - input_number.alarm_minutes_weekend
+          - entity: automation.wakeup_weekend
+            name: 'Väckning helg'
 
 ################# TV #################
 

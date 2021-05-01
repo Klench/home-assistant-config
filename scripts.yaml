@@ -355,13 +355,21 @@ watching_tv_lights:
           - light.livingroom_ceiling
           - light.livingroom_window
 
-create_indoor_light_group:
+create_indoor_lights_group:
     sequence:
       - service: group.set
         data:
           object_id: "indoor_lights"
           entities: >
             {%- for device in states.light %}{% if 'outdoor' not in device.entity_id %}{%- if loop.first %}{%- else %}, {% endif %}{{ device.entity_id }}{%- if loop.last %}{% endif %}{% endif %}{%- endfor %}
+
+create_all_lights_group:
+    sequence:
+      - service: group.set
+        data:
+          object_id: "all_lights"
+          entities: >
+            {%- for device in states.light %}{%- if loop.first %}{%- else %}, {% endif %}{{ device.entity_id }}{%- if loop.last %}{% endif %}{%- endfor %}
 
 ##### BEDROOM #####
 
@@ -492,7 +500,7 @@ livingroom_relaxed:
     - service: light.turn_on
       data:
         entity_id: light.livingroom_floor
-        brightness_pct: 100
+        brightness_pct: 40
         color_temp: 443
         transition: 2
     - service: light.turn_on
@@ -666,7 +674,7 @@ turn_off_outdoor_lights:
 
 ################# ROBOT VACUUM #################
 
-vacuum_clean_bottom_floor_neato_d7:
+vacuum_clean_home_neato_d7:
   sequence:
     - service: neato.custom_cleaning
       data:
@@ -675,9 +683,8 @@ vacuum_clean_bottom_floor_neato_d7:
           {{ states('sensor.vacuum_mode_neato') }}
         navigation: >
           {{ states('sensor.vacuum_extra_care_neato') }}
-        zone: 'Bottom floor'
 
-vacuum_clean_hallway_neato_d7:
+vacuum_clean_entrance_neato_d7:
   sequence:
     - service: neato.custom_cleaning
       data:
@@ -686,7 +693,7 @@ vacuum_clean_hallway_neato_d7:
           {{ states('sensor.vacuum_mode_neato') }}
         navigation: >
           {{ states('sensor.vacuum_extra_care_neato') }}
-        zone: Hallway
+        zone: Entrance
 
 vacuum_clean_kitchen_neato_d7:
   sequence:
@@ -710,7 +717,7 @@ vacuum_clean_livingroom_neato_d7:
           {{ states('sensor.vacuum_extra_care_neato') }}
         zone: Livingroom
 
-vacuum_clean_top_floor_neato_d7:
+vacuum_clean_hallway_neato_d7:
   sequence:
     - service: neato.custom_cleaning
       data:
@@ -719,7 +726,40 @@ vacuum_clean_top_floor_neato_d7:
           {{ states('sensor.vacuum_mode_neato') }}
         navigation: >
           {{ states('sensor.vacuum_extra_care_neato') }}
-        zone: Top floor
+        zone: Hallway
+
+vacuum_clean_bedroom_neato_d7:
+  sequence:
+    - service: neato.custom_cleaning
+      data:
+        entity_id: vacuum.neato_d7
+        mode: >
+          {{ states('sensor.vacuum_mode_neato') }}
+        navigation: >
+          {{ states('sensor.vacuum_extra_care_neato') }}
+        zone: Bedroom
+
+vacuum_clean_childroom_neato_d7:
+  sequence:
+    - service: neato.custom_cleaning
+      data:
+        entity_id: vacuum.neato_d7
+        mode: >
+          {{ states('sensor.vacuum_mode_neato') }}
+        navigation: >
+          {{ states('sensor.vacuum_extra_care_neato') }}
+        zone: Childroom
+
+vacuum_clean_office_neato_d7:
+  sequence:
+    - service: neato.custom_cleaning
+      data:
+        entity_id: vacuum.neato_d7
+        mode: >
+          {{ states('sensor.vacuum_mode_neato') }}
+        navigation: >
+          {{ states('sensor.vacuum_extra_care_neato') }}
+        zone: Office
 
 ################# VARIOUS #################
 

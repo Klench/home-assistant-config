@@ -33,7 +33,7 @@
     - service: media_player.volume_set
       data:
         entity_id: media_player.sonos_bedroom
-        volume_level: 0.2
+        volume_level: 0.15
 
 - alias: 'Hallway bright'
   trigger:
@@ -1040,6 +1040,8 @@
 
 ################# NOTIFICATIONS #################
 
+##### CAR HEATER #####
+
 - alias: 'Car heater start'
   initial_state: on
   trigger:
@@ -1059,12 +1061,188 @@
         push:
           category: 'carheater'
 
-################# CREATE ALL LIGHTS GROUP #################
+##### ALARM #####
 
-- alias: 'Create all lights group'
+- alias: 'Alarm not active'
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: group.device_tracker_family
+    to: 'not_home'
+    for: "00:30:00"
+  condition:
+    condition: template
+    value_template: >
+      {{ not is_state('alarm_control_panel.ajax_alarm_status','armed_away') }}
+  action:
+    choose:
+      - conditions: >
+          {{ states.device_tracker.davids_iphone.last_changed > states.device_tracker.nellies_iphone.last_changed }}
+        sequence:
+          - service: notify.mobile_app_davids_iphone
+            data:
+              message: 'Larmet är ej aktiverat'
+              title: 'Larmstatus'
+              data:
+                push:
+                  category: 'alarmstatus'
+                sound:
+                  name: default
+                  critical: 1
+                  volume: 0.5
+      - conditions: >
+          {{ states.device_tracker.davids_iphone.last_changed < states.device_tracker.nellies_iphone.last_changed }}
+        sequence:
+          - service: notify.mobile_app_nellies_iphone
+            data:
+              message: 'Larmet är ej aktiverat'
+              title: 'Larmstatus'
+              data:
+                push:
+                  category: 'alarmstatus'
+                sound:
+                  name: default
+                  critical: 1
+                  volume: 0.5
+
+- alias: 'Night mode not active'
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: script.indoor_lights_off
+    to: 'on'
+  condition:
+    - condition: state
+      entity_id: group.device_tracker_family
+      state: 'home'
+      for: "00:00:05"
+    - condition: template
+      value_template: >
+        {{ not is_state('alarm_control_panel.ajax_alarm_status','armed_night') }}
+  action:
+    service: notify.mobile_app_davids_iphone
+    data:
+      message: 'Nattläge är ej aktiverat'
+      title: 'Larmstatus'
+      data:
+        push:
+          category: 'alarmstatus'
+        sound:
+          name: default
+          critical: 1
+          volume: 0.1
+
+- alias: 'Night mode active'
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: group.indoor_lights
+    to: 'on'
+  condition:
+    condition: state
+    entity_id: alarm_control_panel.ajax_alarm_status
+    state: 'armed_night'
+  action:
+    service: notify.mobile_app_davids_iphone
+    data:
+      message: 'Nattläge är aktiverat'
+      title: 'Larmstatus'
+      data:
+        push:
+          category: 'alarmstatus'
+
+- alias: 'Alarm triggered'
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: alarm_control_panel.ajax_alarm_status
+    to: 'triggered'
+  condition:
+    condition: state
+    entity_id: group.device_tracker_family
+    state: 'not_home'
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: group.all_lights
+        brightness_pct: 100
+        transition: 1
+    - service: notify.mobile_app_davids_iphone
+      data:
+        message: 'Larmet har utlösts'
+        title: 'Larmstatus'
+        data:
+          push:
+            category: 'alarmstatus'
+          sound:
+            name: default
+            critical: 1
+            volume: 1
+
+################# IOS EVENTS #################
+
+- alias: 'Toggle kitchen relay'
+  initial_state: on
+  trigger:
+    platform: event
+    event_type: ios.action_fired
+    event_data:
+      actionID: F2398A0D-8A0C-41BA-B337-1405B6518531
+      actionName: Toggle kitchen relay
+      sourceDeviceID: davids_iphone
+      sourceDeviceName: Davids iPhone
+      sourceDevicePermanentID: CFD2DEC1-8CF3-432F-AF78-7419632CC842
+      triggerSource: siriShortcut
+  action:
+    service: switch.toggle
+    target:
+      entity_id: switch.kitchen_relay
+
+- alias: 'Toggle kitchen relay'
+  initial_state: on
+  trigger:
+    platform: event
+    event_type: ios.action_fired
+    event_data:
+      actionID: CADF83CD-087C-4737-8E5F-16D3DB61E40E
+      actionName: Play child room music
+      sourceDeviceID: davids_iphone
+      sourceDeviceName: Davids iPhone
+      sourceDevicePermanentID: CFD2DEC1-8CF3-432F-AF78-7419632CC842
+      triggerSource: siriShortcut
+  action:
+    - choose:
+      - conditions: >
+          {{ is_state('binary_sensor.sonos_bedroom_is_grouped','on') }}
+        sequence:
+          - service: python_script.media_player_volume_set
+            data:
+              entity_id: media_player.sonos_bedroom
+              volume_level: 0
+          - service: script.sonos_ungroup_bedroom_speaker
+          - service: media_player.volume_set
+            data:
+              entity_id: media_player.sonos_bedroom
+              volume_level: 0.15
+          - service: media_player.media_play
+            target:
+              entity_id: media_player.sonos_bedroom
+      default:
+        - service: media_player.volume_set
+          data:
+            entity_id: media_player.sonos_bedroom
+            volume_level: 0.15
+        - service: media_player.media_play
+          target:
+            entity_id: media_player.sonos_bedroom
+
+################# CREATE LIGHT GROUPS #################
+
+- alias: 'Create light groups'
   initial_state: on
   trigger:
     platform: homeassistant
     event: start
   action:
-    service: script.create_indoor_light_group
+    - service: script.create_indoor_lights_group
+    - service: script.create_all_lights_group

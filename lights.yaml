@@ -1,15 +1,15 @@
 - platform: template
   lights:
     livingroom_window:
-      friendly_name: 'Fönsterlampa'
+      friendly_name: 'Fönsterlampor'
       icon_template: mdi:outdoor-lamp
-      value_template: '{{ states.switch.control_outlet_1.state }}'
+      value_template: '{{ states.switch.shelly_livingroom_1.state }}'
       turn_on:
         service: switch.turn_on
-        entity_id: switch.control_outlet_1
+        entity_id: switch.shelly_livingroom_1
       turn_off:
         service: switch.turn_off
-        entity_id: switch.control_outlet_1
+        entity_id: switch.shelly_livingroom_1
     office_window:
       friendly_name: 'Fönsterlampa'
       icon_template: mdi:outdoor-lamp

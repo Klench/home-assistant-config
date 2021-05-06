@@ -195,6 +195,16 @@ views:
           labels: true
           fill: fade
 
+      - type: 'custom:auto-entities'
+        show_empty: false
+        card:
+          type: entities
+          title: Shelly firmware update
+          show_header_toggle: false
+        filter:
+          include:
+            - entity_id: '*firmware_update*'
+
 ################# SONOS #################
 
   - icon: mdi:speaker-wireless

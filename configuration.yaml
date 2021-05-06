@@ -183,6 +183,27 @@ zha:
     ota:
       ikea_provider: true
 
+################# SHELLY #################
+
+shelly:
+  version: true
+  attributes:
+    - default
+    - firmware_version
+    - latest_fw_version
+  devices:
+    - id: "E098068ceebd"
+      name: "Shelly livingroom"
+      upgrade_switch: true
+      sensors:
+        - current_consumption
+        - rssi_level
+        - uptime
+        - device_temp
+        - over_temp
+        - switch
+        - voltage
+
 ################# MEDIA PLAYERS #################
 
 media_player:

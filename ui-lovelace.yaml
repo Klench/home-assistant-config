@@ -210,9 +210,6 @@ views:
   - icon: mdi:speaker-wireless
     cards:
 
-      - type: media-control
-        entity: media_player.sonos_kitchen
-
       - type: custom:mini-media-player
         entity: media_player.sonos_kitchen
         hide:

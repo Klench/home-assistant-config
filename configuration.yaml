@@ -207,10 +207,6 @@ shelly:
 ################# MEDIA PLAYERS #################
 
 media_player:
-  - platform: samsungtv_custom
-    host: !secret samsung_tv_ip
-    port: 8001
-    name: 'TV_custom'
   # - platform: kodi
   #   host: !secret kodi_ip
   #   port: 80
@@ -228,6 +224,7 @@ spotify:
 
 sonos:
   media_player:
+    advertise_addr: !secret oden_ip
     hosts:
       - !secret sonos_kitchen_ip
       - !secret sonos_livingroom_ip

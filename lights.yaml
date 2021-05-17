@@ -1,41 +1,58 @@
-- platform: template
-  lights:
-    livingroom_window:
-      friendly_name: 'Fönsterlampor'
-      icon_template: mdi:outdoor-lamp
-      value_template: '{{ states.switch.shelly_livingroom_1.state }}'
-      turn_on:
-        service: switch.turn_on
-        entity_id: switch.shelly_livingroom_1
-      turn_off:
-        service: switch.turn_off
-        entity_id: switch.shelly_livingroom_1
-    office_window:
-      friendly_name: 'Fönsterlampa'
-      icon_template: mdi:outdoor-lamp
-      value_template: '{{ states.switch.control_outlet_2.state }}'
-      turn_on:
-        service: switch.turn_on
-        entity_id: switch.control_outlet_2
-      turn_off:
-        service: switch.turn_off
-        entity_id: switch.control_outlet_2
-    bedroom_bedside_1:
-      value_template: '{{ states.switch.control_outlet_3.state }}'
-      turn_on:
-        service: switch.turn_on
-        entity_id: switch.control_outlet_3
-      turn_off:
-        service: switch.turn_off
-        entity_id: switch.control_outlet_3
-    bedroom_bedside_2:
-      value_template: '{{ states.switch.control_outlet_4.state }}'
-      turn_on:
-        service: switch.turn_on
-        entity_id: switch.control_outlet_4
-      turn_off:
-        service: switch.turn_off
-        entity_id: switch.control_outlet_4
+# - platform: template
+#   lights:
+#     livingroom_window:
+#       friendly_name: 'Fönsterlampor'
+#       icon_template: mdi:outdoor-lamp
+#       value_template: >
+#         {{ states('switch.shelly_livingroom_1') }}
+#       turn_on:
+#         service: switch.turn_on
+#         entity_id: switch.shelly_livingroom_1
+#       turn_off:
+#         service: switch.turn_off
+#         entity_id: switch.shelly_livingroom_1
+#     office_window:
+#       friendly_name: 'Fönsterlampa'
+#       icon_template: mdi:outdoor-lamp
+#       value_template: >
+#         {{ states('switch.control_outlet_2') }}
+#       turn_on:
+#         service: switch.turn_on
+#         entity_id: switch.control_outlet_2
+#       turn_off:
+#         service: switch.turn_off
+#         entity_id: switch.control_outlet_2
+#     bedroom_bedside_1:
+#       value_template: >
+#         {{ states('switch.control_outlet_3') }}
+#       turn_on:
+#         service: switch.turn_on
+#         entity_id: switch.control_outlet_3
+#       turn_off:
+#         service: switch.turn_off
+#         entity_id: switch.control_outlet_3
+#     bedroom_bedside_2:
+#       value_template: >
+#         {{ states('switch.control_outlet_4') }}
+#       turn_on:
+#         service: switch.turn_on
+#         entity_id: switch.control_outlet_4
+#       turn_off:
+#         service: switch.turn_off
+#         entity_id: switch.control_outlet_4
+
+- platform: switch
+  name: Livingroom window
+  entity_id: switch.shelly_livingroom_1
+- platform: switch
+  name: Office window
+  entity_id: switch.control_outlet_2
+- platform: switch
+  name: Bedroom bedside 1
+  entity_id: switch.control_outlet_3
+- platform: switch
+  name: Bedroom bedside 2
+  entity_id: switch.control_outlet_4
 
 - platform: group
   name: 'Hallway ceiling top floor'

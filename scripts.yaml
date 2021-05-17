@@ -211,9 +211,6 @@ indoor_lights_bright:
           - script.hallway_bright
           - script.kitchen_bright
           - script.office_bright
-    - service: homeassistant.turn_on
-      target:
-        entity_id: automation.opening_bathroom_door
     - condition: template
       value_template: >
         {{ not (is_state('binary_sensor.sonos_bedroom_is_grouped','off') and is_state('media_player.sonos_bedroom','playing')) }}
@@ -232,9 +229,6 @@ indoor_lights_relaxed:
           - script.hallway_relaxed
           - script.kitchen_relaxed
           - script.bathroom_relaxed
-    - service: homeassistant.turn_off
-      target:
-        entity_id: automation.opening_bathroom_door
 
 indoor_lights_low_brightness:
   alias: 'Låg ljusstyrka'
@@ -265,6 +259,10 @@ indoor_lights_low_brightness:
             entity_id: light.kitchen_table
             brightness_pct: 50
             transition: 2
+        - service: script.turn_on
+          target:
+            entity_id:
+              - script.bathroom_low_brightness
     default:
       - service: script.turn_on
         target:
@@ -385,11 +383,9 @@ bedroom_bright:
 bedroom_relaxed:
   alias: 'Mysbelysning'
   sequence:
-    - service: light.turn_on
-      data:
+    - service: light.turn_off
+      target:
         entity_id: light.bedroom_ceiling
-        brightness_pct: 15
-        transition: 2
     - service: light.turn_on
       target:
         entity_id: light.bedroom_bedside
@@ -635,16 +631,27 @@ kitchen_wakeup:
 
 ##### BATHROOM #####
 
-bathroom_relaxed:
-  alias: 'Badrumsbelysning'
+bathroom_bright:
+  alias: 'Hög ljusstyrka'
   sequence:
     - service: light.turn_on
       data:
-        entity_id: light.bathroom_led
+        entity_id: light.bathroom_ceiling
         brightness_pct: 100
-        rgb_color: [255,168,38]
-        transition: 2
-        effect: None
+    - service: light.turn_on
+      target:
+        entity_id: light.bathroom_mirror
+
+bathroom_low_brightness:
+  alias: 'Låg ljusstyrka'
+  sequence:
+    - service: light.turn_on
+      data:
+        entity_id: light.bathroom_ceiling
+        brightness_pct: 1
+    - service: light.turn_off
+      target:
+        entity_id: light.bathroom_mirror
 
 ##### OUTDOOR #####
 
@@ -760,8 +767,6 @@ vacuum_clean_office_neato_d7:
         navigation: >
           {{ states('sensor.vacuum_extra_care_neato') }}
         zone: Office
-
-################# VARIOUS #################
 
 ################# TRANSMISSION #################
 

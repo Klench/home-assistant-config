@@ -121,11 +121,6 @@ tts:
  - platform: google_translate
    base_url: !secret internal_url
 
-# pi_hole:
-#   host: !secret pi-hole_ip
-#   ssl: false
-#   verify_ssl: false
-
 shopping_list:
 
 apcupsd:
@@ -204,9 +199,18 @@ shelly:
         - switch
         - voltage
 
+################# MQTT #################
+
+mqtt:
+  broker: !secret oden_ip
+  username: !secret mqtt_username
+  password: !secret mqtt_password
+  discovery: true
+  discovery_prefix: homeassistant
+
 ################# MEDIA PLAYERS #################
 
-media_player:
+# media_player:
   # - platform: kodi
   #   host: !secret kodi_ip
   #   port: 80

@@ -107,6 +107,17 @@ views:
           - light.kitchen_table
           - switch.kitchen_relay
 
+      - type: entities
+        title: Badrum
+        show_header_toggle: false
+        entities:
+          - entity: script.bathroom_bright
+            icon: mdi:lightbulb-on-outline
+          - entity: script.bathroom_low_brightness
+            icon: mdi:lightbulb-on
+          - light.bathroom_ceiling
+          - light.bathroom_mirror
+
       - type: custom:mini-media-player
         entity: media_player.spotify
         icon: mdi:spotify
@@ -744,8 +755,6 @@ views:
           - automation.sunset
           - input_boolean.window_lights_after_sunset
           - input_boolean.enable_away_lights
-          - automation.closing_bathroom_door
-          - automation.opening_bathroom_door
           - input_boolean.coming_home_turn_on_lights
           - automation.leaving_home
           - automation.watching_tv

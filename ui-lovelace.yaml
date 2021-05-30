@@ -82,7 +82,10 @@ views:
             icon: mdi:lightbulb-on-outline
           - entity: script.childroom_relaxed
             icon: mdi:lightbulb-on
+          - entity: script.childroom_night_light
+            icon: mdi:moon-waning-crescent
           - light.childroom_ceiling
+          - light.childroom_led_strip
 
       - type: entities
         title: Arbetsrum
@@ -105,7 +108,6 @@ views:
           - entity: script.kitchen_relaxed
             icon: mdi:lightbulb-on
           - light.kitchen_table
-          - switch.kitchen_relay
 
       - type: entities
         title: Badrum
@@ -117,6 +119,20 @@ views:
             icon: mdi:lightbulb-on
           - light.bathroom_ceiling
           - light.bathroom_mirror
+
+      - type: conditional
+        conditions:
+          - entity: binary_sensor.show_outdoor_light_card
+            state: 'on'
+        card:
+          type: entities
+          title: Utomhus
+          show_header_toggle: false
+          entities:
+            - entity: script.turn_on_outdoor_lights
+              icon: mdi:lightbulb-on-outline
+            - light.outdoor_main_entrance
+            - light.outdoor_rear_entrance
 
       - type: custom:mini-media-player
         entity: media_player.spotify
@@ -167,7 +183,10 @@ views:
 
       - type: weather-forecast
         entity: weather.smhi_hem
-        
+
+      - type: custom:sun-card
+        language: sv
+
       - type: custom:krisinfo-card
         entity: sensor.krisinformation_skane
 
@@ -188,23 +207,6 @@ views:
         friendly_name: Steam
         online_only: true
         entities: sensor.steam_
-
-      - type: custom:mini-graph-card
-        entities:
-          - sensor.nordpool_kwh_se4_sek_2_10_025
-        name: Elpris
-        unit: kr/kWh
-        line_color: '#5c8dd1'
-        hour24: true
-        animate: true
-        decimals: 2
-        hours_to_show: 120
-        points_per_hour: 1
-        font_size_header: 18
-        show:
-          extrema: true
-          labels: true
-          fill: fade
 
       - type: 'custom:auto-entities'
         show_empty: false
@@ -462,6 +464,26 @@ views:
             name: 'Temperatur moderkort'
 
       - type: custom:mini-graph-card
+        name: Processoranvändning Oden
+        icon: mdi:cpu-64-bit
+        entities:
+          - entity: sensor.unraid_cpu_used
+            name: Processoranvändning Oden
+            unit: '%'
+            line_color: blue
+            show:
+              extrema: true
+              labels: true
+              fill: fade
+              average: true
+        hours_to_show: 2
+        points_per_hour: 30
+        hour24: true
+        animate: true
+        decimals: 0
+        font_size_header: 18
+
+      - type: custom:mini-graph-card
         name: Oden
         icon: mdi:server
         entities:
@@ -533,7 +555,7 @@ views:
 
   - icon: mdi:alarm
     cards:
-     
+
       - type: entities
         title: Väckning vardagar
         show_header_toggle: false
@@ -596,7 +618,7 @@ views:
 
   - icon: mdi:car
     cards:
-      
+
       - type: entities
         title: Översikt
         show_header_toggle: false

@@ -406,6 +406,30 @@
       volume_level: >
         {{ [((state_attr('media_player.sonos_bedroom','volume_level') | float * 0.85 - 0.03) | round(2)), 0.05] | max }}
 
+- alias: 'Ikea button childroom ungroup speaker'
+  initial_state: on
+  trigger:
+    platform: event
+    event_type: zha_event
+    event_data:
+      device_id: 44bc2855a0757d86e2bf3ca19df7db77
+      command: 'hold'
+      args: [3329, 0]
+  action:
+    service: script.sonos_ungroup_bedroom_speaker
+
+- alias: 'Ikea button childroom group speaker'
+  initial_state: on
+  trigger:
+    platform: event
+    event_type: zha_event
+    event_data:
+      device_id: 44bc2855a0757d86e2bf3ca19df7db77
+      command: 'hold'
+      args: [3328, 0]
+  action:
+    service: script.sonos_group_bedroom_speaker
+
 ##### HALLWAY TOP FLOOR #####
 
 - alias: 'Ikea switch low brightbess'
@@ -1074,13 +1098,9 @@
     - condition: state
       entity_id: binary_sensor.sonos_bedroom_is_grouped
       state: 'off'
-    - condition: or
-      conditions:
-        - condition: state
-          entity_id: binary_sensor.relaxed_mode
-          state: 'on'
-        - condition: time
-          before: '05:00:00'
+    - condition: state
+      entity_id: binary_sensor.relaxed_mode
+      state: 'on'
   action:
     service: script.bedroom_music_timer_start
 
@@ -1228,7 +1248,7 @@
           - service: media_player.volume_set
             data:
               entity_id: media_player.sonos_bedroom
-              volume_level: 0.15
+              volume_level: 0.1
           - delay: '00:00:01'
           - service: media_player.media_play
             target:
@@ -1237,7 +1257,7 @@
         - service: media_player.volume_set
           data:
             entity_id: media_player.sonos_bedroom
-            volume_level: 0.15
+            volume_level: 0.1
         - delay: '00:00:01'
         - service: media_player.media_play
           target:

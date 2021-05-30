@@ -183,18 +183,18 @@ sonos_enable_night_mode:
   sequence:
     - service: sonos.set_option
       data:
-         entity_id: media_player.sonos_livingroom
-         night_sound: true
-         speech_enhance: true
+        entity_id: media_player.sonos_livingroom
+        night_sound: true
+        speech_enhance: true
 
 sonos_disable_night_mode:
   alias: 'Sonos disable night mode'
   sequence:
     - service: sonos.set_option
       data:
-         entity_id: media_player.sonos_livingroom
-         night_sound: false
-         speech_enhance: false
+        entity_id: media_player.sonos_livingroom
+        night_sound: false
+        speech_enhance: false
 
 ################# Lights #################
 
@@ -259,6 +259,11 @@ indoor_lights_low_brightness:
             entity_id: light.kitchen_table
             brightness_pct: 50
             transition: 2
+        - service: light.turn_on
+          data:
+            entity_id: light.office_desk
+            brightness_pct: 10
+            transition: 2
         - service: script.turn_on
           target:
             entity_id:
@@ -277,12 +282,15 @@ indoor_lights_off:
     - service: light.turn_off
       target:
         entity_id: group.indoor_lights
-    - service: homeassistant.turn_on
-      data:
-        entity_id: automation.opening_bathroom_door
     - service: script.sonos_set_group_volume
       data:
         volume: 0.1
+    - condition: state
+      entity_id: binary_sensor.relaxed_mode
+      state: 'off'
+    - service: light.turn_off
+      target:
+        entity_id: light.childroom_led_strip
 
 wakeup_lights:
   alias: 'Väckning'
@@ -359,7 +367,7 @@ create_indoor_lights_group:
         data:
           object_id: "indoor_lights"
           entities: >
-            {%- for device in states.light %}{% if 'outdoor' not in device.entity_id %}{%- if loop.first %}{%- else %}, {% endif %}{{ device.entity_id }}{%- if loop.last %}{% endif %}{% endif %}{%- endfor %}
+            {%- for device in states.light %}{% if 'outdoor' not in device.entity_id %}{% if 'led_strip' not in device.entity_id %}{%- if loop.first %}{%- else %}, {% endif %}{{ device.entity_id }}{%- if loop.last %}{% endif %}{% endif %}{% endif %}{%- endfor %}
 
 create_all_lights_group:
     sequence:
@@ -399,7 +407,7 @@ bedroom_wakeup:
         brightness_pct: 30
         color_temp: 372
 
-##### CHILDREN ROOM #####
+##### CHILD ROOM #####
 
 childroom_bright:
   alias: 'Hög ljusstyrka'
@@ -421,12 +429,26 @@ childroom_relaxed:
         color_temp: 443
         transition: 2
 
+childroom_night_light:
+  alias: 'Nattbelysning'
+  sequence:
+    - service: light.turn_on
+      data:
+        entity_id: light.childroom_led_strip
+        brightness_pct: 40
+        rgb_color: [255,168,38]
+        transition: 2
+        effect: None
+
 childroom_turn_off:
   alias: 'Släck'
   sequence:
     - service: light.turn_off
       data:
         entity_id: light.childroom_ceiling
+    - service: script.turn_on
+      target:
+        entity_id: script.childroom_night_light
 
 ##### OFFICE #####
 
@@ -656,7 +678,7 @@ bathroom_low_brightness:
 ##### OUTDOOR #####
 
 turn_on_outdoor_lights:
-  alias: 'Tänd utomhusbelysning'
+  alias: 'Tänd'
   sequence:
     - service: light.turn_on
       data:
@@ -671,7 +693,6 @@ turn_on_outdoor_lights:
         transition: 2
 
 turn_off_outdoor_lights:
-  alias: 'Släck utomhusbelysning'
   sequence:
     - service: light.turn_off
       target:

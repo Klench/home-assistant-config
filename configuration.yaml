@@ -51,6 +51,8 @@ lovelace:
       type: module
     - url: /hacsfiles/zha-network-card/zha-network-card.js
       type: module
+    - url: /hacsfiles/home-assistant-sun-card/home-assistant-sun-card.js
+      type: module
     - url: /hacsfiles/upcoming-media-card/upcoming-media-card.js
       type: js
 
@@ -118,8 +120,8 @@ ios:
 
 # Text to speech
 tts:
- - platform: google_translate
-   base_url: !secret internal_url
+  - platform: google_translate
+    base_url: !secret internal_url
 
 shopping_list:
 
@@ -160,8 +162,6 @@ transmission:
 glances:
   host: !secret oden_ip
   name: unraid
-
-nordpool:
 
 wake_on_lan:
 
@@ -256,10 +256,10 @@ panel_iframe:
     title: Configurator
     icon: mdi:wrench
     url: !secret hass_configurator_url
-  # esphome:
-  #   title: ESPHome
-  #   icon: mdi:developer-board
-  #   url: !secret esphome_url
+  esphome:
+    title: ESPHome
+    icon: mdi:developer-board
+    url: !secret esphome_url
 
 panel_custom:
   - name: panel-redirect

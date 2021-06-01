@@ -893,7 +893,7 @@
     to: 'home'
   condition:
     condition: state
-    entity_id: media_player.tv_custom
+    entity_id: binary_sensor.sonos_livingroom_tv_active
     state: 'off'
   action:
     - choose:

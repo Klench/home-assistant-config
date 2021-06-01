@@ -4,7 +4,8 @@ views:
 
 ################# HOME #################
 
-  - icon: mdi:home-assistant
+  - title: ''
+    icon: mdi:home-assistant
     cards:
 
       - type: glance
@@ -220,7 +221,8 @@ views:
 
 ################# SONOS #################
 
-  - icon: mdi:speaker-wireless
+  - title: ''
+    icon: mdi:speaker-wireless
     cards:
 
       - type: custom:mini-media-player
@@ -374,7 +376,8 @@ views:
 
 ################# ROBOT VACUUM #################
 
-  - icon: mdi:robot-vacuum-variant
+  - title: ''
+    icon: mdi:robot-vacuum-variant
     cards:
 
       - type: custom:vacuum-card
@@ -433,7 +436,8 @@ views:
 
 ################# UNRAID #################
 
-  - icon: mdi:server-network
+  - title: ''
+    icon: mdi:server-network
     cards:
 
       - type: entities
@@ -553,7 +557,8 @@ views:
 
 ################# WAKEUP #################
 
-  - icon: mdi:alarm
+  - title: ''
+    icon: mdi:alarm
     cards:
 
       - type: entities
@@ -584,7 +589,8 @@ views:
 
 ################# TV #################
 
-  - icon: mdi:television-classic
+  - title: ''
+    icon: mdi:television-classic
     cards:
 
       - type: custom:upcoming-media-card
@@ -616,7 +622,8 @@ views:
 
 ################# CAR #################
 
-  - icon: mdi:car
+  - title: ''
+    icon: mdi:car
     cards:
 
       - type: entities
@@ -677,7 +684,8 @@ views:
 
 ################# TRANSMISSION #################
 
-  - icon: mdi:download-network-outline
+  - title: ''
+    icon: mdi:download-network-outline
     cards:
 
       - type: entities
@@ -750,7 +758,8 @@ views:
 
 ################# AUTOMATIONS #################
 
-  - icon: mdi:robot-industrial
+  - title: ''
+    icon: mdi:robot-industrial
     cards:
 
       - type: entities

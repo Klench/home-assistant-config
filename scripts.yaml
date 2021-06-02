@@ -228,7 +228,6 @@ indoor_lights_relaxed:
           - script.livingroom_relaxed
           - script.hallway_relaxed
           - script.kitchen_relaxed
-          - script.bathroom_relaxed
 
 indoor_lights_low_brightness:
   alias: 'Låg ljusstyrka'

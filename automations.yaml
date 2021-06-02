@@ -64,7 +64,7 @@
       data:
         entity_id: light.bedroom_bedside
 
-################# LIGHT AUTOMATIONS FOR SUNSET #################
+################# LIGHT AUTOMATIONS FOR SUNSET/SUNRISE #################
 
 - alias: 'Sunset'
   initial_state: on
@@ -136,6 +136,18 @@
     event: sunrise
   action:
     service: script.turn_off_outdoor_lights
+
+- alias: 'Turn off child room night light at sunrise'
+  initial_state: on
+  trigger:
+    platform: sun
+    event: sunrise
+    offset: '02:00:00'
+  action:
+    service: light.turn_off
+    target:
+      entity_id: light.childroom_led_strip
+
 ################# WAKEUP #################
 
 - alias: 'Wakeup weekdays'

@@ -666,13 +666,27 @@ bathroom_bright:
 bathroom_low_brightness:
   alias: 'Låg ljusstyrka'
   sequence:
-    - service: light.turn_on
+    choose:
+      conditions:
+        condition: state
+        entity_id: light.bathroom_ceiling
+        state: 'on'
+      sequence:
+        - service: light.turn_off
+          target:
+            entity_id:
+              - light.bathroom_mirror
+              - light.bathroom_ceiling
+        - delay: '00:00:05'
+        - service: light.turn_on
+          data:
+            entity_id: light.bathroom_ceiling
+            brightness_pct: 1
+    default:
+      service: light.turn_on
       data:
         entity_id: light.bathroom_ceiling
         brightness_pct: 1
-    - service: light.turn_off
-      target:
-        entity_id: light.bathroom_mirror
 
 ##### OUTDOOR #####
 

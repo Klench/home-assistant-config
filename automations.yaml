@@ -959,6 +959,27 @@
   action:
     service: script.office_bright
 
+################# BATHROOM #################
+
+- alias: 'Increase bathroom ceiling light brightness'
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: light.bathroom_ceiling
+    to: 'on'
+  condition:
+    - condition: template
+      value_template: >
+        {{ state_attr('light.bathroom_ceiling','brightness') < 255 }}
+    - condition: state
+      entity_id: binary_sensor.bathroom_low_brightness_recently_executed
+      state: 'off'
+  action:
+    service: light.turn_on
+    data:
+      entity_id: light.bathroom_ceiling
+      brightness_pct: 100
+
 ################# MEDIA #################
 
 - alias: 'Watching TV'

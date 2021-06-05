@@ -56,3 +56,6 @@
     show_outdoor_light_card:
       value_template: >
         {{ is_state('sun.sun','below_horizon') or is_state('light.outdoor_main_entrance','on') or is_state('light.outdoor_rear_entrance','on') }}
+    bathroom_low_brightness_recently_executed:
+      value_template: >
+        {{ (utcnow() - states.script.bathroom_low_brightness.last_changed) < timedelta(seconds = 10) }}

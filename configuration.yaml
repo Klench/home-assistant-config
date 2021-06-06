@@ -152,17 +152,6 @@ homekit:
       - light.livingroom_window
       - sensor.outdoor_temperature
 
-transmission:
-  host: !secret ubuntu_ip
-  name: 'Transmission'
-  username: !secret transmission_username
-  password: !secret transmission_password
-  scan_interval: 10
-
-glances:
-  host: !secret oden_ip
-  name: unraid
-
 wake_on_lan:
 
 ################# VOLVO ON CALL #################

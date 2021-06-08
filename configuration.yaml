@@ -74,10 +74,35 @@ discovery:
 # Enables support for tracking state changes over time
 history:
 
-# View all events in a logbook
+# View events in a logbook
 logbook:
+  exclude:
+    entities:
+      - sensor.time
+      - sensor.date
+      - sensor.date_time
+      - sensor.ups_status_date
+
+recorder:
+  purge_keep_days: 5
+  exclude:
+    entities:
+      - sensor.time
+      - sensor.date
+      - sensor.date_time
+      - sensor.ups_status_date
 
 logger:
+  logs:
+    homeassistant.components.glances: fatal
+    glances_api: fatal
+    homeassistant.components.steam_online: error
+    homeassistant.components.volvooncall: error
+    custom_components.trakt: error
+  filters:
+    homeassistant.components.hue:
+      - "Timeout fetching light data"
+      - "Timeout fetching sensor data"
 
 # Enables a map showing the location of tracked devices
 map:

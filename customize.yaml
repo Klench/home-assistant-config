@@ -43,6 +43,8 @@ automation.evening_relaxed:
   icon: mdi:lightbulb-on
 automation.hallway_bright:
   icon: mdi:lightbulb-on-outline
+automation.child_room_night_light:
+  icon: mdi:moon-waning-crescent
 automation.sunset:
   icon: mdi:weather-sunset
 automation.turn_off_bedroom_lights:

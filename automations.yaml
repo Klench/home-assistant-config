@@ -49,6 +49,13 @@
   action:
     service: script.hallway_bright
 
+- alias: 'Child room night light'
+  trigger:
+    platform: time
+    at: '22:00:00'
+  action:
+    service: script.childroom_night_light
+
 - alias: 'Advent light'
   trigger:
     platform: time

@@ -782,6 +782,7 @@ views:
           - automation.evening_bright
           - automation.evening_relaxed
           - automation.hallway_bright
+          - automation.child_room_night_light
           - automation.advent_light
           - automation.sunset
           - input_boolean.window_lights_after_sunset

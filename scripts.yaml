@@ -434,7 +434,7 @@ childroom_night_light:
     - service: light.turn_on
       data:
         entity_id: light.childroom_led_strip
-        brightness_pct: 20
+        brightness_pct: 17
         rgb_color: [255,168,38]
         transition: 2
         effect: None
@@ -445,9 +445,6 @@ childroom_turn_off:
     - service: light.turn_off
       data:
         entity_id: light.childroom_ceiling
-    - service: script.turn_on
-      target:
-        entity_id: script.childroom_night_light
 
 ##### OFFICE #####
 

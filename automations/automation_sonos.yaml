@@ -1,0 +1,75 @@
+- alias: 'Enable Sonos alarm'
+  trigger:
+    platform: time
+    at: '03:00:00'
+  condition:
+    - condition: state
+      entity_id: binary_sensor.workday_sensor
+      state: 'on'
+    - condition: state
+      entity_id: automation.wakeup_weekdays
+      state: 'on'
+  action:
+    service: script.sonos_set_alarm
+
+- alias: 'Skip song tracks'
+  initial_state: on
+  trigger:
+    platform: template
+    value_template: >
+      {{ state_attr('media_player.sonos_bedroom','media_title')|regex_search('Perfect', ignorecase=False) }}
+  action:
+    service: media_player.media_next_track
+    data:
+      entity_id: media_player.sonos_bedroom
+
+- alias: 'Activate repeat on Sonos bedroom'
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: media_player.sonos_bedroom
+    to: 'playing'
+    for: "00:00:05"
+  condition:
+    - condition: state
+      entity_id: binary_sensor.sonos_bedroom_is_grouped
+      state: 'off'
+    - condition: template
+      value_template: >
+        {{ is_state_attr('media_player.sonos_bedroom','repeat','off') and is_state_attr('media_player.sonos_bedroom','media_content_type','music') }}
+  action:
+    service: media_player.repeat_set
+    data:
+      entity_id: media_player.sonos_bedroom
+      repeat: all
+
+- alias: 'TV off group speakers'
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: binary_sensor.sonos_livingroom_tv_active
+    to: 'off'
+  condition:
+    condition: not
+    conditions:
+      - condition: state
+        entity_id: binary_sensor.sonos_livingroom_is_grouped
+        state: 'on'
+      - condition: state
+        entity_id: media_player.sonos_livingroom
+        state: 'playing'
+  action:
+    service: script.sonos_group_livingroom_speaker
+
+- alias: 'TV off disable night mode'
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: media_player.tv_custom
+    to: 'off'
+  condition:
+    condition: state
+    entity_id: binary_sensor.sonos_night_mode
+    state: 'on'
+  action:
+    service: script.sonos_disable_night_mode

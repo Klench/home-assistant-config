@@ -1,0 +1,86 @@
+vacuum_clean_home_neato_d7:
+  sequence:
+    - service: neato.custom_cleaning
+      data:
+        entity_id: vacuum.neato_d7
+        mode: >
+          {{ states('sensor.vacuum_mode_neato') }}
+        navigation: >
+          {{ states('sensor.vacuum_extra_care_neato') }}
+
+vacuum_clean_entrance_neato_d7:
+  sequence:
+    - service: neato.custom_cleaning
+      data:
+        entity_id: vacuum.neato_d7
+        mode: >
+          {{ states('sensor.vacuum_mode_neato') }}
+        navigation: >
+          {{ states('sensor.vacuum_extra_care_neato') }}
+        zone: Entrance
+
+vacuum_clean_kitchen_neato_d7:
+  sequence:
+    - service: neato.custom_cleaning
+      data:
+        entity_id: vacuum.neato_d7
+        mode: >
+          {{ states('sensor.vacuum_mode_neato') }}
+        navigation: >
+          {{ states('sensor.vacuum_extra_care_neato') }}
+        zone: Kitchen
+
+vacuum_clean_livingroom_neato_d7:
+  sequence:
+    - service: neato.custom_cleaning
+      data:
+        entity_id: vacuum.neato_d7
+        mode: >
+          {{ states('sensor.vacuum_mode_neato') }}
+        navigation: >
+          {{ states('sensor.vacuum_extra_care_neato') }}
+        zone: Livingroom
+
+vacuum_clean_hallway_neato_d7:
+  sequence:
+    - service: neato.custom_cleaning
+      data:
+        entity_id: vacuum.neato_d7
+        mode: >
+          {{ states('sensor.vacuum_mode_neato') }}
+        navigation: >
+          {{ states('sensor.vacuum_extra_care_neato') }}
+        zone: Hallway
+
+vacuum_clean_bedroom_neato_d7:
+  sequence:
+    - service: neato.custom_cleaning
+      data:
+        entity_id: vacuum.neato_d7
+        mode: >
+          {{ states('sensor.vacuum_mode_neato') }}
+        navigation: >
+          {{ states('sensor.vacuum_extra_care_neato') }}
+        zone: Bedroom
+
+vacuum_clean_childroom_neato_d7:
+  sequence:
+    - service: neato.custom_cleaning
+      data:
+        entity_id: vacuum.neato_d7
+        mode: >
+          {{ states('sensor.vacuum_mode_neato') }}
+        navigation: >
+          {{ states('sensor.vacuum_extra_care_neato') }}
+        zone: Childroom
+
+vacuum_clean_office_neato_d7:
+  sequence:
+    - service: neato.custom_cleaning
+      data:
+        entity_id: vacuum.neato_d7
+        mode: >
+          {{ states('sensor.vacuum_mode_neato') }}
+        navigation: >
+          {{ states('sensor.vacuum_extra_care_neato') }}
+        zone: Office

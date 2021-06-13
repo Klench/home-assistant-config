@@ -1,0 +1,195 @@
+##### GROUP/UNGROUP #####
+
+sonos_group_all_speakers:
+  alias: Sonos group all speakers
+  sequence:
+    - service: media_player.volume_set
+      data:
+        entity_id:
+          - media_player.sonos_livingroom
+          - media_player.sonos_bedroom
+        volume_level: 0.0
+    - service: sonos.join
+      data:
+        master: media_player.sonos_kitchen
+        entity_id:
+          - media_player.sonos_bedroom
+          - media_player.sonos_livingroom
+    - service: script.sonos_sync_group_volume
+
+sonos_group_speaker:
+  alias: Sonos group speaker
+  sequence:
+    - service: media_player.volume_set
+      data:
+        entity_id: "{{ sonos_entity }}"
+        volume_level: 0.0
+    - service: sonos.join
+      data:
+        master: media_player.sonos_kitchen
+        entity_id: "{{ sonos_entity }}"
+    - service: python_script.media_player_volume_set
+      data:
+        entity_id: "{{ sonos_entity }}"
+        volume_level: >
+          {{ state_attr('media_player.sonos_kitchen','volume_level') }}
+
+sonos_ungroup_speaker:
+  alias: Sonos ungroup speaker
+  sequence:
+    - service: python_script.media_player_volume_set
+      data:
+        entity_id: "{{ sonos_entity }}"
+        volume_level: 0.01
+    - service: sonos.unjoin
+      data:
+        entity_id: "{{ sonos_entity }}"
+    - service: media_player.volume_set
+      data:
+        entity_id: "{{ sonos_entity }}"
+        volume_level: 0.10
+
+sonos_group_livingroom_speaker:
+  alias: Sonos group livingroom speaker
+  sequence:
+    - service: script.sonos_group_speaker
+      data:
+        sonos_entity: media_player.sonos_livingroom
+
+sonos_group_bedroom_speaker:
+  alias: Sonos group bedroom speaker
+  sequence:
+    - service: script.sonos_group_speaker
+      data:
+        sonos_entity: media_player.sonos_bedroom
+
+sonos_ungroup_livingroom_speaker:
+  alias: Sonos group livingroom speaker
+  sequence:
+    - service: script.sonos_ungroup_speaker
+      data:
+        sonos_entity: media_player.sonos_livingroom
+
+sonos_ungroup_bedroom_speaker:
+  alias: Sonos group bedroom speaker
+  sequence:
+    - service: script.sonos_ungroup_speaker
+      data:
+        sonos_entity: media_player.sonos_bedroom
+
+##### VOLUME #####
+
+sonos_set_group_volume:
+  alias: Sonos set group volume
+  sequence:
+    - service: python_script.media_player_volume_set
+      data:
+        entity_id: media_player.sonos_kitchen
+        set_group_volume: true
+        volume_level: '{{ volume }}'
+
+sonos_sync_group_volume:
+  alias: Sonos sync group volume
+  sequence:
+    - service: python_script.media_player_volume_set
+      data:
+        entity_id: media_player.sonos_kitchen
+        set_group_volume: true
+        volume_level: >
+          {{ state_attr('media_player.sonos_kitchen','volume_level') | float }}
+
+sonos_increase_volume:
+  alias: 'Sonos increase volume'
+  sequence:
+    - service: python_script.media_player_volume_set
+      data:
+        entity_id: media_player.sonos_kitchen
+        set_group_volume: true
+        volume_level: >
+          {{ [((state_attr('media_player.sonos_kitchen','volume_level') | float * 1.15 + 0.03) | round(2)), 1] | min }}
+
+sonos_decrease_volume:
+  alias: 'Sonos decrease volume'
+  sequence:
+    - service: python_script.media_player_volume_set
+      data:
+        entity_id: media_player.sonos_kitchen
+        set_group_volume: true
+        volume_level: >
+          {{ [((state_attr('media_player.sonos_kitchen','volume_level') | float * 0.85 - 0.03) | round(2)), 0.05] | max }}
+
+##### SAY #####
+
+sonos_say:
+  alias: "Sonos TTS script"
+  sequence:
+    - service: sonos.snapshot
+      data:
+        entity_id: "{{ 'media_player.' ~ sonos_entity }}"
+    - service: sonos.unjoin
+      data:
+        entity_id:  "{{ 'media_player.' ~ sonos_entity }}"
+    - service: media_player.volume_set
+      data:
+        entity_id:  "{{ 'media_player.' ~ sonos_entity }}"
+        volume_level: "{{ volume }}"
+    - service: tts.google_translate_say
+      data:
+        entity_id:  "{{ 'media_player.' ~ sonos_entity }}"
+        message: "{{ message }}"
+    - delay: '00:00:01'
+    - delay: >
+        {% set duration = states.media_player[sonos_entity].attributes.media_duration %}
+        {% if duration > 0 %}
+          {% set duration = duration - 1 %}
+        {% endif %}
+        {% set seconds = duration % 60 %}
+        {% set minutes = (duration / 60)|int % 60 %}
+        {% set hours = (duration / 3600)|int %}
+        {{ [hours, minutes, seconds]|join(':') }}
+    - service: sonos.restore
+      data:
+        entity_id:  "{{ 'media_player.' ~ sonos_entity }}"
+        with_group: true
+
+##### ALARM #####
+
+sonos_set_alarm:
+  alias: 'Sonos set alarm'
+  sequence:
+    - service: sonos.update_alarm
+      data:
+        entity_id: media_player.sonos_bedroom
+        alarm_id: 7
+        time: >
+          {{ states('sensor.alarm_clock_time_weekdays') }}
+        enabled: true
+
+sonos_disable_alarm:
+  alias: 'Sonos disable alarm'
+  sequence:
+    - service: sonos.update_alarm
+      data:
+        entity_id: media_player.sonos_bedroom
+        alarm_id: 7
+        enabled: false
+
+##### NIGHT MODE #####
+
+sonos_enable_night_mode:
+  alias: 'Sonos enable night mode'
+  sequence:
+    - service: sonos.set_option
+      data:
+        entity_id: media_player.sonos_livingroom
+        night_sound: true
+        speech_enhance: true
+
+sonos_disable_night_mode:
+  alias: 'Sonos disable night mode'
+  sequence:
+    - service: sonos.set_option
+      data:
+        entity_id: media_player.sonos_livingroom
+        night_sound: false
+        speech_enhance: false

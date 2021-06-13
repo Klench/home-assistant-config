@@ -1,0 +1,36 @@
+################# MEDIA #################
+
+- alias: 'Watching TV'
+  trigger:
+    platform: state
+    entity_id: media_player.plex_vardagsrum
+    to: 'playing'
+  condition:
+    condition: and
+    conditions:
+      - condition: or
+        conditions:
+          - condition: time
+            after: '20:30:00'
+          - condition: time
+            before: '10:00:00'
+      - condition: or
+        conditions:
+          - condition: sun
+            after: sunset
+            after_offset: '-01:00:00'
+          - condition: sun
+            before: sunrise
+            before_offset: '1:00:00'
+  action:
+    service: script.watching_tv_lights
+
+################# TRANSMISSION #################
+
+- alias: 'Transmission add torrent'
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: input_text.transmission_torrent_url
+  action:
+    - service: script.transmission_add_torrent

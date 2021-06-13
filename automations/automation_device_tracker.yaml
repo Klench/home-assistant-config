@@ -1,0 +1,178 @@
+- alias: 'Leaving home'
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: group.device_tracker_family
+    to: 'not_home'
+  action:
+    service: script.indoor_lights_off
+
+- alias: 'Leaving home pause Sonos'
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: group.device_tracker_family
+    to: 'not_home'
+  condition:
+    condition: state
+    entity_id: media_player.sonos_kitchen
+    state: 'playing'
+  action:
+    service: media_player.media_pause
+    entity_id: media_player.sonos_kitchen
+
+- alias: 'Coming home turn on lights bright'
+  initial_state: on
+  trigger:
+    - platform: state
+      entity_id: group.device_tracker_family
+      to: 'home'
+    - platform: state
+      entity_id: device_tracker.volvo_lgd321
+      to: 'home'
+  condition:
+    - condition: state
+      entity_id: input_boolean.coming_home_turn_on_lights
+      state: 'on'
+    - condition: state
+      entity_id: binary_sensor.relaxed_mode
+      state: 'off'
+    - condition: sun
+      after: sunset
+      after_offset: '-01:00:00'
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: group.indoor_lights
+          state: 'off'
+        - condition: state
+          entity_id: input_boolean.away_lights_active
+          state: 'on'
+  action:
+    - service: script.indoor_lights_bright
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.away_lights_active
+
+- alias: 'Coming home turn on lights relaxed'
+  initial_state: on
+  trigger:
+    - platform: state
+      entity_id: group.device_tracker_family
+      to: 'home'
+    - platform: state
+      entity_id: device_tracker.volvo_lgd321
+      to: 'home'
+  condition:
+    - condition: state
+      entity_id: input_boolean.coming_home_turn_on_lights
+      state: 'on'
+    - condition: state
+      entity_id: binary_sensor.relaxed_mode
+      state: 'on'
+    - condition: sun
+      after: sunset
+      after_offset: '-01:00:00'
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: group.indoor_lights
+          state: 'off'
+        - condition: state
+          entity_id: input_boolean.away_lights_active
+          state: 'on'
+  action:
+    - service: script.indoor_lights_relaxed
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.away_lights_active
+
+- alias: 'Coming home turn on hallway lights'
+  initial_state: on
+  trigger:
+    - platform: state
+      entity_id: group.device_tracker_family
+      to: 'home'
+    - platform: state
+      entity_id: device_tracker.volvo_lgd321
+      to: 'home'
+    - platform: state
+      entity_id: device_tracker.sela_ltjs4sl13
+      to: 'home'
+  condition:
+    - condition: state
+      entity_id: input_boolean.coming_home_turn_on_lights
+      state: 'on'
+    - condition: state
+      entity_id: binary_sensor.relaxed_mode
+      state: 'off'
+    - condition: sun
+      before: sunset
+      before_offset: '-01:00:00'
+    - condition: sun
+      after: sunrise
+      after_offset: '01:00:00'
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: group.indoor_lights
+          state: 'off'
+        - condition: state
+          entity_id: input_boolean.away_lights_active
+          state: 'on'
+  action:
+    - service: script.hallway_bright
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.away_lights_active
+
+- alias: 'Coming home group Sonos speakers'
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: group.device_tracker_family
+    to: 'home'
+  condition:
+    condition: state
+    entity_id: binary_sensor.sonos_livingroom_tv_active
+    state: 'off'
+  action:
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.relaxed_mode
+              state: 'on'
+          sequence:
+            - service: script.sonos_group_livingroom_speaker
+            - service: script.sonos_set_group_volume
+              data:
+                volume: 0.2
+            - service: script.sonos_ungroup_bedroom_speaker
+            - service: media_player.volume_set
+              data:
+                entity_id: media_player.sonos_bedroom
+                volume_level: 0.2
+      default:
+        - service: script.sonos_group_all_speakers
+        - service: script.sonos_set_group_volume
+          data:
+            volume: 0.2
+
+- alias: 'Nellie coming home'
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: device_tracker.volvo_lgd321
+    to: 'home'
+  condition:
+    - condition: state
+      entity_id: device_tracker.nellies_iphone
+      state: 'not_home'
+    - condition: state
+      entity_id: device_tracker.davids_iphone
+      state: 'home'
+  action:
+    service: light.turn_on
+    data:
+      entity_id: light.kitchen_table
+      flash: short

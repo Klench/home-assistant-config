@@ -1,0 +1,44 @@
+- alias: 'Pause bedroom music'
+  initial_state: on
+  trigger:
+    platform: event
+    event_type: timer.finished
+    event_data:
+      entity_id: timer.bedroom_music_timer
+  condition:
+    - condition: state
+      entity_id: media_player.sonos_bedroom
+      state: 'playing'
+    - condition: state
+      entity_id: binary_sensor.sonos_bedroom_is_grouped
+      state: 'off'
+  action:
+    - service: python_script.media_player_volume_set
+      data:
+        entity_id: media_player.sonos_bedroom
+        volume_level: 0.01
+    - service: media_player.media_pause
+      entity_id: media_player.sonos_bedroom
+    - service: media_player.volume_set
+      data:
+        entity_id: media_player.sonos_bedroom
+        volume_level: 0.10
+
+- alias: 'Start bedroom music timer'
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: script.indoor_lights_off
+    to: 'on'
+  condition:
+    - condition: state
+      entity_id: media_player.sonos_bedroom
+      state: 'playing'
+    - condition: state
+      entity_id: binary_sensor.sonos_bedroom_is_grouped
+      state: 'off'
+    - condition: state
+      entity_id: binary_sensor.relaxed_mode
+      state: 'on'
+  action:
+    service: script.bedroom_music_timer_start

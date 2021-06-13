@@ -1,0 +1,26 @@
+################# TRANSMISSION #################
+
+transmission_add_torrent:
+  alias: 'Lägg till torrent'
+  sequence:
+    - service: transmission.add_torrent
+      data:
+        name: Transmission
+        torrent: >
+          {{ states('input_text.transmission_torrent_url') }}
+
+################# TIMER #################
+
+bedroom_music_timer_start:
+  sequence:
+    - service: timer.start
+      data:
+        entity_id: timer.bedroom_music_timer
+        duration: >
+          {{ states('sensor.bedroom_music_timer_duration') }}
+
+bedroom_music_timer_cancel:
+  sequence:
+    - service: timer.cancel
+      data:
+        entity_id: timer.bedroom_music_timer

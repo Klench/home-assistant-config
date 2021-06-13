@@ -1,0 +1,323 @@
+################# TIME #################
+
+- alias: 'Evening bright'
+  trigger:
+    platform: sun
+    event: sunset
+    offset: '-01:00:00'
+  condition:
+    - condition: state
+      entity_id: group.device_tracker_family
+      state: 'home'
+    - condition: state
+      entity_id: binary_sensor.relaxed_mode
+      state: 'off'
+  action:
+    service: script.indoor_lights_bright
+
+- alias: 'Evening relaxed'
+  trigger:
+    platform: state
+    entity_id: binary_sensor.relaxed_mode
+    to: 'on'
+  condition:
+    condition: state
+    entity_id: group.device_tracker_family
+    state: 'home'
+  action:
+    - service: script.indoor_lights_relaxed
+    - condition: state
+      entity_id: binary_sensor.sonos_bedroom_is_grouped
+      state: 'on'
+    - service: script.sonos_ungroup_bedroom_speaker
+    - service: media_player.volume_set
+      data:
+        entity_id: media_player.sonos_bedroom
+        volume_level: 0.15
+
+- alias: 'Hallway bright'
+  trigger:
+    platform: time
+    at: '09:00:00'
+  condition:
+    - condition: state
+      entity_id: group.device_tracker_family
+      state: 'home'
+    - condition: state
+      entity_id: light.hallway_ceiling_group
+      state: 'off'
+  action:
+    service: script.hallway_bright
+
+- alias: 'Child room night light'
+  trigger:
+    platform: time
+    at: '22:00:00'
+  action:
+    service: script.childroom_night_light
+
+- alias: 'Advent light'
+  trigger:
+    platform: time
+    at: '09:30:00'
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.livingroom_window
+    - condition: template
+      value_template: >
+        {{ not (is_state('binary_sensor.sonos_bedroom_is_grouped','off') and is_state('media_player.sonos_bedroom','playing')) }}
+    - service: light.turn_on
+      data:
+        entity_id: light.bedroom_bedside
+
+################# SUNSET/SUNRISE #################
+
+- alias: 'Sunset'
+  initial_state: on
+  trigger:
+    platform: sun
+    event: sunset
+  condition:
+    - condition: state
+      entity_id: group.device_tracker_family
+      state: 'home'
+    - condition: state
+      entity_id: group.indoor_lights
+      state: 'on'
+  action:
+    service: light.turn_on
+    target:
+      entity_id:
+        - light.livingroom_window
+        - light.office_window
+
+- alias: 'Bright after sunset bedroom'
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: script.bedroom_bright
+    to: 'on'
+  condition:
+    - condition: sun
+      after: sunset
+    - condition: state
+      entity_id: input_boolean.window_lights_after_sunset
+      state: 'on'
+  action:
+    service: light.turn_on
+    target:
+      entity_id: light.bedroom_bedside
+
+- alias: 'Bright after sunset livingroom'
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: script.livingroom_bright
+    to: 'on'
+  condition:
+    - condition: sun
+      after: sunset
+    - condition: state
+      entity_id: input_boolean.window_lights_after_sunset
+      state: 'on'
+  action:
+    service: light.turn_on
+    target:
+      entity_id:
+        - light.livingroom_window
+        - light.office_window
+
+- alias: 'Outdoor lights at sunset'
+  initial_state: on
+  trigger:
+    platform: sun
+    event: sunset
+  action:
+    service: script.turn_on_outdoor_lights
+
+- alias: 'Outdoor lights at sunrise'
+  initial_state: on
+  trigger:
+    platform: sun
+    event: sunrise
+  action:
+    service: script.turn_off_outdoor_lights
+
+- alias: 'Turn off child room night light at sunrise'
+  initial_state: on
+  trigger:
+    platform: sun
+    event: sunrise
+    offset: '02:00:00'
+  action:
+    service: light.turn_off
+    target:
+      entity_id: light.childroom_led_strip
+
+################# WAKEUP #################
+
+- alias: 'Wakeup weekdays'
+  trigger:
+    platform: state
+    entity_id: binary_sensor.alarm_clock_trigger_weekdays
+    to: 'on'
+  condition:
+    condition: or
+    conditions:
+      - condition: state
+        entity_id: input_boolean.wakeup_override
+        state: 'on'
+      - condition: and
+        conditions:
+          - condition: state
+            entity_id: binary_sensor.workday_sensor
+            state: 'on'
+          - condition: state
+            entity_id: group.device_tracker_family
+            state: 'home'
+  action:
+    service: script.wakeup_lights
+
+- alias: 'Wakeup weekend'
+  initial_state: off
+  trigger:
+    platform: state
+    entity_id: binary_sensor.alarm_clock_trigger_weekend
+    to: 'on'
+  condition:
+    - condition: time
+      weekday:
+        - sat
+        - sun
+    - condition: state
+      entity_id: group.device_tracker_family
+      state: 'home'
+  action:
+    service: script.wakeup_lights
+
+################# AWAY #################
+
+- alias: 'Away turn on lights'
+  initial_state: on
+  trigger:
+    platform: sun
+    event: sunset
+  condition:
+    - condition: state
+      entity_id: input_boolean.enable_away_lights
+      state: 'on'
+    - condition: state
+      entity_id: group.device_tracker_family
+      state: 'not_home'
+  action:
+    - service: script.enable_away_lights
+    - service: input_boolean.turn_on
+      data:
+        entity_id: input_boolean.away_lights_active
+
+- alias: 'Leaving home turn on lights'
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: group.device_tracker_family
+    to: 'not_home'
+  condition:
+    - condition: state
+      entity_id: input_boolean.enable_away_lights
+      state: 'on'
+    - condition: sun
+      after: sunset
+  action:
+    - service: script.enable_away_lights
+    - service: input_boolean.turn_on
+      data:
+        entity_id: input_boolean.away_lights_active
+
+- alias: 'Away turn off lights'
+  initial_state: on
+  trigger:
+    platform: time
+    at: '23:30:00'
+  condition:
+    - condition: state
+      entity_id: group.device_tracker_family
+      state: 'not_home'
+    - condition: state
+      entity_id: group.indoor_lights
+      state: 'on'
+  action:
+    - service: script.indoor_lights_off
+    - service: input_boolean.turn_off
+      target:
+        entity_id: input_boolean.away_lights_active
+
+- alias: 'Go to bed weekdays'
+  trigger:
+    platform: time
+    at: '23:00:00'
+  condition:
+    condition: state
+    entity_id: binary_sensor.workday_sensor_offset
+    state: 'on'
+  action:
+    service: script.go_to_bed_lights
+
+- alias: 'Go to bed weekend'
+  trigger:
+    platform: time
+    at: '23:59:00'
+  condition:
+    condition: time
+    weekday:
+      - fri
+      - sat
+  action:
+    service: script.go_to_bed_lights
+
+- alias: 'Start working'
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: device_tracker.sela_ltjs4sl13
+    to: 'home'
+  condition:
+    - condition: state
+      entity_id: binary_sensor.workday_sensor
+      state: 'on'
+    - condition: time
+      before: '17:00:00'
+  action:
+    service: script.office_bright
+
+################# BATHROOM #################
+
+- alias: 'Increase bathroom ceiling light brightness'
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: light.bathroom_ceiling
+    to: 'on'
+  condition:
+    - condition: template
+      value_template: >
+        {{ state_attr('light.bathroom_ceiling','brightness') < 255 }}
+    - condition: state
+      entity_id: binary_sensor.bathroom_low_brightness_recently_executed
+      state: 'off'
+  action:
+    service: light.turn_on
+    data:
+      entity_id: light.bathroom_ceiling
+      brightness_pct: 100
+
+################# CREATE LIGHT GROUPS #################
+
+- alias: 'Create light groups'
+  initial_state: on
+  trigger:
+    platform: homeassistant
+    event: start
+  action:
+    - service: script.create_indoor_lights_group
+    - service: script.create_all_lights_group

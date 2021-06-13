@@ -1,0 +1,59 @@
+- alias: 'Toggle kitchen relay'
+  initial_state: on
+  trigger:
+    platform: event
+    event_type: ios.action_fired
+    event_data:
+      actionID: F2398A0D-8A0C-41BA-B337-1405B6518531
+      actionName: Toggle kitchen relay
+      sourceDeviceID: davids_iphone
+      sourceDeviceName: Davids iPhone
+      sourceDevicePermanentID: CFD2DEC1-8CF3-432F-AF78-7419632CC842
+      triggerSource: siriShortcut
+  action:
+    service: switch.toggle
+    target:
+      entity_id: switch.kitchen_relay
+
+- alias: 'Play child room music'
+  initial_state: on
+  trigger:
+    platform: event
+    event_type: ios.action_fired
+    event_data:
+      actionID: CADF83CD-087C-4737-8E5F-16D3DB61E40E
+      actionName: Play child room music
+      sourceDeviceID: davids_iphone
+      sourceDeviceName: Davids iPhone
+      sourceDevicePermanentID: CFD2DEC1-8CF3-432F-AF78-7419632CC842
+      triggerSource: siriShortcut
+  action:
+    - service: light.turn_off
+      target:
+        entity_id: light.childroom_ceiling
+    - choose:
+      - conditions: >
+          {{ is_state('binary_sensor.sonos_bedroom_is_grouped','on') }}
+        sequence:
+          - service: python_script.media_player_volume_set
+            data:
+              entity_id: media_player.sonos_bedroom
+              volume_level: 0
+          - service: script.sonos_ungroup_bedroom_speaker
+          - service: media_player.volume_set
+            data:
+              entity_id: media_player.sonos_bedroom
+              volume_level: 0.1
+          - delay: '00:00:01'
+          - service: media_player.media_play
+            target:
+              entity_id: media_player.sonos_bedroom
+      default:
+        - service: media_player.volume_set
+          data:
+            entity_id: media_player.sonos_bedroom
+            volume_level: 0.1
+        - delay: '00:00:01'
+        - service: media_player.media_play
+          target:
+            entity_id: media_player.sonos_bedroom

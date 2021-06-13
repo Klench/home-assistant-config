@@ -1,0 +1,39 @@
+- alias: 'Car heater weekdays'
+  initial_state: off
+  trigger:
+    platform: state
+    entity_id: binary_sensor.car_heater_trigger_workdays
+    to: 'on'
+  condition:
+    - condition: numeric_state
+      entity_id: sensor.outdoor_temperature
+      below: 3
+    - condition: state
+      entity_id: binary_sensor.workday_sensor
+      state: 'on'
+    - condition: state
+      entity_id: group.device_tracker_family
+      state: 'home'
+    - condition: state
+      entity_id: switch.lgd321_heater
+      state: 'off'
+  action:
+    - service: switch.turn_on
+      entity_id: switch.lgd321_heater
+
+- alias: 'Car heater audio notification'
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: switch.lgd321_heater
+    to: 'on'
+  condition:
+    condition: state
+    entity_id: device_tracker.davidsiphone
+    state: 'home'
+  action: 
+    service: script.sonos_say
+    data:
+      sonos_entity: kok
+      volume: 0.1
+      message: 'Car heater turned on'

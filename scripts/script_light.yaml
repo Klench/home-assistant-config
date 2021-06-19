@@ -234,8 +234,8 @@ childroom_night_light:
     - service: light.turn_on
       data:
         entity_id: light.childroom_led_strip
-        brightness_pct: 17
-        rgb_color: [255,168,38]
+        brightness_pct: 11
+        rgb_color: [255,0,0]
         transition: 2
         effect: None
 

@@ -244,11 +244,19 @@
       device_id: 9f686575e6ad98784e2efbb0b4e78526
       command: 'off'
   action:
-    service: light.turn_off
-    target:
-      entity_id:
-        - light.bedroom_ceiling
-        - light.bedroom_bedside
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: sensor.davids_iphone_battery_state
+              state: 'Charging'
+          sequence:
+            - service: script.indoor_lights_off
+      default:
+        - service: light.turn_off
+          target:
+            entity_id:
+              - light.bedroom_ceiling
+              - light.bedroom_bedside
 
 ##### CHILD ROOM #####
 

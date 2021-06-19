@@ -98,11 +98,11 @@ logger:
     glances_api: fatal
     homeassistant.components.steam_online: error
     homeassistant.components.volvooncall: error
+    homeassistant.components.esphome: error
     custom_components.trakt: error
   filters:
     homeassistant.components.hue:
-      - "Timeout fetching light data"
-      - "Timeout fetching sensor data"
+      - "^Timeout fetching"
 
 # Enables a map showing the location of tracked devices
 map:
@@ -176,8 +176,6 @@ homekit:
       - light.bedroom_bedside
       - light.livingroom_window
       - sensor.outdoor_temperature
-
-wake_on_lan:
 
 ################# VOLVO ON CALL #################
 

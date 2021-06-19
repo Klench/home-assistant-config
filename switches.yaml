@@ -9,8 +9,3 @@
         service: script.sonos_enable_night_mode
       turn_off:
         service: script.sonos_disable_night_mode
-
-- platform: wake_on_lan
-  mac: !secret tor_mac
-  host: !secret tor_ip
-  name: Tor

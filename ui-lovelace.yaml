@@ -398,41 +398,77 @@ views:
             - attribute: clean_area
               unit: 'm2'
               subtitle: Cleaning area
-        actions:
-          # - service: script.vacuum_clean_bottom_floor_neato_d7
-          #   icon: mdi:home
-          #   name: Bottenvåning
-          - service: script.vacuum_clean_entrance_neato_d7
-            icon: mdi:door
-            name: Entré
-          - service: script.vacuum_clean_kitchen_neato_d7
-            icon: mdi:silverware-fork-knife
-            name: Kök
-          - service: script.vacuum_clean_livingroom_neato_d7
-            icon: mdi:sofa-outline
-            name: Vardagsrum
-          # - service: script.vacuum_clean_top_floor_neato_d7
-          #   icon: mdi:bed
-          #   name: Ovanvåning
-          - service: script.vacuum_clean_hallway_neato_d7
-            icon: mdi:stairs
-            name: Hall
-          - service: script.vacuum_clean_bedroom_neato_d7
-            icon: mdi:bed-double-outline
-            name: Sovrum
-          - service: script.vacuum_clean_childroom_neato_d7
-            icon: mdi:human-child
-            name: Barnrum
-          - service: script.vacuum_clean_hallway_neato_d7
-            icon: mdi:desk
-            name: Arbetsrum
 
-      - type: entities
-        title: Inställningar
-        show_header_toggle: false
-        entities:
-          - input_boolean.vacuum_eco_mode
-          - input_boolean.vacuum_extra_care
+      - type: vertical-stack
+        cards:
+          - type: button
+            entity: script.vacuum_clean_home_neato_d7
+            name: Nuvarande våningsplan
+            icon: mdi:floor-plan
+            icon_height: '50px'
+            tap_action:
+              action: call-service
+              service: script.vacuum_clean_home_neato_d7
+          - type: horizontal-stack
+            title: Ovanvåning
+            cards:
+              - type: button
+                entity: script.vacuum_clean_bedroom_neato_d7
+                name: Sovrum
+                icon: mdi:bed-double-outline
+                tap_action:
+                  action: call-service
+                  service: script.vacuum_clean_bedroom_neato_d7
+              - type: button
+                entity: script.vacuum_clean_childroom_neato_d7
+                name: Barnrum
+                icon: mdi:baby
+                tap_action:
+                  action: call-service
+                  service: script.vacuum_clean_childroom_neato_d7
+              - type: button
+                entity: script.vacuum_clean_office_neato_d7
+                name: Arbetsrum
+                icon: mdi:desk
+                tap_action:
+                  action: call-service
+                  service: script.vacuum_clean_office_neato_d7
+              - type: button
+                entity: script.vacuum_clean_hallway_neato_d7
+                name: Hall
+                icon: mdi:shoe-print
+                tap_action:
+                  action: call-service
+                  service: script.vacuum_clean_hallway_neato_d7
+          - type: horizontal-stack
+            title: Bottenvåning
+            cards:
+              - type: button
+                entity: script.vacuum_clean_entrance_neato_d7
+                name: Entré
+                icon: mdi:door
+                tap_action:
+                  action: call-service
+                  service: script.vacuum_clean_entrance_neato_d7
+              - type: button
+                entity: script.vacuum_clean_livingroom_neato_d7
+                name: Vardagsrum
+                icon: mdi:sofa
+                tap_action:
+                  action: call-service
+                  service: script.vacuum_clean_livingroom_neato_d7
+              - type: button
+                entity: script.vacuum_clean_kitchen_neato_d7
+                name: Kök
+                icon: mdi:silverware-fork-knife
+                tap_action:
+                  action: call-service
+                  service: script.vacuum_clean_kitchen_neato_d7
+          - type: entities
+            show_header_toggle: false
+            entities:
+              - input_boolean.vacuum_eco_mode
+              - input_boolean.vacuum_extra_care
 
 ################# UNRAID #################
 

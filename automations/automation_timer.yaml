@@ -35,6 +35,9 @@
       entity_id: media_player.sonos_bedroom
       state: 'playing'
     - condition: state
+      entity_id: timer.bedroom_music_timer
+      state: 'idle'
+    - condition: state
       entity_id: binary_sensor.sonos_bedroom_is_grouped
       state: 'off'
     - condition: state

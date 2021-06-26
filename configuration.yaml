@@ -53,6 +53,8 @@ lovelace:
       type: module
     - url: /hacsfiles/home-assistant-sun-card/home-assistant-sun-card.js
       type: module
+    - url: /hacsfiles/timer-bar-card/timer-bar-card.js
+      type: module
     - url: /hacsfiles/upcoming-media-card/upcoming-media-card.js
       type: js
 
@@ -60,6 +62,9 @@ lovelace:
 config:
 
 http:
+  use_x_forwarded_for: true
+  trusted_proxies:
+    - 172.18.0.4
 
 hacs:
   token: !secret hacs_token
@@ -95,14 +100,18 @@ recorder:
 logger:
   logs:
     homeassistant.components.glances: fatal
-    glances_api: fatal
     homeassistant.components.steam_online: error
     homeassistant.components.volvooncall: error
     homeassistant.components.esphome: error
+    homeassistant.components.hue: fatal
+    homeassistant.components.plex.server: fatal
+    homeassistant.components.python_script: error
     custom_components.trakt: error
-  filters:
-    homeassistant.components.hue:
-      - "^Timeout fetching"
+    glances_api: fatal
+    volvooncall.volvooncall: error
+    zigpy.ota.image: error
+    plexwebsocket: fatal
+    plexapi: fatal
 
 # Enables a map showing the location of tracked devices
 map:

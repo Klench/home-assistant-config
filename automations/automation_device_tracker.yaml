@@ -10,16 +10,27 @@
 - alias: 'Leaving home pause Sonos'
   initial_state: on
   trigger:
-    platform: state
-    entity_id: group.device_tracker_family
-    to: 'not_home'
+    - platform: state
+      entity_id: group.device_tracker_family
+      to: 'not_home'
+    - platform: state
+      entity_id: alarm_control_panel.ajax_alarm_status
+      to: 'armed_away'
   condition:
     condition: state
     entity_id: media_player.sonos_kitchen
     state: 'playing'
   action:
-    service: media_player.media_pause
-    entity_id: media_player.sonos_kitchen
+    - service: python_script.media_player_volume_set
+      data:
+        entity_id: media_player.sonos_kitchen
+        set_group_volume: true
+        volume_level: 0.01
+    - service: media_player.media_pause
+      entity_id: media_player.sonos_kitchen
+    - service: script.sonos_set_group_volume
+      data:
+        volume: 0.2
 
 - alias: 'Coming home turn on lights bright'
   initial_state: on

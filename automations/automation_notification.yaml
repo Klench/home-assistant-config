@@ -13,11 +13,8 @@
   action:
     service: notify.mobile_app_davids_iphone
     data:
-      message: 'Parkeringsvärmaren har startats'
       title: 'Volvo V60'
-      data:
-        push:
-          category: 'carheater'
+      message: 'Parkeringsvärmaren har startats'
 
 ################# ALARM #################
 
@@ -83,12 +80,5 @@
   action:
     service: notify.mobile_app_davids_iphone
     data:
-      message: 'Nattläge är ej aktiverat'
       title: 'Larmstatus'
-      data:
-        push:
-          category: 'alarmstatus'
-        sound:
-          name: default
-          critical: 1
-          volume: 0.1
+      message: 'Nattläge är ej aktiverat'

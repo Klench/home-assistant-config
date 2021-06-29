@@ -125,33 +125,6 @@ system_health:
 # iOS app
 mobile_app:
 
-ios:
-  push:
-    categories:
-      - name: Car heater
-        identifier: 'carheater'
-        actions:
-          - identifier: 'ok'
-            title: 'Ok'
-            activationMode: 'background'
-            authenticationRequired: false
-            destructive: false
-            behavior: 'default'
-          - identifier: 'openhomeassistant'
-            title: 'Öppna Home Assistant'
-            activationMode: 'foreground'
-            destructive: false
-            behavior: 'default'
-      - name: Alarm status
-        identifier: 'alarmstatus'
-        actions:
-          - identifier: 'ok'
-            title: 'Ok'
-            activationMode: 'background'
-            authenticationRequired: false
-            destructive: false
-            behavior: 'default'
-
 # Text to speech
 tts:
   - platform: google_translate

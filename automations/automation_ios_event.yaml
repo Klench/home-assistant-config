@@ -30,7 +30,9 @@
   action:
     - service: light.turn_off
       target:
-        entity_id: light.childroom_ceiling
+        entity_id:
+          - light.childroom_ceiling
+          - light.hallway_ceiling_top_floor
     - choose:
       - conditions: >
           {{ is_state('binary_sensor.sonos_bedroom_is_grouped','on') }}

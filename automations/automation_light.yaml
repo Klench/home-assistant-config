@@ -144,6 +144,21 @@
   action:
     service: script.turn_off_outdoor_lights
 
+- alias: 'Outdoor lights at HA startup'
+  initial_state: on
+  trigger:
+    platform: homeassistant
+    event: start
+  condition:
+    - condition: state
+      entity_id: sun.sun
+      state: "above_horizon"
+    - condition: state
+      entity_id: light.outdoor_lights
+      state: 'on'
+  action:
+    service: script.turn_off_outdoor_lights
+
 - alias: 'Turn off child room night light at sunrise'
   initial_state: on
   trigger:
@@ -226,8 +241,9 @@
     - condition: state
       entity_id: input_boolean.enable_away_lights
       state: 'on'
-    - condition: sun
-      after: sunset
+    - condition: state
+      entity_id: sun.sun
+      state: "below_horizon"
   action:
     - service: script.enable_away_lights
     - service: input_boolean.turn_on

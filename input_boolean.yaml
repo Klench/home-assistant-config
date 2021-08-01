@@ -21,3 +21,7 @@ vacuum_eco_mode:
 vacuum_extra_care:
   name: Extra försiktighet
   icon: mdi:map-marker-path
+enable_hue_switch_hallway:
+  name: Enable Hue switch hallway
+  icon: mdi:light-switch
+  initial: on

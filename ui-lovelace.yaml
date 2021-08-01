@@ -826,6 +826,7 @@ views:
           - input_boolean.window_lights_after_sunset
           - input_boolean.enable_away_lights
           - input_boolean.coming_home_turn_on_lights
+          - input_boolean.enable_hue_switch_hallway
           - automation.leaving_home
           - automation.watching_tv
           - automation.tv_off_group_speakers

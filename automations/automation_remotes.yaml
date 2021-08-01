@@ -5,24 +5,30 @@
 - alias: 'Hue switch bright'
   initial_state: on
   trigger:
-    platform: state
-    entity_id: sensor.hue_hallway_switch
+    platform: event
+    event_type: hue_event
+    event_data:
+      id: "hallway_switch"
+      event: 1002
   condition:
     condition: state
-    entity_id: sensor.hue_hallway_switch
-    state: '1_click_up'
+    entity_id: input_boolean.enable_hue_switch_hallway
+    state: 'on'
   action:
     service: script.indoor_lights_bright
 
 - alias: 'Hue switch relaxed'
   initial_state: on
   trigger:
-    platform: state
-    entity_id: sensor.hue_hallway_switch
+    platform: event
+    event_type: hue_event
+    event_data:
+      id: "hallway_switch"
+      event: 1003
   condition:
     condition: state
-    entity_id: sensor.hue_hallway_switch
-    state: '1_hold_up'
+    entity_id: input_boolean.enable_hue_switch_hallway
+    state: 'on'
   action:
     - service: script.indoor_lights_relaxed
     - condition: state
@@ -37,24 +43,30 @@
 - alias: 'Hue switch turn off lighs'
   initial_state: on
   trigger:
-    platform: state
-    entity_id: sensor.hue_hallway_switch
+    platform: event
+    event_type: hue_event
+    event_data:
+      id: "hallway_switch"
+      event: 4002
   condition:
     condition: state
-    entity_id: sensor.hue_hallway_switch
-    state: '4_click_up'
+    entity_id: input_boolean.enable_hue_switch_hallway
+    state: 'on'
   action:
     service: script.indoor_lights_off
 
 - alias: 'Hue switch low brightness'
   initial_state: on
   trigger:
-    platform: state
-    entity_id: sensor.hue_hallway_switch
+    platform: event
+    event_type: hue_event
+    event_data:
+      id: "hallway_switch"
+      event: 4003
   condition:
     condition: state
-    entity_id: sensor.hue_hallway_switch
-    state: '4_hold_up'
+    entity_id: input_boolean.enable_hue_switch_hallway
+    state: 'on'
   action:
     service: script.indoor_lights_low_brightness
 
@@ -63,72 +75,61 @@
 - alias: 'Hue switch group livingroom speaker'
   initial_state: on
   trigger:
-    platform: state
-    entity_id: sensor.hue_hallway_switch
+    platform: event
+    event_type: hue_event
+    event_data:
+      id: "hallway_switch"
+      event: 2003
   condition:
-    - condition: state
-      entity_id: sensor.hue_hallway_switch
-      state: '2_hold_up'
-    - condition: state
-      entity_id: binary_sensor.sonos_livingroom_is_grouped
-      state: 'off'
+    condition: state
+    entity_id: input_boolean.enable_hue_switch_hallway
+    state: 'on'
   action:
-    service: script.sonos_group_livingroom_speaker
-
-- alias: 'Hue switch ungroup livingroom speaker'
-  initial_state: on
-  trigger:
-    platform: state
-    entity_id: sensor.hue_hallway_switch
-  condition:
-    - condition: state
-      entity_id: sensor.hue_hallway_switch
-      state: '2_hold_up'
-    - condition: state
-      entity_id: binary_sensor.sonos_livingroom_is_grouped
-      state: 'on'
-  action:
-    service: script.sonos_ungroup_livingroom_speaker
+    choose:
+      - conditions: >
+          {{ is_state('binary_sensor.sonos_livingroom_is_grouped','off') }}
+        sequence:
+          service: script.sonos_group_livingroom_speaker
+      - conditions: >
+          {{ is_state('binary_sensor.sonos_livingroom_is_grouped','on') }}
+        sequence:
+          service: script.sonos_ungroup_livingroom_speaker
 
 - alias: 'Hue switch group bedroom speaker'
   initial_state: on
   trigger:
-    platform: state
-    entity_id: sensor.hue_hallway_switch
+    platform: event
+    event_type: hue_event
+    event_data:
+      id: "hallway_switch"
+      event: 3003
   condition:
-    - condition: state
-      entity_id: sensor.hue_hallway_switch
-      state: '3_hold_up'
-    - condition: state
-      entity_id: binary_sensor.sonos_bedroom_is_grouped
-      state: 'off'
+    condition: state
+    entity_id: input_boolean.enable_hue_switch_hallway
+    state: 'on'
   action:
-    service: script.sonos_group_bedroom_speaker
-
-- alias: 'Hue switch ungroup bedroom speaker'
-  initial_state: on
-  trigger:
-    platform: state
-    entity_id: sensor.hue_hallway_switch
-  condition:
-    - condition: state
-      entity_id: sensor.hue_hallway_switch
-      state: '3_hold_up'
-    - condition: state
-      entity_id: binary_sensor.sonos_bedroom_is_grouped
-      state: 'on'
-  action:
-    service: script.sonos_ungroup_bedroom_speaker
+    choose:
+      - conditions: >
+          {{ is_state('binary_sensor.sonos_bedroom_is_grouped','off') }}
+        sequence:
+          service: script.sonos_group_bedroom_speaker
+      - conditions: >
+          {{ is_state('binary_sensor.sonos_bedroom_is_grouped','on') }}
+        sequence:
+          service: script.sonos_ungroup_bedroom_speaker
 
 - alias: 'Hue switch increase Sonos group volume'
   initial_state: on
   trigger:
-    platform: state
-    entity_id: sensor.hue_hallway_switch
+    platform: event
+    event_type: hue_event
+    event_data:
+      id: "hallway_switch"
+      event: 2002
   condition:
     - condition: state
-      entity_id: sensor.hue_hallway_switch
-      state: '2_click_up'
+      entity_id: input_boolean.enable_hue_switch_hallway
+      state: 'on'
     - condition: or
       conditions:
         - condition: state
@@ -145,12 +146,15 @@
 - alias: 'Hue switch decrease Sonos group volume'
   initial_state: on
   trigger:
-    platform: state
-    entity_id: sensor.hue_hallway_switch
+    platform: event
+    event_type: hue_event
+    event_data:
+      id: "hallway_switch"
+      event: 3002
   condition:
     - condition: state
-      entity_id: sensor.hue_hallway_switch
-      state: '3_click_up'
+      entity_id: input_boolean.enable_hue_switch_hallway
+      state: 'on'
     - condition: or
       conditions:
         - condition: state
@@ -167,12 +171,15 @@
 - alias: 'Hue switch increase Sonos bedroom volume'
   initial_state: on
   trigger:
-    platform: state
-    entity_id: sensor.hue_hallway_switch
+    platform: event
+    event_type: hue_event
+    event_data:
+      id: "hallway_switch"
+      event: 2002
   condition:
     - condition: state
-      entity_id: sensor.hue_hallway_switch
-      state: '2_click_up'
+      entity_id: input_boolean.enable_hue_switch_hallway
+      state: 'on'
     - condition: state
       entity_id: media_player.sonos_kitchen
       state:
@@ -194,12 +201,15 @@
 - alias: 'Hue switch decrease Sonos bedroom volume'
   initial_state: on
   trigger:
-    platform: state
-    entity_id: sensor.hue_hallway_switch
+    platform: event
+    event_type: hue_event
+    event_data:
+      id: "hallway_switch"
+      event: 3002
   condition:
     - condition: state
-      entity_id: sensor.hue_hallway_switch
-      state: '3_click_up'
+      entity_id: input_boolean.enable_hue_switch_hallway
+      state: 'on'
     - condition: state
       entity_id: media_player.sonos_kitchen
       state:

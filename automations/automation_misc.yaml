@@ -33,4 +33,4 @@
     platform: state
     entity_id: input_text.transmission_torrent_url
   action:
-    - service: script.transmission_add_torrent
+    service: script.transmission_add_torrent

@@ -224,9 +224,9 @@ sonos:
   media_player:
     advertise_addr: !secret oden_ip
     hosts:
-      - !secret sonos_kitchen_ip
-      - !secret sonos_livingroom_ip
-      - !secret sonos_bedroom_ip
+      - !secret kitchen_sonos_ip
+      - !secret livingroom_sonos_ip
+      - !secret childroom_sonos_ip
 
 # Local media source
 media_source:

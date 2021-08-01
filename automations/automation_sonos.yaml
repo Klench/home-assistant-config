@@ -17,46 +17,46 @@
   trigger:
     platform: template
     value_template: >
-      {{ state_attr('media_player.sonos_bedroom','media_title')|regex_search('Perfect', ignorecase=False) }}
+      {{ state_attr('media_player.childroom_sonos','media_title')|regex_search('Perfect', ignorecase=False) }}
   action:
     service: media_player.media_next_track
     data:
-      entity_id: media_player.sonos_bedroom
+      entity_id: media_player.childroom_sonos
 
 - alias: 'Activate repeat on Sonos bedroom'
   initial_state: on
   trigger:
     platform: state
-    entity_id: media_player.sonos_bedroom
+    entity_id: media_player.childroom_sonos
     to: 'playing'
     for: "00:00:05"
   condition:
     - condition: state
-      entity_id: binary_sensor.sonos_bedroom_is_grouped
+      entity_id: binary_sensor.childroom_sonos_is_grouped
       state: 'off'
     - condition: template
       value_template: >
-        {{ is_state_attr('media_player.sonos_bedroom','repeat','off') and is_state_attr('media_player.sonos_bedroom','media_content_type','music') }}
+        {{ is_state_attr('media_player.childroom_sonos','repeat','off') and is_state_attr('media_player.childroom_sonos','media_content_type','music') }}
   action:
     service: media_player.repeat_set
     data:
-      entity_id: media_player.sonos_bedroom
+      entity_id: media_player.childroom_sonos
       repeat: all
 
 - alias: 'TV off group speakers'
   initial_state: on
   trigger:
     platform: state
-    entity_id: binary_sensor.sonos_livingroom_tv_active
+    entity_id: binary_sensor.livingroom_sonos_tv_active
     to: 'off'
   condition:
     condition: not
     conditions:
       - condition: state
-        entity_id: binary_sensor.sonos_livingroom_is_grouped
+        entity_id: binary_sensor.livingroom_sonos_is_grouped
         state: 'on'
       - condition: state
-        entity_id: media_player.sonos_livingroom
+        entity_id: media_player.livingroom_sonos
         state: 'playing'
   action:
     service: script.sonos_group_livingroom_speaker

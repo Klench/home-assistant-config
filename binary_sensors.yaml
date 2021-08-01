@@ -22,7 +22,7 @@
       friendly_name: 'Status'
       icon_template: mdi:check-circle-outline
       value_template: >
-        {{ state_attr('media_player.sonos_livingroom','night_sound') }}
+        {{ state_attr('media_player.livingroom_sonos','night_sound') }}
     alarm_clock_trigger_weekdays:
       friendly_name: 'Alarm clock trigger weekdays'
       value_template: >
@@ -38,18 +38,18 @@
     relaxed_mode:
       value_template: >
         {{ ((as_timestamp(strptime(states('sensor.relaxed_mode_time'), '%H:%M')) | int) < (as_timestamp(strptime(states('sensor.time'), '%H:%M')) + 60) | int) or ((as_timestamp(strptime(states('sensor.time'), '%H:%M')) | int) < (as_timestamp(strptime('05:00', '%H:%M')) | int)) }}
-    sonos_livingroom_tv_active:
+    livingroom_sonos_tv_active:
       value_template: >
-        {{ is_state_attr('media_player.sonos_livingroom','source','TV') }}
-    sonos_kitchen_is_grouped:
+        {{ is_state_attr('media_player.livingroom_sonos','source','TV') }}
+    kitchen_sonos_is_grouped:
       value_template: >
-        {{ not is_state_attr('media_player.sonos_kitchen','sonos_group',['media_player.sonos_kitchen']) }}
-    sonos_livingroom_is_grouped:
+        {{ not is_state_attr('media_player.kitchen_sonos','sonos_group',['media_player.kitchen_sonos']) }}
+    livingroom_sonos_is_grouped:
       value_template: >
-        {{ not is_state_attr('media_player.sonos_livingroom','sonos_group',['media_player.sonos_livingroom']) }}
-    sonos_bedroom_is_grouped:
+        {{ not is_state_attr('media_player.livingroom_sonos','sonos_group',['media_player.livingroom_sonos']) }}
+    childroom_sonos_is_grouped:
       value_template: >
-        {{ not is_state_attr('media_player.sonos_bedroom','sonos_group',['media_player.sonos_bedroom']) }}
+        {{ not is_state_attr('media_player.childroom_sonos','sonos_group',['media_player.childroom_sonos']) }}
     transmission_active:
       value_template: >
         {{ not (is_state('sensor.transmission_status','idle') or is_state('sensor.transmission_status','unavailable')) }}

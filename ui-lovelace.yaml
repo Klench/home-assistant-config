@@ -151,11 +151,11 @@ views:
 
       - type: conditional
         conditions:
-          - entity: media_player.apple_tv_vardagsrum
+          - entity: media_player.livingroom_apple_tv
             state_not: 'idle'
         card:
           type: custom:mini-media-player
-          entity: media_player.apple_tv_vardagsrum
+          entity: media_player.livingroom_apple_tv
           icon: mdi:television
           replace_mute: stop
           hide:
@@ -226,7 +226,7 @@ views:
     cards:
 
       - type: custom:mini-media-player
-        entity: media_player.sonos_kitchen
+        entity: media_player.kitchen_sonos
         hide:
           power: true
           source: true
@@ -239,13 +239,13 @@ views:
           expanded: true
           show_group_count: true
           entities:
-            - entity_id: media_player.sonos_livingroom
+            - entity_id: media_player.livingroom_sonos
               name: Sonos vardagsrum
-            - entity_id: media_player.sonos_bedroom
+            - entity_id: media_player.childroom_sonos
               name: Sonos sovrum
 
       - type: custom:mini-media-player
-        entity: media_player.sonos_bedroom
+        entity: media_player.childroom_sonos
         artwork: cover
         icon: mdi:speaker
         hide:
@@ -284,7 +284,7 @@ views:
               id: spotify:album:75atlwzG5ExdoFhCtWX8BM
 
       - type: custom:mini-media-player
-        entity: media_player.sonos_livingroom
+        entity: media_player.livingroom_sonos
         artwork: cover
         icon: mdi:speaker
         hide:
@@ -297,11 +297,11 @@ views:
 
       - type: conditional
         conditions:
-          - entity: binary_sensor.sonos_kitchen_is_grouped
+          - entity: binary_sensor.kitchen_sonos_is_grouped
             state: 'on'
         card:
           type: custom:mini-media-player
-          entity: media_player.sonos_kitchen
+          entity: media_player.kitchen_sonos
           artwork: cover
           icon: mdi:speaker
           hide:
@@ -320,9 +320,9 @@ views:
 
       - type: conditional
         conditions:
-          - entity: media_player.sonos_bedroom
+          - entity: media_player.childroom_sonos
             state: 'playing'
-          - entity: binary_sensor.sonos_bedroom_is_grouped
+          - entity: binary_sensor.childroom_sonos_is_grouped
             state: 'off'
         card:
           type: vertical-stack
@@ -355,11 +355,11 @@ views:
 
       - type: conditional
         conditions:
-          - entity: binary_sensor.sonos_livingroom_tv_active
+          - entity: binary_sensor.livingroom_sonos_tv_active
             state: 'on'
         card:
           type: custom:mini-media-player
-          entity: media_player.sonos_livingroom
+          entity: media_player.livingroom_sonos
           hide:
             power: true
             source: true
@@ -371,9 +371,9 @@ views:
             expanded: true
             show_group_count: true
             entities:
-              - entity_id: media_player.sonos_kitchen
+              - entity_id: media_player.kitchen_sonos
                 name: Sonos kök
-              - entity_id: media_player.sonos_bedroom
+              - entity_id: media_player.childroom_sonos
                 name: Sonos sovrum
 
 ################# ROBOT VACUUM #################

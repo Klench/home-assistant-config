@@ -13,7 +13,7 @@ indoor_lights_bright:
           - script.office_bright
     - condition: template
       value_template: >
-        {{ not (is_state('binary_sensor.sonos_bedroom_is_grouped','off') and is_state('media_player.sonos_bedroom','playing')) }}
+        {{ not (is_state('binary_sensor.childroom_sonos_is_grouped','off') and is_state('media_player.childroom_sonos','playing')) }}
     - service: script.childroom_bright
 
 indoor_lights_relaxed:

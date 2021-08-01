@@ -6,15 +6,15 @@ sonos_group_all_speakers:
     - service: media_player.volume_set
       data:
         entity_id:
-          - media_player.sonos_livingroom
-          - media_player.sonos_bedroom
+          - media_player.livingroom_sonos
+          - media_player.childroom_sonos
         volume_level: 0.0
     - service: sonos.join
       data:
-        master: media_player.sonos_kitchen
+        master: media_player.kitchen_sonos
         entity_id:
-          - media_player.sonos_bedroom
-          - media_player.sonos_livingroom
+          - media_player.childroom_sonos
+          - media_player.livingroom_sonos
     - service: script.sonos_sync_group_volume
 
 sonos_group_speaker:
@@ -26,13 +26,13 @@ sonos_group_speaker:
         volume_level: 0.0
     - service: sonos.join
       data:
-        master: media_player.sonos_kitchen
+        master: media_player.kitchen_sonos
         entity_id: "{{ sonos_entity }}"
     - service: python_script.media_player_volume_set
       data:
         entity_id: "{{ sonos_entity }}"
         volume_level: >
-          {{ state_attr('media_player.sonos_kitchen','volume_level') }}
+          {{ state_attr('media_player.kitchen_sonos','volume_level') }}
 
 sonos_ungroup_speaker:
   alias: Sonos ungroup speaker
@@ -54,28 +54,28 @@ sonos_group_livingroom_speaker:
   sequence:
     - service: script.sonos_group_speaker
       data:
-        sonos_entity: media_player.sonos_livingroom
+        sonos_entity: media_player.livingroom_sonos
 
-sonos_group_bedroom_speaker:
-  alias: Sonos group bedroom speaker
+sonos_group_childroom_speaker:
+  alias: Sonos group childroom speaker
   sequence:
     - service: script.sonos_group_speaker
       data:
-        sonos_entity: media_player.sonos_bedroom
+        sonos_entity: media_player.childroom_sonos
 
 sonos_ungroup_livingroom_speaker:
   alias: Sonos group livingroom speaker
   sequence:
     - service: script.sonos_ungroup_speaker
       data:
-        sonos_entity: media_player.sonos_livingroom
+        sonos_entity: media_player.livingroom_sonos
 
 sonos_ungroup_bedroom_speaker:
-  alias: Sonos group bedroom speaker
+  alias: Sonos ungroup childroom speaker
   sequence:
     - service: script.sonos_ungroup_speaker
       data:
-        sonos_entity: media_player.sonos_bedroom
+        sonos_entity: media_player.childroom_sonos
 
 ##### VOLUME #####
 
@@ -84,7 +84,7 @@ sonos_set_group_volume:
   sequence:
     - service: python_script.media_player_volume_set
       data:
-        entity_id: media_player.sonos_kitchen
+        entity_id: media_player.kitchen_sonos
         set_group_volume: true
         volume_level: '{{ volume }}'
 
@@ -93,30 +93,30 @@ sonos_sync_group_volume:
   sequence:
     - service: python_script.media_player_volume_set
       data:
-        entity_id: media_player.sonos_kitchen
+        entity_id: media_player.kitchen_sonos
         set_group_volume: true
         volume_level: >
-          {{ state_attr('media_player.sonos_kitchen','volume_level') | float }}
+          {{ state_attr('media_player.kitchen_sonos','volume_level') | float }}
 
 sonos_increase_volume:
   alias: 'Sonos increase volume'
   sequence:
     - service: python_script.media_player_volume_set
       data:
-        entity_id: media_player.sonos_kitchen
+        entity_id: media_player.kitchen_sonos
         set_group_volume: true
         volume_level: >
-          {{ [((state_attr('media_player.sonos_kitchen','volume_level') | float * 1.15 + 0.03) | round(2)), 1] | min }}
+          {{ [((state_attr('media_player.kitchen_sonos','volume_level') | float * 1.15 + 0.03) | round(2)), 1] | min }}
 
 sonos_decrease_volume:
   alias: 'Sonos decrease volume'
   sequence:
     - service: python_script.media_player_volume_set
       data:
-        entity_id: media_player.sonos_kitchen
+        entity_id: media_player.kitchen_sonos
         set_group_volume: true
         volume_level: >
-          {{ [((state_attr('media_player.sonos_kitchen','volume_level') | float * 0.85 - 0.03) | round(2)), 0.05] | max }}
+          {{ [((state_attr('media_player.kitchen_sonos','volume_level') | float * 0.85 - 0.03) | round(2)), 0.05] | max }}
 
 ##### SAY #####
 
@@ -159,7 +159,7 @@ sonos_set_alarm:
   sequence:
     - service: sonos.update_alarm
       data:
-        entity_id: media_player.sonos_bedroom
+        entity_id: media_player.childroom_sonos
         alarm_id: 7
         time: >
           {{ states('sensor.alarm_clock_time_weekdays') }}
@@ -170,7 +170,7 @@ sonos_disable_alarm:
   sequence:
     - service: sonos.update_alarm
       data:
-        entity_id: media_player.sonos_bedroom
+        entity_id: media_player.childroom_sonos
         alarm_id: 7
         enabled: false
 
@@ -181,7 +181,7 @@ sonos_enable_night_mode:
   sequence:
     - service: sonos.set_option
       data:
-        entity_id: media_player.sonos_livingroom
+        entity_id: media_player.livingroom_sonos
         night_sound: true
         speech_enhance: true
 
@@ -190,6 +190,6 @@ sonos_disable_night_mode:
   sequence:
     - service: sonos.set_option
       data:
-        entity_id: media_player.sonos_livingroom
+        entity_id: media_player.livingroom_sonos
         night_sound: false
         speech_enhance: false

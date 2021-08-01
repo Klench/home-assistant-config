@@ -10,6 +10,6 @@ device_tracker_family:
 sonos_all_speakers:
   name: "Sonos all speakers"
   entities:
-    - media_player.sonos_kitchen
-    - media_player.sonos_bedroom
-    - media_player.sonos_livingroom
+    - media_player.kitchen_sonos
+    - media_player.childroom_sonos
+    - media_player.livingroom_sonos

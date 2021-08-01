@@ -18,16 +18,16 @@
       to: 'armed_away'
   condition:
     condition: state
-    entity_id: media_player.sonos_kitchen
+    entity_id: media_player.kitchen_sonos
     state: 'playing'
   action:
     - service: python_script.media_player_volume_set
       data:
-        entity_id: media_player.sonos_kitchen
+        entity_id: media_player.kitchen_sonos
         set_group_volume: true
         volume_level: 0.01
     - service: media_player.media_pause
-      entity_id: media_player.sonos_kitchen
+      entity_id: media_player.kitchen_sonos
     - service: script.sonos_set_group_volume
       data:
         volume: 0.2
@@ -145,7 +145,7 @@
     to: 'home'
   condition:
     condition: state
-    entity_id: binary_sensor.sonos_livingroom_tv_active
+    entity_id: binary_sensor.livingroom_sonos_tv_active
     state: 'off'
   action:
     - choose:
@@ -161,7 +161,7 @@
             - service: script.sonos_ungroup_bedroom_speaker
             - service: media_player.volume_set
               data:
-                entity_id: media_player.sonos_bedroom
+                entity_id: media_player.childroom_sonos
                 volume_level: 0.2
       default:
         - service: script.sonos_group_all_speakers

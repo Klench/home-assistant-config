@@ -35,27 +35,27 @@
           - light.hallway_ceiling_top_floor
     - choose:
       - conditions: >
-          {{ is_state('binary_sensor.sonos_bedroom_is_grouped','on') }}
+          {{ is_state('binary_sensor.childroom_sonos_is_grouped','on') }}
         sequence:
           - service: python_script.media_player_volume_set
             data:
-              entity_id: media_player.sonos_bedroom
+              entity_id: media_player.childroom_sonos
               volume_level: 0
           - service: script.sonos_ungroup_bedroom_speaker
           - service: media_player.volume_set
             data:
-              entity_id: media_player.sonos_bedroom
+              entity_id: media_player.childroom_sonos
               volume_level: 0.1
           - delay: '00:00:01'
           - service: media_player.media_play
             target:
-              entity_id: media_player.sonos_bedroom
+              entity_id: media_player.childroom_sonos
       default:
         - service: media_player.volume_set
           data:
-            entity_id: media_player.sonos_bedroom
+            entity_id: media_player.childroom_sonos
             volume_level: 0.1
         - delay: '00:00:01'
         - service: media_player.media_play
           target:
-            entity_id: media_player.sonos_bedroom
+            entity_id: media_player.childroom_sonos

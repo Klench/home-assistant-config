@@ -32,12 +32,12 @@
   action:
     - service: script.indoor_lights_relaxed
     - condition: state
-      entity_id: binary_sensor.sonos_bedroom_is_grouped
+      entity_id: binary_sensor.childroom_sonos_is_grouped
       state: 'on'
     - service: script.sonos_ungroup_bedroom_speaker
     - service: media_player.volume_set
       data:
-        entity_id: media_player.sonos_bedroom
+        entity_id: media_player.childroom_sonos
         volume_level: 0.2
 
 - alias: 'Hue switch turn off lighs'
@@ -87,11 +87,11 @@
   action:
     choose:
       - conditions: >
-          {{ is_state('binary_sensor.sonos_livingroom_is_grouped','off') }}
+          {{ is_state('binary_sensor.livingroom_sonos_is_grouped','off') }}
         sequence:
           service: script.sonos_group_livingroom_speaker
       - conditions: >
-          {{ is_state('binary_sensor.sonos_livingroom_is_grouped','on') }}
+          {{ is_state('binary_sensor.livingroom_sonos_is_grouped','on') }}
         sequence:
           service: script.sonos_ungroup_livingroom_speaker
 
@@ -110,11 +110,11 @@
   action:
     choose:
       - conditions: >
-          {{ is_state('binary_sensor.sonos_bedroom_is_grouped','off') }}
+          {{ is_state('binary_sensor.childroom_sonos_is_grouped','off') }}
         sequence:
-          service: script.sonos_group_bedroom_speaker
+          service: script.sonos_group_childroom_speaker
       - conditions: >
-          {{ is_state('binary_sensor.sonos_bedroom_is_grouped','on') }}
+          {{ is_state('binary_sensor.childroom_sonos_is_grouped','on') }}
         sequence:
           service: script.sonos_ungroup_bedroom_speaker
 
@@ -133,12 +133,12 @@
     - condition: or
       conditions:
         - condition: state
-          entity_id: media_player.sonos_bedroom
+          entity_id: media_player.childroom_sonos
           state:
             - 'paused'
             - 'idle'
         - condition: state
-          entity_id: binary_sensor.sonos_bedroom_is_grouped
+          entity_id: binary_sensor.childroom_sonos_is_grouped
           state: 'on'
   action:
     service: script.sonos_increase_volume
@@ -158,12 +158,12 @@
     - condition: or
       conditions:
         - condition: state
-          entity_id: media_player.sonos_bedroom
+          entity_id: media_player.childroom_sonos
           state:
             - 'paused'
             - 'idle'
         - condition: state
-          entity_id: binary_sensor.sonos_bedroom_is_grouped
+          entity_id: binary_sensor.childroom_sonos_is_grouped
           state: 'on'
   action:
     service: script.sonos_decrease_volume
@@ -181,22 +181,22 @@
       entity_id: input_boolean.enable_hue_switch_hallway
       state: 'on'
     - condition: state
-      entity_id: media_player.sonos_kitchen
+      entity_id: media_player.kitchen_sonos
       state:
         - 'paused'
         - 'idle'
     - condition: state
-      entity_id: media_player.sonos_bedroom
+      entity_id: media_player.childroom_sonos
       state: 'playing'
     - condition: state
-      entity_id: binary_sensor.sonos_bedroom_is_grouped
+      entity_id: binary_sensor.childroom_sonos_is_grouped
       state: 'off'
   action:
     service: python_script.media_player_volume_set
     data:
-      entity_id: media_player.sonos_bedroom
+      entity_id: media_player.childroom_sonos
       volume_level: >
-        {{ [((state_attr('media_player.sonos_bedroom','volume_level') | float * 1.15 + 0.03) | round(2)), 1] | min }}
+        {{ [((state_attr('media_player.childroom_sonos','volume_level') | float * 1.15 + 0.03) | round(2)), 1] | min }}
 
 - alias: 'Hue switch decrease Sonos bedroom volume'
   initial_state: on
@@ -211,22 +211,22 @@
       entity_id: input_boolean.enable_hue_switch_hallway
       state: 'on'
     - condition: state
-      entity_id: media_player.sonos_kitchen
+      entity_id: media_player.kitchen_sonos
       state:
         - 'paused'
         - 'idle'
     - condition: state
-      entity_id: media_player.sonos_bedroom
+      entity_id: media_player.childroom_sonos
       state: 'playing'
     - condition: state
-      entity_id: binary_sensor.sonos_bedroom_is_grouped
+      entity_id: binary_sensor.childroom_sonos_is_grouped
       state: 'off'
   action:
     service: python_script.media_player_volume_set
     data:
-      entity_id: media_player.sonos_bedroom
+      entity_id: media_player.childroom_sonos
       volume_level: >
-        {{ [((state_attr('media_player.sonos_bedroom','volume_level') | float * 0.85 - 0.03) | round(2)), 0.05] | max }}
+        {{ [((state_attr('media_player.childroom_sonos','volume_level') | float * 0.85 - 0.03) | round(2)), 0.05] | max }}
 
 ################# IKEA #################
 
@@ -317,9 +317,9 @@
   action:
     service: python_script.media_player_volume_set
     data:
-      entity_id: media_player.sonos_bedroom
+      entity_id: media_player.childroom_sonos
       volume_level: >
-        {{ [((state_attr('media_player.sonos_bedroom','volume_level') | float * 1.15 + 0.03) | round(2)), 1] | min }}
+        {{ [((state_attr('media_player.childroom_sonos','volume_level') | float * 1.15 + 0.03) | round(2)), 1] | min }}
 
 - alias: 'Ikea button childroom decrease volume'
   initial_state: on
@@ -333,9 +333,9 @@
   action:
     service: python_script.media_player_volume_set
     data:
-      entity_id: media_player.sonos_bedroom
+      entity_id: media_player.childroom_sonos
       volume_level: >
-        {{ [((state_attr('media_player.sonos_bedroom','volume_level') | float * 0.85 - 0.03) | round(2)), 0.05] | max }}
+        {{ [((state_attr('media_player.childroom_sonos','volume_level') | float * 0.85 - 0.03) | round(2)), 0.05] | max }}
 
 - alias: 'Ikea button childroom ungroup speaker'
   initial_state: on
@@ -359,7 +359,7 @@
       command: 'hold'
       args: [3328, 0]
   action:
-    service: script.sonos_group_bedroom_speaker
+    service: script.sonos_group_childroom_speaker
 
 ##### HALLWAY TOP FLOOR #####
 

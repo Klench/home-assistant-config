@@ -401,7 +401,7 @@
   condition:
     condition: template
     value_template: >
-      {{ is_state('light.livingroom_couch_table','off') or is_state_attr('light.livingroom_couch_table','brightness',255) }}
+      {{ is_state_attr('light.livingroom_couch_table','brightness',255) }}
   action:
     service: script.livingroom_relaxed
 
@@ -417,11 +417,11 @@
   condition:
     condition: template
     value_template: >
-      {{ is_state_attr('light.livingroom_couch_table','brightness',76) }}
+      {{ is_state('light.livingroom_couch_table','off') or is_state_attr('light.livingroom_couch_table','brightness',76) }}
   action:
     service: script.livingroom_bright
 
-- alias: 'Shelly livingroom bright long press'
+- alias: 'Shelly livingroom relaxed long press'
   initial_state: on
   trigger:
     platform: event
@@ -434,7 +434,7 @@
     entity_id: light.livingroom_couch_table
     state: 'off'
   action:
-    service: script.livingroom_bright
+    service: script.livingroom_relaxed
 
 - alias: 'Shelly livingroom turn off lights'
   initial_state: on

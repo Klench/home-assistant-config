@@ -18,15 +18,24 @@
 - alias: 'Play child room music'
   initial_state: on
   trigger:
-    platform: event
-    event_type: ios.action_fired
-    event_data:
-      actionID: CADF83CD-087C-4737-8E5F-16D3DB61E40E
-      actionName: Play child room music
-      sourceDeviceID: davids_iphone
-      sourceDeviceName: Davids iPhone
-      sourceDevicePermanentID: CFD2DEC1-8CF3-432F-AF78-7419632CC842
-      triggerSource: siriShortcut
+    - platform: event
+      event_type: ios.action_fired
+      event_data:
+        actionID: CADF83CD-087C-4737-8E5F-16D3DB61E40E
+        actionName: Play child room music
+        sourceDeviceID: davids_iphone
+        sourceDeviceName: Davids iPhone
+        sourceDevicePermanentID: CFD2DEC1-8CF3-432F-AF78-7419632CC842
+        triggerSource: siriShortcut
+    - platform: event
+      event_type: ios.action_fired
+      event_data:
+        actionID: 405DCC9E-1D43-4105-9757-390F31263579
+        actionName: Play child room music
+        sourceDeviceID: nellies_iphone
+        sourceDeviceName: Nellies iPhone
+        sourceDevicePermanentID: 339E737F-6B8D-4568-8F98-3E422F7E98D8
+        triggerSource: siriShortcut
   action:
     - service: light.turn_off
       target:

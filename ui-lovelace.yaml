@@ -240,9 +240,9 @@ views:
           show_group_count: true
           entities:
             - entity_id: media_player.livingroom_sonos
-              name: Sonos vardagsrum
+              name: Vardagsrum
             - entity_id: media_player.childroom_sonos
-              name: Sonos sovrum
+              name: Barnrum
 
       - type: custom:mini-media-player
         entity: media_player.childroom_sonos

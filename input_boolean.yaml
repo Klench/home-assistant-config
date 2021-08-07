@@ -24,4 +24,3 @@ vacuum_extra_care:
 enable_hue_switch_hallway:
   name: Enable Hue switch hallway
   icon: mdi:light-switch
-  initial: on

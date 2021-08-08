@@ -39,8 +39,6 @@
               message: 'Larmet är ej aktiverat'
               title: 'Larmstatus'
               data:
-                push:
-                  category: 'alarmstatus'
                 sound:
                   name: default
                   critical: 1
@@ -53,8 +51,6 @@
               message: 'Larmet är ej aktiverat'
               title: 'Larmstatus'
               data:
-                push:
-                  category: 'alarmstatus'
                 sound:
                   name: default
                   critical: 1

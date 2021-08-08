@@ -157,7 +157,8 @@
       entity_id: light.outdoor_lights
       state: 'on'
   action:
-    service: script.turn_off_outdoor_lights
+    - delay: '00:10:00'
+    - service: script.turn_off_outdoor_lights
 
 - alias: 'Turn off child room night light at sunrise'
   initial_state: on

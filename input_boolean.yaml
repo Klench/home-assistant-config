@@ -23,4 +23,4 @@ vacuum_extra_care:
   icon: mdi:map-marker-path
 enable_hue_switch_hallway:
   name: Enable Hue switch hallway
-  icon: mdi:light-switch
+  icon: hue:dimmer-switch

@@ -14,10 +14,10 @@ light.livingroom_window:
   icon: mdi:outdoor-lamp
   friendly_name: 'Fönsterlampor'
 light.office_window:
-  icon: mdi:outdoor-lamp
+  icon: hue:bulb-filament-alt
   friendly_name: 'Fönsterlampa'
 light.bedroom_bedside:
-  icon: mdi:lamp
+  icon: mdi:floor-lamp
   friendly_name: 'Nattduksbord'
 
 device_tracker.davids_iphone:

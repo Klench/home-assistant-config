@@ -25,6 +25,31 @@
   action:
     service: script.watching_tv_lights
 
+- alias: 'Decrease child room music volume when turning indoor lights off'
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: script.indoor_lights_off
+    to: 'on'
+  condition:
+    - condition: state
+      entity_id: binary_sensor.relaxed_mode
+      state: 'on'
+    - condition: state
+      entity_id: media_player.childroom_sonos
+      state: 'playing'
+    - condition: state
+      entity_id: binary_sensor.childroom_sonos_is_grouped
+      state: 'off'
+    - condition: template
+      value_template: >
+        {{ state_attr('media_player.childroom_sonos','volume_level') > 0.05 }}
+  action:
+    service: python_script.media_player_volume_set
+    data:
+      entity_id: media_player.childroom_sonos
+      volume_level: 0.05
+
 ################# TRANSMISSION #################
 
 - alias: 'Transmission add torrent'

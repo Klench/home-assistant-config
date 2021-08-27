@@ -78,3 +78,8 @@
     data:
       title: 'Larmstatus'
       message: 'Nattläge är ej aktiverat'
+      data:
+        sound:
+          name: default
+          critical: 1
+          volume: 0.1

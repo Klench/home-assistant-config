@@ -4,11 +4,11 @@
   initial_state: on
   trigger:
     platform: state
-    entity_id: switch.lgd321_heater
+    entity_id: switch.rcb492_heater
     to: 'on'
   condition:
     condition: state
-    entity_id: device_tracker.volvo_lgd321
+    entity_id: device_tracker.volvo_rcb492
     state: 'home'
   action:
     service: notify.mobile_app_davids_iphone

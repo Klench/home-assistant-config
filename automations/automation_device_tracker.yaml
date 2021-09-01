@@ -39,7 +39,7 @@
       entity_id: group.device_tracker_family
       to: 'home'
     - platform: state
-      entity_id: device_tracker.volvo_lgd321
+      entity_id: device_tracker.volvo_rcb492
       to: 'home'
   condition:
     - condition: state
@@ -72,7 +72,7 @@
       entity_id: group.device_tracker_family
       to: 'home'
     - platform: state
-      entity_id: device_tracker.volvo_lgd321
+      entity_id: device_tracker.volvo_rcb492
       to: 'home'
   condition:
     - condition: state
@@ -105,7 +105,7 @@
       entity_id: group.device_tracker_family
       to: 'home'
     - platform: state
-      entity_id: device_tracker.volvo_lgd321
+      entity_id: device_tracker.volvo_rcb492
       to: 'home'
     - platform: state
       entity_id: device_tracker.sela_ltjs4sl13
@@ -173,7 +173,7 @@
   initial_state: on
   trigger:
     platform: state
-    entity_id: device_tracker.volvo_lgd321
+    entity_id: device_tracker.volvo_rcb492
     to: 'home'
   condition:
     - condition: state

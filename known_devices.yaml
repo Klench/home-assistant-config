@@ -5,3 +5,10 @@ volvo_lgd321:
   name: Bilen
   picture:
   track: true
+
+volvo_rcb492:
+  name: RCB492
+  mac:
+  icon: mdi:car
+  picture:
+  track: true

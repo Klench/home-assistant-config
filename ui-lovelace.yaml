@@ -13,9 +13,9 @@ views:
           - device_tracker.davids_iphone
           - device_tracker.nellies_iphone
           - sensor.car_status
-          - entity: sensor.lgd321_range
+          - entity: sensor.rcb492_range
             name: 'Räckvidd'
-          - entity: switch.lgd321_heater
+          - entity: switch.rcb492_heater
             name: 'Värmare'
           - sensor.outdoor_temperature
           - entity: sensor.plex_oden
@@ -668,39 +668,45 @@ views:
         title: Översikt
         show_header_toggle: false
         entities:
-          - binary_sensor.lgd321_doors
-          - binary_sensor.lgd321_windows
-          - binary_sensor.lgd321_hood
-          - binary_sensor.lgd321_brake_fluid
-          - binary_sensor.lgd321_bulbs
-          - binary_sensor.lgd321_service
-          - binary_sensor.lgd321_washer_fluid
-          - sensor.lgd321_fuel_level
-          - sensor.lgd321_fuel_amount
-          - sensor.lgd321_range
-          - sensor.lgd321_fuel_consumption
-          - switch.lgd321_heater
+          - binary_sensor.rcb492_doors
+          - binary_sensor.rcb492_door_lock
+          - binary_sensor.rcb492_windows
+          - binary_sensor.rcb492_hood
+          - binary_sensor.rcb492_brake_fluid
+          - binary_sensor.rcb492_bulbs
+          - binary_sensor.rcb492_service
+          - binary_sensor.rcb492_washer_fluid
+          - sensor.rcb492_fuel_level
+          - sensor.rcb492_fuel_amount
+          - sensor.rcb492_range
+          - sensor.rcb492_fuel_consumption
+          - switch.rcb492_engine
+          - lock.rcb492_door_lock
+          - switch.rcb492_heater
 
       - type: entities
         title: Detaljer
         show_header_toggle: false
         entities:
-          - sensor.lgd321_last_trip
-          - sensor.lgd321_odometer
-          - sensor.lgd321_trip_meter_1
-          - sensor.lgd321_trip_meter_2
-          - binary_sensor.lgd321_front_left_door
-          - binary_sensor.lgd321_front_right_door
-          - binary_sensor.lgd321_rear_left_door
-          - binary_sensor.lgd321_rear_right_door
-          - binary_sensor.lgd321_front_left_window
-          - binary_sensor.lgd321_front_right_window
-          - binary_sensor.lgd321_rear_left_window
-          - binary_sensor.lgd321_rear_right_window
-          - binary_sensor.lgd321_front_left_tyre
-          - binary_sensor.lgd321_front_right_tyre
-          - binary_sensor.lgd321_rear_left_tyre
-          - binary_sensor.lgd321_rear_right_tyre
+          - sensor.rcb492_last_trip
+          - sensor.rcb492_odometer
+          - sensor.rcb492_trip_meter_1
+          - sensor.rcb492_trip_meter_2
+          - sensor.rcb492_average_speed
+          - binary_sensor.rcb492_front_left_door
+          - binary_sensor.rcb492_front_right_door
+          - binary_sensor.rcb492_rear_left_door
+          - binary_sensor.rcb492_rear_right_door
+          - binary_sensor.rcb492_hood
+          - binary_sensor.rcb492_tailgate
+          - binary_sensor.rcb492_front_left_window
+          - binary_sensor.rcb492_front_right_window
+          - binary_sensor.rcb492_rear_left_window
+          - binary_sensor.rcb492_rear_right_window
+          - binary_sensor.rcb492_front_left_tyre
+          - binary_sensor.rcb492_front_right_tyre
+          - binary_sensor.rcb492_rear_left_tyre
+          - binary_sensor.rcb492_rear_right_tyre
 
 # ################# WORK TIME #################
 

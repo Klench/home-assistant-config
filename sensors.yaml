@@ -46,6 +46,10 @@
     - mbattchg
     - mintimel
 
+- platform: skolmaten
+  sensors:
+    - school: junibackens-forskola7
+
 - platform: template
   sensors:
     alarm_clock_time_weekdays:

@@ -57,6 +57,8 @@ lovelace:
       type: module
     - url: /hacsfiles/hass-hue-icons/hass-hue-icons.js
       type: module
+    - url: /hacsfiles/list-card/list-card.js
+      type: module
     - url: /hacsfiles/upcoming-media-card/upcoming-media-card.js
       type: js
 

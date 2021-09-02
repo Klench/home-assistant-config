@@ -188,6 +188,16 @@ views:
       - type: custom:sun-card
         language: sv
 
+      - type: custom:list-card
+        columns:
+          - title: ' '
+            field: day
+          - field: food
+            title: ' '
+        entity: sensor.skolmaten_junibackens_forskola7
+        feed_attribute: entries
+        title: Matsedel Junibacken
+
       - type: custom:krisinfo-card
         entity: sensor.krisinformation_skane
 

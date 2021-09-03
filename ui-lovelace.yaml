@@ -277,21 +277,24 @@ views:
             - name: 'Disney Peaceful Piano: Lullaby'
               type: music
               id: spotify:album:2CE8v99s07pcaXQwOLYMlS
-            - name: Be Held
+            - name: Piano worship
               type: music
-              id: spotify:album:36mfScdTe8zFlaHQAmIMuf
-            - name: Be Held Instrumental
-              type: music
-              id: spotify:album:5bf51FjqhwkiYMQyRiEhlh
+              id: spotify:playlist:3zJnlFpxQ9s7VS5LSvbeSd
             - name: Piano dinner
               type: music
               id: spotify:playlist:37i9dQZF1DWZVU32KsYGUK
             - name: Baby sleep
               type: music
               id: spotify:playlist:37i9dQZF1DX0DxcHtn4Hwo
-            - name: 'Hillsong: The Secret Place'
+            - name: Be Held
               type: music
-              id: spotify:album:75atlwzG5ExdoFhCtWX8BM
+              id: spotify:album:36mfScdTe8zFlaHQAmIMuf
+            - name: Be Held Instrumental
+              type: music
+              id: spotify:album:5bf51FjqhwkiYMQyRiEhlh
+            - name: Humlan Djojj
+              type: music
+              id: spotify:album:7Fwal5B7DbHxVEjZRmckum
 
       - type: custom:mini-media-player
         entity: media_player.livingroom_sonos

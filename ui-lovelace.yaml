@@ -677,12 +677,95 @@ views:
     icon: mdi:car
     cards:
 
+      - type: vertical-stack
+        cards:
+          - type: glance
+            entities:
+              - entity: binary_sensor.rcb492_door_lock
+                name: Dörrar
+              - entity: switch.rcb492_heater
+                name: Värmare
+              - entity: binary_sensor.rcb492_engine
+                name: Motor
+                icon: mdi:engine
+          - type: horizontal-stack
+            cards:
+              - type: conditional
+                conditions:
+                  - entity: lock.rcb492_door_lock
+                    state: 'locked'
+                card:
+                  type: button
+                  name: 'Lås upp'
+                  icon: mdi:lock-open-variant
+                  tap_action:
+                    action: call-service
+                    service: lock.unlock
+                    service_data:
+                      entity_id: lock.rcb492_door_lock
+                    confirmation:
+                      text: 'Vill du låsa upp bilen?'
+              - type: conditional
+                conditions:
+                  - entity: lock.rcb492_door_lock
+                    state: 'unlocked'
+                card:
+                  type: button
+                  name: 'Lås'
+                  icon: mdi:lock
+                  tap_action:
+                    action: call-service
+                    service: lock.lock
+                    service_data:
+                      entity_id: lock.rcb492_door_lock
+                    confirmation:
+                      text: 'Vill du låsa bilen?'
+              - type: conditional
+                conditions:
+                  - entity: switch.rcb492_heater
+                    state: 'off'
+                card:
+                  type: button
+                  name: 'Starta värmare'
+                  icon: mdi:radiator
+                  tap_action:
+                    action: call-service
+                    service: switch.turn_on
+                    service_data:
+                      entity_id: switch.rcb492_heater
+                    confirmation:
+                      text: 'Vill du starta parkeringsvärmaren?'
+              - type: conditional
+                conditions:
+                  - entity: switch.rcb492_heater
+                    state: 'on'
+                card:
+                  type: button
+                  name: 'Stoppa värmare'
+                  icon: mdi:radiator-off
+                  tap_action:
+                    action: call-service
+                    service: switch.turn_off
+                    service_data:
+                      entity_id: switch.rcb492_heater
+                    confirmation:
+                      text: 'Vill du stänga av parkeringsvärmaren?'
+              - type: button
+                name: 'Starta motor'
+                icon: mdi:engine
+                tap_action:
+                  action: call-service
+                  service: switch.turn_on
+                  service_data:
+                    entity_id: switch.rcb492_engine
+                  confirmation:
+                    text: 'Vill du starta motorn?'
+
       - type: entities
         title: Översikt
         show_header_toggle: false
         entities:
           - binary_sensor.rcb492_doors
-          - binary_sensor.rcb492_door_lock
           - binary_sensor.rcb492_windows
           - binary_sensor.rcb492_hood
           - binary_sensor.rcb492_brake_fluid
@@ -693,9 +776,6 @@ views:
           - sensor.rcb492_fuel_amount
           - sensor.rcb492_range
           - sensor.rcb492_fuel_consumption
-          - switch.rcb492_engine
-          - lock.rcb492_door_lock
-          - switch.rcb492_heater
 
       - type: entities
         title: Detaljer

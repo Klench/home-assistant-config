@@ -40,12 +40,9 @@
     platform: time
     at: '09:00:00'
   condition:
-    - condition: state
-      entity_id: group.device_tracker_family
-      state: 'home'
-    - condition: state
-      entity_id: light.hallway_ceiling_group
-      state: 'off'
+    condition: state
+    entity_id: group.device_tracker_family
+    state: 'home'
   action:
     service: script.hallway_bright
 

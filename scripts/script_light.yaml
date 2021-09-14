@@ -286,7 +286,7 @@ livingroom_bright:
     - service: light.turn_on
       data:
         entity_id:
-          # - light.livingroom_dinner_table
+          - light.livingroom_dinner_table
           - light.livingroom_couch_table
         brightness_pct: 100
         transition: 2
@@ -300,11 +300,11 @@ livingroom_bright:
 livingroom_relaxed:
   alias: 'Mysbelysning'
   sequence:
-    # - service: light.turn_on
-    #   data:
-    #     entity_id: light.livingroom_dinner_table
-    #     brightness_pct: 40
-    #     transition: 2
+    - service: light.turn_on
+      data:
+        entity_id: light.livingroom_dinner_table
+        brightness_pct: 10
+        transition: 2
     - service: light.turn_on
       data:
         entity_id: light.livingroom_couch_table

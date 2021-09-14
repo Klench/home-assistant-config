@@ -49,6 +49,7 @@ views:
             icon: mdi:lightbulb-on-outline
           - entity: script.livingroom_relaxed
             icon: mdi:lightbulb-on
+          - light.livingroom_dinner_table
           - light.livingroom_couch_table
           - light.livingroom_floor
           - light.livingroom_window
@@ -325,12 +326,6 @@ views:
             platform: sonos
             show_group_count: false
 
-      - type: entities
-        title: Nattläge Sonos Beam
-        entities:
-          - entity: switch.sonos_night_mode
-            state_color: true
-
       - type: conditional
         conditions:
           - entity: media_player.childroom_sonos
@@ -366,28 +361,11 @@ views:
                   type: custom:timer-bar-card
                 - input_number.bedroom_music_timer_minutes
 
-      - type: conditional
-        conditions:
-          - entity: binary_sensor.livingroom_sonos_tv_active
-            state: 'on'
-        card:
-          type: custom:mini-media-player
-          entity: media_player.livingroom_sonos
-          hide:
-            power: true
-            source: true
-          artwork: cover
-          icon: mdi:television-classic
-          speaker_group:
-            platform: sonos
-            sync_volume: false
-            expanded: true
-            show_group_count: true
-            entities:
-              - entity_id: media_player.kitchen_sonos
-                name: Sonos kök
-              - entity_id: media_player.childroom_sonos
-                name: Sonos sovrum
+      - type: entities
+        title: Nattläge Sonos Beam
+        entities:
+          - entity: switch.sonos_night_mode
+            state_color: true
 
 ################# ROBOT VACUUM #################
 

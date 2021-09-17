@@ -319,6 +319,9 @@
     - condition: state
       entity_id: binary_sensor.bathroom_low_brightness_recently_executed
       state: 'off'
+    - condition: state
+      entity_id: binary_sensor.relaxed_mode
+      state: 'off'
   action:
     service: light.turn_on
     data:

@@ -447,8 +447,4 @@
   action:
     service: light.turn_off
     target:
-      entity_id:
-        - light.livingroom_couch_table
-        - light.livingroom_dinner_table
-        - light.livingroom_window
-        - light.livingroom_floor
+      area_id: vardagsrum

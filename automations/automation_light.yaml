@@ -13,7 +13,7 @@
       entity_id: binary_sensor.relaxed_mode
       state: 'off'
   action:
-    service: script.indoor_lights_bright
+    service: script.bottom_floor_bright
 
 - alias: 'Evening relaxed'
   trigger:
@@ -168,7 +168,7 @@
     target:
       entity_id: light.childroom_led_strip
 
-################# WAKEUP #################
+################# WAKEUP/BED #################
 
 - alias: 'Wakeup weekdays'
   trigger:
@@ -208,6 +208,29 @@
       state: 'home'
   action:
     service: script.wakeup_lights
+
+- alias: 'Go to bed weekdays'
+  trigger:
+    platform: time
+    at: '23:00:00'
+  condition:
+    condition: state
+    entity_id: binary_sensor.workday_sensor_offset
+    state: 'on'
+  action:
+    service: script.go_to_bed_lights
+
+- alias: 'Go to bed weekend'
+  trigger:
+    platform: time
+    at: '23:59:00'
+  condition:
+    condition: time
+    weekday:
+      - fri
+      - sat
+  action:
+    service: script.go_to_bed_lights
 
 ################# AWAY #################
 
@@ -266,44 +289,6 @@
       target:
         entity_id: input_boolean.away_lights_active
 
-- alias: 'Go to bed weekdays'
-  trigger:
-    platform: time
-    at: '23:00:00'
-  condition:
-    condition: state
-    entity_id: binary_sensor.workday_sensor_offset
-    state: 'on'
-  action:
-    service: script.go_to_bed_lights
-
-- alias: 'Go to bed weekend'
-  trigger:
-    platform: time
-    at: '23:59:00'
-  condition:
-    condition: time
-    weekday:
-      - fri
-      - sat
-  action:
-    service: script.go_to_bed_lights
-
-- alias: 'Start working'
-  initial_state: on
-  trigger:
-    platform: state
-    entity_id: device_tracker.sela_ltjs4sl13
-    to: 'home'
-  condition:
-    - condition: state
-      entity_id: binary_sensor.workday_sensor
-      state: 'on'
-    - condition: time
-      before: '17:00:00'
-  action:
-    service: script.office_bright
-
 ################# BATHROOM #################
 
 - alias: 'Increase bathroom ceiling light brightness'
@@ -327,6 +312,83 @@
     data:
       entity_id: light.bathroom_ceiling
       brightness_pct: 100
+
+################# MOTION SENSOR #################
+
+- alias: 'Hallway top floor motion hallway bright'
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: binary_sensor.hallway_top_floor_motion
+    to: 'on'
+  condition:
+    - condition: state
+      entity_id: input_boolean.enable_hue_motion_sensor_hallway
+      state: 'on'
+    - condition: state
+      entity_id: light.hallway_ceiling_top_floor
+      state: 'off'
+    - condition: state
+      entity_id: binary_sensor.relaxed_mode
+      state: 'off'
+    - condition: template
+      value_template: >
+        {{ is_state_attr('light.hallway_ceiling_bottom_floor','brightness',255) }}
+    - condition: template
+      value_template: >
+        {{ not (is_state('binary_sensor.childroom_sonos_is_grouped','off') and is_state('media_player.childroom_sonos','playing')) }}
+  action:
+    service: script.hallway_top_floor_bright
+
+- alias: 'Hallway top floor motion rooms bright'
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: binary_sensor.hallway_top_floor_motion
+    to: 'on'
+  condition:
+    - condition: state
+      entity_id: input_boolean.enable_hue_motion_sensor_hallway
+      state: 'on'
+    - condition: state
+      entity_id: light.bedroom_ceiling
+      state: 'off'
+    - condition: state
+      entity_id: binary_sensor.relaxed_mode
+      state: 'off'
+    - condition: or
+      conditions:
+        - condition: time
+          weekday:
+            - sat
+            - sun
+          after: '09:30:00'
+        - condition: and
+          conditions:
+            - condition: state
+              entity_id: binary_sensor.workday_sensor
+              state: 'on'
+            - condition: time
+              after: '07:00:00'
+    - condition: template
+      value_template: >
+        {{ is_state_attr('light.livingroom_couch_table','brightness',255) }}
+  action:
+    - service: script.turn_on
+      target:
+        entity_id:
+          - script.bedroom_bright
+          - script.office_bright
+    - condition: time
+      before: '11:00:00'
+      after: '16:00:00'
+    - condition: template
+      value_template: >
+        {{ not (is_state('binary_sensor.childroom_sonos_is_grouped','off') and is_state('media_player.childroom_sonos','playing')) }}
+    - service: script.turn_on
+      target:
+        entity_id:
+          - script.childroom_bright
 
 ################# CREATE LIGHT GROUPS #################
 

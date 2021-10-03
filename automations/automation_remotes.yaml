@@ -15,7 +15,7 @@
     entity_id: input_boolean.enable_hue_switch_hallway
     state: 'on'
   action:
-    service: script.indoor_lights_bright
+    service: script.bottom_floor_bright
 
 - alias: 'Hue switch relaxed'
   initial_state: on

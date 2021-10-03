@@ -60,7 +60,7 @@
           entity_id: input_boolean.away_lights_active
           state: 'on'
   action:
-    - service: script.indoor_lights_bright
+    - service: script.bottom_floor_bright
     - service: input_boolean.turn_off
       data:
         entity_id: input_boolean.away_lights_active
@@ -169,21 +169,17 @@
           data:
             volume: 0.2
 
-- alias: 'Nellie coming home'
+- alias: 'Start working'
   initial_state: on
   trigger:
     platform: state
-    entity_id: device_tracker.volvo_rcb492
+    entity_id: device_tracker.sela_ltjs4sl13
     to: 'home'
   condition:
     - condition: state
-      entity_id: device_tracker.nellies_iphone
-      state: 'not_home'
-    - condition: state
-      entity_id: device_tracker.davids_iphone
-      state: 'home'
+      entity_id: binary_sensor.workday_sensor
+      state: 'on'
+    - condition: time
+      before: '17:00:00'
   action:
-    service: light.turn_on
-    data:
-      entity_id: light.kitchen_table
-      flash: short
+    service: script.office_bright

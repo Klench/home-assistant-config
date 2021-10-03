@@ -15,12 +15,12 @@ views:
           - sensor.car_status
           - entity: sensor.rcb492_range
             name: 'Räckvidd'
-          - entity: switch.rcb492_heater
-            name: 'Värmare'
-          - sensor.outdoor_temperature
           - entity: sensor.plex_oden
             name: Plex
             icon: mdi:plex
+          - entity: sensor.outdoor_temperature
+            name: 'Utomhus'
+          - sensor.hallway_top_floor_temperature
           - entity: sensor.hacs
             name: 'HACS'
           - entity: sensor.potential_breaking_changes
@@ -889,6 +889,8 @@ views:
         title: Automationer
         show_header_toggle: false
         entities:
+          - input_boolean.enable_hue_switch_hallway
+          - input_boolean.enable_hue_motion_sensor_hallway
           - automation.wakeup_weekdays
           - automation.enable_sonos_alarm
           - automation.wakeup_weekend
@@ -903,7 +905,6 @@ views:
           - input_boolean.window_lights_after_sunset
           - input_boolean.enable_away_lights
           - input_boolean.coming_home_turn_on_lights
-          - input_boolean.enable_hue_switch_hallway
           - automation.leaving_home
           - automation.watching_tv
           - automation.tv_off_group_speakers

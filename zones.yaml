@@ -21,3 +21,20 @@
   longitude: !secret albertssons_longitude
   radius: 100
   icon: mdi:home-outline
+
+- name: Kyrkan
+  latitude: !secret church_latitude
+  longitude: !secret church_longitude
+  radius: 200
+  icon: mdi:church
+
+- name: ICA
+  latitude: !secret ica_latitude
+  longitude: !secret ica_longitude
+  radius: 200
+  icon: mdi:store
+
+- name: Coop
+  latitude: !secret coop_latitude
+  longitude: !secret coop_longitude
+  radius: 100

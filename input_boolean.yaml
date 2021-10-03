@@ -24,3 +24,6 @@ vacuum_extra_care:
 enable_hue_switch_hallway:
   name: Enable Hue switch hallway
   icon: hue:dimmer-switch
+enable_hue_motion_sensor_hallway:
+  name: Enable Hue motion sensor hallway
+  icon: hue:motion-sensor

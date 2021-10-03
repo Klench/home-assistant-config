@@ -16,6 +16,15 @@ indoor_lights_bright:
         {{ not (is_state('binary_sensor.childroom_sonos_is_grouped','off') and is_state('media_player.childroom_sonos','playing')) }}
     - service: script.childroom_bright
 
+bottom_floor_bright:
+  sequence:
+    - service: script.turn_on
+      target:
+        entity_id:
+          - script.livingroom_bright
+          - script.hallway_bright
+          - script.kitchen_bright
+
 indoor_lights_relaxed:
   alias: 'Mysbelysning'
   sequence:
@@ -72,7 +81,7 @@ indoor_lights_low_brightness:
         target:
           entity_id:
             - script.livingroom_low_brightness
-            - script.hallway_low_brightness
+            - script.hallway_bottom_floor_bright
             - script.kitchen_bright
 
 indoor_lights_off:
@@ -345,34 +354,27 @@ livingroom_low_brightness:
 hallway_bright:
   alias: 'Hög ljusstyrka'
   sequence:
-    - service: light.turn_on
+    - service: script.ikea_light_turn_on
       data:
         entity_id: light.hallway_ceiling_group
         brightness_pct: 100
-        transition: 1
-    - delay:
-        milliseconds: 1100
-    - service: light.turn_on
-      data:
-        entity_id: light.hallway_ceiling_group
         color_temp: 300
-        transition: 1
 
-hallway_low_brightness:
-  alias: 'Låg ljusstyrka'
+hallway_top_floor_bright:
   sequence:
-    - service: light.turn_on
+    - service: script.ikea_light_turn_on
+      data:
+        entity_id: light.hallway_ceiling_top_floor
+        brightness_pct: 100
+        color_temp: 300
+
+hallway_bottom_floor_bright:
+  sequence:
+    - service: script.ikea_light_turn_on
       data:
         entity_id: light.hallway_ceiling_bottom_floor
         brightness_pct: 100
-        transition: 1
-    - delay:
-        milliseconds: 1100
-    - service: light.turn_on
-      data:
-        entity_id: light.hallway_ceiling_bottom_floor
         color_temp: 300
-        transition: 1
 
 hallway_relaxed:
   alias: 'Mysbelysning'
@@ -381,18 +383,11 @@ hallway_relaxed:
       data:
         entity_id: light.hallway_ceiling_top_floor
         transition: 2
-    - service: light.turn_on
+    - service: script.ikea_light_turn_on
       data:
         entity_id: light.hallway_ceiling_bottom_floor
         brightness_pct: 1
-        transition: 1
-    - delay:
-        milliseconds: 1100
-    - service: light.turn_on
-      data:
-        entity_id: light.hallway_ceiling_bottom_floor
         color_temp: 443
-        transition: 1
 
 hallway_wakeup:
   alias: 'Väckning hall'
@@ -508,3 +503,20 @@ turn_off_outdoor_lights:
         entity_id:
           - light.outdoor_main_entrance
           - light.outdoor_rear_entrance
+
+##### IKEA LIGHTS #####
+
+ikea_light_turn_on:
+  sequence:
+      - service: light.turn_on
+        data:
+          entity_id: "{{ entity_id }}"
+          brightness_pct: "{{ brightness_pct }}"
+          transition: 1
+      - delay:
+          milliseconds: 1100
+      - service: light.turn_on
+        data:
+          entity_id: "{{ entity_id }}"
+          color_temp: "{{ color_temp }}"
+          transition: 1

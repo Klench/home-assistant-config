@@ -8,6 +8,15 @@ views:
     icon: mdi:home-assistant
     cards:
 
+      - type: conditional
+        conditions:
+          - entity: sensor.potential_breaking_changes
+            state_not: '0'
+        card:
+          type: markdown
+          content: |
+            **Uppdatering för Home Assistant tillgänglig!**
+
       - type: glance
         entities:
           - device_tracker.davids_iphone
@@ -15,17 +24,16 @@ views:
           - sensor.car_status
           - entity: sensor.rcb492_range
             name: 'Räckvidd'
-          - entity: sensor.plex_oden
-            name: Plex
-            icon: mdi:plex
+          - entity: switch.rcb492_heater
+            name: 'Värmare'
           - entity: sensor.outdoor_temperature
             name: 'Utomhus'
           - sensor.hallway_top_floor_temperature
+          - entity: sensor.plex_oden
+            name: Plex
+            icon: mdi:plex
           - entity: sensor.hacs
             name: 'HACS'
-          - entity: sensor.potential_breaking_changes
-            name: 'Ändringar'
-            icon: mdi:briefcase-download-outline
           - alarm_control_panel.ajax_alarm_status
 
       - type: entities

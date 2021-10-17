@@ -2,10 +2,10 @@ light.hallway_ceiling:
   icon: mdi:ceiling-light
   friendly_name: 'Taklampa'
 light.hallway_ceiling_bottom_floor:
-  icon: mdi:ceiling-light
+  icon: hue:phoenix-plafond
   friendly_name: 'Taklampa bottenvåning'
 light.hallway_ceiling_top_floor:
-  icon: mdi:ceiling-light
+  icon: hue:phoenix-plafond
   friendly_name: 'Taklampa ovanvåning'
 light.hallway_ceiling_group:
   icon: mdi:ceiling-light

@@ -101,7 +101,6 @@ indoor_lights_off:
         entity_id: light.childroom_led_strip
 
 wakeup_lights:
-  alias: 'Väckning'
   sequence:
     - service: script.turn_on
       target:
@@ -109,9 +108,9 @@ wakeup_lights:
           - script.livingroom_wakeup
           - script.hallway_wakeup
           - script.kitchen_wakeup
+          - script.office_wakeup
 
 window_lights:
-  alias: 'Fönsterbelysning'
   sequence:
     - service: light.turn_on
       target:
@@ -121,7 +120,6 @@ window_lights:
           - light.office_window
 
 go_to_bed_lights:
-  alias: 'Gå till sängs'
   sequence:
     - service: light.turn_off
       data:
@@ -154,7 +152,6 @@ enable_away_lights:
           - light.office_window
 
 watching_tv_lights:
-  alias: 'Belysning TV-tittande'
   sequence:
     - service: light.turn_on
       data:
@@ -206,13 +203,13 @@ bedroom_relaxed:
         entity_id: light.bedroom_bedside
 
 bedroom_wakeup:
-  alias: 'Väckning sovrum'
   sequence:
     - service: light.turn_on
       data:
         entity_id: light.bedroom_ceiling
         brightness_pct: 30
         color_temp: 372
+        transition: 1800
 
 ##### CHILD ROOM #####
 
@@ -248,7 +245,6 @@ childroom_night_light:
         effect: None
 
 childroom_turn_off:
-  alias: 'Släck'
   sequence:
     - service: light.turn_off
       data:
@@ -286,6 +282,14 @@ office_relaxed:
       data:
         entity_id: light.office_window
         transition: 2
+
+office_wakeup:
+  sequence:
+    - service: light.turn_on
+      data:
+        entity_id: light.office_ceiling
+        brightness_pct: 30
+        transition: 1800
 
 ##### LIVINGROOM #####
 
@@ -330,7 +334,6 @@ livingroom_relaxed:
         entity_id: light.livingroom_window
 
 livingroom_wakeup:
-  alias: 'Väckning vardagsrum'
   sequence:
     - service: light.turn_on
       data:
@@ -340,7 +343,6 @@ livingroom_wakeup:
         transition: 1800
 
 livingroom_low_brightness:
-  alias: 'Låg ljusstyrka'
   sequence:
     - service: light.turn_on
       data:
@@ -390,7 +392,6 @@ hallway_relaxed:
         color_temp: 443
 
 hallway_wakeup:
-  alias: 'Väckning hall'
   sequence:
     - service: light.turn_on
       data:
@@ -433,7 +434,6 @@ kitchen_relaxed:
         transition: 2
 
 kitchen_wakeup:
-  alias: 'Väckning kök'
   sequence:
     - service: light.turn_on
       data:

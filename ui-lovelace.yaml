@@ -878,7 +878,6 @@ views:
         card:
           type: custom:transmission-card
 
-
 ################# AUTOMATIONS #################
 
   - title: ''

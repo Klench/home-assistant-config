@@ -68,4 +68,4 @@ automation.tv_off_group_speakers:
 automation.car_heater_weekdays:
   icon: mdi:radiator
 automation.advent_light:
-  icon: mdi:judaism
+  icon: mdi:star-david

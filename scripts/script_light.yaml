@@ -190,7 +190,6 @@ bedroom_bright:
       data:
         entity_id: light.bedroom_ceiling
         brightness_pct: 80
-        transition: 2
 
 bedroom_relaxed:
   alias: 'Mysbelysning'
@@ -258,13 +257,7 @@ office_bright:
     - service: light.turn_on
       data:
         entity_id: light.office_ceiling
-        brightness_pct: 80
-        transition: 2
-    - service: light.turn_on
-      data:
-        entity_id: light.office_desk
         brightness_pct: 100
-        transition: 2
 
 office_relaxed:
   alias: 'Mysbelysning'
@@ -317,7 +310,6 @@ livingroom_relaxed:
       data:
         entity_id: light.livingroom_dinner_table
         brightness_pct: 10
-        transition: 2
     - service: light.turn_on
       data:
         entity_id: light.livingroom_couch_table

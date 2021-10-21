@@ -30,10 +30,13 @@
       entity_id: binary_sensor.childroom_sonos_is_grouped
       state: 'on'
     - service: script.sonos_ungroup_bedroom_speaker
+    - condition: template
+      value_template: >
+        {{ state_attr('media_player.childroom_sonos','volume_level') > 0.10 }}
     - service: media_player.volume_set
       data:
         entity_id: media_player.childroom_sonos
-        volume_level: 0.15
+        volume_level: 0.10
 
 - alias: 'Hallway bright'
   trigger:

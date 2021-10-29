@@ -265,9 +265,8 @@
     - condition: state
       entity_id: input_boolean.enable_away_lights
       state: 'on'
-    - condition: state
-      entity_id: sun.sun
-      state: "below_horizon"
+    - condition: sun
+      after: sunset
   action:
     - service: script.enable_away_lights
     - service: input_boolean.turn_on
@@ -359,6 +358,9 @@
     - condition: state
       entity_id: binary_sensor.relaxed_mode
       state: 'off'
+    - condition: state
+      entity_id: device_tracker.sela_ltjs4sl13
+      state: 'not_home'
     - condition: or
       conditions:
         - condition: time

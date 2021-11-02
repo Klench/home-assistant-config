@@ -1,10 +1,12 @@
+##### CHILD ROOM #####
+
 - alias: 'Pause bedroom music'
   initial_state: on
   trigger:
     platform: event
     event_type: timer.finished
     event_data:
-      entity_id: timer.bedroom_music_timer
+      entity_id: timer.childroom_music
   condition:
     - condition: state
       entity_id: media_player.childroom_sonos
@@ -35,7 +37,7 @@
       entity_id: media_player.childroom_sonos
       state: 'playing'
     - condition: state
-      entity_id: timer.bedroom_music_timer
+      entity_id: timer.childroom_music
       state: 'idle'
     - condition: state
       entity_id: binary_sensor.childroom_sonos_is_grouped
@@ -45,3 +47,21 @@
       state: 'on'
   action:
     service: script.bedroom_music_timer_start
+
+##### KITCHEN #####
+
+- alias: 'Timer turn off kitchen coffee maker'
+  initial_state: on
+  trigger:
+    platform: event
+    event_type: timer.finished
+    event_data:
+      entity_id: timer.kitchen_coffee_maker
+  condition:
+    condition: state
+    entity_id: switch.kitchen_coffee_maker
+    state: 'on'
+  action:
+    service: switch.turn_off
+    target:
+      entity_id: switch.kitchen_coffee_maker

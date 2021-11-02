@@ -109,15 +109,26 @@ views:
           - light.office_desk
           - light.office_window
 
-      - type: entities
-        title: Kök
-        show_header_toggle: false
+      - type: custom:auto-entities
+        card:
+          type: entities
+          title: Kök
+          show_header_toggle: false
         entities:
           - entity: script.kitchen_bright
             icon: mdi:lightbulb-on-outline
           - entity: script.kitchen_relaxed
             icon: mdi:lightbulb-on
           - light.kitchen_table
+          - entity: switch.kitchen_coffee_maker
+            state_color: true
+        filter:
+          include:
+            - entity_id: timer.kitchen_coffee_maker
+              state: 'active'
+              options:
+                name: Timer
+                type: custom:timer-bar-card
 
       - type: entities
         title: Badrum
@@ -362,8 +373,8 @@ views:
                   entity: sensor.bedroom_music_timer_minutes
             - type: entities
               entities:
-                - entity: timer.bedroom_music_timer
-                  name: 'Status'
+                - entity: timer.childroom_music
+                  name: Status
                   icon: mdi:timelapse
                   state_color: true
                   type: custom:timer-bar-card

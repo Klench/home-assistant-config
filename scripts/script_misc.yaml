@@ -15,7 +15,7 @@ bedroom_music_timer_start:
   sequence:
     - service: timer.start
       data:
-        entity_id: timer.bedroom_music_timer
+        entity_id: timer.childroom_music
         duration: >
           {{ states('sensor.bedroom_music_timer_duration') }}
 
@@ -23,4 +23,17 @@ bedroom_music_timer_cancel:
   sequence:
     - service: timer.cancel
       data:
-        entity_id: timer.bedroom_music_timer
+        entity_id: timer.childroom_music
+
+kitchen_coffee_maker_timer_start:
+  sequence:
+    - service: timer.start
+      data:
+        entity_id: timer.kitchen_coffee_maker
+        duration: '01:00:00'
+
+kitchen_coffee_maker_timer_cancel:
+  sequence:
+    - service: timer.cancel
+      data:
+        entity_id: timer.kitchen_coffee_maker

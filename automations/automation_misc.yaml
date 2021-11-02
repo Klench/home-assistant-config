@@ -59,3 +59,27 @@
     entity_id: input_text.transmission_torrent_url
   action:
     service: script.transmission_add_torrent
+
+################# TIMER #################
+
+- alias: 'Kitchen coffee maker timer start'
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: switch.kitchen_coffee_maker
+    to: 'on'
+  action:
+    service: script.kitchen_coffee_maker_timer_start
+
+- alias: 'Kitchen coffee maker timer cancel'
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: switch.kitchen_coffee_maker
+    to: 'off'
+  condition:
+    condition: state
+    entity_id: timer.kitchen_coffee_maker
+    state: 'active'
+  action:
+    service: script.kitchen_coffee_maker_timer_cancel

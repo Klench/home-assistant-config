@@ -90,6 +90,9 @@ indoor_lights_off:
     - service: light.turn_off
       target:
         entity_id: group.indoor_lights
+    - service: switch.turn_off
+      target:
+        entity_id: switch.kitchen_coffee_maker
     - service: script.sonos_set_group_volume
       data:
         volume: 0.1

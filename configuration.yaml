@@ -68,7 +68,7 @@ config:
 http:
   use_x_forwarded_for: true
   trusted_proxies:
-    - 172.18.0.4
+    - 172.18.0.0/16
 
 hacs:
   token: !secret hacs_token
@@ -205,6 +205,16 @@ mqtt:
   password: !secret mqtt_password
   discovery: true
   discovery_prefix: homeassistant
+
+################# ASSISTANT RELAY #################
+
+rest_command:
+  assistant_relay:
+    url: http://172.18.0.5:3000/assistant
+    method: POST
+    content_type: 'application/json'
+    payload: '{"user:" "David","command:" "{{ message }}"}'
+    verify_ssl: false
 
 ################# MEDIA PLAYERS #################
 

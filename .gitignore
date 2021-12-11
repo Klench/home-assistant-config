@@ -42,6 +42,7 @@ www
 
 # Log files
 home-assistant.log
+home-assistant.log.1
 ozw_log.txt
 
 # Development files

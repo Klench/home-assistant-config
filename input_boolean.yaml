@@ -27,3 +27,6 @@ enable_hue_switch_hallway:
 enable_hue_motion_sensor_hallway:
   name: Enable Hue motion sensor hallway
   icon: hue:motion-sensor
+enable_advent_light_automations:
+  name: Adventsbelysning
+  icon: mdi:judaism

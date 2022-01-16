@@ -52,24 +52,39 @@
 - alias: 'Child room night light'
   trigger:
     platform: time
-    at: '21:00:00'
+    at: '21:30:00'
   action:
     service: script.childroom_night_light
 
-- alias: 'Advent light'
+- alias: 'Advent lights workday'
+  initial_state: on
   trigger:
     platform: time
-    at: '09:30:00'
+    at: '06:15:00'
+  condition:
+    - condition: state
+      entity_id: input_boolean.enable_advent_light_automations
+      state: 'on'
+    - condition: state
+      entity_id: binary_sensor.workday_sensor
+      state: 'on'
   action:
-    - service: light.turn_on
-      data:
-        entity_id: light.livingroom_window
-    - condition: template
-      value_template: >
-        {{ not (is_state('binary_sensor.childroom_sonos_is_grouped','off') and is_state('media_player.childroom_sonos','playing')) }}
-    - service: light.turn_on
-      data:
-        entity_id: light.bedroom_bedside
+    service: script.advent_lights_turn_on
+
+- alias: 'Advent lights weekend'
+  initial_state: on
+  trigger:
+    platform: time
+    at: '09:00:00'
+  condition:
+    - condition: state
+      entity_id: input_boolean.enable_advent_light_automations
+      state: 'on'
+    - condition: state
+      entity_id: binary_sensor.workday_sensor
+      state: 'off'
+  action:
+    service: script.advent_lights_turn_on
 
 ################# SUNSET/SUNRISE #################
 
@@ -106,8 +121,9 @@
       state: 'on'
   action:
     service: light.turn_on
-    target:
+    data:
       entity_id: light.bedroom_bedside
+      brightness_pct: 100
 
 - alias: 'Bright after sunset livingroom'
   initial_state: on
@@ -152,7 +168,7 @@
   condition:
     - condition: state
       entity_id: sun.sun
-      state: "above_horizon"
+      state: 'above_horizon'
     - condition: state
       entity_id: light.outdoor_lights
       state: 'on'
@@ -330,9 +346,9 @@
     - condition: state
       entity_id: light.hallway_ceiling_top_floor
       state: 'off'
-    - condition: state
-      entity_id: binary_sensor.relaxed_mode
-      state: 'off'
+    - condition: time
+      before: '18:00:00'
+      after: '07:00:00'
     - condition: template
       value_template: >
         {{ is_state_attr('light.hallway_ceiling_bottom_floor','brightness',255) }}

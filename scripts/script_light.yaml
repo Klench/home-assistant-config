@@ -116,11 +116,42 @@ wakeup_lights:
 window_lights:
   sequence:
     - service: light.turn_on
-      target:
+      data:
         entity_id:
           - light.bedroom_bedside
           - light.livingroom_window
           - light.office_window
+        brightness_pct: 100
+
+advent_lights_turn_on:
+  sequence:
+    - service: switch.turn_on
+      target:
+        entity_id:
+          # - switch.control_outlet_3
+          - switch.control_outlet_5
+          - switch.control_outlet_6
+    - service: light.turn_on
+      data:
+        entity_id:
+          # - light.office_window
+          # - light.livingroom_window
+
+advent_lights_turn_off:
+  sequence:
+    - service: switch.turn_off
+      target:
+        entity_id:
+          # - switch.control_outlet_3
+          - switch.control_outlet_4
+          - switch.control_outlet_5
+          - switch.control_outlet_6
+    - service: light.turn_off
+      data:
+        entity_id:
+          - light.office_window
+          - light.livingroom_window
+          - light.kitchen_window
 
 go_to_bed_lights:
   sequence:
@@ -153,6 +184,7 @@ enable_away_lights:
         entity_id:
           - light.bedroom_bedside
           - light.office_window
+        brightness_pct: 100
 
 watching_tv_lights:
   sequence:
@@ -197,20 +229,31 @@ bedroom_bright:
 bedroom_relaxed:
   alias: 'Mysbelysning'
   sequence:
+    - service: light.turn_on
+      data:
+        entity_id: light.bedroom_bedside
+        brightness_pct: 100
     - service: light.turn_off
       target:
         entity_id: light.bedroom_ceiling
+
+bedroom_low_brightness:
+  alias: 'Låg ljusstyrka'
+  sequence:
     - service: light.turn_on
-      target:
+      data:
         entity_id: light.bedroom_bedside
+        brightness_pct: 1
+    - service: light.turn_off
+      target:
+        entity_id: light.bedroom_ceiling
 
 bedroom_wakeup:
   sequence:
     - service: light.turn_on
       data:
-        entity_id: light.bedroom_ceiling
-        brightness_pct: 30
-        color_temp: 372
+        entity_id: light.bedroom_bedside
+        brightness_pct: 50
         transition: 1800
 
 ##### CHILD ROOM #####
@@ -267,17 +310,15 @@ office_relaxed:
   sequence:
     - service: light.turn_on
       data:
-        entity_id: light.office_ceiling
-        brightness_pct: 20
-    - service: light.turn_on
-      data:
         entity_id: light.office_desk
         brightness_pct: 40
         transition: 2
     - service: light.turn_on
       data:
         entity_id: light.office_window
-        transition: 2
+    - service: light.turn_off
+      data:
+        entity_id: light.office_ceiling
 
 office_wakeup:
   sequence:
@@ -376,15 +417,18 @@ hallway_bottom_floor_bright:
 hallway_relaxed:
   alias: 'Mysbelysning'
   sequence:
-    - service: light.turn_off
-      data:
-        entity_id: light.hallway_ceiling_top_floor
-        transition: 2
     - service: script.ikea_light_turn_on
       data:
         entity_id: light.hallway_ceiling_bottom_floor
         brightness_pct: 1
         color_temp: 443
+    - condition: state
+      entity_id: light.hallway_ceiling_top_floor
+      state: 'on'
+    - service: light.turn_off
+      data:
+        entity_id: light.hallway_ceiling_top_floor
+        transition: 2
 
 hallway_wakeup:
   sequence:
@@ -418,6 +462,15 @@ kitchen_bright:
         entity_id: light.kitchen_table
         brightness_pct: 100
         transition: 2
+    - condition: state
+      entity_id: input_boolean.enable_advent_light_automations
+      state: 'on'
+    - delay: '00:00:02'
+    - service: script.ikea_light_turn_on
+      data:
+        entity_id: light.kitchen_window
+        brightness_pct: 100
+        color_temp: 280
 
 kitchen_relaxed:
   alias: 'Mysbelysning'
@@ -427,6 +480,15 @@ kitchen_relaxed:
         entity_id: light.kitchen_table
         brightness_pct: 70
         transition: 2
+    - condition: state
+      entity_id: input_boolean.enable_advent_light_automations
+      state: 'on'
+    - delay: '00:00:02'
+    - service: script.ikea_light_turn_on
+      data:
+        entity_id: light.kitchen_window
+        brightness_pct: 60
+        color_temp: 420
 
 kitchen_wakeup:
   sequence:
@@ -435,6 +497,11 @@ kitchen_wakeup:
         entity_id: light.kitchen_table
         brightness_pct: 100
         transition: 1800
+    - service: script.ikea_light_turn_on
+      data:
+        entity_id: light.kitchen_window
+        brightness_pct: 100
+        color_temp: 280
 
 ##### BATHROOM #####
 
@@ -490,6 +557,10 @@ turn_on_outdoor_lights:
         brightness_pct: 70
         color_temp: 443
         transition: 2
+    - service: switch.turn_on
+      target:
+        entity_id:
+          - switch.control_outlet_3
 
 turn_off_outdoor_lights:
   sequence:
@@ -498,6 +569,10 @@ turn_off_outdoor_lights:
         entity_id:
           - light.outdoor_main_entrance
           - light.outdoor_rear_entrance
+    - service: switch.turn_off
+      target:
+        entity_id:
+          - switch.control_outlet_3
 
 ##### IKEA LIGHTS #####
 

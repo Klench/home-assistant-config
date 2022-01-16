@@ -15,7 +15,7 @@ views:
         card:
           type: markdown
           content: |
-            **Uppdatering för Home Assistant tillgänglig!**
+            **Uppdatering för Home Assistant tillgänglig**
 
       - type: glance
         entities:
@@ -80,6 +80,8 @@ views:
           - entity: script.bedroom_bright
             icon: mdi:lightbulb-on-outline
           - entity: script.bedroom_relaxed
+            icon: mdi:lightbulb-on
+          - entity: script.bedroom_low_brightness
             icon: mdi:lightbulb-on
           - light.bedroom_ceiling
           - light.bedroom_bedside
@@ -154,6 +156,10 @@ views:
               icon: mdi:lightbulb-on-outline
             - light.outdoor_main_entrance
             - light.outdoor_rear_entrance
+            - entity: switch.control_outlet_3
+              icon: mdi:led-strip-variant
+              name: Ljusslinga
+              state_color: true
 
       - type: custom:mini-media-player
         entity: media_player.spotify
@@ -217,6 +223,16 @@ views:
         entity: sensor.skolmaten_junibackens_forskola7
         feed_attribute: entries
         title: Matsedel Junibacken
+
+      - type: entities
+        title: Dieselpriser
+        entities:
+          - entity: sensor.okq8
+            icon: mdi:gas-station
+          - entity: sensor.st1
+            icon: mdi:gas-station
+          - entity: sensor.tanka
+            icon: mdi:gas-station
 
       - type: custom:krisinfo-card
         entity: sensor.krisinformation_skane
@@ -486,6 +502,8 @@ views:
 
   - title: ''
     icon: mdi:server-network
+    visible:
+      - user: 53d03bf37feb464487d18a6c12a30efb
     cards:
 
       - type: entities
@@ -639,6 +657,8 @@ views:
 
   - title: ''
     icon: mdi:television-classic
+    visible:
+      - user: 53d03bf37feb464487d18a6c12a30efb
     cards:
 
       - type: custom:upcoming-media-card
@@ -820,7 +840,51 @@ views:
 
   - title: ''
     icon: mdi:download-network-outline
+    visible:
+      - user: 53d03bf37feb464487d18a6c12a30efb
     cards:
+
+      - type: conditional
+        conditions:
+          - entity: sensor.qbittorrent_status
+            state_not: 'idle'
+        card:
+          type: horizontal-stack
+          cards:
+            - type: custom:mini-graph-card
+              entities:
+                - entity: sensor.qbittorrent_down_speed
+              name: 'Nedladdning'
+              unit: 'KiB/s'
+              icon: mdi:file-download-outline
+              line_color: '#5c8dd1'
+              hour24: true
+              hours_to_show: 2
+              animate: true
+              decimals: 2
+              points_per_hour: 60
+              font_size_header: 18
+              show:
+                extrema: true
+                labels: true
+                fill: fade
+            - type: custom:mini-graph-card
+              entities:
+                - entity: sensor.qbittorrent_up_speed
+              name: 'Uppladdning'
+              unit: 'KiB/s'
+              icon: mdi:file-upload-outline
+              line_color: '#5c8dd1'
+              hour24: true
+              hours_to_show: 2
+              animate: true
+              decimals: 2
+              points_per_hour: 60
+              font_size_header: 18
+              show:
+                extrema: true
+                labels: true
+                fill: fade
 
       - type: entities
         title: Transmission
@@ -918,7 +982,7 @@ views:
           - automation.evening_relaxed
           - automation.hallway_bright
           - automation.child_room_night_light
-          - automation.advent_light
+          - input_boolean.enable_advent_light_automations
           - automation.sunset
           - input_boolean.window_lights_after_sunset
           - input_boolean.enable_away_lights

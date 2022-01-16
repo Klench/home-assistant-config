@@ -1,6 +1,3 @@
-light.hallway_ceiling:
-  icon: mdi:ceiling-light
-  friendly_name: 'Taklampa'
 light.hallway_ceiling_bottom_floor:
   icon: hue:phoenix-plafond
   friendly_name: 'Taklampa bottenvåning'
@@ -11,10 +8,10 @@ light.hallway_ceiling_group:
   icon: mdi:ceiling-light
   friendly_name: 'Taklampor'
 light.livingroom_window:
-  icon: mdi:outdoor-lamp
+  icon: hue:ceiling-explore
   friendly_name: 'Fönsterlampor'
 light.office_window:
-  icon: hue:bulb-filament-alt
+  icon: hue:bulb-filament-alt-hung
   friendly_name: 'Fönsterlampa'
 light.bedroom_bedside:
   icon: mdi:floor-lamp
@@ -67,5 +64,3 @@ automation.tv_off_group_speakers:
   icon: mdi:television-classic-off
 automation.car_heater_weekdays:
   icon: mdi:radiator
-automation.advent_light:
-  icon: mdi:star-david

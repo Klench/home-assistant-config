@@ -54,7 +54,7 @@
           - service: media_player.volume_set
             data:
               entity_id: media_player.childroom_sonos
-              volume_level: 0.1
+              volume_level: 0.05
           - delay: '00:00:01'
           - service: media_player.media_play
             target:
@@ -63,7 +63,7 @@
         - service: media_player.volume_set
           data:
             entity_id: media_player.childroom_sonos
-            volume_level: 0.1
+            volume_level: 0.05
         - delay: '00:00:01'
         - service: media_player.media_play
           target:

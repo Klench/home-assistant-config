@@ -260,10 +260,6 @@ panel_iframe:
     title: Kitana
     icon: mdi:filmstrip
     url: !secret kitana_url
-  configurator:
-    title: Configurator
-    icon: mdi:wrench
-    url: !secret hass_configurator_url
   esphome:
     title: ESPHome
     icon: mdi:developer-board

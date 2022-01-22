@@ -1,19 +1,20 @@
-- alias: 'Toggle kitchen relay'
+- alias: 'Turn on coffee maker'
   initial_state: on
   trigger:
-    platform: event
-    event_type: ios.action_fired
-    event_data:
-      actionID: F2398A0D-8A0C-41BA-B337-1405B6518531
-      actionName: Toggle kitchen relay
-      sourceDeviceID: davids_iphone
-      sourceDeviceName: Davids iPhone
-      sourceDevicePermanentID: CFD2DEC1-8CF3-432F-AF78-7419632CC842
-      triggerSource: siriShortcut
+    - platform: event
+      event_type: ios.action_fired
+      event_data:
+        actionID: 0AD13D57-0A4F-4973-8908-97A24064DAFE
+        actionName: Turn on coffee maker
+        sourceDeviceID: davids_iphone
+        sourceDeviceName: Davids iPhone
+        sourceDevicePermanentID: CFD2DEC1-8CF3-432F-AF78-7419632CC842
+        triggerSource: siriShortcut
   action:
-    service: switch.toggle
-    target:
-      entity_id: switch.kitchen_relay
+    - service: switch.turn_on
+      target:
+        entity_id:
+          - switch.kitchen_coffee_maker
 
 - alias: 'Play child room music'
   initial_state: on

@@ -397,10 +397,14 @@ views:
                 - input_number.bedroom_music_timer_minutes
 
       - type: entities
-        title: Nattläge Sonos Beam
+        title: Sonos Beam
+        show_header_toggle: false
         entities:
-          - entity: switch.sonos_night_mode
+          - entity: switch.sonos_livingroom_night_sound
             state_color: true
+          - entity: switch.sonos_livingroom_speech_enhancement
+            state_color: true
+          - number.sonos_livingroom_bass
 
 ################# ROBOT VACUUM #################
 

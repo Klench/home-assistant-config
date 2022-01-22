@@ -68,8 +68,17 @@
     entity_id: binary_sensor.livingroom_sonos_tv_active
     to: 'off'
   condition:
-    condition: state
-    entity_id: binary_sensor.sonos_night_mode
-    state: 'on'
+    condition: or
+    conditions:
+      - condition: state
+        entity_id: switch.sonos_livingroom_night_sound
+        state: 'on'
+      - condition: state
+        entity_id: switch.sonos_livingroom_speech_enhancement
+        state: 'on'
   action:
-    service: script.sonos_disable_night_mode
+    service: switch.turn_off
+    target:
+      entity_id:
+        - switch.sonos_livingroom_night_sound
+        - switch.sonos_livingroom_speech_enhancement

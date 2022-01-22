@@ -173,23 +173,3 @@ sonos_disable_alarm:
         entity_id: media_player.childroom_sonos
         alarm_id: 7
         enabled: false
-
-##### NIGHT MODE #####
-
-sonos_enable_night_mode:
-  alias: 'Sonos enable night mode'
-  sequence:
-    - service: sonos.set_option
-      data:
-        entity_id: media_player.livingroom_sonos
-        night_sound: true
-        speech_enhance: true
-
-sonos_disable_night_mode:
-  alias: 'Sonos disable night mode'
-  sequence:
-    - service: sonos.set_option
-      data:
-        entity_id: media_player.livingroom_sonos
-        night_sound: false
-        speech_enhance: false

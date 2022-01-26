@@ -448,11 +448,10 @@
   initial_state: on
   trigger:
     platform: event
-    event_type: shelly_switch_click
+    event_type: shellyforhass.click
     event_data:
-      entity_id: 'binary_sensor.shelly_livingroom_2_switch'
-      click_cnt: 2
-      state: false
+      entity_id: binary_sensor.livingroom_shelly_2_switch
+      click_type: single
   condition:
     condition: template
     value_template: >
@@ -464,11 +463,10 @@
   initial_state: on
   trigger:
     platform: event
-    event_type: shelly_switch_click
+    event_type: shellyforhass.click
     event_data:
-      entity_id: 'binary_sensor.shelly_livingroom_2_switch'
-      click_cnt: 2
-      state: false
+      entity_id: binary_sensor.livingroom_shelly_2_switch
+      click_type: single
   condition:
     condition: template
     value_template: >
@@ -482,8 +480,8 @@
     platform: event
     event_type: shellyforhass.click
     event_data:
-      entity_id: 'binary_sensor.shelly_livingroom_2_switch'
-      click_type: 'long'
+      entity_id: binary_sensor.livingroom_shelly_2_switch
+      click_type: long
   condition:
     condition: state
     entity_id: light.livingroom_couch_table
@@ -497,14 +495,13 @@
     platform: event
     event_type: shellyforhass.click
     event_data:
-      entity_id: 'binary_sensor.shelly_livingroom_2_switch'
-      click_type: 'long'
+      entity_id: binary_sensor.livingroom_shelly_2_switch
+      click_type: long
+  condition:
+    condition: state
+    entity_id: light.livingroom_couch_table
+    state: 'on'
   action:
     - service: light.turn_off
       target:
         area_id: vardagsrum
-    - service: switch.turn_off
-      target:
-        entity_id:
-          - switch.control_outlet_5
-          - switch.control_outlet_6

@@ -7,9 +7,6 @@ light.hallway_ceiling_top_floor:
 light.hallway_ceiling_group:
   icon: mdi:ceiling-light
   friendly_name: 'Taklampor'
-light.livingroom_window:
-  icon: hue:ceiling-explore
-  friendly_name: 'Fönsterlampor'
 light.office_window:
   icon: hue:bulb-filament-alt-hung
   friendly_name: 'Fönsterlampa'

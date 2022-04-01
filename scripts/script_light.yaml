@@ -32,7 +32,6 @@ indoor_lights_relaxed:
       target:
         entity_id:
           - script.bedroom_relaxed
-          - script.childroom_turn_off
           - script.office_relaxed
           - script.livingroom_relaxed
           - script.hallway_relaxed
@@ -289,11 +288,20 @@ childroom_night_light:
         transition: 2
         effect: None
 
-childroom_turn_off:
+childroom_light_dim:
   sequence:
-    - service: light.turn_off
+    - service: light.turn_on
       data:
         entity_id: light.childroom_ceiling
+        color_temp: 443
+        transition: 2
+    - delay: '00:00:02'
+    - service: light.turn_on
+      data:
+        entity_id: light.childroom_ceiling
+        brightness_pct: 1
+        color_temp: 443
+        transition: 600
 
 ##### OFFICE #####
 

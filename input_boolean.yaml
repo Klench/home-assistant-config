@@ -30,3 +30,9 @@ enable_hue_motion_sensor_hallway:
 enable_advent_light_automations:
   name: Adventsbelysning
   icon: mdi:judaism
+bathroom_floor_heater_auto:
+  name: Schema
+  icon: mdi:calendar-clock
+enable_bathroom_floor_heater_automations:
+  name: Golvvärme
+  icon: mdi:radiator

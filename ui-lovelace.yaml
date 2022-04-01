@@ -4,8 +4,7 @@ views:
 
 ################# HOME #################
 
-  - title: ''
-    icon: mdi:home-assistant
+  - icon: mdi:home-assistant
     cards:
 
       - type: conditional
@@ -143,24 +142,6 @@ views:
           - light.bathroom_ceiling
           - light.bathroom_mirror
 
-      - type: conditional
-        conditions:
-          - entity: binary_sensor.show_outdoor_light_card
-            state: 'on'
-        card:
-          type: entities
-          title: Utomhus
-          show_header_toggle: false
-          entities:
-            - entity: script.turn_on_outdoor_lights
-              icon: mdi:lightbulb-on-outline
-            - light.outdoor_main_entrance
-            - light.outdoor_rear_entrance
-            - entity: switch.control_outlet_3
-              icon: mdi:led-strip-variant
-              name: Ljusslinga
-              state_color: true
-
       - type: custom:mini-media-player
         entity: media_player.spotify
         icon: mdi:spotify
@@ -237,6 +218,19 @@ views:
       - type: custom:krisinfo-card
         entity: sensor.krisinformation_skane
 
+      - type: entities
+        title: Utomhus
+        show_header_toggle: false
+        entities:
+          - entity: script.turn_on_outdoor_lights
+            icon: mdi:lightbulb-on-outline
+          - light.outdoor_main_entrance
+          - light.outdoor_rear_entrance
+          # - entity: switch.control_outlet_3
+          #   icon: mdi:led-strip-variant
+          #   name: Ljusslinga
+          #   state_color: true
+
       - type: custom:auto-entities
         show_empty: false
         card:
@@ -267,8 +261,7 @@ views:
 
 ################# SONOS #################
 
-  - title: ''
-    icon: mdi:speaker-wireless
+  - icon: mdi:speaker-wireless
     cards:
 
       - type: custom:mini-media-player
@@ -397,19 +390,27 @@ views:
                 - input_number.bedroom_music_timer_minutes
 
       - type: entities
-        title: Sonos Beam
+        title: Inställningar
         show_header_toggle: false
         entities:
+          - type: section
+            label: Vardagsrum
           - entity: switch.sonos_livingroom_night_sound
             state_color: true
           - entity: switch.sonos_livingroom_speech_enhancement
             state_color: true
           - number.sonos_livingroom_bass
+          - number.sonos_livingroom_audio_delay
+          - type: section
+            label: Barnrum
+          - number.sonos_childroom_bass
+          - type: section
+            label: Kök
+          - number.sonos_kitchen_bass
 
 ################# ROBOT VACUUM #################
 
-  - title: ''
-    icon: mdi:robot-vacuum-variant
+  - icon: mdi:robot-vacuum-variant
     cards:
 
       - type: custom:vacuum-card
@@ -504,8 +505,7 @@ views:
 
 ################# UNRAID #################
 
-  - title: ''
-    icon: mdi:server-network
+  - icon: mdi:server-network
     visible:
       - user: 53d03bf37feb464487d18a6c12a30efb
     cards:
@@ -528,8 +528,6 @@ views:
             name: 'Ramanvändning'
           - entity: sensor.unraid_containers_active
             name: 'Aktiva docker containers'
-          - entity: sensor.unraid_containers_cpu_used
-            name: 'Processoranvänding docker'
           - entity: sensor.unraid_containers_ram_used
             name: 'Ramanvändning docker'
           - entity: sensor.unraid_cputin_temperature
@@ -627,8 +625,7 @@ views:
 
 ################# WAKEUP #################
 
-  - title: ''
-    icon: mdi:alarm
+  - icon: mdi:alarm
     cards:
 
       - type: entities
@@ -659,8 +656,7 @@ views:
 
 ################# TV #################
 
-  - title: ''
-    icon: mdi:television-classic
+  - icon: mdi:television-classic
     visible:
       - user: 53d03bf37feb464487d18a6c12a30efb
     cards:
@@ -694,8 +690,7 @@ views:
 
 ################# CAR #################
 
-  - title: ''
-    icon: mdi:car
+  - icon: mdi:car
     cards:
 
       - type: vertical-stack
@@ -822,24 +817,6 @@ views:
           - binary_sensor.rcb492_rear_left_tyre
           - binary_sensor.rcb492_rear_right_tyre
 
-# ################# WORK TIME #################
-
-#   - icon: mdi:briefcase-clock-outline
-#     cards:
-
-#       - type: entities
-#         title: Arbetstid
-#         show_header_toggle: false
-#         entities:
-#           - sensor.work_time
-#           - sensor.work_time_in
-#           - input_number.work_time_hours_in
-#           - input_number.work_time_minutes_in
-#           - sensor.work_time_out
-#           - input_number.work_time_hours_out
-#           - input_number.work_time_minutes_out
-#           - input_number.work_time_minutes_lunch
-
 ################# TRANSMISSION #################
 
   - title: ''
@@ -959,8 +936,7 @@ views:
 
 ################# AUTOMATIONS #################
 
-  - title: ''
-    icon: mdi:robot-industrial
+  - icon: mdi:robot-industrial
     cards:
 
       - type: entities
@@ -995,6 +971,43 @@ views:
           - automation.watching_tv
           - automation.tv_off_group_speakers
           - automation.car_heater_weekdays
+          - input_boolean.enable_bathroom_floor_heater_automations
+
+################# CLIMATE #################
+
+  - icon: mdi:radiator
+    cards:
+
+      - type: entities
+        title: Golvvärme badrum
+        show_header_toggle: false
+        entities:
+          - input_boolean.bathroom_floor_heater_auto
+
+      - type: thermostat
+        entity: climate.bathroom_floor
+        name: Termostat
+
+################# WORK TIME #################
+
+  - icon: mdi:briefcase-clock-outline
+    visible:
+      - user: 53d03bf37feb464487d18a6c12a30efb
+    cards:
+    cards:
+
+      - type: entities
+        title: Arbetstid
+        show_header_toggle: false
+        entities:
+          - sensor.work_time
+          - sensor.work_time_in
+          - input_number.work_time_hours_in
+          - input_number.work_time_minutes_in
+          - sensor.work_time_out
+          - input_number.work_time_hours_out
+          - input_number.work_time_minutes_out
+          - input_number.work_time_minutes_lunch
 
 # ################# ESPHome #################
 

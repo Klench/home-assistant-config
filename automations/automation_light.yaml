@@ -212,7 +212,6 @@
     service: script.wakeup_lights
 
 - alias: 'Wakeup weekend'
-  initial_state: off
   trigger:
     platform: state
     entity_id: binary_sensor.alarm_clock_trigger_weekend

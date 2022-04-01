@@ -176,6 +176,33 @@ zha:
     ota:
       ikea_provider: true
 
+################# SHELLY #################
+
+shelly:
+  host_ip: !secret oden_ip
+  discover_by_ip:
+    - !secret shelly_livingroom_ip
+  igmp_fix: true
+  version: true
+  scan_interval: 1
+  attributes:
+    - default
+    - firmware_version
+    - latest_fw_version
+  devices:
+    - id: "E098068CEEBD"
+      name: Shelly vardagsrum
+      entity_id: livingroom_shelly
+      upgrade_switch: true
+      sensors:
+        - current_consumption
+        - rssi_level
+        - uptime
+        - device_temp
+        - over_temp
+        - switch
+        - voltage
+
 ################# MQTT #################
 
 mqtt:
@@ -194,6 +221,12 @@ rest_command:
     content_type: 'application/json'
     payload: '{"user:" "David","command:" "{{ message }}"}'
     verify_ssl: false
+
+################# SENZ #################
+
+senz:
+  client_id: !secret senz_client_id
+  client_secret: !secret senz_client_secret
 
 ################# MEDIA PLAYERS #################
 
@@ -257,7 +290,7 @@ panel_custom:
   - name: panel-redirect
     # url_path needs to be unique for each panel_custom config
     url_path: redirect-logs
-    sidebar_title: Loggar
+    sidebar_title: Logg
     sidebar_icon: mdi:math-log
     module_url: /local/panel-redirect.js
     config:

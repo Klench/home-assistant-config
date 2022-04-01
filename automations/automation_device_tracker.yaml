@@ -179,4 +179,4 @@
     - condition: time
       before: '17:00:00'
   action:
-    service: script.office_bright
+    - service: script.office_bright

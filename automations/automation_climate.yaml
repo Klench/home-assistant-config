@@ -1,0 +1,101 @@
+################# CAR HEATER #################
+
+- alias: 'Car heater weekdays'
+  initial_state: off
+  trigger:
+    platform: state
+    entity_id: binary_sensor.car_heater_trigger_workdays
+    to: 'on'
+  condition:
+    - condition: numeric_state
+      entity_id: sensor.outdoor_temperature
+      below: 3
+    - condition: state
+      entity_id: binary_sensor.workday_sensor
+      state: 'on'
+    - condition: state
+      entity_id: group.device_tracker_family
+      state: 'home'
+    - condition: state
+      entity_id: switch.rcb492_heater
+      state: 'off'
+  action:
+    - service: switch.turn_on
+      entity_id: switch.rcb492_heater
+
+- alias: 'Car heater audio notification'
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: switch.rcb492_heater
+    to: 'on'
+  condition:
+    condition: state
+    entity_id: device_tracker.davids_iphone
+    state: 'home'
+  action: 
+    service: script.sonos_say
+    data:
+      sonos_entity: kitchen_sonos
+      volume: 0.1
+      message: 'Car heater turned on'
+
+################# BATHROOM FLOOR HEATER #################
+
+- alias: 'Bathroom floor heater manual off'
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: input_boolean.bathroom_floor_heater_auto
+    to: 'off'
+  action:
+    service: script.turn_on
+    target:
+      entity_id: script.bathroom_floor_heater_turn_off
+
+- alias: 'Bathroom floor heater manual auto'
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: input_boolean.bathroom_floor_heater_auto
+    to: 'on'
+  action:
+    service: script.turn_on
+    target:
+      entity_id: script.bathroom_floor_heater_auto
+
+- alias: 'Bathroom floor heater away'
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: group.device_tracker_family
+    to: 'not_home'
+  condition:
+    - condition: state
+      entity_id: input_boolean.bathroom_floor_heater_auto
+      state: 'on'
+    - condition: state
+      entity_id: input_boolean.enable_bathroom_floor_heater_automations
+      state: 'on'
+  action:
+    service: script.turn_on
+    target:
+      entity_id: script.bathroom_floor_heater_turn_off
+
+- alias: 'Bathroom floor heater home'
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: group.device_tracker_family
+    to: 'home'
+  condition:
+    - condition: state
+      entity_id: input_boolean.bathroom_floor_heater_auto
+      state: 'on'
+    - condition: state
+      entity_id: input_boolean.enable_bathroom_floor_heater_automations
+      state: 'on'
+  action:
+    service: script.turn_on
+    target:
+      entity_id: script.bathroom_floor_heater_auto

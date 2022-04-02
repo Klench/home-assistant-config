@@ -451,6 +451,17 @@
     target:
       entity_id: switch.kitchen_coffee_maker
 
+- alias: 'Ikea switch turn on kitchen bright'
+  initial_state: on
+  trigger:
+    platform: event
+    event_type: zha_event
+    event_data:
+      device_id: 0e0ddda228abe1831c9056b2834b6454
+      command: 'move_with_on_off'
+  action:
+    service: script.kitchen_bright
+
 ################# SHELLY #################
 
 ##### LIVINGROOM #####

@@ -994,7 +994,6 @@ views:
     visible:
       - user: 53d03bf37feb464487d18a6c12a30efb
     cards:
-    cards:
 
       - type: entities
         title: Arbetstid

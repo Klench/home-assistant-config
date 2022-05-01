@@ -70,7 +70,7 @@ sonos_ungroup_livingroom_speaker:
       data:
         sonos_entity: media_player.livingroom_sonos
 
-sonos_ungroup_bedroom_speaker:
+sonos_ungroup_childroom_speaker:
   alias: Sonos ungroup childroom speaker
   sequence:
     - service: script.sonos_ungroup_speaker

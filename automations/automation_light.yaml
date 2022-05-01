@@ -29,7 +29,7 @@
     - condition: state
       entity_id: binary_sensor.childroom_sonos_is_grouped
       state: 'on'
-    - service: script.sonos_ungroup_bedroom_speaker
+    - service: script.sonos_ungroup_childroom_speaker
     - condition: template
       value_template: >
         {{ state_attr('media_player.childroom_sonos','volume_level') > 0.10 }}

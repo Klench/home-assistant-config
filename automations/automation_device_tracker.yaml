@@ -155,7 +155,7 @@
             - service: script.sonos_set_group_volume
               data:
                 volume: 0.2
-            - service: script.sonos_ungroup_bedroom_speaker
+            - service: script.sonos_ungroup_childroom_speaker
             - service: media_player.volume_set
               data:
                 entity_id: media_player.childroom_sonos
@@ -180,3 +180,23 @@
       before: '17:00:00'
   action:
     - service: script.office_bright
+    - service: script.hallway_top_floor_bright
+    - condition: state
+      entity_id: device_tracker.nellies_iphone
+      state: 'not_home'
+    - service: light.turn_off
+      target:
+        entity_id: 
+        - light.hallway_ceiling_bottom_floor
+        - light.kitchen_table
+        - light.livingroom_couch_table
+        - light.livingroom_dinner_table
+        - light.livingroom_floor
+        - light.livingroom_window
+        - light.bedroom_bedside
+        - light.childroom_ceiling
+    - service: script.sonos_ungroup_childroom_speaker
+    - service: media_player.volume_set
+      data:
+        entity_id: media_player.childroom_sonos
+        volume_level: 0.40

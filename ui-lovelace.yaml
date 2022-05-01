@@ -17,6 +17,7 @@ views:
             **Uppdatering för Home Assistant tillgänglig**
 
       - type: glance
+        state_color: false
         entities:
           - device_tracker.davids_iphone
           - device_tracker.nellies_iphone
@@ -248,16 +249,6 @@ views:
         friendly_name: Steam
         online_only: true
         entities: sensor.steam_
-
-      - type: 'custom:auto-entities'
-        show_empty: false
-        card:
-          type: entities
-          title: Shelly firmware update
-          show_header_toggle: false
-        filter:
-          include:
-            - entity_id: '*firmware_update*'
 
 ################# SONOS #################
 
@@ -867,72 +858,72 @@ views:
                 labels: true
                 fill: fade
 
-      - type: entities
-        title: Transmission
-        show_header_toggle: false
-        entities:
-          - input_text.transmission_torrent_url
-          - entity: sensor.transmission_active_torrents
-            name: Aktiva torrents
-            icon: mdi:play
-          - entity: sensor.transmission_paused_torrents
-            name: Pausade torrents
-            icon: mdi:pause
-          - entity: sensor.transmission_completed_torrents
-            name: Slutförda torrents
-            icon: mdi:check
-          - entity: switch.transmission_turtle_mode
-            name: Turtle mode
-            icon: mdi:tortoise
+      # - type: entities
+      #   title: Transmission
+      #   show_header_toggle: false
+      #   entities:
+      #     - input_text.transmission_torrent_url
+      #     - entity: sensor.transmission_active_torrents
+      #       name: Aktiva torrents
+      #       icon: mdi:play
+      #     - entity: sensor.transmission_paused_torrents
+      #       name: Pausade torrents
+      #       icon: mdi:pause
+      #     - entity: sensor.transmission_completed_torrents
+      #       name: Slutförda torrents
+      #       icon: mdi:check
+      #     - entity: switch.transmission_turtle_mode
+      #       name: Turtle mode
+      #       icon: mdi:tortoise
 
-      - type: conditional
-        conditions:
-          - entity: binary_sensor.transmission_active
-            state: 'on'
-        card:
-          type: horizontal-stack
-          cards:
-            - type: custom:mini-graph-card
-              entities:
-                - entity: sensor.transmission_down_speed
-              name: 'Nedladdning'
-              unit: 'MB/s'
-              icon: mdi:file-download-outline
-              line_color: '#5c8dd1'
-              hour24: true
-              hours_to_show: 2
-              animate: true
-              decimals: 2
-              points_per_hour: 60
-              font_size_header: 18
-              show:
-                extrema: true
-                labels: true
-                fill: fade
-            - type: custom:mini-graph-card
-              entities:
-                - entity: sensor.transmission_up_speed
-              name: 'Uppladdning'
-              unit: 'MB/s'
-              icon: mdi:file-upload-outline
-              line_color: '#5c8dd1'
-              hour24: true
-              hours_to_show: 2
-              animate: true
-              decimals: 2
-              points_per_hour: 60
-              font_size_header: 18
-              show:
-                extrema: true
-                labels: true
-                fill: fade
+      # - type: conditional
+      #   conditions:
+      #     - entity: binary_sensor.transmission_active
+      #       state: 'on'
+      #   card:
+      #     type: horizontal-stack
+      #     cards:
+      #       - type: custom:mini-graph-card
+      #         entities:
+      #           - entity: sensor.transmission_down_speed
+      #         name: 'Nedladdning'
+      #         unit: 'MB/s'
+      #         icon: mdi:file-download-outline
+      #         line_color: '#5c8dd1'
+      #         hour24: true
+      #         hours_to_show: 2
+      #         animate: true
+      #         decimals: 2
+      #         points_per_hour: 60
+      #         font_size_header: 18
+      #         show:
+      #           extrema: true
+      #           labels: true
+      #           fill: fade
+      #       - type: custom:mini-graph-card
+      #         entities:
+      #           - entity: sensor.transmission_up_speed
+      #         name: 'Uppladdning'
+      #         unit: 'MB/s'
+      #         icon: mdi:file-upload-outline
+      #         line_color: '#5c8dd1'
+      #         hour24: true
+      #         hours_to_show: 2
+      #         animate: true
+      #         decimals: 2
+      #         points_per_hour: 60
+      #         font_size_header: 18
+      #         show:
+      #           extrema: true
+      #           labels: true
+      #           fill: fade
 
-      - type: conditional
-        conditions:
-          - entity: binary_sensor.transmission_active
-            state: 'on'
-        card:
-          type: custom:transmission-card
+      # - type: conditional
+      #   conditions:
+      #     - entity: binary_sensor.transmission_active
+      #       state: 'on'
+      #   card:
+      #     type: custom:transmission-card
 
 ################# AUTOMATIONS #################
 

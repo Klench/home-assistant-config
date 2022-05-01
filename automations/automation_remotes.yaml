@@ -36,7 +36,7 @@
     - condition: state
       entity_id: binary_sensor.childroom_sonos_is_grouped
       state: 'on'
-    - service: script.sonos_ungroup_bedroom_speaker
+    - service: script.sonos_ungroup_childroom_speaker
     - service: media_player.volume_set
       data:
         entity_id: media_player.childroom_sonos
@@ -122,7 +122,7 @@
       - conditions: >
           {{ is_state('binary_sensor.childroom_sonos_is_grouped','on') }}
         sequence:
-          service: script.sonos_ungroup_bedroom_speaker
+          service: script.sonos_ungroup_childroom_speaker
 
 - alias: 'Hue switch increase Sonos group volume'
   initial_state: on
@@ -384,7 +384,7 @@
       command: 'hold'
       args: [3329, 0]
   action:
-    service: script.sonos_ungroup_bedroom_speaker
+    service: script.sonos_ungroup_childroom_speaker
 
 - alias: 'Ikea button childroom group speaker'
   initial_state: on

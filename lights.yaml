@@ -1,9 +1,6 @@
 - platform: switch
   name: Livingroom window
   entity_id: switch.livingroom_shelly_1
-- platform: switch
-  name: Office window
-  entity_id: switch.control_outlet_2
 
 - platform: group
   name: 'Hallway ceiling top floor'

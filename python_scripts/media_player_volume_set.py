@@ -4,7 +4,7 @@ set_group_volume = bool(data.get('set_group_volume'))
 volume_increment = 0.003
 
 if set_group_volume:
-  entity_id_list = hass.states.get(entity_id).attributes['sonos_group']
+  entity_id_list = hass.states.get(entity_id).attributes['group_members']
 else:
   entity_id_list = [entity_id]
 

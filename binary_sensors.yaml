@@ -43,13 +43,13 @@
         {{ is_state_attr('media_player.livingroom_sonos','source','TV') }}
     kitchen_sonos_is_grouped:
       value_template: >
-        {{ not is_state_attr('media_player.kitchen_sonos','sonos_group',['media_player.kitchen_sonos']) }}
+        {{ not is_state_attr('media_player.kitchen_sonos','group_members',['media_player.kitchen_sonos']) }}
     livingroom_sonos_is_grouped:
       value_template: >
-        {{ not is_state_attr('media_player.livingroom_sonos','sonos_group',['media_player.livingroom_sonos']) }}
+        {{ not is_state_attr('media_player.livingroom_sonos','group_members',['media_player.livingroom_sonos']) }}
     childroom_sonos_is_grouped:
       value_template: >
-        {{ not is_state_attr('media_player.childroom_sonos','sonos_group',['media_player.childroom_sonos']) }}
+        {{ not is_state_attr('media_player.childroom_sonos','group_members',['media_player.childroom_sonos']) }}
     transmission_active:
       value_template: >
         {{ not (is_state('sensor.transmission_status','idle') or is_state('sensor.transmission_status','unavailable')) }}

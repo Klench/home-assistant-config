@@ -23,16 +23,16 @@
     - 'date'
     - 'date_time'
 
-- platform: steam_online
-  api_key: !secret steam_api_key
-  accounts:
-    - !secret steam_id_klench
-    - !secret steam_id_mench
-    - !secret steam_id_bench
-    - !secret steam_id_lady_nelson
-    - !secret steam_id_olrik_meister
-    - !secret steam_id_tdq
-    - !secret steam_id_lesap
+# - platform: steam_online
+#   api_key: !secret steam_api_key
+#   accounts:
+#     - !secret steam_id_klench
+#     - !secret steam_id_mench
+#     - !secret steam_id_bench
+#     - !secret steam_id_lady_nelson
+#     - !secret steam_id_olrik_meister
+#     - !secret steam_id_tdq
+#     - !secret steam_id_lesap
 
 - platform: apcupsd
   resources:

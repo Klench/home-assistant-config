@@ -181,6 +181,10 @@
   action:
     - service: script.office_bright
     - service: script.hallway_top_floor_bright
+    - service: media_player.volume_set
+      data:
+        entity_id: media_player.childroom_sonos
+        volume_level: 0.40
     - condition: state
       entity_id: device_tracker.nellies_iphone
       state: 'not_home'
@@ -196,7 +200,21 @@
         - light.bedroom_bedside
         - light.childroom_ceiling
     - service: script.sonos_ungroup_childroom_speaker
-    - service: media_player.volume_set
-      data:
-        entity_id: media_player.childroom_sonos
-        volume_level: 0.40
+
+- alias: 'Stop working'
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: device_tracker.sela_ltjs4sl13
+    to: 'not_home'
+  condition:
+    - condition: state
+      entity_id: binary_sensor.relaxed_mode
+      state: 'off'
+    - condition: sun
+      after: sunset
+      after_offset: '-01:00:00'
+  action:
+    service: light.turn_off
+    target:
+      entity_id: light.office_ceiling

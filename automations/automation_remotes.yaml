@@ -330,6 +330,17 @@
   action:
     service: script.childroom_relaxed
 
+- alias: 'Ikea button childroom light warm'
+  initial_state: on
+  trigger:
+    platform: event
+    event_type: zha_event
+    event_data:
+      device_id: 44bc2855a0757d86e2bf3ca19df7db77
+      command: 'move_with_on_off'
+  action:
+    service: script.childroom_light_warm
+
 - alias: 'Ikea button childroom light turn off'
   initial_state: on
   trigger:
@@ -338,7 +349,6 @@
     event_data:
       device_id: 44bc2855a0757d86e2bf3ca19df7db77
       command: 'move'
-      args: [1, 84]
   action:
     service: script.childroom_light_dim
 

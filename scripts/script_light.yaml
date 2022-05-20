@@ -288,6 +288,14 @@ childroom_night_light:
         transition: 2
         effect: None
 
+childroom_light_warm:
+  sequence:
+    - service: light.turn_on
+      data:
+        entity_id: light.childroom_ceiling
+        color_temp: 443
+        transition: 2
+
 childroom_light_dim:
   sequence:
     - service: light.turn_on
@@ -301,7 +309,7 @@ childroom_light_dim:
         entity_id: light.childroom_ceiling
         brightness_pct: 1
         color_temp: 443
-        transition: 600
+        transition: 900
 
 ##### OFFICE #####
 

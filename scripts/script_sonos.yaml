@@ -9,10 +9,10 @@ sonos_group_all_speakers:
           - media_player.livingroom_sonos
           - media_player.childroom_sonos
         volume_level: 0.0
-    - service: sonos.join
+    - service: media_player.join
       data:
-        master: media_player.kitchen_sonos
-        entity_id:
+        entity_id: media_player.kitchen_sonos
+        group_members:
           - media_player.childroom_sonos
           - media_player.livingroom_sonos
     - service: script.sonos_sync_group_volume
@@ -24,10 +24,10 @@ sonos_group_speaker:
       data:
         entity_id: "{{ sonos_entity }}"
         volume_level: 0.0
-    - service: sonos.join
+    - service: media_player.join
       data:
-        master: media_player.kitchen_sonos
-        entity_id: "{{ sonos_entity }}"
+        entity_id: media_player.kitchen_sonos
+        group_members: "{{ sonos_entity }}"
     - service: python_script.media_player_volume_set
       data:
         entity_id: "{{ sonos_entity }}"
@@ -41,7 +41,7 @@ sonos_ungroup_speaker:
       data:
         entity_id: "{{ sonos_entity }}"
         volume_level: 0.01
-    - service: sonos.unjoin
+    - service: media_player.unjoin
       data:
         entity_id: "{{ sonos_entity }}"
     - service: media_player.volume_set
@@ -126,7 +126,7 @@ sonos_say:
     - service: sonos.snapshot
       data:
         entity_id: "{{ 'media_player.' ~ sonos_entity }}"
-    - service: sonos.unjoin
+    - service: media_player.unjoin
       data:
         entity_id:  "{{ 'media_player.' ~ sonos_entity }}"
     - service: media_player.volume_set

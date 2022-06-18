@@ -59,8 +59,10 @@ lovelace:
       type: module
     - url: /hacsfiles/list-card/list-card.js
       type: module
+    - url: /hacsfiles/weather-radar-card/weather-radar-card.js
+      type: module
     - url: /hacsfiles/upcoming-media-card/upcoming-media-card.js
-      type: js
+      type: module
 
 # Enables configuration UI
 config:
@@ -72,8 +74,6 @@ http:
 
 hacs:
   token: !secret hacs_token
-
-breaking_changes:
 
 python_script:
 
@@ -132,16 +132,12 @@ mobile_app:
 # Text to speech
 tts:
   - platform: google_translate
-    base_url: !secret internal_url
+    language: 'sv'
 
 shopping_list:
 
 apcupsd:
   host: !secret oden_ip
-
-neato:
-  client_id: !secret neato_client_id
-  client_secret: !secret neato__client_secret
 
 homekit:
   ip_address: !secret oden_ip
@@ -212,22 +208,6 @@ mqtt:
   discovery: true
   discovery_prefix: homeassistant
 
-################# ASSISTANT RELAY #################
-
-rest_command:
-  assistant_relay:
-    url: http://172.18.0.5:3000/assistant
-    method: POST
-    content_type: 'application/json'
-    payload: '{"user:" "David","command:" "{{ message }}"}'
-    verify_ssl: false
-
-################# SENZ #################
-
-senz:
-  client_id: !secret senz_client_id
-  client_secret: !secret senz_client_secret
-
 ################# MEDIA PLAYERS #################
 
 # media_player:
@@ -241,10 +221,6 @@ senz:
   #     data:
   #       entity_id: media_player.kodi
   #       method: System.Reboot
-
-spotify:
-  client_id: !secret spotify_client_id
-  client_secret: !secret spotify_client_secret
 
 sonos:
   media_player:
@@ -278,15 +254,6 @@ panel_iframe:
     url: !secret esphome_url
 
 panel_custom:
-  - name: panel-redirect
-    # url_path needs to be unique for each panel_custom config
-    url_path: redirect-server-controls
-    sidebar_title: Serverhantering
-    sidebar_icon: mdi:server
-    module_url: /local/panel-redirect.js
-    config:
-      # Where you want to redirect to
-      target: /developer-tools/yaml
   - name: panel-redirect
     # url_path needs to be unique for each panel_custom config
     url_path: redirect-logs

@@ -472,6 +472,19 @@
   action:
     service: script.kitchen_bright
 
+- alias: 'Ikea switch turn off kitchen lights'
+  initial_state: on
+  trigger:
+    platform: event
+    event_type: zha_event
+    event_data:
+      device_id: 0e0ddda228abe1831c9056b2834b6454
+      command: 'move'
+  action:
+    service: light.turn_off
+    target:
+      entity_id: light.kitchen_table
+
 ################# SHELLY #################
 
 ##### LIVINGROOM #####

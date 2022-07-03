@@ -3,7 +3,7 @@ bathroom_floor_heater_turn_off:
     service: climate.set_hvac_mode
     data:
       entity_id: climate.bathroom_floor
-      hvac_mode: 'off'
+      hvac_mode: 'heat'
 
 bathroom_floor_heater_auto:
   sequence:

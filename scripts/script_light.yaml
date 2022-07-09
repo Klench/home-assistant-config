@@ -241,11 +241,13 @@ bedroom_low_brightness:
   sequence:
     - service: light.turn_on
       data:
-        entity_id: light.bedroom_bedside
+        entity_id: light.bedroom_bedside_2
         brightness_pct: 1
     - service: light.turn_off
       target:
-        entity_id: light.bedroom_ceiling
+        entity_id: 
+          - light.bedroom_ceiling
+          - light.bedroom_bedside_1
 
 bedroom_wakeup:
   sequence:

@@ -682,6 +682,8 @@ views:
         filter:
           include:
             - entity_id: "media_player.plex*"
+            - entity_id: "sensor.plex_total_bandwidth"
+              state: "> 0"
           exclude:
             - state: "inactive"
             - state: "unavailable"

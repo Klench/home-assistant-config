@@ -89,7 +89,6 @@
 ################# SUNSET/SUNRISE #################
 
 - alias: 'Sunset'
-  initial_state: on
   trigger:
     platform: sun
     event: sunset

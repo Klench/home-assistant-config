@@ -18,7 +18,6 @@ homeassistant:
   media_dirs:
     music: /media/music
     audiobooks: /media/audiobooks
-
   auth_providers:
     - type: homeassistant
 
@@ -38,8 +37,6 @@ lovelace:
     - url: /hacsfiles/lovelace-auto-entities/auto-entities.js
       type: module
     - url: /hacsfiles/lovelace-multiple-entity-row/multiple-entity-row.js
-      type: module
-    - url: /hacsfiles/kb-steam-card/kb-steam-card.js
       type: module
     - url: /hacsfiles/krisinfo-card/krisinfo-card.js
       type: module
@@ -82,6 +79,9 @@ discovery:
 
 # Enables support for tracking state changes over time
 history:
+
+# Enables my Home Assistant integration
+my:
 
 # View events in a logbook
 logbook:

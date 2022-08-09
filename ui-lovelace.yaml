@@ -33,9 +33,9 @@ views:
         entities:
           - entity: script.indoor_lights_bright
             icon: mdi:lightbulb-on-outline
-          - entity: script.indoor_lights_low_brightness
-            icon: mdi:lightbulb-on
           - entity: script.indoor_lights_relaxed
+            icon: mdi:lightbulb-on
+          - entity: script.indoor_lights_low_brightness
             icon: mdi:lightbulb-on
           - entity: script.indoor_lights_off
             icon: mdi:lightbulb-off
@@ -235,11 +235,6 @@ views:
               state: home
               attributes:
                 essid: "Stenman_guest"
-
-      - type: 'custom:kb-steam-card'
-        friendly_name: Steam
-        online_only: true
-        entities: sensor.steam_
 
 ################# SONOS #################
 

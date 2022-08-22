@@ -208,6 +208,56 @@ mqtt:
   discovery: true
   discovery_prefix: homeassistant
 
+################# DOCKER MONITOR #################
+
+monitor_docker:
+  - containers:
+      - cloudflareddns
+      - code-server
+      - duckdns
+      - glances
+      - home-assistant
+      - Krusader
+      - mariadb
+      - nextcloud
+      - pihole
+      - PlexMediaServer
+      - qbittorrentvpn
+      - resilio-sync
+      - swag
+      - unifi-controller
+    rename:
+      cloudflareddns: Cloudflare DDNS
+      code-server: Code Server
+      duckdns: DuckDNS
+      glances: Glances
+      home-assistant: Home Assistant
+      mariadb: MariaDB
+      nextcloud: Nextcloud
+      pihole: PiHole
+      qbittorrentvpn: qBittorrent VPN
+      resilio-sync: Resilio Sync
+      swag: Swag
+      unifi-controller: UniFi Controller
+    monitored_conditions:
+      - version
+      - containers_total
+      - containers_running
+      - containers_paused
+      - containers_stopped
+      - containers_1cpu_percentage
+      - containers_memory
+      - state
+      - status
+      - uptime
+      - 1cpu_percentage
+      - memory
+      - network_speed_up
+      - network_speed_down
+      - network_total_up
+      - network_total_down
+    sensorname: "{sensor}"
+
 ################# MEDIA PLAYERS #################
 
 # media_player:

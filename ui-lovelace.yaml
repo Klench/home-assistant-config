@@ -533,10 +533,6 @@ views:
             name: 'Ramanvändning'
           - entity: sensor.unraid_ram_used
             name: 'Ramanvändning'
-          - entity: sensor.unraid_containers_active
-            name: 'Aktiva docker containers'
-          - entity: sensor.unraid_containers_ram_used
-            name: 'Ramanvändning docker'
           - entity: sensor.unraid_cputin_temperature
             name: 'Temperatur CPU'
           - entity: sensor.unraid_auxtin0_temperature
@@ -599,6 +595,123 @@ views:
         filter:
           include:
             - entity_id: "sensor.ups*"
+
+      - type: custom:auto-entities
+        card:
+          type: entities
+          title: Docker
+          show_header_toggle: false
+        entities:
+          - sensor.docker_version
+          - sensor.docker_1cpu
+          - sensor.docker_memory
+          - sensor.docker_containers_running
+          - sensor.docker_containers_stopped
+          - type: section
+            label: Containers
+          - type: custom:auto-entities
+            card:
+              type: entities
+              show_header_toggle: false
+            filter:
+              include:
+                - entity_id: "*.docker_plexmediaserver*"
+          - type: divider
+          - type: custom:auto-entities
+            card:
+              type: entities
+              show_header_toggle: false
+            filter:
+              include:
+                - entity_id: "*.docker_nextcloud*"
+          - type: divider
+          - type: custom:auto-entities
+            card:
+              type: entities
+              show_header_toggle: false
+            filter:
+              include:
+                - entity_id: "*.docker_qbittorrentvpn*"
+          - type: divider
+          - type: custom:auto-entities
+            card:
+              type: entities
+              show_header_toggle: false
+            filter:
+              include:
+                - entity_id: "*.docker_pihole*"
+          - type: divider
+          - type: custom:auto-entities
+            card:
+              type: entities
+              show_header_toggle: false
+            filter:
+              include:
+                - entity_id: "*.docker_swag*"
+          - type: divider
+          - type: custom:auto-entities
+            card:
+              type: entities
+              show_header_toggle: false
+            filter:
+              include:
+                - entity_id: "*.docker_mariadb*"
+          - type: divider
+          - type: custom:auto-entities
+            card:
+              type: entities
+              show_header_toggle: false
+            filter:
+              include:
+                - entity_id: "*.docker_duckdns*"
+          - type: divider
+          - type: custom:auto-entities
+            card:
+              type: entities
+              show_header_toggle: false
+            filter:
+              include:
+                - entity_id: "*.docker_cloudflareddns*"
+          - type: divider
+          - type: custom:auto-entities
+            card:
+              type: entities
+              show_header_toggle: false
+            filter:
+              include:
+                - entity_id: "*.docker_code_server*"
+          - type: divider
+          - type: custom:auto-entities
+            card:
+              type: entities
+              show_header_toggle: false
+            filter:
+              include:
+                - entity_id: "*.docker_krusader*"
+          - type: divider
+          - type: custom:auto-entities
+            card:
+              type: entities
+              show_header_toggle: false
+            filter:
+              include:
+                - entity_id: "*.docker_unifi_controller*"
+          - type: divider
+          - type: custom:auto-entities
+            card:
+              type: entities
+              show_header_toggle: false
+            filter:
+              include:
+                - entity_id: "*.docker_resilio_sync*"
+          - type: divider
+          - type: custom:auto-entities
+            card:
+              type: entities
+              show_header_toggle: false
+            filter:
+              include:
+                - entity_id: "*.docker_glances*"
 
       - type: custom:zha-network-card
         title: ZHA

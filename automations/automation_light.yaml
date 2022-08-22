@@ -367,14 +367,11 @@
       entity_id: input_boolean.enable_hue_motion_sensor_hallway
       state: 'on'
     - condition: state
-      entity_id: light.bedroom_ceiling
+      entity_id: light.office_ceiling
       state: 'off'
     - condition: state
       entity_id: binary_sensor.relaxed_mode
       state: 'off'
-    - condition: state
-      entity_id: device_tracker.sela_ltjs4sl13
-      state: 'not_home'
     - condition: or
       conditions:
         - condition: time
@@ -396,16 +393,16 @@
     - service: script.turn_on
       target:
         entity_id: script.office_bright
-    - condition: time
-      before: '11:00:00'
-      after: '16:00:00'
-    - condition: template
-      value_template: >
-        {{ not (is_state('binary_sensor.childroom_sonos_is_grouped','off') and is_state('media_player.childroom_sonos','playing')) }}
-    - service: script.turn_on
-      target:
-        entity_id:
-          - script.childroom_bright
+    # - condition: time
+    #   before: '11:00:00'
+    #   after: '16:00:00'
+    # - condition: template
+    #   value_template: >
+    #     {{ not (is_state('binary_sensor.childroom_sonos_is_grouped','off') and is_state('media_player.childroom_sonos','playing')) }}
+    # - service: script.turn_on
+    #   target:
+    #     entity_id:
+    #       - script.childroom_bright
 
 ################# CREATE LIGHT GROUPS #################
 

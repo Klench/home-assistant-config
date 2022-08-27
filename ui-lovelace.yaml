@@ -1124,20 +1124,6 @@ views:
           - input_number.work_time_minutes_out
           - input_number.work_time_minutes_lunch
 
-# ################# WEATHER #################
-
-  - icon: mdi:weather-partly-cloudy
-    cards:
-
-      - type: 'custom:weather-radar-card'
-        frame_count: 10
-        show_marker: true
-        show_range: true
-        show_zoom: true
-        show_recenter: true
-        show_playback: true
-        zoom_level: 8
-
 # ################# ESPHome #################
 
 #   - icon: mdi:developer-board

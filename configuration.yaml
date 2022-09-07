@@ -137,26 +137,6 @@ shopping_list:
 apcupsd:
   host: !secret oden_ip
 
-homekit:
-  ip_address: !secret oden_ip
-  filter:
-    include_entities:
-      - script.indoor_lights_bright
-      - script.indoor_lights_relaxed
-      - script.indoor_lights_off
-      - script.hallway_bright
-      - script.hallway_low_brightness
-      - script.hallway_relaxed
-      - script.sonos_manual_group_speakers
-      - script.baby_light_bedroom
-      - script.livingroom_nursery
-      - light.bathroom_led
-      - light.hallway_ceiling_group
-      - light.hallway_ceiling
-      - light.bedroom_bedside
-      - light.livingroom_window
-      - sensor.outdoor_temperature
-
 ################# VOLVO ON CALL #################
 
 volvooncall:

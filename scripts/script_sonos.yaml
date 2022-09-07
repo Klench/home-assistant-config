@@ -173,3 +173,16 @@ sonos_disable_alarm:
         entity_id: media_player.childroom_sonos
         alarm_id: 7
         enabled: false
+
+##### MISC #####
+
+sonos_reset_sound_levels:
+  sequence:
+    - service: number.set_value
+      data:
+        entity_id:
+          - number.sonos_kitchen_bass
+          - number.sonos_childroom_bass
+          - number.sonos_livingroom_bass
+          - number.sonos_livingroom_audio_delay
+        value: 0

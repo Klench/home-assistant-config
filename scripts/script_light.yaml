@@ -95,6 +95,7 @@ indoor_lights_off:
     - service: script.sonos_set_group_volume
       data:
         volume: 0.1
+    - service: script.sonos_reset_sound_levels
     - condition: state
       entity_id: binary_sensor.relaxed_mode
       state: 'off'

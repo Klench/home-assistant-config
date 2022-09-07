@@ -14,7 +14,10 @@ harmony_media_room.conf
 home-assistant.db
 home-assistant_v2.db
 home-assistant_v2.db-*
+home-assistant.log.fault
 zigbee.db
+zigbee.db-shm
+zigbee.db-wal
 html5_push_registrations.conf
 ip_bans.yaml
 known_devices.yaml

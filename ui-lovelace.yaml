@@ -613,105 +613,131 @@ views:
             card:
               type: entities
               show_header_toggle: false
+            entities:
+              - switch.docker_plexmediaserver
             filter:
               include:
-                - entity_id: "*.docker_plexmediaserver*"
+                - entity_id: "sensor.docker_plexmediaserver*"
           - type: divider
           - type: custom:auto-entities
             card:
               type: entities
               show_header_toggle: false
+            entities:
+              - switch.docker_nextcloud
             filter:
               include:
-                - entity_id: "*.docker_nextcloud*"
+                - entity_id: "sensor.docker_nextcloud*"
           - type: divider
           - type: custom:auto-entities
             card:
               type: entities
               show_header_toggle: false
+            entities:
+              - switch.docker_qbittorrentvpn
             filter:
               include:
-                - entity_id: "*.docker_qbittorrentvpn*"
+                - entity_id: "sensor.docker_qbittorrentvpn*"
           - type: divider
           - type: custom:auto-entities
             card:
               type: entities
               show_header_toggle: false
+            entities:
+              - switch.docker_pihole
             filter:
               include:
-                - entity_id: "*.docker_pihole*"
+                - entity_id: "sensor.docker_pihole*"
           - type: divider
           - type: custom:auto-entities
             card:
               type: entities
               show_header_toggle: false
+            entities:
+              - switch.docker_swag
             filter:
               include:
-                - entity_id: "*.docker_swag*"
+                - entity_id: "sensor.docker_swag*"
           - type: divider
           - type: custom:auto-entities
             card:
               type: entities
               show_header_toggle: false
+            entities:
+              - switch.docker_mariadb
             filter:
               include:
-                - entity_id: "*.docker_mariadb*"
+                - entity_id: "sensor.docker_mariadb*"
           - type: divider
           - type: custom:auto-entities
             card:
               type: entities
               show_header_toggle: false
+            entities:
+              - switch.docker_duckdns
             filter:
               include:
-                - entity_id: "*.docker_duckdns*"
+                - entity_id: "sensor.docker_duckdns*"
           - type: divider
           - type: custom:auto-entities
             card:
               type: entities
               show_header_toggle: false
+            entities:
+              - switch.docker_cloudflareddns
             filter:
               include:
-                - entity_id: "*.docker_cloudflareddns*"
+                - entity_id: "sensor.docker_cloudflareddns*"
           - type: divider
           - type: custom:auto-entities
             card:
               type: entities
               show_header_toggle: false
+            entities:
+              - switch.docker_code_server
             filter:
               include:
-                - entity_id: "*.docker_code_server*"
+                - entity_id: "sensor.docker_code_server*"
           - type: divider
           - type: custom:auto-entities
             card:
               type: entities
               show_header_toggle: false
+            entities:
+              - switch.docker_krusader
             filter:
               include:
-                - entity_id: "*.docker_krusader*"
+                - entity_id: "sensor.docker_krusader*"
           - type: divider
           - type: custom:auto-entities
             card:
               type: entities
               show_header_toggle: false
+            entities:
+              - switch.docker_unifi_controller
             filter:
               include:
-                - entity_id: "*.docker_unifi_controller*"
+                - entity_id: "sensor.docker_unifi_controller*"
           - type: divider
           - type: custom:auto-entities
             card:
               type: entities
               show_header_toggle: false
+            entities:
+              - switch.docker_resilio_sync
             filter:
               include:
-                - entity_id: "*.docker_resilio_sync*"
+                - entity_id: "sensor.docker_resilio_sync*"
           - type: divider
           - type: custom:auto-entities
             card:
               type: entities
               show_header_toggle: false
+            entities:
+              - switch.docker_glances
             filter:
               include:
-                - entity_id: "*.docker_glances*"
+                - entity_id: "sensor.docker_glances*"
 
       - type: custom:zha-network-card
         title: ZHA

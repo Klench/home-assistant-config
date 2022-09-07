@@ -37,7 +37,7 @@
         {{ (as_timestamp(strptime(states('sensor.alarm_clock_time_weekdays'), '%H:%M')) | int + 60*60 + states('input_number.alarm_heater_offset') | int * 60) | timestamp_custom('%H:%M', false) == states('sensor.time') }}
     relaxed_mode:
       value_template: >
-        {{ ((as_timestamp(strptime(states('sensor.relaxed_mode_time'), '%H:%M')) | int) < (as_timestamp(strptime(states('sensor.time'), '%H:%M')) + 60) | int) or ((as_timestamp(strptime(states('sensor.time'), '%H:%M')) | int) < (as_timestamp(strptime('05:00', '%H:%M')) | int)) }}
+        {{ ((as_timestamp(strptime(states('sensor.relaxed_mode_time'), '%H:%M')) | int) < (as_timestamp(strptime(states('sensor.time'), '%H:%M')) + 60) | int) or ((as_timestamp(strptime(states('sensor.time'), '%H:%M')) | int) < (as_timestamp(strptime('06:00', '%H:%M')) | int)) }}
     livingroom_sonos_tv_active:
       value_template: >
         {{ is_state_attr('media_player.livingroom_sonos','source','TV') }}
@@ -50,9 +50,6 @@
     childroom_sonos_is_grouped:
       value_template: >
         {{ not is_state_attr('media_player.childroom_sonos','group_members',['media_player.childroom_sonos']) }}
-    transmission_active:
-      value_template: >
-        {{ not (is_state('sensor.transmission_status','idle') or is_state('sensor.transmission_status','unavailable')) }}
     bathroom_low_brightness_recently_executed:
       value_template: >
         {{ (utcnow() - states.script.bathroom_low_brightness.last_changed) < timedelta(seconds = 10) }}

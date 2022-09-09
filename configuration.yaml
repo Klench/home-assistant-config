@@ -193,6 +193,7 @@ monitor_docker:
       - cloudflareddns
       - code-server
       - duckdns
+      - duplicati
       - glances
       - home-assistant
       - Krusader
@@ -208,6 +209,7 @@ monitor_docker:
       cloudflareddns: Cloudflare DDNS
       code-server: Code Server
       duckdns: DuckDNS
+      duplicati: Duplicati
       glances: Glances
       home-assistant: Home Assistant
       mariadb: MariaDB

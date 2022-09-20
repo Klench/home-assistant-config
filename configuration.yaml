@@ -137,12 +137,6 @@ shopping_list:
 apcupsd:
   host: !secret oden_ip
 
-################# VOLVO ON CALL #################
-
-volvooncall:
-  username: !secret volvo_username
-  password: !secret volvo_password
-
 ################# ZHA #################
 
 zha:
@@ -228,7 +222,6 @@ monitor_docker:
       - containers_1cpu_percentage
       - containers_memory
       - state
-      - status
       - uptime
       - 1cpu_percentage
       - memory

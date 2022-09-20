@@ -128,8 +128,8 @@
       value_template: >
         {% if is_state('binary_sensor.rcb492_engine','on') %}
           Aktiv
-        {% elif not is_state('binary_sensor.rcb492_engine','on') and is_state('device_tracker.volvo_rcb492','not_home') %}
+        {% elif not is_state('binary_sensor.rcb492_engine','on') and is_state('device_tracker.rcb492','not_home') %}
           Borta
         {% else %}
-          {{ states('device_tracker.volvo_rcb492') }}
+          {{ states('device_tracker.rcb492') }}
         {% endif %}

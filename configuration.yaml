@@ -64,8 +64,7 @@ config:
 
 http:
   use_x_forwarded_for: true
-  trusted_proxies:
-    - 172.18.0.0/16
+  trusted_proxies: 172.18.0.0/16
 
 hacs:
   token: !secret hacs_token
@@ -134,9 +133,6 @@ tts:
 
 shopping_list:
 
-apcupsd:
-  host: !secret oden_ip
-
 ################# ZHA #################
 
 zha:
@@ -148,11 +144,10 @@ zha:
 
 shelly:
   host_ip: !secret oden_ip
-  discover_by_ip:
-    - !secret shelly_livingroom_ip
-  igmp_fix: true
+  mqtt_server_host: !secret oden_ip
+  mqtt_server_username: !secret mqtt_username
+  mqtt_server_password: !secret mqtt_password
   version: true
-  scan_interval: 1
   attributes:
     - default
     - firmware_version

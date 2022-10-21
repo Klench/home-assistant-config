@@ -166,6 +166,8 @@
           data:
             volume: 0.2
 
+################# SONOS #################
+
 - alias: 'Start working'
   initial_state: on
   trigger:
@@ -218,3 +220,60 @@
     service: light.turn_off
     target:
       entity_id: light.office_ceiling
+
+- alias: 'Leaving home during work hours'
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: device_tracker.davids_iphone
+    to: 'not_home'
+  condition:
+    - condition: state
+      entity_id: device_tracker.sela_ltjs4sl13
+      state: 'home'
+    - condition: state
+      entity_id: device_tracker.nellies_iphone
+      state: 'home'
+  action:
+    service: light.turn_off
+    target:
+      entity_id: light.office_ceiling
+
+- alias: 'Coming home during work hours'
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: device_tracker.davids_iphone
+    to: 'home'
+  condition:
+    condition: state
+    entity_id: device_tracker.sela_ltjs4sl13
+    state: 'home'
+  action:
+    service: script.office_bright
+
+- alias: 'Nellie leaving home during work hours'
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: device_tracker.nellies_iphone
+    to: 'not_home'
+  condition:
+    - condition: state
+      entity_id: device_tracker.sela_ltjs4sl13
+      state: 'home'
+    - condition: state
+      entity_id: device_tracker.davids_iphone
+      state: 'home'
+  action:
+    service: light.turn_off
+    target:
+      entity_id: 
+      - light.hallway_ceiling_bottom_floor
+      - light.kitchen_table
+      - light.livingroom_couch_table
+      - light.livingroom_dinner_table
+      - light.livingroom_floor
+      - light.livingroom_window
+      - light.bedroom_bedside
+      - light.childroom_ceiling

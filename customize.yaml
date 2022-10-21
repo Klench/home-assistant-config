@@ -13,6 +13,9 @@ light.office_window:
 light.bedroom_bedside:
   icon: mdi:floor-lamp
   friendly_name: 'Nattduksbord'
+light.outdoor_porch:
+  icon: hue:wall-spot
+  friendly_name: 'Veranda'
 
 device_tracker.davids_iphone:
   friendly_name: 'David'

@@ -576,9 +576,8 @@ turn_on_outdoor_lights:
         transition: 2
     - service: light.turn_on
       data:
-        entity_id: light.outdoor_rear_entrance
-        brightness_pct: 70
-        color_temp: 443
+        entity_id: light.outdoor_porch
+        brightness_pct: 40
         transition: 2
     - service: switch.turn_on
       target:
@@ -589,9 +588,7 @@ turn_off_outdoor_lights:
   sequence:
     - service: light.turn_off
       target:
-        entity_id:
-          - light.outdoor_main_entrance
-          - light.outdoor_rear_entrance
+        entity_id: light.outdoor_lights
     - service: switch.turn_off
       target:
         entity_id:

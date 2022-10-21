@@ -217,7 +217,7 @@ views:
           - entity: script.turn_on_outdoor_lights
             icon: mdi:lightbulb-on-outline
           - light.outdoor_main_entrance
-          - light.outdoor_rear_entrance
+          - light.outdoor_porch
           # - entity: switch.control_outlet_3
           #   icon: mdi:led-strip-variant
           #   name: Ljusslinga

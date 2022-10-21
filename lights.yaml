@@ -30,7 +30,14 @@
     - light.bedroom_bedside_1
     - light.bedroom_bedside_2
 - platform: group
+  name: 'Outdoor porch'
+  entities:
+    - light.outdoor_porch_1
+    - light.outdoor_porch_2
+    - light.outdoor_porch_3
+    - light.outdoor_porch_4
+- platform: group
   name: 'Outdoor lights'
   entities:
     - light.outdoor_main_entrance
-    - light.outdoor_rear_entrance
+    - light.outdoor_porch

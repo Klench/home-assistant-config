@@ -98,6 +98,8 @@ views:
             icon: mdi:lightbulb-on-outline
           - entity: script.office_relaxed
             icon: mdi:lightbulb-on
+          - entity: script.office_low_brightness
+            icon: mdi:lightbulb-on
           - light.office_ceiling
           - light.office_desk
           - light.office_window

@@ -343,6 +343,18 @@ office_relaxed:
       data:
         entity_id: light.office_ceiling
 
+office_low_brightness:
+  alias: 'Låg ljusstyrka'
+  sequence:
+    - service: light.turn_on
+      data:
+        entity_id: light.office_desk
+        brightness_pct: 1
+        transition: 2
+    - service: light.turn_off
+      target:
+        entity_id: light.office_window
+
 office_wakeup:
   sequence:
     - service: light.turn_on

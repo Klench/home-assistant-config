@@ -298,6 +298,13 @@ childroom_light_warm:
         entity_id: light.childroom_ceiling
         color_temp: 443
         transition: 2
+    - service: light.turn_on
+      data:
+        entity_id: light.childroom_led_strip
+        brightness_pct: 25
+        rgb_color: [255,128,0]
+        transition: 2
+        effect: None
 
 childroom_light_dim:
   sequence:
@@ -306,6 +313,13 @@ childroom_light_dim:
         entity_id: light.childroom_ceiling
         color_temp: 443
         transition: 2
+    - service: light.turn_on
+      data:
+        entity_id: light.childroom_led_strip
+        brightness_pct: 25
+        rgb_color: [255,128,0]
+        transition: 2
+        effect: None
     - delay: '00:00:02'
     - service: light.turn_on
       data:

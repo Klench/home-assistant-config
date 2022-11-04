@@ -63,11 +63,6 @@
       icon_template: mdi:alarm
       value_template: >
         {{ "%0.02d:%0.02d" | format(states('input_number.alarm_hours_weekend') | int, states('input_number.alarm_minutes_weekend') | int ) }}
-    relaxed_mode_time:
-      friendly_name: 'Klockslag'
-      icon_template: mdi:alarm
-      value_template: >
-        {{ "%0.02d:%0.02d" | format(states('input_number.relaxed_mode_hours') | int, states('input_number.relaxed_mode_minutes') | int ) }}
     outdoor_temperature:
       friendly_name: 'Temperatur'
       icon_template: mdi:thermometer

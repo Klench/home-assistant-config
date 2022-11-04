@@ -1,0 +1,4 @@
+relaxed_mode:
+  name: Klockslag för mysbelysning
+  has_time: true
+  icon: mdi:alarm

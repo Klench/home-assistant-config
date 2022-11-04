@@ -37,7 +37,7 @@
         {{ (as_timestamp(strptime(states('sensor.alarm_clock_time_weekdays'), '%H:%M')) | int + 60*60 + states('input_number.alarm_heater_offset') | int * 60) | timestamp_custom('%H:%M', false) == states('sensor.time') }}
     relaxed_mode:
       value_template: >
-        {{ ((as_timestamp(strptime(states('sensor.relaxed_mode_time'), '%H:%M')) | int) < (as_timestamp(strptime(states('sensor.time'), '%H:%M')) + 60) | int) or ((as_timestamp(strptime(states('sensor.time'), '%H:%M')) | int) < (as_timestamp(strptime('06:00', '%H:%M')) | int)) }}
+        {{ states('sensor.time') > states('input_datetime.relaxed_mode') or now() < today_at("06:00") }}
     livingroom_sonos_tv_active:
       value_template: >
         {{ is_state_attr('media_player.livingroom_sonos','source','TV') }}

@@ -1094,17 +1094,10 @@ views:
     cards:
 
       - type: entities
-        title: Tid för mysbelysning
-        show_header_toggle: false
-        entities:
-          - sensor.relaxed_mode_time
-          - input_number.relaxed_mode_hours
-          - input_number.relaxed_mode_minutes
-
-      - type: entities
         title: Automationer
         show_header_toggle: false
         entities:
+          - input_datetime.relaxed_mode
           - input_boolean.enable_hue_switch_hallway
           - input_boolean.enable_hue_motion_sensor_hallway
           - automation.wakeup_weekdays

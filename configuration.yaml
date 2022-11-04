@@ -296,3 +296,4 @@ switch: !include switches.yaml
 light: !include lights.yaml
 timer: !include timers.yaml
 zone: !include zones.yaml
+input_datetime: !include input_datetime.yaml

@@ -73,21 +73,6 @@
       friendly_name: 'Hallway switch updated'
       value_template: >
         {{ state_attr('remote.hallway_switch','last_updated') }}
-    work_time_in:
-      friendly_name: 'Inpasseringstid'
-      icon_template: mdi:clock-in
-      value_template: >
-        {{ "%0.02d:%0.02d" | format(states('input_number.work_time_hours_in') | int, states('input_number.work_time_minutes_in') | int ) }}
-    work_time_out:
-      friendly_name: 'Utpasseringstid'
-      icon_template: mdi:clock-out
-      value_template: >
-        {{ "%0.02d:%0.02d" | format(states('input_number.work_time_hours_out') | int, states('input_number.work_time_minutes_out') | int ) }}
-    work_time:
-      friendly_name: 'Arbetstid timmar'
-      icon_template: mdi:calendar-clock
-      value_template: >
-        {{ float((as_timestamp(strptime(states('sensor.work_time_out'), '%H:%M')) | int - as_timestamp(strptime(states('sensor.work_time_in'), '%H:%M')) | int - states('input_number.work_time_minutes_lunch') | int * 60)/3600) | round(1) }}
     bedroom_music_timer_duration:
       value_template: >
         {{ "00:%0.02d:00" | format(states('input_number.bedroom_music_timer_minutes') | int) }}

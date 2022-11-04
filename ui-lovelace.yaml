@@ -1135,26 +1135,6 @@ views:
         entity: climate.bathroom_floor
         name: Termostat
 
-################# WORK TIME #################
-
-  - icon: mdi:briefcase-clock-outline
-    visible:
-      - user: 53d03bf37feb464487d18a6c12a30efb
-    cards:
-
-      - type: entities
-        title: Arbetstid
-        show_header_toggle: false
-        entities:
-          - sensor.work_time
-          - sensor.work_time_in
-          - input_number.work_time_hours_in
-          - input_number.work_time_minutes_in
-          - sensor.work_time_out
-          - input_number.work_time_hours_out
-          - input_number.work_time_minutes_out
-          - input_number.work_time_minutes_lunch
-
 # ################# ESPHome #################
 
 #   - icon: mdi:developer-board

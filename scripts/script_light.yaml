@@ -241,14 +241,23 @@ bedroom_relaxed:
 bedroom_low_brightness:
   alias: 'Låg ljusstyrka'
   sequence:
+    - service: light.turn_off
+      target:
+        entity_id: light.bedroom_bedside
     - service: light.turn_on
       data:
         entity_id: light.bedroom_ceiling
         brightness_pct: 1
         rgb_color: [255,1,1]
-    - service: light.turn_off
-      target:
-        entity_id: light.bedroom_bedside
+        transition: 2
+    - delay:
+          milliseconds: 2100
+    - service: light.turn_on
+      data:
+        entity_id: light.bedroom_ceiling
+        brightness_pct: 1
+        rgb_color: [255,1,1]
+        transition: 2
 
 bedroom_wakeup:
   sequence:

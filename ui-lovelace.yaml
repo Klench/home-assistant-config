@@ -10,8 +10,8 @@ views:
       - type: glance
         state_color: false
         entities:
-          - device_tracker.davids_iphone
-          - device_tracker.nellies_iphone
+          - person.david
+          - person.nellie
           - sensor.car_status
           - entity: sensor.rcb492_range
             name: 'Räckvidd'

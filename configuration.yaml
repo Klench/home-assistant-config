@@ -133,6 +133,18 @@ tts:
 
 shopping_list:
 
+person:
+  - name: David
+    id: david
+    device_trackers:
+      - device_tracker.davids_iphone
+      - device_tracker.davids_iphone_wifi
+  - name: Nellie
+    id: nellie
+    device_trackers:
+      - device_tracker.nellies_iphone
+      - device_tracker.nellies_iphone_wifi
+
 ################# ZHA #################
 
 zha:
@@ -165,15 +177,6 @@ shelly:
         - over_temp
         - switch
         - voltage
-
-################# MQTT #################
-
-mqtt:
-  broker: !secret oden_ip
-  username: !secret mqtt_username
-  password: !secret mqtt_password
-  discovery: true
-  discovery_prefix: homeassistant
 
 ################# DOCKER MONITOR #################
 

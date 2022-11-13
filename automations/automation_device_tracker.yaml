@@ -108,7 +108,7 @@
       entity_id: device_tracker.volvo_rcb492
       to: 'home'
     - platform: state
-      entity_id: device_tracker.sela_ltjs4sl13
+      entity_id: person.nellie
       to: 'home'
   condition:
     - condition: state
@@ -188,7 +188,7 @@
         entity_id: media_player.childroom_sonos
         volume_level: 0.40
     - condition: state
-      entity_id: device_tracker.nellies_iphone
+      entity_id: person.nellie
       state: 'not_home'
     - service: light.turn_off
       target:
@@ -209,13 +209,6 @@
     platform: state
     entity_id: device_tracker.sela_ltjs4sl13
     to: 'not_home'
-  condition:
-    - condition: state
-      entity_id: binary_sensor.relaxed_mode
-      state: 'off'
-    - condition: sun
-      after: sunset
-      after_offset: '-01:00:00'
   action:
     service: light.turn_off
     target:
@@ -225,14 +218,14 @@
   initial_state: on
   trigger:
     platform: state
-    entity_id: device_tracker.davids_iphone
+    entity_id: person.david
     to: 'not_home'
   condition:
     - condition: state
       entity_id: device_tracker.sela_ltjs4sl13
       state: 'home'
     - condition: state
-      entity_id: device_tracker.nellies_iphone
+      entity_id: person.nellie
       state: 'home'
   action:
     service: light.turn_off
@@ -256,14 +249,14 @@
   initial_state: on
   trigger:
     platform: state
-    entity_id: device_tracker.nellies_iphone
+    entity_id: person.nellie
     to: 'not_home'
   condition:
     - condition: state
       entity_id: device_tracker.sela_ltjs4sl13
       state: 'home'
     - condition: state
-      entity_id: device_tracker.davids_iphone
+      entity_id: person.david
       state: 'home'
   action:
     service: light.turn_off

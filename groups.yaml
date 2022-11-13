@@ -3,9 +3,8 @@
 device_tracker_family:
   name: "Device tracker family"
   entities:
-    - device_tracker.davids_iphone
-    - device_tracker.nellies_iphone
-    - device_tracker.galaxy_s6
+    - person.david
+    - person.nellie
     - device_tracker.galaxy_s10e
 sonos_all_speakers:
   name: "Sonos all speakers"

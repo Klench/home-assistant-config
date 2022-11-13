@@ -17,13 +17,6 @@ light.outdoor_porch:
   icon: hue:wall-spot
   friendly_name: 'Veranda'
 
-device_tracker.davids_iphone:
-  friendly_name: 'David'
-  icon: mdi:human-male
-device_tracker.nellies_iphone:
-  friendly_name: 'Nellie'
-  icon: mdi:human-female
-
 automation.wakeup_weekdays:
   icon: mdi:weather-sunny
 automation.enable_sonos_alarm:

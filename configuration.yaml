@@ -145,6 +145,14 @@ person:
       - device_tracker.nellies_iphone
       - device_tracker.nellies_iphone_wifi
 
+calendar:
+  - platform: caldav
+    username: !secret icloud_email
+    password: !secret icloud_password
+    url: https://caldav.icloud.com
+    calendars:
+      - Family
+
 ################# ZHA #################
 
 zha:

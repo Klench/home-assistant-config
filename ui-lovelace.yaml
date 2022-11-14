@@ -225,6 +225,14 @@ views:
           #   name: Ljusslinga
           #   state_color: true
 
+      - type: entities
+        title: Återvinningsschema
+        entities:
+          - sensor.pappersforpackningar
+          - sensor.plastforpackningar
+          - sensor.glas_ofargat
+          - sensor.tradgardsavfall
+
       - type: custom:auto-entities
         show_empty: false
         card:

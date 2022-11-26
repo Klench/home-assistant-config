@@ -311,6 +311,9 @@ views:
             - name: Humlan Djojj
               type: music
               id: spotify:album:7Fwal5B7DbHxVEjZRmckum
+            - name: Skyrim sleep
+              type: music
+              id: spotify:playlist:0cz5GpTRGnMYrqtEj3639f
 
       - type: custom:mini-media-player
         entity: media_player.childroom_sonos
@@ -353,6 +356,9 @@ views:
             - name: Humlan Djojj
               type: music
               id: spotify:album:7Fwal5B7DbHxVEjZRmckum
+            - name: Skyrim sleep
+              type: music
+              id: spotify:playlist:0cz5GpTRGnMYrqtEj3639f
 
       - type: conditional
         conditions:

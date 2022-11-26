@@ -59,22 +59,18 @@ indoor_lights_low_brightness:
           data:
             entity_id: light.livingroom_floor
             brightness_pct: 20
-            color_temp: 443
+            kelvin: 2200
             transition: 2
         - service: light.turn_on
           data:
             entity_id: light.kitchen_table
             brightness_pct: 50
             transition: 2
-        - service: light.turn_on
-          data:
-            entity_id: light.office_desk
-            brightness_pct: 10
-            transition: 2
         - service: script.turn_on
           target:
             entity_id:
               - script.bathroom_low_brightness
+              - script.office_low_brightness
     default:
       - service: script.turn_on
         target:
@@ -118,10 +114,8 @@ window_lights:
     - service: light.turn_on
       data:
         entity_id:
-          - light.bedroom_bedside
           - light.livingroom_window
           - light.office_window
-        brightness_pct: 100
 
 advent_lights_turn_on:
   sequence:
@@ -192,7 +186,7 @@ watching_tv_lights:
       data:
         entity_id: light.livingroom_floor
         brightness: 144
-        color_temp: 443
+        kelvin: 2200
         transition: 2
     - service: light.turn_off
       target:
@@ -225,7 +219,7 @@ bedroom_bright:
       data:
         entity_id: light.bedroom_ceiling
         brightness_pct: 80
-        color_temp: 372
+        kelvin: 2700
 
 bedroom_relaxed:
   alias: 'Mysbelysning'
@@ -276,7 +270,7 @@ childroom_bright:
       data:
         entity_id: light.childroom_ceiling
         brightness_pct: 100
-        color_temp: 372
+        kelvin: 2700
         transition: 2
 
 childroom_relaxed:
@@ -286,7 +280,7 @@ childroom_relaxed:
       data:
         entity_id: light.childroom_ceiling
         brightness_pct: 30
-        color_temp: 443
+        kelvin: 2200
         transition: 2
 
 childroom_night_light:
@@ -305,7 +299,7 @@ childroom_light_warm:
     - service: light.turn_on
       data:
         entity_id: light.childroom_ceiling
-        color_temp: 443
+        kelvin: 2200
         transition: 2
     - service: light.turn_on
       data:
@@ -320,7 +314,7 @@ childroom_light_dim:
     - service: light.turn_on
       data:
         entity_id: light.childroom_ceiling
-        color_temp: 443
+        kelvin: 2200
         transition: 2
     - service: light.turn_on
       data:
@@ -334,7 +328,7 @@ childroom_light_dim:
       data:
         entity_id: light.childroom_ceiling
         brightness_pct: 1
-        color_temp: 443
+        kelvin: 2200
         transition: 600
     - delay: '00:10:00'
     - service: light.turn_off
@@ -402,7 +396,7 @@ livingroom_bright:
       data:
         entity_id: light.livingroom_floor
         brightness_pct: 100
-        color_temp: 372
+        kelvin: 2700
         transition: 2
 
 livingroom_relaxed:
@@ -421,11 +415,12 @@ livingroom_relaxed:
       data:
         entity_id: light.livingroom_floor
         brightness_pct: 40
-        color_temp: 443
+        kelvin: 2200
         transition: 2
     - service: light.turn_on
       target:
-        entity_id: light.livingroom_window
+        entity_id: 
+          - light.livingroom_window
 
 livingroom_wakeup:
   sequence:
@@ -433,7 +428,7 @@ livingroom_wakeup:
       data:
         entity_id: light.livingroom_floor
         brightness_pct: 100
-        color_temp: 372
+        kelvin: 2700
         transition: 1800
 
 livingroom_low_brightness:
@@ -442,7 +437,7 @@ livingroom_low_brightness:
       data:
         entity_id: light.livingroom_floor
         brightness_pct: 100
-        color_temp: 372
+        kelvin: 2700
         transition: 2
 
 ##### HALLWAY #####
@@ -452,9 +447,11 @@ hallway_bright:
   sequence:
     - service: script.ikea_light_turn_on
       data:
-        entity_id: light.hallway_ceiling_group
+        entity_id: 
+          - light.hallway_ceiling_top_floor
+          - light.hallway_ceiling_bottom_floor
         brightness_pct: 100
-        color_temp: 300
+        kelvin: 3300
 
 hallway_top_floor_bright:
   sequence:
@@ -462,7 +459,7 @@ hallway_top_floor_bright:
       data:
         entity_id: light.hallway_ceiling_top_floor
         brightness_pct: 100
-        color_temp: 300
+        kelvin: 3300
 
 hallway_bottom_floor_bright:
   sequence:
@@ -470,7 +467,7 @@ hallway_bottom_floor_bright:
       data:
         entity_id: light.hallway_ceiling_bottom_floor
         brightness_pct: 100
-        color_temp: 300
+        kelvin: 3300
 
 hallway_relaxed:
   alias: 'Mysbelysning'
@@ -479,7 +476,7 @@ hallway_relaxed:
       data:
         entity_id: light.hallway_ceiling_bottom_floor
         brightness_pct: 1
-        color_temp: 443
+        kelvin: 2200
     - condition: state
       entity_id: light.hallway_ceiling_top_floor
       state: 'on'
@@ -500,7 +497,7 @@ hallway_wakeup:
     - service: light.turn_on
       data:
         entity_id: light.hallway_ceiling_bottom_floor
-        color_temp: 300
+        kelvin: 3300
         transition: 1
     - delay:
         milliseconds: 1100
@@ -518,7 +515,8 @@ kitchen_bright:
     - service: light.turn_on
       data:
         entity_id: light.kitchen_table
-        brightness_pct: 100
+        brightness_pct: 90
+        kelvin: 2500
         transition: 2
     - condition: state
       entity_id: input_boolean.enable_advent_light_automations
@@ -528,7 +526,7 @@ kitchen_bright:
       data:
         entity_id: light.kitchen_window
         brightness_pct: 100
-        color_temp: 280
+        kelvin: 2700
 
 kitchen_relaxed:
   alias: 'Mysbelysning'
@@ -537,6 +535,7 @@ kitchen_relaxed:
       data:
         entity_id: light.kitchen_table
         brightness_pct: 70
+        kelvin: 2200
         transition: 2
     - condition: state
       entity_id: input_boolean.enable_advent_light_automations
@@ -546,7 +545,7 @@ kitchen_relaxed:
       data:
         entity_id: light.kitchen_window
         brightness_pct: 60
-        color_temp: 420
+        kelvin: 2300
 
 kitchen_wakeup:
   sequence:
@@ -554,12 +553,13 @@ kitchen_wakeup:
       data:
         entity_id: light.kitchen_table
         brightness_pct: 100
+        kelvin: 2200
         transition: 1800
     - service: script.ikea_light_turn_on
       data:
         entity_id: light.kitchen_window
         brightness_pct: 100
-        color_temp: 280
+        kelvin: 2300
 
 ##### BATHROOM #####
 
@@ -643,5 +643,5 @@ ikea_light_turn_on:
       - service: light.turn_on
         data:
           entity_id: "{{ entity_id }}"
-          color_temp: "{{ color_temp }}"
+          kelvin: "{{ kelvin }}"
           transition: 1

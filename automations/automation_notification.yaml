@@ -32,7 +32,7 @@
   action:
     choose:
       - conditions: >
-          {{ states.device_tracker.davids_iphone.last_changed > states.device_tracker.nellies_iphone.last_changed }}
+          {{ states.person.david.last_changed > states.person.nellie.last_changed }}
         sequence:
           - service: notify.mobile_app_davids_iphone
             data:
@@ -44,7 +44,7 @@
                   critical: 1
                   volume: 0.5
       - conditions: >
-          {{ states.device_tracker.davids_iphone.last_changed < states.device_tracker.nellies_iphone.last_changed }}
+          {{ states.person.david.last_changed < states.person.nellie.last_changed }}
         sequence:
           - service: notify.mobile_app_nellies_iphone
             data:

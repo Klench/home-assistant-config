@@ -29,7 +29,7 @@ enable_hue_motion_sensor_hallway:
   icon: hue:motion-sensor
 enable_advent_light_automations:
   name: Adventsbelysning
-  icon: mdi:judaism
+  icon: mdi:star-david
 bathroom_floor_heater_auto:
   name: Schema
   icon: mdi:calendar-clock

@@ -116,36 +116,22 @@ window_lights:
         entity_id:
           - light.livingroom_window
           - light.office_window
+    - service: script.turn_on
+      target:
+        entity_id: script.kitchen_advent_light_bright
 
 advent_lights_turn_on:
   sequence:
-    - service: switch.turn_on
-      target:
-        entity_id:
-          # - switch.control_outlet_3
-          - switch.control_outlet_5
-          - switch.control_outlet_6
     - service: light.turn_on
-      data:
-        entity_id:
-          # - light.office_window
-          # - light.livingroom_window
-
-advent_lights_turn_off:
-  sequence:
-    - service: switch.turn_off
       target:
-        entity_id:
-          # - switch.control_outlet_3
-          - switch.control_outlet_4
-          - switch.control_outlet_5
-          - switch.control_outlet_6
-    - service: light.turn_off
-      data:
         entity_id:
           - light.office_window
           - light.livingroom_window
-          - light.kitchen_window
+          - light.livingroom_advent_lights
+          - light.livingroom_christmas_tree
+    - service: script.turn_on
+      target:
+        entity_id: script.kitchen_advent_light_bright
 
 go_to_bed_lights:
   sequence:
@@ -179,6 +165,12 @@ enable_away_lights:
           - light.bedroom_bedside
           - light.office_window
         brightness_pct: 100
+    - condition: state
+      entity_id: input_boolean.enable_advent_light_automations
+      state: 'on'
+    - service: script.turn_on
+      target:
+        entity_id: script.advent_lights_turn_on
 
 watching_tv_lights:
   sequence:
@@ -272,6 +264,9 @@ childroom_bright:
         brightness_pct: 100
         kelvin: 2700
         transition: 2
+    - service: light.turn_on
+      target:
+        entity_id: light.childroom_window
 
 childroom_relaxed:
   alias: 'Mysbelysning'
@@ -323,6 +318,9 @@ childroom_light_dim:
         rgb_color: [255,128,0]
         transition: 2
         effect: None
+    - service: light.turn_off
+      target:
+        entity_id: light.childroom_window
     - delay: '00:00:02'
     - service: light.turn_on
       data:
@@ -421,6 +419,14 @@ livingroom_relaxed:
       target:
         entity_id: 
           - light.livingroom_window
+    - condition: state
+      entity_id: input_boolean.enable_advent_light_automations
+      state: 'on'
+    - service: light.turn_on
+      target:
+        entity_id:
+          - light.livingroom_advent_lights
+          - light.livingroom_christmas_tree
 
 livingroom_wakeup:
   sequence:
@@ -522,11 +528,9 @@ kitchen_bright:
       entity_id: input_boolean.enable_advent_light_automations
       state: 'on'
     - delay: '00:00:02'
-    - service: script.ikea_light_turn_on
-      data:
-        entity_id: light.kitchen_window
-        brightness_pct: 100
-        kelvin: 2700
+    - service: script.turn_on
+      target:
+        entity_id: script.kitchen_advent_light_bright
 
 kitchen_relaxed:
   alias: 'Mysbelysning'
@@ -541,11 +545,9 @@ kitchen_relaxed:
       entity_id: input_boolean.enable_advent_light_automations
       state: 'on'
     - delay: '00:00:02'
-    - service: script.ikea_light_turn_on
-      data:
-        entity_id: light.kitchen_window
-        brightness_pct: 60
-        kelvin: 2300
+    - service: script.turn_on
+      target:
+        entity_id: script.kitchen_advent_light_relaxed
 
 kitchen_wakeup:
   sequence:
@@ -559,6 +561,22 @@ kitchen_wakeup:
       data:
         entity_id: light.kitchen_window
         brightness_pct: 100
+        kelvin: 2300
+
+kitchen_advent_light_bright:
+  sequence:
+    - service: script.ikea_light_turn_on
+      data:
+        entity_id: light.kitchen_window
+        brightness_pct: 100
+        kelvin: 2700
+
+kitchen_advent_light_relaxed:
+  sequence:
+    - service: script.ikea_light_turn_on
+      data:
+        entity_id: light.kitchen_window
+        brightness_pct: 60
         kelvin: 2300
 
 ##### BATHROOM #####
@@ -614,20 +632,15 @@ turn_on_outdoor_lights:
         entity_id: light.outdoor_porch
         brightness_pct: 40
         transition: 2
-    - service: switch.turn_on
+    - service: light.turn_on
       target:
-        entity_id:
-          - switch.control_outlet_3
+        entity_id: light.outdoor_front_ledstrip
 
 turn_off_outdoor_lights:
   sequence:
     - service: light.turn_off
       target:
-        entity_id: light.outdoor_lights
-    - service: switch.turn_off
-      target:
-        entity_id:
-          - switch.control_outlet_3
+        area_id: utomhus
 
 ##### IKEA LIGHTS #####
 

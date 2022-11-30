@@ -52,6 +52,7 @@ views:
           - light.livingroom_couch_table
           - light.livingroom_floor
           - light.livingroom_window
+          - light.livingroom_advent_lights
 
       - type: entities
         title: Hall
@@ -89,6 +90,7 @@ views:
             icon: mdi:moon-waning-crescent
           - light.childroom_ceiling
           - light.childroom_led_strip
+          - light.childroom_window
 
       - type: entities
         title: Arbetsrum
@@ -115,6 +117,7 @@ views:
           - entity: script.kitchen_relaxed
             icon: mdi:lightbulb-on
           - light.kitchen_table
+          - light.kitchen_window
           - entity: switch.kitchen_coffee_maker
             state_color: true
         filter:
@@ -220,10 +223,7 @@ views:
             icon: mdi:lightbulb-on-outline
           - light.outdoor_main_entrance
           - light.outdoor_porch
-          # - entity: switch.control_outlet_3
-          #   icon: mdi:led-strip-variant
-          #   name: Ljusslinga
-          #   state_color: true
+          - light.outdoor_front_ledstrip
 
       - type: entities
         title: Återvinningsschema

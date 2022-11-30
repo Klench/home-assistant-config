@@ -100,14 +100,23 @@
       entity_id: group.indoor_lights
       state: 'on'
   action:
-    service: light.turn_on
-    target:
-      entity_id:
-        - light.livingroom_window
-        - light.office_window
+    - service: light.turn_on
+      target:
+        entity_id:
+          - light.livingroom_window
+          - light.office_window
+    - condition: state
+      entity_id: input_boolean.enable_advent_light_automations
+      state: 'on'
+    - service: light.turn_on
+      target:
+        entity_id: light.childroom_window
+    - service: script.turn_on
+      target:
+        entity_id: script.kitchen_advent_light_bright
 
 - alias: 'Bright after sunset bedroom'
-  initial_state: on
+  initial_state: off
   trigger:
     platform: state
     entity_id: script.bedroom_bright
@@ -304,6 +313,23 @@
     - service: input_boolean.turn_off
       target:
         entity_id: input_boolean.away_lights_active
+
+################# ADVENT LIGHTS #################
+
+- alias: 'Turn off child room window light'
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: light.childroom_ceiling
+    to: 'off'
+  condition:
+    condition: state
+    entity_id: input_boolean.enable_advent_light_automations
+    state: 'on'
+  action:
+    service: light.turn_off
+    target:
+      entity_id: light.childroom_window
 
 ################# BATHROOM #################
 

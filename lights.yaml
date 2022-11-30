@@ -36,8 +36,3 @@
     - light.outdoor_porch_2
     - light.outdoor_porch_3
     - light.outdoor_porch_4
-- platform: group
-  name: 'Outdoor lights'
-  entities:
-    - light.outdoor_main_entrance
-    - light.outdoor_porch

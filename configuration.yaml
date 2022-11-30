@@ -107,6 +107,7 @@ logger:
     homeassistant.components.hue: fatal
     homeassistant.components.plex.server: fatal
     homeassistant.components.python_script: error
+    homeassistant.components.qbittorrent: fatal
     custom_components.trakt: error
     glances_api: fatal
     volvooncall.volvooncall: error

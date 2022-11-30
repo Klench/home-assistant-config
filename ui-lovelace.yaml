@@ -128,16 +128,16 @@ views:
                 name: Timer
                 type: custom:timer-bar-card
 
-      - type: entities
-        title: Badrum
-        show_header_toggle: false
-        entities:
-          - entity: script.bathroom_bright
-            icon: mdi:lightbulb-on-outline
-          - entity: script.bathroom_low_brightness
-            icon: mdi:lightbulb-on
-          - light.bathroom_ceiling
-          - light.bathroom_mirror
+      # - type: entities
+      #   title: Badrum
+      #   show_header_toggle: false
+      #   entities:
+      #     - entity: script.bathroom_bright
+      #       icon: mdi:lightbulb-on-outline
+      #     - entity: script.bathroom_low_brightness
+      #       icon: mdi:lightbulb-on
+      #     - light.bathroom_ceiling
+      #     - light.bathroom_mirror
 
       - type: custom:mini-media-player
         entity: media_player.spotify
@@ -169,28 +169,6 @@ views:
             when_idle: true
             when_standby: true
           artwork: full-cover
-
-      - type: custom:mini-graph-card
-        entities:
-          - sensor.outdoor_temperature
-        name: 'Yttertemperatur'
-        unit: '°C'
-        line_color: '#5c8dd1'
-        hour24: true
-        animate: true
-        decimals: 1
-        points_per_hour: 1
-        font_size_header: 18
-        show:
-          extrema: true
-          labels: true
-          fill: fade
-
-      - type: weather-forecast
-        entity: weather.smhi_hem
-
-      - type: custom:sun-card
-        language: sv
 
       - type: custom:list-card
         columns:
@@ -430,6 +408,33 @@ views:
           - type: section
             label: Kök
           - number.sonos_kitchen_bass
+
+################# WEATHER #################
+
+  - icon: mdi:weather-partly-cloudy
+    cards:
+
+      - type: custom:mini-graph-card
+        entities:
+          - sensor.outdoor_temperature
+        name: 'Yttertemperatur'
+        unit: '°C'
+        line_color: '#5c8dd1'
+        hour24: true
+        animate: true
+        decimals: 1
+        points_per_hour: 1
+        font_size_header: 18
+        show:
+          extrema: true
+          labels: true
+          fill: fade
+
+      - type: weather-forecast
+        entity: weather.smhi_hem
+
+      - type: custom:sun-card
+        language: sv
 
 ################# ROBOT VACUUM #################
 

@@ -498,7 +498,7 @@
   condition:
     condition: template
     value_template: >
-      {{ is_state_attr('light.livingroom_couch_table','brightness',255) }}
+      {{ is_state('light.livingroom_couch_table','on') and not is_state_attr('light.livingroom_couch_table','brightness',76) }}
   action:
     service: script.livingroom_relaxed
 

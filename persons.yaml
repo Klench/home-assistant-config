@@ -1,0 +1,14 @@
+- name: David
+  id: david
+  device_trackers:
+    - device_tracker.davids_iphone
+    - device_tracker.davids_iphone_wifi
+- name: Nellie
+  id: nellie
+  device_trackers:
+    - device_tracker.nellies_iphone
+    - device_tracker.nellies_iphone_wifi
+- name: Lennart
+  id: lennart
+  device_trackers:
+    - device_tracker.galaxy_s10e

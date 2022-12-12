@@ -136,18 +136,6 @@ tts:
 
 shopping_list:
 
-person:
-  - name: David
-    id: david
-    device_trackers:
-      - device_tracker.davids_iphone
-      - device_tracker.davids_iphone_wifi
-  - name: Nellie
-    id: nellie
-    device_trackers:
-      - device_tracker.nellies_iphone
-      - device_tracker.nellies_iphone_wifi
-
 calendar:
   - platform: caldav
     username: !secret icloud_email
@@ -313,3 +301,4 @@ light: !include lights.yaml
 timer: !include timers.yaml
 zone: !include zones.yaml
 input_datetime: !include input_datetime.yaml
+person: !include persons.yaml

@@ -1,5 +1,4 @@
 - alias: 'Leaving home'
-  initial_state: on
   trigger:
     platform: state
     entity_id: group.device_tracker_family

@@ -5,7 +5,7 @@ device_tracker_family:
   entities:
     - person.david
     - person.nellie
-    - device_tracker.galaxy_s10e
+    - person.lennart
 sonos_all_speakers:
   name: "Sonos all speakers"
   entities:

@@ -5,14 +5,12 @@ wakeup_override:
 coming_home_turn_on_lights:
   name: Coming home turn on lights
   icon: mdi:home-outline
-  initial: on
 window_lights_after_sunset:
   name: Window lights after sunset
   icon: mdi:weather-sunset
 enable_away_lights:
   name: Turn on lights when not home
   icon: mdi:home-outline
-  initial: on
 away_lights_active:
   initial: false
 vacuum_eco_mode:

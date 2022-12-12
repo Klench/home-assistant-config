@@ -83,3 +83,41 @@
           name: default
           critical: 1
           volume: 0.1
+
+################# CCTV #################
+
+- alias: 'Person detected notify Davids iPhone'
+  trigger:
+    platform: state
+    entity_id: binary_sensor.asgari_1_person_occupancy
+    to: 'on'
+  action:
+    service: notify.mobile_app_davids_iphone
+    data:
+      title: 'Övervakningskamera'
+      message: 'Person detekterad'
+      data:
+        url: "/lovelace/2"
+        push:
+          sound:
+            name: US-EN-Morgan-Freeman-Motion-Detected.wav
+            critical: 1
+            volume: 0.8
+
+- alias: 'Person detected notify Nellies iPhone'
+  trigger:
+    platform: state
+    entity_id: binary_sensor.asgari_1_person_occupancy
+    to: 'on'
+  action:
+    service: notify.mobile_app_nellies_iphone
+    data:
+      title: 'Övervakningskamera'
+      message: 'Person detekterad'
+      data:
+        url: "/lovelace/2"
+        push:
+          sound:
+            name: US-EN-Morgan-Freeman-Motion-Detected.wav
+            critical: 1
+            volume: 0.8

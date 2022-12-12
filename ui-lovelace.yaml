@@ -409,6 +409,34 @@ views:
             label: Kök
           - number.sonos_kitchen_bass
 
+################# CAMERA #################
+
+  - icon: mdi:cctv
+    cards:
+
+      - type: custom:frigate-card
+        cameras:
+          - camera_entity: camera.asgari_1
+
+      - type: entities
+        title: Baksida
+        show_header_toggle: false
+        entities:
+          - camera.asgari_1
+          - binary_sensor.asgari_1_motion
+          - binary_sensor.asgari_1_person_occupancy
+          - sensor.asgari_1_person_count
+          - camera.asgari_1_person
+          - switch.asgari_1_detect
+          - type: section
+            label: Notiser
+          - entity: automation.person_detected_notify_davids_iphone
+            name: Davids iPhone
+            icon: mdi:cellphone-sound
+          - entity: automation.person_detected_notify_nellies_iphone
+            name: Nellies iPhone
+            icon: mdi:cellphone-sound
+
 ################# WEATHER #################
 
   - icon: mdi:weather-partly-cloudy
@@ -639,6 +667,16 @@ views:
             filter:
               include:
                 - entity_id: "sensor.docker_plexmediaserver*"
+          - type: divider
+          - type: custom:auto-entities
+            card:
+              type: entities
+              show_header_toggle: false
+            entities:
+              - switch.docker_frigate
+            filter:
+              include:
+                - entity_id: "sensor.docker_frigate*"
           - type: divider
           - type: custom:auto-entities
             card:

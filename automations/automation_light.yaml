@@ -75,7 +75,7 @@
   initial_state: on
   trigger:
     platform: time
-    at: '09:00:00'
+    at: '08:15:00'
   condition:
     - condition: state
       entity_id: input_boolean.enable_advent_light_automations
@@ -100,20 +100,9 @@
       entity_id: group.indoor_lights
       state: 'on'
   action:
-    - service: light.turn_on
-      target:
-        entity_id:
-          - light.livingroom_window
-          - light.office_window
-    - condition: state
-      entity_id: input_boolean.enable_advent_light_automations
-      state: 'on'
-    - service: light.turn_on
-      target:
-        entity_id: light.childroom_window
-    - service: script.turn_on
-      target:
-        entity_id: script.kitchen_advent_light_bright
+    service: script.turn_on
+    target:
+      entity_id: script.window_lights
 
 - alias: 'Bright after sunset bedroom'
   initial_state: off

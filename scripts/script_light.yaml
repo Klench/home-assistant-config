@@ -116,6 +116,12 @@ window_lights:
         entity_id:
           - light.livingroom_window
           - light.office_window
+    - condition: state
+      entity_id: input_boolean.enable_advent_light_automations
+      state: 'on'
+    - service: light.turn_on
+      target:
+        entity_id: light.childroom_window
     - service: script.turn_on
       target:
         entity_id: script.kitchen_advent_light_bright

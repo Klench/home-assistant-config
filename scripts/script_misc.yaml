@@ -1,14 +1,3 @@
-################# TRANSMISSION #################
-
-transmission_add_torrent:
-  alias: 'Lägg till torrent'
-  sequence:
-    - service: transmission.add_torrent
-      data:
-        name: Transmission
-        torrent: >
-          {{ states('input_text.transmission_torrent_url') }}
-
 ################# TIMER #################
 
 bedroom_music_timer_start:

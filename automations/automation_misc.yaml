@@ -50,16 +50,6 @@
       entity_id: media_player.childroom_sonos
       volume_level: 0.03
 
-################# TRANSMISSION #################
-
-- alias: 'Transmission add torrent'
-  initial_state: on
-  trigger:
-    platform: state
-    entity_id: input_text.transmission_torrent_url
-  action:
-    service: script.transmission_add_torrent
-
 ################# TIMER #################
 
 - alias: 'Kitchen coffee maker timer start'

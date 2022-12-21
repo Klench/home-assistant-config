@@ -198,7 +198,9 @@ create_indoor_lights_group:
         data:
           object_id: "indoor_lights"
           entities: >
-            {%- for device in states.light %}{% if 'outdoor' not in device.entity_id %}{% if 'led_strip' not in device.entity_id %}{%- if loop.first %}{%- else %}, {% endif %}{{ device.entity_id }}{%- if loop.last %}{% endif %}{% endif %}{% endif %}{%- endfor %}
+            {% for light in states.light -%}
+              {% if not area_id(light.entity_id) in exclude_area_id and not light.entity_id in exclude_entity_id -%}{%- if loop.first %}{%- else %}, {% endif %}{{ light.entity_id }}{% endif %}
+            {%- endfor %}
 
 create_all_lights_group:
     sequence:
@@ -206,7 +208,7 @@ create_all_lights_group:
         data:
           object_id: "all_lights"
           entities: >
-            {%- for device in states.light %}{%- if loop.first %}{%- else %}, {% endif %}{{ device.entity_id }}{%- if loop.last %}{% endif %}{%- endfor %}
+            {%- for light in states.light %}{%- if loop.first %}{%- else %}, {% endif %}{{ light.entity_id }}{%- if loop.last %}{% endif %}{%- endfor %}
 
 ##### BEDROOM #####
 

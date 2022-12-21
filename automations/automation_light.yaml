@@ -411,4 +411,7 @@
     event: start
   action:
     - service: script.create_indoor_lights_group
+      data:
+        exclude_area_id: ['utomhus']
+        exclude_entity_id: ['light.childroom_led_strip']
     - service: script.create_all_lights_group

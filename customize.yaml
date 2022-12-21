@@ -1,22 +1,3 @@
-light.hallway_ceiling_bottom_floor:
-  icon: hue:phoenix-plafond
-  friendly_name: 'Taklampa bottenvåning'
-light.hallway_ceiling_top_floor:
-  icon: hue:phoenix-plafond
-  friendly_name: 'Taklampa ovanvåning'
-light.hallway_ceiling_group:
-  icon: mdi:ceiling-light
-  friendly_name: 'Taklampor'
-light.office_window:
-  icon: hue:bulb-filament-alt-hung
-  friendly_name: 'Fönsterlampa'
-light.bedroom_bedside:
-  icon: mdi:floor-lamp
-  friendly_name: 'Nattduksbord'
-light.outdoor_porch:
-  icon: hue:wall-spot
-  friendly_name: 'Veranda'
-
 automation.wakeup_weekdays:
   icon: mdi:weather-sunny
 automation.enable_sonos_alarm:

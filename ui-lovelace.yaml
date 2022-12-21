@@ -53,6 +53,7 @@ views:
           - light.livingroom_floor
           - light.livingroom_window
           - light.livingroom_advent_lights
+          - light.livingroom_christmas_tree
 
       - type: entities
         title: Hall

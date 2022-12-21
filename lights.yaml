@@ -4,18 +4,21 @@
 
 - platform: group
   name: 'Hallway ceiling top floor'
+  unique_id: hallway-ceiling-top-floor
   entities:
     - light.hallway_ceiling_1_1
     - light.hallway_ceiling_1_2
     - light.hallway_ceiling_1_3
 - platform: group
   name: 'Hallway ceiling bottom floor'
+  unique_id: hallway-ceiling-bottom-floor
   entities:
     - light.hallway_ceiling_2_1
     - light.hallway_ceiling_2_2
     - light.hallway_ceiling_2_3
 - platform: group
   name: 'Hallway ceiling group'
+  unique_id: hallway-ceiling
   entities:
     - light.hallway_ceiling_1_1
     - light.hallway_ceiling_1_2
@@ -23,14 +26,15 @@
     - light.hallway_ceiling_2_1
     - light.hallway_ceiling_2_2
     - light.hallway_ceiling_2_3
-    - light.hallway_ceiling
 - platform: group
   name: 'Bedroom bedside'
+  unique_id: bedroom-bedside
   entities:
     - light.bedroom_bedside_1
     - light.bedroom_bedside_2
 - platform: group
   name: 'Outdoor porch'
+  unique_id: outdoor-porch
   entities:
     - light.outdoor_porch_1
     - light.outdoor_porch_2

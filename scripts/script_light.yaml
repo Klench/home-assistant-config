@@ -565,11 +565,6 @@ kitchen_wakeup:
         brightness_pct: 100
         kelvin: 2200
         transition: 1800
-    - service: script.ikea_light_turn_on
-      data:
-        entity_id: light.kitchen_window
-        brightness_pct: 100
-        kelvin: 2300
 
 kitchen_advent_light_bright:
   sequence:

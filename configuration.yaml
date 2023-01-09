@@ -256,26 +256,6 @@ sonos:
 # Local media source
 media_source:
 
-################# PANELS #################
-
-panel_iframe:
-  # kodi:
-  #   title: Kodi
-  #   icon: mdi:kodi
-  #   url: !secret kodi_url
-  tautully:
-    title: Tautulli
-    icon: mdi:plex
-    url: !secret tautully_url
-  kitana:
-    title: Kitana
-    icon: mdi:filmstrip
-    url: !secret kitana_url
-  esphome:
-    title: ESPHome
-    icon: mdi:developer-board
-    url: !secret esphome_url
-
 panel_custom:
   - name: panel-redirect
     # url_path needs to be unique for each panel_custom config

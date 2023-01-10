@@ -23,23 +23,6 @@
     - service: switch.turn_on
       entity_id: switch.rcb492_heater
 
-- alias: 'Car heater audio notification'
-  initial_state: on
-  trigger:
-    platform: state
-    entity_id: switch.rcb492_heater
-    to: 'on'
-  condition:
-    condition: state
-    entity_id: device_tracker.davids_iphone
-    state: 'home'
-  action: 
-    service: script.sonos_say
-    data:
-      sonos_entity: kitchen_sonos
-      volume: 0.1
-      message: 'Car heater turned on'
-
 ################# BATHROOM FLOOR HEATER #################
 
 - alias: 'Bathroom floor heater manual off'

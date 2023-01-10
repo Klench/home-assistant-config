@@ -7,14 +7,37 @@
     entity_id: switch.rcb492_heater
     to: 'on'
   condition:
-    condition: state
-    entity_id: device_tracker.volvo_rcb492
-    state: 'home'
+    - condition: state
+      entity_id: device_tracker.rcb492
+      state: 'not_home'
+    - condition: state
+      entity_id: person.david
+      state: 'not_home'
   action:
     service: notify.mobile_app_davids_iphone
     data:
       title: 'Volvo V60'
-      message: 'Parkeringsvärmaren har startats'
+      message: 'Parkeringsvärmaren har startat'
+
+- alias: 'Car heater audio notification'
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: switch.rcb492_heater
+    to: 'on'
+  condition:
+    - condition: state
+      entity_id: device_tracker.rcb492
+      state: 'home'
+    - condition: state
+      entity_id: person.david
+      state: 'home'
+  action:
+    service: script.sonos_say
+    data:
+      sonos_entity: kitchen_sonos
+      volume: 0.1
+      message: 'Parkeringsvärmaren har startat'
 
 ################# ALARM #################
 

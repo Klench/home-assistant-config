@@ -415,6 +415,16 @@ views:
   - icon: mdi:cctv
     cards:
 
+      - type: conditional
+        conditions:
+          - entity: switch.docker_frigate
+            state: 'off'
+        card:
+          type: entities
+          title: Aktivera Frigate
+          entities:
+            - switch.docker_frigate
+
       - type: custom:frigate-card
         cameras:
           - camera_entity: camera.asgari_1

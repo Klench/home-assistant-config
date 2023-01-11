@@ -144,32 +144,27 @@ views:
         entity: media_player.spotify
         icon: mdi:spotify
         replace_mute: stop
+        artwork: full-cover
         hide:
           volume: true
           power: true
           progress: true
-        artwork: full-cover
         idle_view:
           when_idle: true
           when_paused: true
           when_standby: true
 
-      - type: conditional
-        conditions:
-          - entity: media_player.livingroom_apple_tv
-            state_not: 'idle'
-        card:
-          type: custom:mini-media-player
-          entity: media_player.livingroom_apple_tv
-          icon: mdi:television
-          replace_mute: stop
-          hide:
-            volume: true
-            power: true
-          idle_view:
-            when_idle: true
-            when_standby: true
-          artwork: full-cover
+      - type: custom:mini-media-player
+        entity: media_player.livingroom_apple_tv
+        icon: mdi:television
+        replace_mute: stop
+        artwork: full-cover
+        hide:
+          volume: true
+          power: true
+        idle_view:
+          when_idle: true
+          when_standby: true
 
       - type: custom:list-card
         columns:

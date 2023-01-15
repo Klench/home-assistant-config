@@ -112,8 +112,10 @@
 - alias: 'Person detected notify Davids iPhone'
   trigger:
     platform: state
-    entity_id: binary_sensor.asgari_1_person_occupancy
-    to: 'on'
+    entity_id: sensor.asgari_1_person_count
+  condition:
+    condition: template
+    value_template: '{{ trigger.to_state.state | int > trigger.from_state.state | int }}'
   action:
     service: notify.mobile_app_davids_iphone
     data:
@@ -130,8 +132,10 @@
 - alias: 'Person detected notify Nellies iPhone'
   trigger:
     platform: state
-    entity_id: binary_sensor.asgari_1_person_occupancy
-    to: 'on'
+    entity_id: sensor.asgari_1_person_count
+  condition:
+    condition: template
+    value_template: '{{ trigger.to_state.state | int > trigger.from_state.state | int }}'
   action:
     service: notify.mobile_app_nellies_iphone
     data:
@@ -144,3 +148,17 @@
             name: US-EN-Morgan-Freeman-Motion-Detected.wav
             critical: 1
             volume: 0.8
+
+- alias: 'Person detected notify Sonos'
+  trigger:
+    platform: state
+    entity_id: sensor.asgari_1_person_count
+  condition:
+    condition: template
+    value_template: '{{ trigger.to_state.state | int > trigger.from_state.state | int }}'
+  action:
+    service: script.sonos_say
+    data:
+      sonos_entity: livingroom_sonos
+      volume: 0.2
+      message: 'Person detekterad'

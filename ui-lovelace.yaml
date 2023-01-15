@@ -51,9 +51,32 @@ views:
           - light.livingroom_dinner_table
           - light.livingroom_couch_table
           - light.livingroom_floor
-          - light.livingroom_window
-          - light.livingroom_advent_lights
-          - light.livingroom_christmas_tree
+          - type: conditional
+            conditions:
+              - entity: input_boolean.enable_advent_light_automations
+                state: 'off'
+            row:
+              entity: light.livingroom_window
+          - type: conditional
+            conditions:
+              - entity: input_boolean.enable_advent_light_automations
+                state: 'on'
+            row:
+              entity: light.livingroom_window
+              name: 'Fönsterlampa'
+              icon: mdi:star-david
+          - type: conditional
+            conditions:
+              - entity: input_boolean.enable_advent_light_automations
+                state: 'on'
+            row:
+              entity: light.livingroom_advent_lights
+          - type: conditional
+            conditions:
+              - entity: input_boolean.enable_advent_light_automations
+                state: 'on'
+            row:
+              entity: light.livingroom_christmas_tree
 
       - type: entities
         title: Hall
@@ -91,7 +114,12 @@ views:
             icon: mdi:moon-waning-crescent
           - light.childroom_ceiling
           - light.childroom_led_strip
-          - light.childroom_window
+          - type: conditional
+            conditions:
+              - entity: input_boolean.enable_advent_light_automations
+                state: 'on'
+            row:
+              entity: light.childroom_window
 
       - type: entities
         title: Arbetsrum
@@ -105,29 +133,45 @@ views:
             icon: mdi:lightbulb-on
           - light.office_ceiling
           - light.office_desk
-          - light.office_window
+          - type: conditional
+            conditions:
+              - entity: input_boolean.enable_advent_light_automations
+                state: 'off'
+            row:
+              entity: light.office_window
+          - type: conditional
+            conditions:
+              - entity: input_boolean.enable_advent_light_automations
+                state: 'on'
+            row:
+              entity: light.office_window
+              icon: mdi:star-david
 
-      - type: custom:auto-entities
-        card:
-          type: entities
-          title: Kök
-          show_header_toggle: false
+      - type: entities
+        title: Kök
+        show_header_toggle: false
         entities:
           - entity: script.kitchen_bright
             icon: mdi:lightbulb-on-outline
           - entity: script.kitchen_relaxed
             icon: mdi:lightbulb-on
           - light.kitchen_table
-          - light.kitchen_window
+          - type: conditional
+            conditions:
+              - entity: input_boolean.enable_advent_light_automations
+                state: 'on'
+            row:
+              entity: light.kitchen_window
           - entity: switch.kitchen_coffee_maker
             state_color: true
-        filter:
-          include:
-            - entity_id: timer.kitchen_coffee_maker
-              state: 'active'
-              options:
-                name: Timer
-                type: custom:timer-bar-card
+          - type: conditional
+            conditions:
+              - entity: timer.kitchen_coffee_maker
+                state: 'active'
+            row:
+              entity: timer.kitchen_coffee_maker
+              name: Timer
+              type: custom:timer-bar-card
 
       # - type: entities
       #   title: Badrum
@@ -442,6 +486,9 @@ views:
           - entity: automation.person_detected_notify_nellies_iphone
             name: Nellies iPhone
             icon: mdi:cellphone-sound
+          - entity: automation.person_detected_notify_sonos
+            name: Högtalare
+            icon: mdi:speaker-wireless
 
 ################# WEATHER #################
 

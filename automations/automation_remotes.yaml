@@ -248,7 +248,7 @@
     platform: event
     event_type: zha_event
     event_data:
-      device_id: 9f686575e6ad98784e2efbb0b4e78526
+      device_id: 3b531df34853b38343b729aacef15e48
       command: 'on'
   action:
     service: light.turn_on
@@ -262,7 +262,7 @@
     platform: event
     event_type: zha_event
     event_data:
-      device_id: 9f686575e6ad98784e2efbb0b4e78526
+      device_id: 3b531df34853b38343b729aacef15e48
       command: 'move_with_on_off'
   action:
     service: script.bedroom_low_brightness
@@ -273,7 +273,7 @@
     platform: event
     event_type: zha_event
     event_data:
-      device_id: 9f686575e6ad98784e2efbb0b4e78526
+      device_id: 3b531df34853b38343b729aacef15e48
       command: 'off'
   action:
     - service: light.turn_off
@@ -286,7 +286,7 @@
     platform: event
     event_type: zha_event
     event_data:
-      device_id: 9f686575e6ad98784e2efbb0b4e78526
+      device_id: 3b531df34853b38343b729aacef15e48
       command: 'move'
   action:
     service: script.indoor_lights_off
@@ -408,27 +408,27 @@
 
 ##### HALLWAY TOP FLOOR #####
 
-- alias: 'Ikea switch low brightbess'
-  initial_state: on
-  trigger:
-    platform: event
-    event_type: zha_event
-    event_data:
-      device_id: 3b531df34853b38343b729aacef15e48
-      command: 'on'
-  action:
-    service: script.indoor_lights_low_brightness
+# - alias: 'Ikea switch low brightbess'
+#   initial_state: on
+#   trigger:
+#     platform: event
+#     event_type: zha_event
+#     event_data:
+#       device_id: 3b531df34853b38343b729aacef15e48
+#       command: 'on'
+#   action:
+#     service: script.indoor_lights_low_brightness
 
-- alias: 'Ikea switch turn off indoor lights'
-  initial_state: on
-  trigger:
-    platform: event
-    event_type: zha_event
-    event_data:
-      device_id: 3b531df34853b38343b729aacef15e48
-      command: 'off'
-  action:
-    service: script.indoor_lights_off
+# - alias: 'Ikea switch turn off indoor lights'
+#   initial_state: on
+#   trigger:
+#     platform: event
+#     event_type: zha_event
+#     event_data:
+#       device_id: 3b531df34853b38343b729aacef15e48
+#       command: 'off'
+#   action:
+#     service: script.indoor_lights_off
 
 ##### KITCHEN #####
 

@@ -477,7 +477,6 @@ views:
           - binary_sensor.asgari_1_person_occupancy
           - sensor.asgari_1_person_count
           - camera.asgari_1_person
-          - switch.asgari_1_detect
           - type: section
             label: Notiser
           - entity: automation.person_detected_notify_davids_iphone
@@ -736,10 +735,41 @@ views:
               type: entities
               show_header_toggle: false
             entities:
+              - switch.docker_authelia
+            filter:
+              include:
+                - entity_id: "sensor.docker_authelia*"
+          - type: divider
+          - type: custom:auto-entities
+            card:
+              type: entities
+              show_header_toggle: false
+            entities:
+              - switch.docker_traefik
+            filter:
+              include:
+                - entity_id: "sensor.docker_traefik*"
+          - type: divider
+          - type: custom:auto-entities
+            card:
+              type: entities
+              show_header_toggle: false
+            entities:
               - switch.docker_nextcloud
             filter:
               include:
                 - entity_id: "sensor.docker_nextcloud*"
+          - type: divider
+          - type: custom:auto-entities
+            card:
+              type: entities
+              show_header_toggle: false
+            entities:
+              - switch.docker_pihole
+              - switch.pi_hole
+            filter:
+              include:
+                - entity_id: "sensor.docker_pihole*"
           - type: divider
           - type: custom:auto-entities
             card:
@@ -766,26 +796,6 @@ views:
               type: entities
               show_header_toggle: false
             entities:
-              - switch.docker_pihole
-            filter:
-              include:
-                - entity_id: "sensor.docker_pihole*"
-          - type: divider
-          - type: custom:auto-entities
-            card:
-              type: entities
-              show_header_toggle: false
-            entities:
-              - switch.docker_swag
-            filter:
-              include:
-                - entity_id: "sensor.docker_swag*"
-          - type: divider
-          - type: custom:auto-entities
-            card:
-              type: entities
-              show_header_toggle: false
-            entities:
               - switch.docker_mariadb
             filter:
               include:
@@ -796,40 +806,10 @@ views:
               type: entities
               show_header_toggle: false
             entities:
-              - switch.docker_duckdns
-            filter:
-              include:
-                - entity_id: "sensor.docker_duckdns*"
-          - type: divider
-          - type: custom:auto-entities
-            card:
-              type: entities
-              show_header_toggle: false
-            entities:
-              - switch.docker_cloudflareddns
-            filter:
-              include:
-                - entity_id: "sensor.docker_cloudflareddns*"
-          - type: divider
-          - type: custom:auto-entities
-            card:
-              type: entities
-              show_header_toggle: false
-            entities:
               - switch.docker_code_server
             filter:
               include:
                 - entity_id: "sensor.docker_code_server*"
-          - type: divider
-          - type: custom:auto-entities
-            card:
-              type: entities
-              show_header_toggle: false
-            entities:
-              - switch.docker_krusader
-            filter:
-              include:
-                - entity_id: "sensor.docker_krusader*"
           - type: divider
           - type: custom:auto-entities
             card:

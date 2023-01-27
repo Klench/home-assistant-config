@@ -151,6 +151,7 @@ zha:
   zigpy_config:
     ota:
       ikea_provider: true
+  custom_quirks_path: /config/custom_quirks
 
 ################# SHELLY #################
 
@@ -182,13 +183,10 @@ shelly:
 
 monitor_docker:
   - containers:
-      - cloudflareddns
       - code-server
-      - duckdns
       - duplicati
       - glances
       - home-assistant
-      - Krusader
       - mariadb
       - nextcloud
       - pihole
@@ -198,21 +196,24 @@ monitor_docker:
       - swag
       - unifi-controller
       - frigate
+      - authelia
+      - traefik
+      - wordpress
     rename:
-      cloudflareddns: Cloudflare DDNS
       code-server: Code Server
-      duckdns: DuckDNS
       duplicati: Duplicati
       glances: Glances
       home-assistant: Home Assistant
       mariadb: MariaDB
       nextcloud: Nextcloud
-      pihole: PiHole
+      pihole: Pi-hole
       qbittorrentvpn: qBittorrent VPN
       resilio-sync: Resilio Sync
-      swag: Swag
       unifi-controller: UniFi Controller
       frigate: Frigate
+      authelia: Authelia
+      traefik: Traefik
+      wordpress: Wordpress
     monitored_conditions:
       - version
       - containers_total

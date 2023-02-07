@@ -137,6 +137,8 @@ tts:
 
 shopping_list:
 
+wake_on_lan:
+
 calendar:
   - platform: caldav
     username: !secret icloud_email
@@ -151,7 +153,7 @@ zha:
   zigpy_config:
     ota:
       ikea_provider: true
-  custom_quirks_path: /config/custom_quirks
+  # custom_quirks_path: /config/custom_quirks
 
 ################# SHELLY #################
 

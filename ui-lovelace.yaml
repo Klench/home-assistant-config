@@ -173,16 +173,16 @@ views:
               name: Timer
               type: custom:timer-bar-card
 
-      # - type: entities
-      #   title: Badrum
-      #   show_header_toggle: false
-      #   entities:
-      #     - entity: script.bathroom_bright
-      #       icon: mdi:lightbulb-on-outline
-      #     - entity: script.bathroom_low_brightness
-      #       icon: mdi:lightbulb-on
-      #     - light.bathroom_ceiling
-      #     - light.bathroom_mirror
+      - type: entities
+        title: Badrum
+        show_header_toggle: false
+        entities:
+          - entity: script.bathroom_bright
+            icon: mdi:lightbulb-on-outline
+          - entity: script.bathroom_low_brightness
+            icon: mdi:lightbulb-on
+          - light.bathroom_ceiling
+          - light.bathroom_mirror
 
       - type: custom:mini-media-player
         entity: media_player.spotify
@@ -840,6 +840,13 @@ views:
             filter:
               include:
                 - entity_id: "sensor.docker_glances*"
+
+      - type: entities
+        title: Wake On LAN
+        show_header_toggle: false
+        entities:
+          - switch.wol_tor
+          - switch.wol_rpi_3b
 
       - type: custom:zha-network-card
         title: ZHA

@@ -241,7 +241,7 @@ views:
             icon: mdi:lightbulb-on-outline
           - light.outdoor_main_entrance
           - light.outdoor_porch
-          - light.outdoor_front_ledstrip
+          # - light.outdoor_front_ledstrip
 
       - type: entities
         title: Återvinningsschema
@@ -443,11 +443,11 @@ views:
           - number.sonos_livingroom_bass
           - number.sonos_livingroom_audio_delay
           - type: section
-            label: Barnrum
-          - number.sonos_childroom_bass
-          - type: section
             label: Kök
           - number.sonos_kitchen_bass
+          - type: section
+            label: Barnrum
+          - number.sonos_childroom_bass
 
 ################# CAMERA #################
 

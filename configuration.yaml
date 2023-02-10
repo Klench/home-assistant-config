@@ -135,6 +135,8 @@ tts:
   - platform: google_translate
     language: 'sv'
 
+conversation:
+
 shopping_list:
 
 wake_on_lan:

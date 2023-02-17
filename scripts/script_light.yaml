@@ -36,6 +36,13 @@ indoor_lights_relaxed:
           - script.livingroom_relaxed
           - script.hallway_relaxed
           - script.kitchen_relaxed
+    - service: light.turn_on
+      data:
+        entity_id: light.childroom_led_strip
+        brightness_pct: 25
+        rgb_color: [255,128,0]
+        transition: 2
+        effect: None
 
 indoor_lights_low_brightness:
   alias: 'Låg ljusstyrka'

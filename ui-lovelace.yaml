@@ -230,9 +230,6 @@ views:
           - entity: sensor.tanka
             icon: mdi:gas-station
 
-      - type: custom:krisinfo-card
-        entity: sensor.krisinformation_skane
-
       - type: entities
         title: Utomhus
         show_header_toggle: false

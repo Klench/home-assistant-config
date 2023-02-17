@@ -39,8 +39,6 @@ lovelace:
       type: module
     - url: /hacsfiles/lovelace-multiple-entity-row/multiple-entity-row.js
       type: module
-    - url: /hacsfiles/krisinfo-card/krisinfo-card.js
-      type: module
     - url: /hacsfiles/lovelace-card-mod/card-mod.js
       type: module
     - url: /hacsfiles/transmission-card/transmission-card.js

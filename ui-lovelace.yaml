@@ -890,6 +890,7 @@ views:
           - input_number.alarm_heater_offset
           - entity: automation.wakeup_weekdays
             name: 'Väckning vardagar'
+          - input_boolean.childroom_wakeup
           - entity: automation.enable_sonos_alarm
             name: 'Sonos alarm'
           - input_boolean.wakeup_override

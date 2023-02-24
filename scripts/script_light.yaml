@@ -115,6 +115,20 @@ wakeup_lights:
           - script.hallway_wakeup
           - script.kitchen_wakeup
           - script.office_wakeup
+    - condition: state
+      entity_id: input_boolean.childroom_wakeup
+      state: 'on'
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: binary_sensor.workday_sensor
+          state: 'on'
+        - condition: state
+          entity_id: input_boolean.wakeup_override
+          state: 'on'
+    - service: script.turn_on
+      target:
+        entity_id: script.childroom_wakeup
 
 window_lights:
   sequence:
@@ -347,6 +361,15 @@ childroom_light_dim:
     - service: light.turn_off
       target:
         entity_id: light.childroom_ceiling
+
+childroom_wakeup:
+  sequence:
+    - service: light.turn_on
+      data:
+        entity_id: light.childroom_ceiling
+        brightness_pct: 100
+        kelvin: 2700
+        transition: 1800
 
 ##### OFFICE #####
 

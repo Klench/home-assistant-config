@@ -354,7 +354,7 @@ childroom_light_dim:
     - service: light.turn_on
       data:
         entity_id: light.childroom_ceiling
-        brightness_pct: 1
+        brightness_pct: 20
         kelvin: 2200
         transition: 600
     - delay: '00:10:00'

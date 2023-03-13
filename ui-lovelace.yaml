@@ -320,12 +320,9 @@ views:
             - name: Be Held
               type: music
               id: spotify:album:36mfScdTe8zFlaHQAmIMuf
-            - name: Be Held Instrumental
+            - name: Lullaby Baby
               type: music
-              id: spotify:album:5bf51FjqhwkiYMQyRiEhlh
-            - name: Humlan Djojj
-              type: music
-              id: spotify:album:7Fwal5B7DbHxVEjZRmckum
+              id: spotify:album:49k5jl8u2iuxMU4iyczJ9M
             - name: Skyrim sleep
               type: music
               id: spotify:playlist:0cz5GpTRGnMYrqtEj3639f
@@ -365,12 +362,9 @@ views:
             - name: Be Held
               type: music
               id: spotify:album:36mfScdTe8zFlaHQAmIMuf
-            - name: Be Held Instrumental
+            - name: Lullaby Baby
               type: music
-              id: spotify:album:5bf51FjqhwkiYMQyRiEhlh
-            - name: Humlan Djojj
-              type: music
-              id: spotify:album:7Fwal5B7DbHxVEjZRmckum
+              id: spotify:album:49k5jl8u2iuxMU4iyczJ9M
             - name: Skyrim sleep
               type: music
               id: spotify:playlist:0cz5GpTRGnMYrqtEj3639f
@@ -616,6 +610,13 @@ views:
     cards:
 
       - type: entities
+        title: Wake On LAN
+        show_header_toggle: false
+        entities:
+          - switch.wol_tor
+          - switch.wol_rpi_3b
+
+      - type: entities
         title: Unraid
         show_header_toggle: false
         entities:
@@ -837,13 +838,6 @@ views:
             filter:
               include:
                 - entity_id: "sensor.docker_glances*"
-
-      - type: entities
-        title: Wake On LAN
-        show_header_toggle: false
-        entities:
-          - switch.wol_tor
-          - switch.wol_rpi_3b
 
       - type: custom:zha-network-card
         title: ZHA

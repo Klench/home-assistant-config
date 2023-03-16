@@ -162,8 +162,8 @@ views:
                 state: 'on'
             row:
               entity: light.kitchen_window
-          - entity: switch.kitchen_coffee_maker
-            state_color: true
+          # - entity: switch.kitchen_coffee_maker
+          #   state_color: true
           - type: conditional
             conditions:
               - entity: timer.kitchen_coffee_maker

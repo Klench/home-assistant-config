@@ -36,6 +36,9 @@ indoor_lights_relaxed:
           - script.livingroom_relaxed
           - script.hallway_relaxed
           - script.kitchen_relaxed
+    - condition: state
+      entity_id: light.childroom_led_strip
+      state: 'off'
     - service: light.turn_on
       data:
         entity_id: light.childroom_led_strip

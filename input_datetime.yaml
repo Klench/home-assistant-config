@@ -2,3 +2,11 @@ relaxed_mode:
   name: Klockslag för mysbelysning
   has_time: true
   icon: mdi:alarm
+wakeup_weekdays:
+  name: Väckningstid
+  has_time: true
+  icon: mdi:alarm
+wakeup_weekend:
+  name: Väckningstid
+  has_time: true
+  icon: mdi:alarm

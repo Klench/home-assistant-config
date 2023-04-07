@@ -23,18 +23,6 @@
       icon_template: mdi:check-circle-outline
       value_template: >
         {{ state_attr('media_player.livingroom_sonos','night_sound') }}
-    alarm_clock_trigger_weekdays:
-      friendly_name: 'Alarm clock trigger weekdays'
-      value_template: >
-        {{ (as_timestamp(strptime(states('sensor.alarm_clock_time_weekdays'), '%H:%M')) | int + 60*60 - 30*60) | timestamp_custom('%H:%M', false) == states('sensor.time') }}
-    alarm_clock_trigger_weekend:
-      friendly_name: 'Alarm clock trigger weekend'
-      value_template: >
-        {{ (as_timestamp(strptime(states('sensor.alarm_clock_time_weekend'), '%H:%M')) | int + 60*60 - 30*60) | timestamp_custom('%H:%M', false) == states('sensor.time') }}
-    car_heater_trigger_workdays:
-      friendly_name: 'Car heater trigger workdays'
-      value_template: >
-        {{ (as_timestamp(strptime(states('sensor.alarm_clock_time_weekdays'), '%H:%M')) | int + 60*60 + states('input_number.alarm_heater_offset') | int * 60) | timestamp_custom('%H:%M', false) == states('sensor.time') }}
     relaxed_mode:
       value_template: >
         {{ states('sensor.time') > states('input_datetime.relaxed_mode') or now() < today_at("06:00") }}

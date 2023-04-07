@@ -46,16 +46,6 @@
 
 - platform: template
   sensors:
-    alarm_clock_time_weekdays:
-      friendly_name: 'Väckningstid'
-      icon_template: mdi:alarm
-      value_template: >
-        {{ "%0.02d:%0.02d" | format(states('input_number.alarm_hours_weekdays') | int, states('input_number.alarm_minutes_weekdays') | int ) }}
-    alarm_clock_time_weekend:
-      friendly_name: 'Väckningstid'
-      icon_template: mdi:alarm
-      value_template: >
-        {{ "%0.02d:%0.02d" | format(states('input_number.alarm_hours_weekend') | int, states('input_number.alarm_minutes_weekend') | int ) }}
     outdoor_temperature:
       friendly_name: 'Temperatur'
       icon_template: mdi:thermometer

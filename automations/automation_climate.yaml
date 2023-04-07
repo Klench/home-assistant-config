@@ -1,28 +1,3 @@
-################# CAR HEATER #################
-
-- alias: 'Car heater weekdays'
-  initial_state: off
-  trigger:
-    platform: state
-    entity_id: binary_sensor.car_heater_trigger_workdays
-    to: 'on'
-  condition:
-    - condition: numeric_state
-      entity_id: sensor.outdoor_temperature
-      below: 3
-    - condition: state
-      entity_id: binary_sensor.workday_sensor
-      state: 'on'
-    - condition: state
-      entity_id: group.device_tracker_family
-      state: 'home'
-    - condition: state
-      entity_id: switch.rcb492_heater
-      state: 'off'
-  action:
-    - service: switch.turn_on
-      entity_id: switch.rcb492_heater
-
 ################# BATHROOM FLOOR HEATER #################
 
 - alias: 'Bathroom floor heater manual off'

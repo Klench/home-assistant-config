@@ -875,31 +875,23 @@ views:
     cards:
 
       - type: entities
-        title: Väckning vardagar
+        title: Väckning
         show_header_toggle: false
         entities:
-          - sensor.alarm_clock_time_weekdays
-          - input_number.alarm_hours_weekdays
-          - input_number.alarm_minutes_weekdays
-          - input_number.alarm_heater_offset
+          - type: section
+            label: 'Vardagar'
+          - input_datetime.wakeup_weekdays
           - entity: automation.wakeup_weekdays
-            name: 'Väckning vardagar'
+            name: 'Aktivera'
           - input_boolean.childroom_wakeup
           - entity: automation.enable_sonos_alarm
             name: 'Sonos alarm'
           - input_boolean.wakeup_override
-          - entity: automation.car_heater_weekdays
-            name: 'Bränslevärmare'
-
-      - type: entities
-        title: Väckning helg
-        show_header_toggle: false
-        entities:
-          - sensor.alarm_clock_time_weekend
-          - input_number.alarm_hours_weekend
-          - input_number.alarm_minutes_weekend
+          - type: section
+            label: 'Helgdagar'
+          - input_datetime.wakeup_weekend
           - entity: automation.wakeup_weekend
-            name: 'Väckning helg'
+            name: 'Aktivera'
 
 ################# TV #################
 

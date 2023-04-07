@@ -188,9 +188,9 @@
 
 - alias: 'Wakeup weekdays'
   trigger:
-    platform: state
-    entity_id: binary_sensor.alarm_clock_trigger_weekdays
-    to: 'on'
+    platform: template
+    value_template: >
+      {{ now() >= today_at(states('input_datetime.wakeup_weekdays')) - timedelta(minutes = 30) }}
   condition:
     condition: or
     conditions:
@@ -210,9 +210,9 @@
 
 - alias: 'Wakeup weekend'
   trigger:
-    platform: state
-    entity_id: binary_sensor.alarm_clock_trigger_weekend
-    to: 'on'
+    platform: template
+    value_template: >
+      {{ now() >= today_at(states('input_datetime.wakeup_weekend')) - timedelta(minutes = 30) }}
   condition:
     - condition: time
       weekday:

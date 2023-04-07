@@ -1,5 +1,5 @@
 wakeup_override:
-  name: Manuell aktivering
+  name: Manuell överskridning
   icon: mdi:alarm-check
   initial: off
 childroom_wakeup:

@@ -504,7 +504,7 @@ views:
       - type: weather-forecast
         entity: weather.smhi_hem
 
-      - type: custom:sun-card
+      - type: custom:horizon-card
         language: sv
 
 ################# ROBOT VACUUM #################

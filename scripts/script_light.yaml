@@ -95,9 +95,6 @@ indoor_lights_off:
     - service: light.turn_off
       target:
         entity_id: group.indoor_lights
-    - service: switch.turn_off
-      target:
-        entity_id: switch.kitchen_coffee_maker
     - service: script.sonos_set_group_volume
       data:
         volume: 0.1
@@ -335,6 +332,8 @@ childroom_light_warm:
         rgb_color: [255,128,0]
         transition: 2
         effect: None
+    - service: light.turn_off
+      entity_id: light.hallway_ceiling_top_floor
 
 childroom_light_dim:
   sequence:
@@ -352,7 +351,9 @@ childroom_light_dim:
         effect: None
     - service: light.turn_off
       target:
-        entity_id: light.childroom_window
+        entity_id:
+          - light.childroom_window
+          - light.hallway_ceiling_top_floor
     - delay: '00:00:02'
     - service: light.turn_on
       data:

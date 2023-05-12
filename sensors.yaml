@@ -16,11 +16,6 @@
     - mbattchg
     - mintimel
 
-- platform: qbittorrent
-  url: !secret qbittorrent_url
-  username: !secret qbittorrent_username
-  password: !secret qbittorrent_password
-
 - platform: skolmaten
   sensors:
     - school: junibackens-forskola7
@@ -93,6 +88,8 @@
           Aktiv
         {% elif not is_state('binary_sensor.rcb492_engine','on') and is_state('device_tracker.rcb492','not_home') %}
           Borta
+        {% elif not is_state('binary_sensor.rcb492_engine','on') and is_state('device_tracker.rcb492','home') %}
+          Hemma
         {% else %}
           {{ states('device_tracker.rcb492') }}
         {% endif %}

@@ -53,7 +53,7 @@
 ################# TIMER #################
 
 - alias: 'Kitchen coffee maker timer start'
-  initial_state: on
+  initial_state: off
   trigger:
     platform: state
     entity_id: switch.kitchen_coffee_maker

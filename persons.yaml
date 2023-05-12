@@ -7,7 +7,7 @@
   id: nellie
   device_trackers:
     - device_tracker.nellies_iphone
-    - device_tracker.nellies_iphone_wifi
+    # - device_tracker.nellies_iphone_wifi
 - name: Lennart
   id: lennart
   device_trackers:

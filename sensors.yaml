@@ -4,21 +4,9 @@
     - 'date'
     - 'date_time'
 
-- platform: apcupsd
-  resources:
-    - status
-    - date
-    - starttime
-    - linev
-    - loadpct
-    - bcharge
-    - timeleft
-    - mbattchg
-    - mintimel
-
 - platform: skolmaten
   sensors:
-    - school: junibackens-forskola7
+    - school: villanskolan
 
 - platform: rest
   resource: https://henrikhjelm.se/api/getdata.php?lan=skane-lan

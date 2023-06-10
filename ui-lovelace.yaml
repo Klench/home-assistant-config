@@ -215,7 +215,7 @@ views:
             field: day
           - field: food
             title: ' '
-        entity: sensor.skolmaten_junibackens_forskola7
+        entity: sensor.skolmaten_villanskolan
         feed_attribute: entries
         title: Matsedel Junibacken
 

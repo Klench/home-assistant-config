@@ -1,4 +1,4 @@
-- alias: 'Turn on coffee maker'
+- alias: 'Toggle coffee maker'
   initial_state: on
   trigger:
     - platform: event
@@ -11,7 +11,7 @@
         sourceDevicePermanentID: CFD2DEC1-8CF3-432F-AF78-7419632CC842
         triggerSource: siriShortcut
   action:
-    - service: switch.turn_on
+    - service: switch.toggle
       target:
         entity_id:
           - switch.kitchen_coffee_maker

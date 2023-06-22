@@ -209,15 +209,15 @@ views:
           when_idle: true
           when_standby: true
 
-      - type: custom:list-card
-        columns:
-          - title: ' '
-            field: day
-          - field: food
-            title: ' '
-        entity: sensor.skolmaten_villanskolan
-        feed_attribute: entries
-        title: Matsedel Junibacken
+      # - type: custom:list-card
+      #   columns:
+      #     - title: ' '
+      #       field: day
+      #     - field: food
+      #       title: ' '
+      #   entity: sensor.skolmaten_villanskolan
+      #   feed_attribute: entries
+      #   title: Matsedel Junibacken
 
       - type: entities
         title: Dieselpriser
@@ -238,14 +238,6 @@ views:
           - light.outdoor_main_entrance
           - light.outdoor_porch
           # - light.outdoor_front_ledstrip
-
-      - type: entities
-        title: Återvinningsschema
-        entities:
-          - sensor.pappersforpackningar
-          - sensor.plastforpackningar
-          - sensor.glas_ofargat
-          - sensor.tradgardsavfall
 
       - type: custom:auto-entities
         show_empty: false
@@ -1180,6 +1172,8 @@ views:
           - input_datetime.relaxed_mode
           - input_boolean.enable_hue_switch_hallway
           - input_boolean.enable_hue_motion_sensor_hallway
+          - entity: automation.kitchen_coffee_maker_timer_start
+            icon: mdi:coffee-maker
           - automation.wakeup_weekdays
           - automation.enable_sonos_alarm
           - automation.wakeup_weekend
@@ -1197,7 +1191,6 @@ views:
           - automation.leaving_home
           - automation.watching_tv
           - automation.tv_off_group_speakers
-          - automation.car_heater_weekdays
           - input_boolean.enable_bathroom_floor_heater_automations
 
 ################# CLIMATE #################

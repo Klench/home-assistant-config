@@ -124,7 +124,7 @@
         sequence:
           service: script.sonos_ungroup_childroom_speaker
 
-- alias: 'Hue switch increase Sonos group volume'
+- alias: 'Hue switch increase Sonos volume'
   initial_state: on
   trigger:
     platform: event
@@ -137,20 +137,53 @@
     - condition: state
       entity_id: input_boolean.enable_hue_switch_hallway
       state: 'on'
-    - condition: or
-      conditions:
-        - condition: state
-          entity_id: media_player.childroom_sonos
-          state:
-            - 'paused'
-            - 'idle'
-        - condition: state
-          entity_id: binary_sensor.childroom_sonos_is_grouped
-          state: 'on'
   action:
-    service: script.sonos_increase_volume
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: media_player.kitchen_sonos
+              state:
+                - 'paused'
+                - 'idle'
+            - condition: state
+              entity_id: media_player.childroom_sonos
+              state: 'playing'
+            - condition: state
+              entity_id: binary_sensor.childroom_sonos_is_grouped
+              state: 'off'
+          sequence:
+            - service: python_script.media_player_volume_set
+              data:
+                entity_id: media_player.childroom_sonos
+                volume_level: >
+                  {{ [((state_attr('media_player.childroom_sonos','volume_level') | float * 1.15 + 0.03) | round(2)), 1] | min }}
+        - conditions:
+            - condition: state
+              entity_id: media_player.kitchen_sonos
+              state:
+                - 'paused'
+                - 'idle'
+            - condition: state
+              entity_id: media_player.childroom_sonos
+              state:
+                - 'paused'
+                - 'idle'
+            - condition: state
+              entity_id: media_player.livingroom_apple_tv
+              state: 'playing'
+            - condition: state
+              entity_id: binary_sensor.livingroom_sonos_tv_active
+              state: 'on'
+          sequence:
+            - service: python_script.media_player_volume_set
+              data:
+                entity_id: media_player.livingroom_sonos
+                volume_level: >
+                  {{ [((state_attr('media_player.livingroom_sonos','volume_level') | float * 1.15 + 0.03) | round(2)), 1] | min }}
+      default:
+        - service: script.sonos_increase_volume
 
-- alias: 'Hue switch decrease Sonos group volume'
+- alias: 'Hue switch decrease Sonos volume'
   initial_state: on
   trigger:
     platform: event
@@ -163,80 +196,51 @@
     - condition: state
       entity_id: input_boolean.enable_hue_switch_hallway
       state: 'on'
-    - condition: or
-      conditions:
-        - condition: state
-          entity_id: media_player.childroom_sonos
-          state:
-            - 'paused'
-            - 'idle'
-        - condition: state
-          entity_id: binary_sensor.childroom_sonos_is_grouped
-          state: 'on'
   action:
-    service: script.sonos_decrease_volume
-
-- alias: 'Hue switch increase Sonos childroom volume'
-  initial_state: on
-  trigger:
-    platform: event
-    event_type: hue_event
-    event_data:
-      id: "hallway_switch_button"
-      type: "short_release"
-      subtype: 2
-  condition:
-    - condition: state
-      entity_id: input_boolean.enable_hue_switch_hallway
-      state: 'on'
-    - condition: state
-      entity_id: media_player.kitchen_sonos
-      state:
-        - 'paused'
-        - 'idle'
-    - condition: state
-      entity_id: media_player.childroom_sonos
-      state: 'playing'
-    - condition: state
-      entity_id: binary_sensor.childroom_sonos_is_grouped
-      state: 'off'
-  action:
-    service: python_script.media_player_volume_set
-    data:
-      entity_id: media_player.childroom_sonos
-      volume_level: >
-        {{ [((state_attr('media_player.childroom_sonos','volume_level') | float * 1.15 + 0.03) | round(2)), 1] | min }}
-
-- alias: 'Hue switch decrease Sonos childroom volume'
-  initial_state: on
-  trigger:
-    platform: event
-    event_type: hue_event
-    event_data:
-      id: "hallway_switch_button"
-      type: "short_release"
-      subtype: 3
-  condition:
-    - condition: state
-      entity_id: input_boolean.enable_hue_switch_hallway
-      state: 'on'
-    - condition: state
-      entity_id: media_player.kitchen_sonos
-      state:
-        - 'paused'
-        - 'idle'
-    - condition: state
-      entity_id: media_player.childroom_sonos
-      state: 'playing'
-    - condition: state
-      entity_id: binary_sensor.childroom_sonos_is_grouped
-      state: 'off'
-  action:
-    service: python_script.media_player_volume_set
-    data:
-      entity_id: media_player.childroom_sonos
-      volume_level: >
-        {{ [((state_attr('media_player.childroom_sonos','volume_level') | float * 0.85 - 0.03) | round(2)), 0.05] | max }}
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: media_player.kitchen_sonos
+              state:
+                - 'paused'
+                - 'idle'
+            - condition: state
+              entity_id: media_player.childroom_sonos
+              state: 'playing'
+            - condition: state
+              entity_id: binary_sensor.childroom_sonos_is_grouped
+              state: 'off'
+          sequence:
+            - service: python_script.media_player_volume_set
+              data:
+                entity_id: media_player.childroom_sonos
+                volume_level: >
+                  {{ [((state_attr('media_player.childroom_sonos','volume_level') | float * 0.85 - 0.03) | round(2)), 0.05] | max }}
+        - conditions:
+            - condition: state
+              entity_id: media_player.kitchen_sonos
+              state:
+                - 'paused'
+                - 'idle'
+            - condition: state
+              entity_id: media_player.childroom_sonos
+              state:
+                - 'paused'
+                - 'idle'
+            - condition: state
+              entity_id: media_player.livingroom_apple_tv
+              state: 'playing'
+            - condition: state
+              entity_id: binary_sensor.livingroom_sonos_tv_active
+              state: 'on'
+          sequence:
+            - service: python_script.media_player_volume_set
+              data:
+                entity_id: media_player.livingroom_sonos
+                volume_level: >
+                  {{ [((state_attr('media_player.livingroom_sonos','volume_level') | float * 0.85 - 0.03) | round(2)), 0.05] | max }}
+      default:
+        - service: script.sonos_decrease_volume
 
 ################# IKEA #################
 

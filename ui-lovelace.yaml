@@ -88,6 +88,7 @@ views:
             icon: mdi:lightbulb-on
           - light.hallway_ceiling_bottom_floor
           - light.hallway_ceiling_top_floor
+          - light.hallway_stair_group
 
       - type: entities
         title: Sovrum

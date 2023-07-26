@@ -495,10 +495,15 @@ hallway_bright:
   sequence:
     - service: script.ikea_light_turn_on
       data:
-        entity_id: 
+        entity_id:
           - light.hallway_ceiling_top_floor
           - light.hallway_ceiling_bottom_floor
         brightness_pct: 100
+        kelvin: 3300
+    - service: script.ikea_light_turn_on
+      data:
+        entity_id: light.hallway_stair_group
+        brightness_pct: 70
         kelvin: 3300
 
 hallway_top_floor_bright:
@@ -522,8 +527,15 @@ hallway_relaxed:
   sequence:
     - service: script.ikea_light_turn_on
       data:
-        entity_id: light.hallway_ceiling_bottom_floor
+        entity_id:
+          - light.hallway_ceiling_bottom_floor
+          - light.hallway_stair_up
         brightness_pct: 1
+        kelvin: 2200
+    - service: script.ikea_light_turn_on
+      data:
+        entity_id: light.hallway_stair_down
+        brightness_pct: 30
         kelvin: 2200
     - condition: state
       entity_id: light.hallway_ceiling_top_floor
@@ -537,14 +549,18 @@ hallway_wakeup:
   sequence:
     - service: light.turn_on
       data:
-        entity_id: light.hallway_ceiling_bottom_floor
+        entity_id:
+          - light.hallway_ceiling_bottom_floor
+          - light.hallway_stair_group
         brightness_pct: 1
         transition: 1
     - delay:
         milliseconds: 1100
     - service: light.turn_on
       data:
-        entity_id: light.hallway_ceiling_bottom_floor
+        entity_id:
+          - light.hallway_ceiling_bottom_floor
+          - light.hallway_stair_group
         kelvin: 3300
         transition: 1
     - delay:
@@ -553,6 +569,11 @@ hallway_wakeup:
       data:
         entity_id: light.hallway_ceiling_bottom_floor
         brightness_pct: 100
+        transition: 1800
+    - service: light.turn_on
+      data:
+        entity_id: light.hallway_stair_group
+        brightness_pct: 70
         transition: 1800
 
 ##### KITCHEN #####

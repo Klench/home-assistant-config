@@ -27,6 +27,12 @@
     - light.hallway_ceiling_2_2
     - light.hallway_ceiling_2_3
 - platform: group
+  name: 'Hallway stair group'
+  unique_id: 'hallway-stair'
+  entities:
+    - light.hallway_stair_down
+    - light.hallway_stair_up
+- platform: group
   name: 'Bedroom bedside'
   unique_id: bedroom-bedside
   entities:

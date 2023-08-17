@@ -72,9 +72,6 @@ hacs:
 
 python_script:
 
-# Discover some devices automatically
-discovery:
-
 # Enables support for tracking state changes over time
 history:
 

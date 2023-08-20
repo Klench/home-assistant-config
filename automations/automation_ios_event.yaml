@@ -43,6 +43,7 @@
         entity_id:
           - light.childroom_ceiling
           - light.hallway_ceiling_top_floor
+          - light.hallway_stair_up
     - choose:
       - conditions: >
           {{ is_state('binary_sensor.childroom_sonos_is_grouped','on') }}

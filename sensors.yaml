@@ -8,25 +8,6 @@
   sensors:
     - school: villanskolan
 
-- platform: rest
-  resource: https://henrikhjelm.se/api/getdata.php?lan=skane-lan
-  name: OKQ8
-  value_template: '{{ value_json.skanelan_OKQ8_AngelholmOstra_vagen_17__diesel | float }}'
-  unit_of_measurement: 'kr'
-  scan_interval: 1800
-- platform: rest
-  resource: https://henrikhjelm.se/api/getdata.php?lan=skane-lan
-  name: ST1
-  value_template: '{{ value_json.skanelan_St1_AngelholmHelsingborgsvagen_49__diesel | float }}'
-  unit_of_measurement: 'kr'
-  scan_interval: 1800
-- platform: rest
-  resource: https://henrikhjelm.se/api/getdata.php?lan=skane-lan
-  name: Tanka
-  value_template: '{{ value_json.skanelan_Tanka_AngelholmTransportgatan_11__diesel | float }}'
-  unit_of_measurement: 'kr'
-  scan_interval: 1800
-
 - platform: template
   sensors:
     outdoor_temperature:

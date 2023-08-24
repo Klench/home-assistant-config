@@ -221,16 +221,6 @@ views:
       #   title: Matsedel Junibacken
 
       - type: entities
-        title: Dieselpriser
-        entities:
-          - entity: sensor.okq8
-            icon: mdi:gas-station
-          - entity: sensor.st1
-            icon: mdi:gas-station
-          - entity: sensor.tanka
-            icon: mdi:gas-station
-
-      - type: entities
         title: Utomhus
         show_header_toggle: false
         entities:

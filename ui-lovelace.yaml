@@ -472,33 +472,6 @@ views:
             name: Högtalare
             icon: mdi:speaker-wireless
 
-################# WEATHER #################
-
-  - icon: mdi:weather-partly-cloudy
-    cards:
-
-      - type: custom:mini-graph-card
-        entities:
-          - sensor.outdoor_temperature
-        name: 'Yttertemperatur'
-        unit: '°C'
-        line_color: '#5c8dd1'
-        hour24: true
-        animate: true
-        decimals: 1
-        points_per_hour: 1
-        font_size_header: 18
-        show:
-          extrema: true
-          labels: true
-          fill: fade
-
-      - type: weather-forecast
-        entity: weather.smhi_hem
-
-      - type: custom:horizon-card
-        language: sv
-
 ################# ROBOT VACUUM #################
 
   - icon: mdi:robot-vacuum-variant
@@ -593,6 +566,33 @@ views:
             entities:
               - input_boolean.vacuum_eco_mode
               - input_boolean.vacuum_extra_care
+
+################# WEATHER #################
+
+  - icon: mdi:weather-partly-cloudy
+    cards:
+
+      - type: custom:mini-graph-card
+        entities:
+          - sensor.outdoor_temperature
+        name: 'Yttertemperatur'
+        unit: '°C'
+        line_color: '#5c8dd1'
+        hour24: true
+        animate: true
+        decimals: 1
+        points_per_hour: 1
+        font_size_header: 18
+        show:
+          extrema: true
+          labels: true
+          fill: fade
+
+      - type: weather-forecast
+        entity: weather.smhi_hem
+
+      - type: custom:horizon-card
+        language: sv
 
 ################# UNRAID #################
 

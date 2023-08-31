@@ -448,7 +448,7 @@
     - service: switch.turn_on
       target:
         entity_id: switch.kitchen_coffee_maker
-    - service: script.kitchen_coffee_maker_timer_start
+    # - service: script.kitchen_coffee_maker_timer_start
 
 - alias: 'Ikea switch turn off coffee maker'
   initial_state: on

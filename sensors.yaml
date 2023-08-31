@@ -4,10 +4,6 @@
     - 'date'
     - 'date_time'
 
-- platform: skolmaten
-  sensors:
-    - school: villanskolan
-
 - platform: template
   sensors:
     outdoor_temperature:

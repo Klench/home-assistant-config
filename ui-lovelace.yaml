@@ -262,6 +262,8 @@ views:
           expanded: true
           show_group_count: true
           entities:
+            - entity_id: media_player.kitchen_sonos
+              name: Kök
             - entity_id: media_player.livingroom_sonos
               name: Vardagsrum
             - entity_id: media_player.childroom_sonos
@@ -323,31 +325,60 @@ views:
         shortcuts:
           label: Välj musik
           list:
+            - name: Rainy Day Piano
+              icon: mdi:plex
+              type: service
+              id: media_player.play_media
+              data:
+                entity_id: media_player.childroom_sonos
+                media_content_type: music
+                media_content_id: 'plex://{"library_name": "Musik", "album_name": "Rainy Day Piano"}'
+            - name: White Noise Lullabies
+              icon: mdi:plex
+              type: service
+              id: media_player.play_media
+              data:
+                entity_id: media_player.childroom_sonos
+                media_content_type: music
+                media_content_id: 'plex://{"library_name": "Musik", "album_name": "Soothing Lullabies with White Noise"}'
+            - name: Disney Guitar
+              icon: mdi:plex
+              type: service
+              id: media_player.play_media
+              data:
+                entity_id: media_player.childroom_sonos
+                media_content_type: playlist
+                media_content_id: 'plex://{"library_name": "Musik", "playlist_name": "Disney Guitar"}'
+            - name: Disney Piano
+              icon: mdi:plex
+              type: service
+              id: media_player.play_media
+              data:
+                entity_id: media_player.childroom_sonos
+                media_content_type: playlist
+                media_content_id: 'plex://{"library_name": "Musik", "playlist_name": "Disney Piano"}'
             - name: Peaceful Guitar
+              icon: mdi:spotify
               type: music
               id: spotify:playlist:37i9dQZF1DX0jgyAiPl8Af
             - name: Instrumentala vaggvisor
+              icon: mdi:spotify
               type: music
               id: spotify:playlist:0AN9INqQysBuGphdxgkfkw
-            - name: 'Disney Peaceful Piano: Lullaby'
-              type: music
-              id: spotify:album:2CE8v99s07pcaXQwOLYMlS
             - name: Piano worship
+              icon: mdi:spotify
               type: music
               id: spotify:playlist:3zJnlFpxQ9s7VS5LSvbeSd
-            - name: Piano dinner
-              type: music
-              id: spotify:playlist:37i9dQZF1DWZVU32KsYGUK
             - name: Baby sleep
+              icon: mdi:spotify
               type: music
               id: spotify:playlist:37i9dQZF1DX0DxcHtn4Hwo
-            - name: Be Held
-              type: music
-              id: spotify:album:36mfScdTe8zFlaHQAmIMuf
             - name: Lullaby Baby
+              icon: mdi:spotify
               type: music
               id: spotify:album:49k5jl8u2iuxMU4iyczJ9M
             - name: Skyrim sleep
+              icon: mdi:spotify
               type: music
               id: spotify:playlist:0cz5GpTRGnMYrqtEj3639f
 
@@ -562,6 +593,12 @@ views:
   - icon: mdi:weather-partly-cloudy
     cards:
 
+      - type: custom:hourly-weather
+        entity: weather.smhi_hem
+        num_segments: 16
+        name: Timvis väder
+        language: sv
+
       - type: custom:mini-graph-card
         entities:
           - sensor.outdoor_temperature
@@ -626,13 +663,13 @@ views:
           - entity: sensor.unraid_cpu_used
             name: Processoranvändning Oden
             unit: '%'
-            line_color: blue
+            color: blue
             show:
               extrema: true
               labels: true
               fill: fade
               average: true
-        hours_to_show: 2
+        hours_to_show: 12
         points_per_hour: 30
         hour24: true
         animate: true
@@ -646,7 +683,7 @@ views:
           - entity: sensor.unraid_cputin_temperature
             name: Temperatur CPU
             unit: '°C'
-            line_color: blue
+            color: blue
             show:
               extrema: true
               labels: true
@@ -655,7 +692,7 @@ views:
           - entity: sensor.ups_power_delivery
             name: Effekt
             unit: W
-            line_color: green
+            color: green
             show:
               extrema: true
               labels: true

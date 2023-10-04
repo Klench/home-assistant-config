@@ -22,7 +22,7 @@ bottom_floor_bright:
       target:
         entity_id:
           - script.livingroom_bright
-          - script.hallway_bright
+          - script.hallway_bottom_floor_bright
           - script.kitchen_bright
 
 indoor_lights_relaxed:
@@ -76,6 +76,11 @@ indoor_lights_low_brightness:
             entity_id: light.kitchen_table
             brightness_pct: 50
             transition: 2
+        - service: script.ikea_light_turn_on
+          data:
+            entity_id: light.hallway_stair_group
+            brightness_pct: 1
+            kelvin: 2200
         - service: script.turn_on
           target:
             entity_id:
@@ -325,13 +330,9 @@ childroom_light_warm:
         entity_id: light.childroom_ceiling
         kelvin: 2200
         transition: 2
-    - service: light.turn_on
-      data:
-        entity_id: light.childroom_led_strip
-        brightness_pct: 25
-        rgb_color: [255,128,0]
-        transition: 2
-        effect: None
+    - service: script.turn_on
+      target:
+        entity_id: script.childroom_night_light
     - service: light.turn_off
       entity_id: light.hallway_ceiling_top_floor
 
@@ -342,13 +343,9 @@ childroom_light_dim:
         entity_id: light.childroom_ceiling
         kelvin: 2200
         transition: 2
-    - service: light.turn_on
-      data:
-        entity_id: light.childroom_led_strip
-        brightness_pct: 25
-        rgb_color: [255,128,0]
-        transition: 2
-        effect: None
+    - service: script.turn_on
+      target:
+        entity_id: script.childroom_night_light
     - service: light.turn_off
       target:
         entity_id:
@@ -520,6 +517,11 @@ hallway_bottom_floor_bright:
       data:
         entity_id: light.hallway_ceiling_bottom_floor
         brightness_pct: 100
+        kelvin: 3300
+    - service: script.ikea_light_turn_on
+      data:
+        entity_id: light.hallway_stair_group
+        brightness_pct: 70
         kelvin: 3300
 
 hallway_relaxed:

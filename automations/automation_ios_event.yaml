@@ -44,29 +44,6 @@
           - light.childroom_ceiling
           - light.hallway_ceiling_top_floor
           - light.hallway_stair_up
-    - choose:
-      - conditions: >
-          {{ is_state('binary_sensor.childroom_sonos_is_grouped','on') }}
-        sequence:
-          - service: python_script.media_player_volume_set
-            data:
-              entity_id: media_player.childroom_sonos
-              volume_level: 0
-          - service: script.sonos_ungroup_childroom_speaker
-          - service: media_player.volume_set
-            data:
-              entity_id: media_player.childroom_sonos
-              volume_level: 0.05
-          - delay: '00:00:01'
-          - service: media_player.media_play
-            target:
-              entity_id: media_player.childroom_sonos
-      default:
-        - service: media_player.volume_set
-          data:
-            entity_id: media_player.childroom_sonos
-            volume_level: 0.05
-        - delay: '00:00:01'
-        - service: media_player.media_play
-          target:
-            entity_id: media_player.childroom_sonos
+    - service: script.turn_on
+      target:
+        entity_id: script.play_child_room_night_music

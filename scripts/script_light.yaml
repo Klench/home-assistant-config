@@ -36,16 +36,6 @@ indoor_lights_relaxed:
           - script.livingroom_relaxed
           - script.hallway_relaxed
           - script.kitchen_relaxed
-    - condition: state
-      entity_id: light.childroom_led_strip
-      state: 'off'
-    - service: light.turn_on
-      data:
-        entity_id: light.childroom_led_strip
-        brightness_pct: 25
-        rgb_color: [255,128,0]
-        transition: 2
-        effect: None
 
 indoor_lights_low_brightness:
   alias: 'Låg ljusstyrka'
@@ -334,10 +324,15 @@ childroom_light_warm:
       target:
         entity_id: script.childroom_night_light
     - service: light.turn_off
-      entity_id: light.hallway_ceiling_top_floor
+      entity_id:
+        - light.hallway_ceiling_top_floor
+        - light.hallway_stair_up
 
 childroom_light_dim:
   sequence:
+    - service: script.turn_on
+      target:
+        entity_id: script.play_child_room_night_music
     - service: light.turn_on
       data:
         entity_id: light.childroom_ceiling
@@ -351,6 +346,7 @@ childroom_light_dim:
         entity_id:
           - light.childroom_window
           - light.hallway_ceiling_top_floor
+          - light.hallway_stair_up
     - delay: '00:00:02'
     - service: light.turn_on
       data:

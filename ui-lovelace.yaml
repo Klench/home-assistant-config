@@ -88,7 +88,10 @@ views:
             icon: mdi:lightbulb-on
           - light.hallway_ceiling_bottom_floor
           - light.hallway_ceiling_top_floor
-          - light.hallway_stair_group
+          - entity: light.hallway_stair_group
+            hold_action:
+              action: navigate
+              navigation_path: /config/devices/device/a09ef8c7bb359eab9a4452d198fcbee9
 
       - type: entities
         title: Sovrum
@@ -833,6 +836,36 @@ views:
               type: entities
               show_header_toggle: false
             entities:
+              - switch.docker_wyoming_piper
+            filter:
+              include:
+                - entity_id: "sensor.docker_wyoming_piper*"
+          - type: divider
+          - type: custom:auto-entities
+            card:
+              type: entities
+              show_header_toggle: false
+            entities:
+              - switch.docker_wyoming_whisper
+            filter:
+              include:
+                - entity_id: "sensor.docker_wyoming_whisper*"
+          - type: divider
+          - type: custom:auto-entities
+            card:
+              type: entities
+              show_header_toggle: false
+            entities:
+              - switch.docker_apacheguacamole
+            filter:
+              include:
+                - entity_id: "sensor.docker_apacheguacamole*"
+          - type: divider
+          - type: custom:auto-entities
+            card:
+              type: entities
+              show_header_toggle: false
+            entities:
               - switch.docker_unifi_controller
             filter:
               include:
@@ -1071,7 +1104,7 @@ views:
           - binary_sensor.rcb492_rear_left_tyre
           - binary_sensor.rcb492_rear_right_tyre
 
-################# TRANSMISSION #################
+################# QBITTORRENT #################
 
   - title: ''
     icon: mdi:download-network-outline

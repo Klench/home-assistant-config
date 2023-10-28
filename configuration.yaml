@@ -19,6 +19,7 @@ homeassistant:
   media_dirs:
     music: /media/music
     audiobooks: /media/audiobooks
+    local_media: /config/media
   auth_providers:
     - type: homeassistant
 
@@ -182,6 +183,7 @@ shelly:
 monitor_docker:
   - containers:
       - code-server
+      - code-server-appdata
       - duplicati
       - glances
       - home-assistant
@@ -197,8 +199,12 @@ monitor_docker:
       - authelia
       - traefik
       - wordpress
+      - wyoming-piper
+      - wyoming-whisper
+      - ApacheGuacamole
     rename:
       code-server: Code Server
+      code-server-appdata: Code Server Appdata
       duplicati: Duplicati
       glances: Glances
       home-assistant: Home Assistant
@@ -212,6 +218,9 @@ monitor_docker:
       authelia: Authelia
       traefik: Traefik
       wordpress: Wordpress
+      wyoming-piper: Wyoming Piper
+      wyoming-whisper: Wyoming Whisper
+      apacheguacamole: Apache Guacamole
     monitored_conditions:
       - version
       - containers_total

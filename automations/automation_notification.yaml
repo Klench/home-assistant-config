@@ -157,8 +157,8 @@
     condition: template
     value_template: '{{ trigger.to_state.state | int > trigger.from_state.state | int }}'
   action:
-    service: script.sonos_say
-    data:
-      sonos_entity: livingroom_sonos
-      volume: 0.2
-      message: 'Person detekterad'
+    - service: script.sonos_play_local_media
+      data:
+        entity_id: media_player.livingroom_sonos
+        media_filename: "US-EN-Morgan-Freeman-Motion-Detected.mp3"
+        volume: 0.3

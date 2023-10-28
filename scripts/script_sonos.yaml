@@ -118,41 +118,67 @@ sonos_decrease_volume:
         volume_level: >
           {{ [((state_attr('media_player.kitchen_sonos','volume_level') | float * 0.85 - 0.03) | round(2)), 0.05] | max }}
 
-##### SAY #####
+##### NOTIFICATION #####
 
-sonos_say:
+sonos_tts:
   alias: "Sonos TTS script"
   sequence:
-    - service: sonos.snapshot
+    - service: media_player.play_media
       data:
-        entity_id: "{{ 'media_player.' ~ sonos_entity }}"
-    - service: media_player.unjoin
+        entity_id: "{{ entity_id }}"
+        media_content_id: >
+          {{ "media-source://tts/tts.piper?message=" ~ message }}"
+        announce: true
+        media_content_type: music
+        extra:
+          volume: "{{ (volume * 100) | int }}"
+
+sonos_play_local_media:
+  alias: 'Sonos play local media'
+  sequence:
+    - service: media_player.play_media
       data:
-        entity_id:  "{{ 'media_player.' ~ sonos_entity }}"
-    - service: media_player.volume_set
-      data:
-        entity_id:  "{{ 'media_player.' ~ sonos_entity }}"
-        volume_level: "{{ volume }}"
-    - service: tts.google_translate_say
-      data:
-        entity_id:  "{{ 'media_player.' ~ sonos_entity }}"
-        message: "{{ message }}"
-    - delay: '00:00:01'
-    - delay: >
-        {% set duration = states.media_player[sonos_entity].attributes.media_duration %}
-        {% if duration > 0 %}
-          {% set duration = duration %}
-        {% endif %}
-        {% set seconds = duration % 60 %}
-        {% set minutes = (duration / 60)|int % 60 %}
-        {% set hours = (duration / 3600)|int %}
-        {{ [hours, minutes, seconds]|join(':') }}
-    - service: sonos.restore
-      data:
-        entity_id:  "{{ 'media_player.' ~ sonos_entity }}"
-        with_group: true
+        entity_id: "{{ entity_id }}"
+        media_content_id: >
+          {{ "media-source://media_source/local_media/" ~ media_filename }}
+        media_content_type: music
+        announce: true
+        extra:
+          volume: "{{ (volume * 100) | int }}"
 
 ##### ALARM #####
+
+##### PLAY MUSIC #####
+
+play_child_room_night_music:
+  alias: 'Play child room night music'
+  sequence:
+    - choose:
+      - conditions: >
+          {{ is_state('binary_sensor.childroom_sonos_is_grouped','on') }}
+        sequence:
+          - service: python_script.media_player_volume_set
+            data:
+              entity_id: media_player.childroom_sonos
+              volume_level: 0
+          - service: script.sonos_ungroup_childroom_speaker
+          - service: media_player.volume_set
+            data:
+              entity_id: media_player.childroom_sonos
+              volume_level: 0.05
+          - delay: '00:00:01'
+          - service: media_player.media_play
+            target:
+              entity_id: media_player.childroom_sonos
+      default:
+        - service: media_player.volume_set
+          data:
+            entity_id: media_player.childroom_sonos
+            volume_level: 0.05
+        - delay: '00:00:01'
+        - service: media_player.media_play
+          target:
+            entity_id: media_player.childroom_sonos
 
 sonos_set_alarm:
   alias: 'Sonos set alarm'

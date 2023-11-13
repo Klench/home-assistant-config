@@ -33,9 +33,9 @@
       entity_id: person.david
       state: 'home'
   action:
-    service: script.sonos_say
+    service: script.sonos_tts
     data:
-      sonos_entity: kitchen_sonos
+      entity_id: media_player.kitchen_sonos
       volume: 0.1
       message: 'Parkeringsvärmaren har startat'
 
@@ -157,8 +157,8 @@
     condition: template
     value_template: '{{ trigger.to_state.state | int > trigger.from_state.state | int }}'
   action:
-    - service: script.sonos_play_local_media
-      data:
-        entity_id: media_player.livingroom_sonos
-        media_filename: "US-EN-Morgan-Freeman-Motion-Detected.mp3"
-        volume: 0.3
+    service: script.sonos_play_local_media
+    data:
+      entity_id: media_player.livingroom_sonos
+      media_filename: "US-EN-Morgan-Freeman-Motion-Detected.mp3"
+      volume: 0.3

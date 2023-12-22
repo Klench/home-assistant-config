@@ -37,6 +37,13 @@ views:
             icon: mdi:lightbulb-on
           - entity: script.indoor_lights_low_brightness
             icon: mdi:lightbulb-on
+          - type: conditional
+            conditions:
+              - entity: input_boolean.enable_advent_light_automations
+                state: 'on'
+            row:
+              entity: script.advent_lights_turn_on
+              icon: mdi:star-david
           - entity: script.indoor_lights_off
             icon: mdi:lightbulb-off
 
@@ -70,7 +77,7 @@ views:
               - entity: input_boolean.enable_advent_light_automations
                 state: 'on'
             row:
-              entity: light.livingroom_advent_lights
+              entity: light.livingroom_menorah
           - type: conditional
             conditions:
               - entity: input_boolean.enable_advent_light_automations
@@ -105,6 +112,12 @@ views:
             icon: mdi:lightbulb-on
           - light.bedroom_ceiling
           - light.bedroom_bedside
+          - type: conditional
+            conditions:
+              - entity: input_boolean.enable_advent_light_automations
+                state: 'on'
+            row:
+              entity: light.bedroom_menorah
 
       - type: entities
         title: Barnrum
@@ -209,6 +222,8 @@ views:
         hide:
           volume: true
           power: true
+          runtime: false
+          runtime_remaining: false
         idle_view:
           when_idle: true
           when_standby: true
@@ -322,6 +337,7 @@ views:
           power: true
           source: true
           shuffle: false
+          volume_level: false
         speaker_group:
           platform: sonos
           show_group_count: false

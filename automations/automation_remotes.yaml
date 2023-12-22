@@ -255,10 +255,7 @@
       device_id: 3b531df34853b38343b729aacef15e48
       command: 'on'
   action:
-    service: light.turn_on
-    data:
-      entity_id: light.bedroom_bedside
-      brightness_pct: 100
+    service: script.bedroom_relaxed
 
 - alias: 'Ikea button bedroom on long press'
   initial_state: on

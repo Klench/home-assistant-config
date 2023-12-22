@@ -62,7 +62,7 @@
   initial_state: on
   trigger:
     platform: time
-    at: '06:15:00'
+    at: '06:45:00'
   condition:
     - condition: state
       entity_id: input_boolean.enable_advent_light_automations
@@ -421,6 +421,22 @@
       state: 'on'
   action:
     service: script.office_low_brightness
+
+- alias: 'Tor turning on'
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: switch.wol_tor
+    to: 'on'
+  condition:
+    - condition: state
+      entity_id: light.office_desk
+      state: 'on'
+    - condition: state
+      entity_id: binary_sensor.relaxed_mode
+      state: 'on'
+  action:
+    service: script.office_relaxed
 
 - alias: 'Davids iPhone charging'
   initial_state: on

@@ -142,7 +142,7 @@ window_lights:
           - light.bedroom_advent_light
     - service: script.turn_on
       target:
-        entity_id: script.kitchen_advent_light_bright
+        entity_id: script.kitchen_advent_lights
 
 advent_lights_turn_on:
   alias: 'Adventsbelysning'
@@ -745,6 +745,7 @@ turn_off_outdoor_lights:
 ##### IKEA LIGHTS #####
 
 ikea_light_turn_on:
+  mode: parallel
   sequence:
       - service: light.turn_on
         data:

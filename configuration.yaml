@@ -191,11 +191,11 @@ monitor_docker:
       - PlexMediaServer
       - qbittorrentvpn
       - resilio-sync
-      - swag
       - unifi-controller
       - frigate
       - authelia
       - traefik
+      - redis
       - wordpress
       - wyoming-piper
       - wyoming-whisper
@@ -215,6 +215,7 @@ monitor_docker:
       frigate: Frigate
       authelia: Authelia
       traefik: Traefik
+      redis: Redis
       wordpress: Wordpress
       wyoming-piper: Wyoming Piper
       wyoming-whisper: Wyoming Whisper

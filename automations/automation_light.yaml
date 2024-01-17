@@ -410,7 +410,7 @@
   initial_state: on
   trigger:
     platform: state
-    entity_id: switch.wol_tor
+    entity_id: switch.wol_vidar
     to: 'off'
   condition:
     - condition: state
@@ -426,7 +426,7 @@
   initial_state: on
   trigger:
     platform: state
-    entity_id: switch.wol_tor
+    entity_id: switch.wol_vidar
     to: 'on'
   condition:
     - condition: state
@@ -450,7 +450,7 @@
       after: '22:00:00'
       before: '06:00:00'
     - condition: state
-      entity_id: switch.wol_tor
+      entity_id: switch.wol_vidar
       state: 'off'
     - condition: state
       entity_id: light.office_desk

@@ -11,9 +11,9 @@
         service: script.sonos_disable_night_mode
 
 - platform: wake_on_lan
-  name: WOL Tor
-  mac: !secret tor_mac
-  host: !secret tor_ip
+  name: WOL Vidar
+  mac: !secret vidar_mac
+  host: !secret vidar_ip
 - platform: wake_on_lan
   name: WOL RPI 3B
   mac: !secret rpi3b_mac

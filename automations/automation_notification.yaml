@@ -162,3 +162,23 @@
       entity_id: media_player.livingroom_sonos
       media_filename: "US-EN-Morgan-Freeman-Motion-Detected.mp3"
       volume: 0.3
+
+################# TRAEFIK STATUS #################
+
+- alias: 'Web service down'
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id:
+      - sensor.docker_traefik_state
+      - sensor.docker_authelia_state
+      - sensor.docker_mariadb_state
+      - sensor.docker_wordpress_state
+    from: 'running'
+  action:
+    service: notify.mobile_app_davids_iphone
+    data:
+      title: 'Web service status'
+      message: 'A web service is down'
+      data:
+        url: "/lovelace/5"

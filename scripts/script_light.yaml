@@ -245,6 +245,10 @@ bedroom_bright:
         entity_id: light.bedroom_ceiling
         brightness_pct: 80
         kelvin: 2700
+    - condition: state
+      entity_id: input_boolean.enable_advent_light_automations
+      state: 'on'
+    - service: script.bedroom_advent_lights
 
 bedroom_relaxed:
   alias: 'Mysbelysning'
@@ -312,6 +316,10 @@ childroom_bright:
         brightness_pct: 100
         kelvin: 2700
         transition: 2
+    - condition: state
+      entity_id: input_boolean.enable_advent_light_automations
+      state: 'on'
+    - service: script.childroom_advent_lights
 
 childroom_relaxed:
   alias: 'Mysbelysning'
@@ -468,6 +476,10 @@ livingroom_bright:
         brightness_pct: 100
         kelvin: 2700
         transition: 2
+    - condition: state
+      entity_id: input_boolean.enable_advent_light_automations
+      state: 'on'
+    - service: script.livingroom_advent_lights
 
 livingroom_relaxed:
   alias: 'Mysbelysning'

@@ -360,6 +360,22 @@ views:
                 entity_id: media_player.childroom_sonos
                 media_content_type: music
                 media_content_id: 'plex://{"library_name": "Musik", "album_name": "Soothing Lullabies with White Noise"}'
+            - name: Worship Lullabies
+              icon: mdi:plex
+              type: service
+              id: media_player.play_media
+              data:
+                entity_id: media_player.childroom_sonos
+                media_content_type: music
+                media_content_id: 'plex://{"library_name": "Musik", "album_name": "Worship Lullabies"}'
+            - name: Gentle Game Lullabies
+              icon: mdi:plex
+              type: service
+              id: media_player.play_media
+              data:
+                entity_id: media_player.childroom_sonos
+                media_content_type: music
+                media_content_id: 'plex://{"library_name": "Musik", "album_name": "Gentle Game Lullabies"}'
             - name: Disney Guitar
               icon: mdi:plex
               type: service
@@ -400,23 +416,6 @@ views:
               icon: mdi:spotify
               type: music
               id: spotify:playlist:0cz5GpTRGnMYrqtEj3639f
-
-      - type: conditional
-        conditions:
-          - entity: binary_sensor.kitchen_sonos_is_grouped
-            state: 'on'
-        card:
-          type: custom:mini-media-player
-          entity: media_player.kitchen_sonos
-          artwork: cover
-          icon: mdi:speaker
-          hide:
-            power: true
-            source: true
-            shuffle: false
-          speaker_group:
-            platform: sonos
-            show_group_count: false
 
       - type: conditional
         conditions:
@@ -651,7 +650,7 @@ views:
         title: Wake On LAN
         show_header_toggle: false
         entities:
-          - switch.wol_tor
+          - switch.wol_vidar
           - switch.wol_rpi_3b
 
       - type: entities
@@ -771,6 +770,16 @@ views:
               type: entities
               show_header_toggle: false
             entities:
+              - switch.docker_traefik
+            filter:
+              include:
+                - entity_id: "sensor.docker_traefik*"
+          - type: divider
+          - type: custom:auto-entities
+            card:
+              type: entities
+              show_header_toggle: false
+            entities:
               - switch.docker_authelia
             filter:
               include:
@@ -781,10 +790,10 @@ views:
               type: entities
               show_header_toggle: false
             entities:
-              - switch.docker_traefik
+              - switch.docker_redis
             filter:
               include:
-                - entity_id: "sensor.docker_traefik*"
+                - entity_id: "sensor.docker_redis"
           - type: divider
           - type: custom:auto-entities
             card:

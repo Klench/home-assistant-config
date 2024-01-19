@@ -7,6 +7,15 @@ views:
   - icon: mdi:home-assistant
     cards:
 
+      - type: conditional
+        conditions:
+          - condition: state
+            entity: binary_sensor.rcb492_washer_fluid
+            state: 'on'
+        card:
+          type: markdown
+          content: <ha-alert alert-type="info">Fyll på spolarvätska</ha-alert>
+
       - type: glance
         state_color: false
         entities:

@@ -49,27 +49,3 @@
     data:
       entity_id: media_player.childroom_sonos
       volume_level: 0.03
-
-################# TIMER #################
-
-- alias: 'Kitchen coffee maker timer start'
-  initial_state: off
-  trigger:
-    platform: state
-    entity_id: switch.kitchen_coffee_maker
-    to: 'on'
-  action:
-    service: script.kitchen_coffee_maker_timer_start
-
-- alias: 'Kitchen coffee maker timer cancel'
-  initial_state: on
-  trigger:
-    platform: state
-    entity_id: switch.kitchen_coffee_maker
-    to: 'off'
-  condition:
-    condition: state
-    entity_id: timer.kitchen_coffee_maker
-    state: 'active'
-  action:
-    service: script.kitchen_coffee_maker_timer_cancel

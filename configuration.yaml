@@ -196,7 +196,7 @@ monitor_docker:
       - authelia
       - traefik
       - redis
-      - wordpress
+      - WordPress
       - wyoming-piper
       - wyoming-whisper
       - ApacheGuacamole
@@ -216,7 +216,6 @@ monitor_docker:
       authelia: Authelia
       traefik: Traefik
       redis: Redis
-      wordpress: Wordpress
       wyoming-piper: Wyoming Piper
       wyoming-whisper: Wyoming Whisper
       apacheguacamole: Apache Guacamole

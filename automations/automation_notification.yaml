@@ -168,13 +168,17 @@
 - alias: 'Web service down'
   initial_state: on
   trigger:
-    platform: state
-    entity_id:
-      - sensor.docker_traefik_state
-      - sensor.docker_authelia_state
-      - sensor.docker_mariadb_state
-      - sensor.docker_wordpress_state
-    from: 'running'
+    platform: time_pattern
+    minutes: "/5"
+  condition:
+    not:
+      - condition: state
+        entity_id:
+          - sensor.docker_traefik_state
+          - sensor.docker_authelia_state
+          - sensor.docker_mariadb_state
+          - sensor.docker_wordpress_state
+        state: 'running'
   action:
     service: notify.mobile_app_davids_iphone
     data:

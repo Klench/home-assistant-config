@@ -407,18 +407,19 @@
   action:
     service: script.sonos_group_childroom_speaker
 
-##### HALLWAY TOP FLOOR #####
+##### OFFICE #####
 
-# - alias: 'Ikea switch low brightbess'
-#   initial_state: on
-#   trigger:
-#     platform: event
-#     event_type: zha_event
-#     event_data:
-#       device_id: 3b531df34853b38343b729aacef15e48
-#       command: 'on'
-#   action:
-#     service: script.indoor_lights_low_brightness
+- alias: 'Ikea switch turn on Vidar'
+  initial_state: on
+  trigger:
+    platform: event
+    event_type: zha_event
+    event_data:
+      device_id: 9f686575e6ad98784e2efbb0b4e78526
+      command: 'on'
+  action:
+    service: switch.turn_on
+    entity_id: switch.wol_vidar
 
 # - alias: 'Ikea switch turn off indoor lights'
 #   initial_state: on
@@ -426,7 +427,7 @@
 #     platform: event
 #     event_type: zha_event
 #     event_data:
-#       device_id: 3b531df34853b38343b729aacef15e48
+#       device_id: 9f686575e6ad98784e2efbb0b4e78526
 #       command: 'off'
 #   action:
 #     service: script.indoor_lights_off

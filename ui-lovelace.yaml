@@ -7,15 +7,6 @@ views:
   - icon: mdi:home-assistant
     cards:
 
-      - type: conditional
-        conditions:
-          - condition: state
-            entity: binary_sensor.rcb492_washer_fluid
-            state: 'on'
-        card:
-          type: markdown
-          content: <ha-alert alert-type="info">Fyll på spolarvätska</ha-alert>
-
       - type: glance
         state_color: false
         entities:
@@ -182,6 +173,7 @@ views:
           - entity: script.kitchen_relaxed
             icon: mdi:lightbulb-on
           - light.kitchen_table
+          - light.kitchen_ceiling
           - type: conditional
             conditions:
               - entity: input_boolean.enable_advent_light_automations
@@ -342,6 +334,8 @@ views:
         entity: media_player.childroom_sonos
         artwork: cover
         icon: mdi:speaker
+        volume_stateless: true
+        volume_step: 2
         hide:
           power: true
           source: true
@@ -507,7 +501,7 @@ views:
           - binary_sensor.asgari_1_motion
           - binary_sensor.asgari_1_person_occupancy
           - sensor.asgari_1_person_count
-          - camera.asgari_1_person
+          - image.asgari_1_person
           - type: section
             label: Notiser
           - entity: automation.person_detected_notify_davids_iphone
@@ -813,6 +807,16 @@ views:
             filter:
               include:
                 - entity_id: "sensor.docker_nextcloud*"
+          - type: divider
+          - type: custom:auto-entities
+            card:
+              type: entities
+              show_header_toggle: false
+            entities:
+              - switch.docker_wordpress
+            filter:
+              include:
+                - entity_id: "sensor.docker_wordpress*"
           - type: divider
           - type: custom:auto-entities
             card:

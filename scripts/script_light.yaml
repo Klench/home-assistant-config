@@ -368,6 +368,7 @@ childroom_light_warm:
         - light.hallway_stair_up
 
 childroom_light_dim:
+  mode: restart
   sequence:
     - service: script.turn_on
       target:

@@ -1,4 +1,4 @@
-################# CAR HEATER #################
+################# CAR #################
 
 - alias: 'Car heater start'
   initial_state: on
@@ -38,6 +38,21 @@
       entity_id: media_player.kitchen_sonos
       volume: 0.1
       message: 'Parkeringsvärmaren har startat'
+
+- alias: 'Low washer fluid'
+  initial_state: on
+  trigger:
+    platform: time
+    at: '07:00:00'
+  condition:
+    condition: state
+    entity_id: binary_sensor.rcb492_washer_fluid
+    state: 'on'
+  action:
+    service: notify.mobile_app_davids_iphone
+    data:
+      title: 'Volvo V60'
+      message: 'Fyll på spolarvätska'
 
 ################# ALARM #################
 

@@ -181,7 +181,7 @@ shelly:
 monitor_docker:
   - containers:
       - code-server
-      - code-server-appdata
+      - code-server-ha
       - duplicati
       - glances
       - home-assistant
@@ -202,7 +202,7 @@ monitor_docker:
       - ApacheGuacamole
     rename:
       code-server: Code Server
-      code-server-appdata: Code Server Appdata
+      code-server-ha: Code Server HA
       duplicati: Duplicati
       glances: Glances
       home-assistant: Home Assistant

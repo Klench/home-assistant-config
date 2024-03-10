@@ -874,6 +874,16 @@ views:
               type: entities
               show_header_toggle: false
             entities:
+              - switch.docker_code_server_ha
+            filter:
+              include:
+                - entity_id: "sensor.docker_code_server_ha*"
+          - type: divider
+          - type: custom:auto-entities
+            card:
+              type: entities
+              show_header_toggle: false
+            entities:
               - switch.docker_wyoming_piper
             filter:
               include:

@@ -13,8 +13,7 @@
   action:
     - service: switch.toggle
       target:
-        entity_id:
-          - switch.kitchen_coffee_maker
+        entity_id: switch.kitchen_coffee_maker
 
 - alias: 'Play child room music'
   initial_state: on
@@ -47,3 +46,20 @@
     - service: script.turn_on
       target:
         entity_id: script.play_child_room_night_music
+
+- alias: 'Turn on PC'
+  initial_state: on
+  trigger:
+    - platform: event
+      event_type: ios.action_fired
+      event_data:
+        actionID: 184A8E4A-CE5B-4B01-B015-7A54F99814F3
+        actionName: Turn on PC
+        sourceDeviceID: davids_iphone
+        sourceDeviceName: Davids iPhone
+        sourceDevicePermanentID: CFD2DEC1-8CF3-432F-AF78-7419632CC842
+        triggerSource: siriShortcut
+  action:
+    - service: switch.turn_on
+      target:
+        entity_id: switch.wol_vidar

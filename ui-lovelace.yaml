@@ -674,7 +674,7 @@ views:
             name: 'Ramanvändning'
           - entity: sensor.unraid_package_id_0_temperature
             name: 'Temperatur CPU'
-          - entity: sensor.unraid_acpitz_1_temperature
+          - entity: sensor.unraid_acpitz_0_temperature
             name: 'Temperatur moderkort'
 
       - type: custom:mini-graph-card

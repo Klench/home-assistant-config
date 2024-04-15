@@ -9,7 +9,7 @@
         sourceDeviceID: davids_iphone
         sourceDeviceName: Davids iPhone
         sourceDevicePermanentID: CFD2DEC1-8CF3-432F-AF78-7419632CC842
-        triggerSource: siriShortcut
+        triggerSource: appShortcut
   action:
     - service: switch.toggle
       target:
@@ -26,7 +26,7 @@
         sourceDeviceID: davids_iphone
         sourceDeviceName: Davids iPhone
         sourceDevicePermanentID: CFD2DEC1-8CF3-432F-AF78-7419632CC842
-        triggerSource: siriShortcut
+        triggerSource: appShortcut
     - platform: event
       event_type: ios.action_fired
       event_data:
@@ -35,7 +35,7 @@
         sourceDeviceID: nellies_iphone
         sourceDeviceName: Nellies iPhone
         sourceDevicePermanentID: 339E737F-6B8D-4568-8F98-3E422F7E98D8
-        triggerSource: siriShortcut
+        triggerSource: appShortcut
   action:
     - service: light.turn_off
       target:
@@ -58,7 +58,7 @@
         sourceDeviceID: davids_iphone
         sourceDeviceName: Davids iPhone
         sourceDevicePermanentID: CFD2DEC1-8CF3-432F-AF78-7419632CC842
-        triggerSource: siriShortcut
+        triggerSource: appShortcut
   action:
     - service: switch.turn_on
       target:

@@ -197,6 +197,7 @@ monitor_docker:
       - wyoming-piper
       - wyoming-whisper
       - ApacheGuacamole
+      - ESPHome
     rename:
       code-server: Code Server
       code-server-ha: Code Server HA

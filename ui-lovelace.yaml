@@ -934,6 +934,16 @@ views:
               type: entities
               show_header_toggle: false
             entities:
+              - switch.docker_esphome
+            filter:
+              include:
+                - entity_id: "sensor.docker_esphome*"
+          - type: divider
+          - type: custom:auto-entities
+            card:
+              type: entities
+              show_header_toggle: false
+            entities:
               - switch.docker_glances
             filter:
               include:

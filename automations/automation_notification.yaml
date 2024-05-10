@@ -1,14 +1,14 @@
 ################# CAR #################
 
-- alias: 'Car heater start'
+- alias: 'Car heater started'
   initial_state: on
   trigger:
     platform: state
-    entity_id: switch.rcb492_heater
+    entity_id: switch.sbw57s_heater
     to: 'on'
   condition:
     - condition: state
-      entity_id: device_tracker.rcb492
+      entity_id: device_tracker.sbw57s
       state: 'not_home'
     - condition: state
       entity_id: person.david
@@ -17,17 +17,17 @@
     service: notify.mobile_app_davids_iphone
     data:
       title: 'Volvo V60'
-      message: 'Parkeringsvärmaren har startat'
+      message: 'Klimatanläggning startad'
 
 - alias: 'Car heater audio notification'
   initial_state: on
   trigger:
     platform: state
-    entity_id: switch.rcb492_heater
+    entity_id: switch.sbw57s_heater
     to: 'on'
   condition:
     - condition: state
-      entity_id: device_tracker.rcb492
+      entity_id: device_tracker.sbw57s
       state: 'home'
     - condition: state
       entity_id: person.david
@@ -37,7 +37,7 @@
     data:
       entity_id: media_player.kitchen_sonos
       volume: 0.1
-      message: 'Parkeringsvärmaren har startat'
+      message: 'Klimatanläggning startad'
 
 - alias: 'Low washer fluid'
   initial_state: on
@@ -46,7 +46,7 @@
     at: '07:00:00'
   condition:
     condition: state
-    entity_id: binary_sensor.rcb492_washer_fluid
+    entity_id: binary_sensor.sbw57s_washer_fluid
     state: 'on'
   action:
     service: notify.mobile_app_davids_iphone

@@ -12,20 +12,39 @@ views:
         entities:
           - person.david
           - person.nellie
-          - sensor.car_status
-          - entity: sensor.rcb492_range
-            name: 'Räckvidd'
-          - entity: switch.rcb492_heater
-            name: 'Värmare'
-          - entity: sensor.outdoor_temperature
-            name: 'Utomhus'
-          - sensor.hallway_top_floor_temperature
           - entity: sensor.plex_oden
             name: Plex
             icon: mdi:plex
+            double_tap_action:
+              action: navigate
+              navigation_path: /lovelace/7
           - entity: sensor.hacs
             name: 'HACS'
+            double_tap_action:
+              action: navigate
+              navigation_path: /hacs/entry
           - alarm_control_panel.ajax_alarm_status
+          - entity: sensor.car_status
+            double_tap_action:
+              action: navigate
+              navigation_path: /lovelace/8
+          - entity: sensor.sbw57s_battery_level
+            name: 'Batteri'
+          - entity: binary_sensor.sbw57s_battery_charging
+            name: 'Status'
+          - entity: sensor.sbw57s_range
+            name: 'Räckvidd'
+          - entity: switch.sbw57s_heater
+            name: 'Klimat'
+            card_mod:
+              style: |
+                :host {
+                  {% if states('sensor.outdoor_temperature') | float > 15 %}
+                  --card-mod-icon: mdi:air-conditioner;
+                  {% else %}
+                  --card-mod-icon: mdi:radiator;
+                  {% endif %}
+                }
 
       - type: entities
         title: Belysning
@@ -638,6 +657,7 @@ views:
 
       - type: weather-forecast
         entity: weather.smhi_hem
+        forecast_type: daily
 
       - type: custom:horizon-card
         language: sv
@@ -1042,18 +1062,27 @@ views:
         cards:
           - type: glance
             entities:
-              - entity: binary_sensor.rcb492_door_lock
+              - entity: binary_sensor.sbw57s_door_lock
                 name: Dörrar
-              - entity: switch.rcb492_heater
-                name: Värmare
-              - entity: binary_sensor.rcb492_engine
+              - entity: switch.sbw57s_heater
+                name: 'Klimat'
+                card_mod:
+                  style: |
+                    :host {
+                      {% if states('sensor.outdoor_temperature') | float > 15 %}
+                      --card-mod-icon: mdi:air-conditioner;
+                      {% else %}
+                      --card-mod-icon: mdi:radiator;
+                      {% endif %}
+                    }
+              - entity: binary_sensor.sbw57s_engine
                 name: Motor
                 icon: mdi:engine
           - type: horizontal-stack
             cards:
               - type: conditional
                 conditions:
-                  - entity: lock.rcb492_door_lock
+                  - entity: lock.sbw57s_door_lock
                     state: 'locked'
                 card:
                   type: button
@@ -1063,12 +1092,12 @@ views:
                     action: call-service
                     service: lock.unlock
                     service_data:
-                      entity_id: lock.rcb492_door_lock
+                      entity_id: lock.sbw57s_door_lock
                     confirmation:
                       text: 'Vill du låsa upp bilen?'
               - type: conditional
                 conditions:
-                  - entity: lock.rcb492_door_lock
+                  - entity: lock.sbw57s_door_lock
                     state: 'unlocked'
                 card:
                   type: button
@@ -1078,27 +1107,35 @@ views:
                     action: call-service
                     service: lock.lock
                     service_data:
-                      entity_id: lock.rcb492_door_lock
+                      entity_id: lock.sbw57s_door_lock
                     confirmation:
                       text: 'Vill du låsa bilen?'
               - type: conditional
                 conditions:
-                  - entity: switch.rcb492_heater
+                  - entity: switch.sbw57s_heater
                     state: 'off'
                 card:
                   type: button
-                  name: 'Starta värmare'
-                  icon: mdi:radiator
+                  name: 'Klimat'
+                  card_mod:
+                    style: |
+                      :host {
+                        {% if states('sensor.outdoor_temperature') | float > 15 %}
+                        --card-mod-icon: mdi:air-conditioner;
+                        {% else %}
+                        --card-mod-icon: mdi:radiator;
+                        {% endif %}
+                      }
                   tap_action:
                     action: call-service
                     service: switch.turn_on
                     service_data:
-                      entity_id: switch.rcb492_heater
+                      entity_id: switch.sbw57s_heater
                     confirmation:
-                      text: 'Vill du starta parkeringsvärmaren?'
+                      text: 'Vill du starta förkonditionering?'
               - type: conditional
                 conditions:
-                  - entity: switch.rcb492_heater
+                  - entity: switch.sbw57s_heater
                     state: 'on'
                 card:
                   type: button
@@ -1108,7 +1145,7 @@ views:
                     action: call-service
                     service: switch.turn_off
                     service_data:
-                      entity_id: switch.rcb492_heater
+                      entity_id: switch.sbw57s_heater
                     confirmation:
                       text: 'Vill du stänga av parkeringsvärmaren?'
               - type: button
@@ -1118,49 +1155,59 @@ views:
                   action: call-service
                   service: switch.turn_on
                   service_data:
-                    entity_id: switch.rcb492_engine
+                    entity_id: switch.sbw57s_engine
                   confirmation:
                     text: 'Vill du starta motorn?'
+
+      - type: entities
+        title: Hybriddrivlina
+        show_header_toggle: false
+        entities:
+          - sensor.sbw57s_battery_level
+          - sensor.sbw57s_battery_range
+          - binary_sensor.sbw57s_plug_status
+          - binary_sensor.sbw57s_battery_charging
+          - sensor.sbw57s_time_to_fully_charged
 
       - type: entities
         title: Översikt
         show_header_toggle: false
         entities:
-          - binary_sensor.rcb492_doors
-          - binary_sensor.rcb492_windows
-          - binary_sensor.rcb492_hood
-          - binary_sensor.rcb492_brake_fluid
-          - binary_sensor.rcb492_bulbs
-          - binary_sensor.rcb492_service
-          - binary_sensor.rcb492_washer_fluid
-          - sensor.rcb492_fuel_level
-          - sensor.rcb492_fuel_amount
-          - sensor.rcb492_range
-          - sensor.rcb492_fuel_consumption
+          - binary_sensor.sbw57s_doors
+          - binary_sensor.sbw57s_windows
+          - binary_sensor.sbw57s_hood
+          - binary_sensor.sbw57s_brake_fluid
+          - binary_sensor.sbw57s_bulbs
+          - binary_sensor.sbw57s_service
+          - binary_sensor.sbw57s_washer_fluid
+          - sensor.sbw57s_fuel_level
+          - sensor.sbw57s_fuel_amount
+          - sensor.sbw57s_range
+          - sensor.sbw57s_fuel_consumption
 
       - type: entities
         title: Detaljer
         show_header_toggle: false
         entities:
-          - sensor.rcb492_last_trip
-          - sensor.rcb492_odometer
-          - sensor.rcb492_trip_meter_1
-          - sensor.rcb492_trip_meter_2
-          - sensor.rcb492_average_speed
-          - binary_sensor.rcb492_front_left_door
-          - binary_sensor.rcb492_front_right_door
-          - binary_sensor.rcb492_rear_left_door
-          - binary_sensor.rcb492_rear_right_door
-          - binary_sensor.rcb492_hood
-          - binary_sensor.rcb492_tailgate
-          - binary_sensor.rcb492_front_left_window
-          - binary_sensor.rcb492_front_right_window
-          - binary_sensor.rcb492_rear_left_window
-          - binary_sensor.rcb492_rear_right_window
-          - binary_sensor.rcb492_front_left_tyre
-          - binary_sensor.rcb492_front_right_tyre
-          - binary_sensor.rcb492_rear_left_tyre
-          - binary_sensor.rcb492_rear_right_tyre
+          - sensor.sbw57s_last_trip
+          - sensor.sbw57s_odometer
+          - sensor.sbw57s_trip_meter_1
+          - sensor.sbw57s_trip_meter_2
+          - sensor.sbw57s_average_speed
+          - binary_sensor.sbw57s_front_left_door
+          - binary_sensor.sbw57s_front_right_door
+          - binary_sensor.sbw57s_rear_left_door
+          - binary_sensor.sbw57s_rear_right_door
+          - binary_sensor.sbw57s_hood
+          - binary_sensor.sbw57s_tailgate
+          - binary_sensor.sbw57s_front_left_window
+          - binary_sensor.sbw57s_front_right_window
+          - binary_sensor.sbw57s_rear_left_window
+          - binary_sensor.sbw57s_rear_right_window
+          - binary_sensor.sbw57s_front_left_tire
+          - binary_sensor.sbw57s_front_right_tire
+          - binary_sensor.sbw57s_rear_left_tire
+          - binary_sensor.sbw57s_rear_right_tire
 
 ################# QBITTORRENT #################
 

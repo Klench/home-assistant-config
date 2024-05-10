@@ -39,7 +39,7 @@
       entity_id: group.device_tracker_family
       to: 'home'
     - platform: state
-      entity_id: device_tracker.volvo_rcb492
+      entity_id: device_tracker.volvo_sbw57s
       to: 'home'
   condition:
     - condition: state
@@ -81,7 +81,7 @@
       entity_id: group.device_tracker_family
       to: 'home'
     - platform: state
-      entity_id: device_tracker.volvo_rcb492
+      entity_id: device_tracker.volvo_sbw57s
       to: 'home'
   condition:
     - condition: state
@@ -114,7 +114,7 @@
       entity_id: group.device_tracker_family
       to: 'home'
     - platform: state
-      entity_id: device_tracker.volvo_rcb492
+      entity_id: device_tracker.volvo_sbw57s
       to: 'home'
     - platform: state
       entity_id: person.nellie

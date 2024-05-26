@@ -199,7 +199,7 @@ monitor_docker:
       - ApacheGuacamole
       - ESPHome
     rename:
-      code-server: Code Server
+      code-server: Code Server appdata
       code-server-ha: Code Server HA
       duplicati: Duplicati
       glances: Glances

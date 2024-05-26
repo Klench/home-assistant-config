@@ -276,6 +276,10 @@
           - sensor.docker_mariadb_state
           - sensor.docker_wordpress_state
         state: 'running'
+      - condition: time
+        after: "04:00:00"
+        before: "05:00:00"
+        weekday: sun
   action:
     service: notify.mobile_app_davids_iphone
     data:

@@ -101,6 +101,9 @@
     - condition: state
       entity_id: group.indoor_lights
       state: 'on'
+    - condition: state
+      entity_id: binary_sensor.relaxed_mode
+      state: 'off'
   action:
     service: script.turn_on
     target:

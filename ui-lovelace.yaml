@@ -509,29 +509,76 @@ views:
             - switch.docker_frigate
 
       - type: custom:frigate-card
+        live:
+          auto_unmute: selected
+        menu:
+          buttons:
+            expand:
+              enabled: true
         cameras:
           - camera_entity: camera.asgari_1
+            live_provider: go2rtc
+          - camera_entity: camera.deltaco_1
+            live_provider: go2rtc
+            # go2rtc:
+            #   stream: deltaco-1
+            #   modes:
+            #     - mse
 
-      - type: entities
-        title: Baksida
-        show_header_toggle: false
-        entities:
-          - camera.asgari_1
-          - binary_sensor.asgari_1_motion
-          - binary_sensor.asgari_1_person_occupancy
-          - sensor.asgari_1_person_count
-          - image.asgari_1_person
-          - type: section
-            label: Notiser
-          - entity: automation.person_detected_notify_davids_iphone
-            name: Davids iPhone
-            icon: mdi:cellphone-sound
-          - entity: automation.person_detected_notify_nellies_iphone
-            name: Nellies iPhone
-            icon: mdi:cellphone-sound
-          - entity: automation.person_detected_notify_sonos
-            name: Högtalare
-            icon: mdi:speaker-wireless
+      - type: horizontal-stack
+        cards:
+          - type: vertical-stack
+            cards:
+              - type: markdown
+                content: >
+                  ### Uteplats
+              - type: tile
+                entity: camera.asgari_1
+                show_entity_picture: true
+                double_tap_action:
+                  action: navigate
+                  navigation_path: /config/devices/device/d455541e2b2ff477bd1a31ad1fcda320
+              - type: tile
+                entity: image.asgari_1_person
+                show_entity_picture: true
+              - type: tile
+                entity: automation.person_detected_notify_davids_iphone
+                name: Davids iPhone
+                icon: mdi:cellphone-sound
+              - type: tile
+                entity: automation.person_detected_notify_nellies_iphone
+                name: Nellies iPhone
+                icon: mdi:cellphone-sound
+              - type: tile
+                entity: automation.person_detected_notify_sonos
+                name: Högtalare
+                icon: mdi:speaker-wireless
+          - type: vertical-stack
+            cards:
+              - type: markdown
+                content: >
+                  ### Barnrum
+              - type: tile
+                entity: camera.deltaco_1
+                show_entity_picture: true
+                double_tap_action:
+                  action: navigate
+                  navigation_path: /config/devices/device/d855d561ee58d21e04921a812ba31a3a
+              - type: tile
+                entity: binary_sensor.deltaco_1_crying_sound
+                name: Detekterat gråt
+                icon: mdi:emoticon-cry-outline
+                state_content:
+                  - state
+                  - last-changed
+              - type: tile
+                entity: automation.sound_detected_notify_davids_iphone
+                name: Davids iPhone
+                icon: mdi:cellphone-sound
+              - type: tile
+                entity: automation.sound_detected_notify_nellies_iphone
+                name: Nellies iPhone
+                icon: mdi:cellphone-sound
 
 ################# ROBOT VACUUM #################
 
@@ -884,10 +931,10 @@ views:
               type: entities
               show_header_toggle: false
             entities:
-              - switch.docker_code_server
+              - switch.docker_code_server_appdata
             filter:
               include:
-                - entity_id: "sensor.docker_code_server*"
+                - entity_id: "sensor.docker_code_server_appdata*"
           - type: divider
           - type: custom:auto-entities
             card:

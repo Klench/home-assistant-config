@@ -124,6 +124,8 @@
 
 ################# CCTV #################
 
+##### OUTDOOR PORCH #####
+
 - alias: 'Person detected notify Davids iPhone'
   trigger:
     platform: state
@@ -177,6 +179,86 @@
       entity_id: media_player.livingroom_sonos
       media_filename: "US-EN-Morgan-Freeman-Motion-Detected.mp3"
       volume: 0.3
+
+##### CHILD ROOM #####
+
+- alias: 'Sound detected notify Davids iPhone'
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.deltaco_1_child_singing_sound
+      to: 'on'
+    - platform: state
+      entity_id: binary_sensor.deltaco_1_crying_sound
+      to: 'on'
+    - platform: state
+      entity_id: binary_sensor.deltaco_1_humming_sound
+      to: 'on'
+    - platform: state
+      entity_id: binary_sensor.deltaco_1_scream_sound
+      to: 'on'
+    - platform: state
+      entity_id: binary_sensor.deltaco_1_humming_sound
+      to: 'on'
+    - platform: state
+      entity_id: binary_sensor.deltaco_1_singing_sound
+      to: 'on'
+    - platform: state
+      entity_id: binary_sensor.deltaco_1_whispering_sound
+      to: 'on'
+    - platform: state
+      entity_id: binary_sensor.deltaco_1_yell_sound
+      to: 'on'
+  action:
+    service: notify.mobile_app_davids_iphone
+    data:
+      title: 'Barnrum'
+      message: 'Ljud detekterat'
+      data:
+        url: "/lovelace/2"
+        push:
+          sound:
+            name: "WebcamStart.caf"
+            critical: 1
+            volume: 0.8
+
+- alias: 'Sound detected notify Nellies iPhone'
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.deltaco_1_child_singing_sound
+      to: 'on'
+    - platform: state
+      entity_id: binary_sensor.deltaco_1_crying_sound
+      to: 'on'
+    - platform: state
+      entity_id: binary_sensor.deltaco_1_humming_sound
+      to: 'on'
+    - platform: state
+      entity_id: binary_sensor.deltaco_1_scream_sound
+      to: 'on'
+    - platform: state
+      entity_id: binary_sensor.deltaco_1_humming_sound
+      to: 'on'
+    - platform: state
+      entity_id: binary_sensor.deltaco_1_singing_sound
+      to: 'on'
+    - platform: state
+      entity_id: binary_sensor.deltaco_1_whispering_sound
+      to: 'on'
+    - platform: state
+      entity_id: binary_sensor.deltaco_1_yell_sound
+      to: 'on'
+  action:
+    service: notify.mobile_app_nellies_iphone
+    data:
+      title: 'Barnrum'
+      message: 'Ljud detekterat'
+      data:
+        url: "/lovelace/2"
+        push:
+          sound:
+            name: "WebcamStart.caf"
+            critical: 1
+            volume: 0.8
 
 ################# TRAEFIK STATUS #################
 

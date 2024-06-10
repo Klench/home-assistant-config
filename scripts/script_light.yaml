@@ -456,6 +456,9 @@ office_advent_lights:
 
 office_wakeup:
   sequence:
+    - condition: state
+      entity_id: sun.sun
+      state: 'below_horizon'
     - service: light.turn_on
       data:
         entity_id: light.office_ceiling
@@ -563,6 +566,11 @@ hallway_top_floor_bright:
       data:
         entity_id: light.hallway_ceiling_top_floor
         brightness_pct: 100
+        kelvin: 3300
+    - service: script.ikea_light_turn_on
+      data:
+        entity_id: light.hallway_stair_group
+        brightness_pct: 70
         kelvin: 3300
 
 hallway_bottom_floor_bright:

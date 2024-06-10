@@ -162,20 +162,22 @@
   action:
     service: script.turn_off_outdoor_lights
 
-- alias: 'Outdoor lights at HA startup'
+- alias: 'Outdoor lights when sun above horizon'
   initial_state: on
   trigger:
-    platform: homeassistant
-    event: start
+    platform: time_pattern
+    minutes: "/30"
   condition:
     - condition: state
       entity_id: sun.sun
       state: 'above_horizon'
     - condition: state
-      entity_id: light.outdoor_lights
+      entity_id:
+        - light.outdoor_main_entrance
+        - light.outdoor_porch
+      match: any
       state: 'on'
   action:
-    - delay: '00:10:00'
     - service: script.turn_off_outdoor_lights
 
 - alias: 'Turn off child room night light at sunrise'

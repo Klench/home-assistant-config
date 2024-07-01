@@ -582,9 +582,17 @@ hallway_bottom_floor_bright:
         kelvin: 3300
     - service: script.ikea_light_turn_on
       data:
-        entity_id: light.hallway_stair_group
+        entity_id: light.hallway_stair_down
         brightness_pct: 70
         kelvin: 3300
+    - service: script.ikea_light_turn_on
+      data:
+        entity_id: light.hallway_stair_up
+        brightness_pct: 100
+        kelvin: 3300
+    - service: light.turn_off
+      target:
+        entity_id: light.hallway_ceiling_top_floor
 
 hallway_relaxed:
   alias: 'Mysbelysning'

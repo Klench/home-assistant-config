@@ -110,14 +110,19 @@ views:
         entities:
           - entity: script.hallway_bright
             icon: mdi:lightbulb-on-outline
+            double_tap_action:
+              action: call-service
+              service: script.hallway_bottom_floor_bright
           - entity: script.hallway_relaxed
             icon: mdi:lightbulb-on
           - light.hallway_ceiling_bottom_floor
           - light.hallway_ceiling_top_floor
           - entity: light.hallway_stair_group
-            hold_action:
-              action: navigate
-              navigation_path: /config/devices/device/a09ef8c7bb359eab9a4452d198fcbee9
+            double_tap_action:
+              action: call-service
+              service: light.turn_off
+              target:
+                entity_id: light.hallway_stair_up
 
       - type: entities
         title: Sovrum

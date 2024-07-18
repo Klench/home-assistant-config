@@ -410,6 +410,41 @@
     #     entity_id:
     #       - script.childroom_bright
 
+################# TURN OFF TOP FLOOR LIGHTS NOT IN USE #################
+
+- alias: 'Turn off top floor lights not in use'
+  initial_state: on
+  trigger:
+    platform: time_pattern
+    minutes: "/30"
+  condition:
+    - condition: state
+      entity_id: binary_sensor.relaxed_mode
+      state: 'off'
+    - or:
+      - condition: state
+        entity_id: light.hallway_ceiling_top_floor
+        state: 'on'
+      - condition: state
+        entity_id: media_player.childroom_sonos
+        state: 'playing'
+    - condition: state
+      entity_id:
+        - binary_sensor.hallway_top_floor_motion
+        - switch.wol_vidar
+        - device_tracker.sela_ltjs4sl13
+      state: 'off'
+      for: "00:30:00"
+  action:
+    - service: script.turn_on
+      target:
+        entity_id: script.hallway_bottom_floor_bright
+    - service: light.turn_off
+      target:
+        entity_id:
+          - light.office_ceiling
+          - light.childroom_ceiling
+
 ################# MISC #################
 
 - alias: 'Tor turning off'

@@ -419,30 +419,10 @@ views:
                 entity_id: media_player.childroom_sonos
                 media_content_type: playlist
                 media_content_id: 'plex://{"library_name": "Musik", "playlist_name": "Disney Piano"}'
-            - name: Peaceful Guitar
+            - name: Bamses godnattstund
               icon: mdi:spotify
               type: music
-              id: spotify:playlist:37i9dQZF1DX0jgyAiPl8Af
-            - name: Instrumentala vaggvisor
-              icon: mdi:spotify
-              type: music
-              id: spotify:playlist:0AN9INqQysBuGphdxgkfkw
-            - name: Piano worship
-              icon: mdi:spotify
-              type: music
-              id: spotify:playlist:3zJnlFpxQ9s7VS5LSvbeSd
-            - name: Baby sleep
-              icon: mdi:spotify
-              type: music
-              id: spotify:playlist:37i9dQZF1DX0DxcHtn4Hwo
-            - name: Lullaby Baby
-              icon: mdi:spotify
-              type: music
-              id: spotify:album:49k5jl8u2iuxMU4iyczJ9M
-            - name: Skyrim sleep
-              icon: mdi:spotify
-              type: music
-              id: spotify:playlist:0cz5GpTRGnMYrqtEj3639f
+              id: spotify:album:5pwEdIxhI6cixxJecNvITG
 
       - type: conditional
         conditions:
@@ -490,7 +470,6 @@ views:
           - entity: switch.sonos_livingroom_speech_enhancement
             state_color: true
           - number.sonos_livingroom_bass
-          - number.sonos_livingroom_audio_delay
           - type: section
             label: Kök
           - number.sonos_kitchen_bass

@@ -20,6 +20,3 @@
     childroom_sonos_is_grouped:
       value_template: >
         {{ not is_state_attr('media_player.childroom_sonos','group_members',['media_player.childroom_sonos']) }}
-    bathroom_low_brightness_recently_executed:
-      value_template: >
-        {{ (utcnow() - states.script.bathroom_low_brightness.last_changed) < timedelta(seconds = 10) }}

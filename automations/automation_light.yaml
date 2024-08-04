@@ -324,9 +324,6 @@
       value_template: >
         {{ state_attr('light.bathroom_ceiling','brightness') < 255 }}
     - condition: state
-      entity_id: binary_sensor.bathroom_low_brightness_recently_executed
-      state: 'off'
-    - condition: state
       entity_id: binary_sensor.relaxed_mode
       state: 'off'
   action:
@@ -432,8 +429,11 @@
       entity_id:
         - binary_sensor.hallway_top_floor_motion
         - switch.wol_vidar
-        - device_tracker.sela_ltjs4sl13
       state: 'off'
+      for: "00:30:00"
+    - condition: state
+      entity_id: device_tracker.sela_ltjs4sl13
+      state: 'not_home'
       for: "00:30:00"
   action:
     - service: script.turn_on

@@ -693,6 +693,16 @@ views:
       - type: custom:horizon-card
         language: sv
 
+################# WIFI #################
+
+  - icon: mdi:wifi
+    visible:
+      - user: 107eee335bda4b4caf181a9d0310a3b0
+    cards:
+
+      - type: button
+        entity: group.wifi
+
 ################# UNRAID #################
 
   - icon: mdi:server-network
@@ -701,11 +711,12 @@ views:
     cards:
 
       - type: entities
-        title: Wake On LAN
+        title: Wake On LAN & Wi-Fi
         show_header_toggle: false
         entities:
           - switch.wol_vidar
           - switch.wol_rpi_3b
+          - group.wifi
 
       - type: entities
         title: Unraid

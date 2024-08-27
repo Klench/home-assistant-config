@@ -12,3 +12,11 @@ sonos_all_speakers:
     - media_player.kitchen_sonos
     - media_player.childroom_sonos
     - media_player.livingroom_sonos
+wifi:
+  name: "Wi-Fi"
+  icon: mdi:wifi
+  entities:
+    - switch.yggdrasil
+    - switch.stenman_guest
+    - switch.stenman_iot
+    - switch.stenman_iot_lan

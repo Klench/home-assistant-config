@@ -17,17 +17,17 @@ views:
             icon: mdi:plex
             double_tap_action:
               action: navigate
-              navigation_path: /lovelace/7
-          - entity: sensor.hacs
-            name: 'HACS'
+              navigation_path: /lovelace/8
+          - entity: sensor.outdoor_temperature
+            #name: 'HACS'
             double_tap_action:
               action: navigate
-              navigation_path: /hacs/entry
+              navigation_path: /lovelace/4
           - alarm_control_panel.ajax_alarm_status
           - entity: sensor.car_status
             double_tap_action:
               action: navigate
-              navigation_path: /lovelace/8
+              navigation_path: /lovelace/9
           - entity: sensor.sbw57s_battery_level
             name: 'Batteri'
           - entity: binary_sensor.sbw57s_battery_charging

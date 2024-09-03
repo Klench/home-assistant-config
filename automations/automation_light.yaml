@@ -58,6 +58,32 @@
   action:
     service: script.childroom_night_light
 
+- alias: 'Child room morning play light'
+  trigger:
+    platform: time
+    at: '06:00:00'
+  action:
+    service: light.turn_on
+    data:
+      entity_id: light.childroom_led_strip
+      brightness_pct: 30
+      rgb_color: [0,255,0]
+      transition: 2
+      effect: None
+
+- alias: 'Child room morning wakeup light'
+  trigger:
+    platform: time
+    at: '07:00:00'
+  action:
+    service: light.turn_on
+    data:
+      entity_id: light.childroom_led_strip
+      brightness_pct: 35
+      rgb_color: [0,0,255]
+      transition: 2
+      effect: None
+
 - alias: 'Advent lights workday'
   initial_state: on
   trigger:

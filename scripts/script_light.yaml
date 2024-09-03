@@ -31,11 +31,26 @@ indoor_lights_relaxed:
     - service: script.turn_on
       target:
         entity_id:
-          # - script.bedroom_relaxed
-          - script.office_relaxed
           - script.livingroom_relaxed
-          - script.hallway_relaxed
           - script.kitchen_relaxed
+          - script.childroom_night_light
+    - choose:
+        conditions:
+          condition: numeric_state
+          entity_id: sensor.outdoor_temperature
+          above: 20
+        sequence:
+          - service: script.ikea_light_turn_on
+            data:
+              entity_id: light.hallway_ceiling_bottom_floor
+              brightness_pct: 1
+              kelvin: 2200
+      default:
+        - service: script.turn_on
+          target:
+            entity_id:
+              - script.hallway_relaxed
+              - script.office_relaxed
 
 indoor_lights_low_brightness:
   alias: 'Låg ljusstyrka'

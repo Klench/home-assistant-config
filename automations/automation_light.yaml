@@ -441,9 +441,9 @@
     platform: time_pattern
     minutes: "/30"
   condition:
-    - condition: state
-      entity_id: binary_sensor.relaxed_mode
-      state: 'off'
+    - condition: time
+      after: '08:00:00'
+      before: '18:00:00'
     - or:
       - condition: state
         entity_id: light.hallway_ceiling_top_floor

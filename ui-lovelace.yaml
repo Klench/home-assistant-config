@@ -387,6 +387,14 @@ views:
                 entity_id: media_player.childroom_sonos
                 media_content_type: music
                 media_content_id: 'plex://{"library_name": "Musik", "album_name": "Soothing Lullabies with White Noise"}'
+            - name: Relaxing film music
+              icon: mdi:plex
+              type: service
+              id: media_player.play_media
+              data:
+                entity_id: media_player.childroom_sonos
+                media_content_type: music
+                media_content_id: 'plex://{"library_name": "Musik", "album_name": "Relaxing film music"}'
             - name: Worship Lullabies
               icon: mdi:plex
               type: service

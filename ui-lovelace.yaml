@@ -19,7 +19,6 @@ views:
               action: navigate
               navigation_path: /lovelace/8
           - entity: sensor.outdoor_temperature
-            #name: 'HACS'
             double_tap_action:
               action: navigate
               navigation_path: /lovelace/4
@@ -273,6 +272,7 @@ views:
           - light.outdoor_main_entrance
           - light.outdoor_porch
           # - light.outdoor_front_ledstrip
+          - binary_sensor.outdoor_shed_door
 
       - type: custom:auto-entities
         show_empty: false

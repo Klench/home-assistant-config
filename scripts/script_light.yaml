@@ -821,7 +821,7 @@ bathroom_low_brightness:
 ##### OUTDOOR #####
 
 turn_on_outdoor_lights:
-  alias: 'Tänd'
+  alias: 'Tänd belysning'
   sequence:
     - service: light.turn_on
       data:

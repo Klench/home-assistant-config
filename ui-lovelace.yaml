@@ -134,6 +134,7 @@ views:
             icon: mdi:lightbulb-on
           - entity: script.bedroom_low_brightness
             icon: mdi:lightbulb-on
+          - script.bedroom_nursery_light
           - light.bedroom_ceiling
           - light.bedroom_bedside
           - type: conditional

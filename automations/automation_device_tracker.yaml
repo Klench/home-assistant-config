@@ -13,9 +13,6 @@
     - platform: state
       entity_id: group.device_tracker_family
       to: 'home'
-    - platform: state
-      entity_id: device_tracker.volvo_sbw57s
-      to: 'home'
   condition:
     - condition: state
       entity_id: input_boolean.coming_home_turn_on_lights
@@ -55,9 +52,6 @@
     - platform: state
       entity_id: group.device_tracker_family
       to: 'home'
-    - platform: state
-      entity_id: device_tracker.volvo_sbw57s
-      to: 'home'
   condition:
     - condition: state
       entity_id: input_boolean.coming_home_turn_on_lights
@@ -89,9 +83,6 @@
       entity_id: group.device_tracker_family
       to: 'home'
     - platform: state
-      entity_id: device_tracker.volvo_sbw57s
-      to: 'home'
-    - platform: state
       entity_id: person.nellie
       to: 'home'
   condition:
@@ -109,6 +100,9 @@
         - condition: state
           entity_id: group.indoor_lights
           state: 'off'
+        - condition: state
+          entity_id: device_tracker.sela_ltjs4sl13
+          state: 'home'
         - condition: state
           entity_id: input_boolean.away_lights_active
           state: 'on'

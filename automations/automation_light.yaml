@@ -58,19 +58,6 @@
   action:
     service: script.childroom_night_light
 
-- alias: 'Child room morning play light'
-  trigger:
-    platform: time
-    at: '06:00:00'
-  action:
-    service: light.turn_on
-    data:
-      entity_id: light.childroom_led_strip
-      brightness_pct: 30
-      rgb_color: [0,255,0]
-      transition: 2
-      effect: None
-
 - alias: 'Child room morning wakeup light'
   trigger:
     platform: time
@@ -79,7 +66,7 @@
     service: light.turn_on
     data:
       entity_id: light.childroom_led_strip
-      brightness_pct: 35
+      brightness_pct: 12
       rgb_color: [0,0,255]
       transition: 2
       effect: None
@@ -349,9 +336,9 @@
     - condition: template
       value_template: >
         {{ state_attr('light.bathroom_ceiling','brightness') < 255 }}
-    - condition: state
-      entity_id: binary_sensor.relaxed_mode
-      state: 'off'
+    - condition: time
+      after: '06:30:00'
+      before: '18:00:00'
   action:
     service: light.turn_on
     data:
@@ -373,9 +360,24 @@
     - condition: state
       entity_id: light.hallway_ceiling_top_floor
       state: 'off'
-    - condition: time
-      before: '18:00:00'
-      after: '07:00:00'
+    - condition: or
+      conditions:
+        - condition: and
+          conditions:
+            - condition: state
+              entity_id: binary_sensor.workday_sensor
+              state: 'off'
+            - condition: time
+              before: '18:00:00'
+              after: '09:30:00'
+        - condition: and
+          conditions:
+            - condition: state
+              entity_id: binary_sensor.workday_sensor
+              state: 'on'
+            - condition: time
+              before: '18:00:00'
+              after: '07:00:00'
     - condition: template
       value_template: >
         {{ is_state_attr('light.hallway_ceiling_bottom_floor','brightness',255) }}
@@ -403,17 +405,21 @@
       state: 'off'
     - condition: or
       conditions:
-        - condition: time
-          weekday:
-            - sat
-            - sun
-          after: '09:30:00'
+        - condition: and
+          conditions:
+            - condition: state
+              entity_id: binary_sensor.workday_sensor
+              state: 'off'
+            - condition: time
+              before: '18:00:00'
+              after: '09:30:00'
         - condition: and
           conditions:
             - condition: state
               entity_id: binary_sensor.workday_sensor
               state: 'on'
             - condition: time
+              before: '18:00:00'
               after: '07:00:00'
     - condition: template
       value_template: >

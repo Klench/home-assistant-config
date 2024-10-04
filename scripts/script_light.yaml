@@ -72,12 +72,6 @@ indoor_lights_low_brightness:
               - light.hallway_ceiling_group
         - service: light.turn_on
           data:
-            entity_id: light.livingroom_floor
-            brightness_pct: 20
-            kelvin: 2200
-            transition: 2
-        - service: light.turn_on
-          data:
             entity_id: light.kitchen_table
             brightness_pct: 50
             transition: 2
@@ -89,15 +83,21 @@ indoor_lights_low_brightness:
         - service: script.turn_on
           target:
             entity_id:
+              - script.livingroom_low_brightness
               - script.bathroom_low_brightness
               - script.office_low_brightness
     default:
       - service: script.turn_on
         target:
           entity_id:
-            - script.livingroom_low_brightness
             - script.hallway_bottom_floor_bright
             - script.kitchen_bright
+      - service: light.turn_on
+        data:
+          entity_id: light.livingroom_floor
+          brightness_pct: 100
+          kelvin: 2700
+          transition: 2
 
 indoor_lights_off:
   alias: 'Allt släckt'
@@ -288,23 +288,47 @@ bedroom_low_brightness:
         entity_id: light.bedroom_bedside
         brightness_pct: 1
         transition: 2
-    # - service: light.turn_off
-    #   target:
-    #     entity_id: light.bedroom_bedside
-    # - service: light.turn_on
-    #   data:
-    #     entity_id: light.bedroom_ceiling
-    #     brightness_pct: 1
-    #     rgb_color: [255,1,1]
-    #     transition: 2
-    # - delay:
-    #       milliseconds: 2100
-    # - service: light.turn_on
-    #   data:
-    #     entity_id: light.bedroom_ceiling
-    #     brightness_pct: 1
-    #     rgb_color: [255,1,1]
-    #     transition: 2
+
+bedroom_nursery_light:
+  alias: 'Amningsbelysning'
+  sequence:
+    - service: light.turn_off
+      target:
+        entity_id: light.bedroom_bedside
+    - service: light.turn_on
+      data:
+        entity_id: light.bedroom_ceiling
+        brightness_pct: 1
+        rgb_color: [255,1,1]
+        transition: 2
+    - delay:
+          milliseconds: 2100
+    - service: light.turn_on
+      data:
+        entity_id: light.bedroom_ceiling
+        brightness_pct: 1
+        rgb_color: [255,1,1]
+        transition: 2
+
+bedroom_nursery_light_high:
+  sequence:
+    - service: light.turn_off
+      target:
+        entity_id: light.bedroom_bedside
+    - service: light.turn_on
+      data:
+        entity_id: light.bedroom_ceiling
+        brightness_pct: 50
+        rgb_color: [255,1,1]
+        transition: 2
+    - delay:
+          milliseconds: 2100
+    - service: light.turn_on
+      data:
+        entity_id: light.bedroom_ceiling
+        brightness_pct: 50
+        rgb_color: [255,1,1]
+        transition: 2
 
 bedroom_advent_lights:
   sequence:
@@ -362,7 +386,7 @@ childroom_night_light:
     - service: light.turn_on
       data:
         entity_id: light.childroom_led_strip
-        brightness_pct: 25
+        brightness_pct: 20
         rgb_color: [255,0,0]
         transition: 2
         effect: None
@@ -535,8 +559,13 @@ livingroom_low_brightness:
     - service: light.turn_on
       data:
         entity_id: light.livingroom_floor
-        brightness_pct: 100
-        kelvin: 2700
+        brightness_pct: 20
+        kelvin: 2200
+        transition: 2
+    - service: light.turn_on
+      data:
+        entity_id: light.livingroom_couch_table
+        brightness_pct: 10
         transition: 2
 
 livingroom_advent_lights:

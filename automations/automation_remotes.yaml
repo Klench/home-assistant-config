@@ -292,6 +292,100 @@
   action:
     service: script.indoor_lights_off
 
+- alias: 'Ikea styrbar bedroom on'
+  initial_state: on
+  trigger:
+    platform: event
+    event_type: zha_event
+    event_data:
+      device_id: f423762e1c28755b0123cc7fd21c5fa7
+      command: 'on'
+  action:
+    service: script.bedroom_relaxed
+
+- alias: 'Ikea styrbar bedroom on long press'
+  initial_state: on
+  trigger:
+    platform: event
+    event_type: zha_event
+    event_data:
+      device_id: f423762e1c28755b0123cc7fd21c5fa7
+      command: 'move_with_on_off'
+  action:
+    service: script.bedroom_low_brightness
+
+- alias: 'Ikea styrbar bedroom off'
+  initial_state: on
+  trigger:
+    platform: event
+    event_type: zha_event
+    event_data:
+      device_id: f423762e1c28755b0123cc7fd21c5fa7
+      command: 'off'
+  action:
+    - service: light.turn_off
+      target:
+        area_id: sovrum
+
+- alias: 'Ikea styrbar bedroom off long press'
+  initial_state: on
+  trigger:
+    platform: event
+    event_type: zha_event
+    event_data:
+      device_id: f423762e1c28755b0123cc7fd21c5fa7
+      command: 'move'
+  action:
+    service: script.indoor_lights_off
+
+- alias: 'Ikea styrbar bedroom increase press'
+  initial_state: on
+  trigger:
+    platform: event
+    event_type: zha_event
+    event_data:
+      device_id: f423762e1c28755b0123cc7fd21c5fa7
+      command: press
+      args: [256, 13, 0]
+  action:
+    choose:
+      conditions:
+        condition: state
+        entity_id: light.bedroom_ceiling
+        state: 'on'
+      sequence:
+        service: light.turn_on
+        data:
+          entity_id: light.bedroom_ceiling
+          brightness: >
+            {{ [state_attr('light.bedroom_ceiling','brightness') | int + 25, 255] | min }}
+    default:
+      service: script.bedroom_nursery_light_high
+
+- alias: 'Ikea styrbar bedroom decrease press'
+  initial_state: on
+  trigger:
+    platform: event
+    event_type: zha_event
+    event_data:
+      device_id: f423762e1c28755b0123cc7fd21c5fa7
+      command: press
+      args: [257, 13, 0]
+  action:
+    choose:
+      conditions:
+        condition: state
+        entity_id: light.bedroom_ceiling
+        state: 'on'
+      sequence:
+        service: light.turn_on
+        data:
+          entity_id: light.bedroom_ceiling
+          brightness: >
+            {{ [state_attr('light.bedroom_ceiling','brightness') | int - 25, 1] | max }}
+    default:
+      service: script.bedroom_nursery_light
+
 ##### CHILD ROOM #####
 
 - alias: 'Ikea button childroom toggle'

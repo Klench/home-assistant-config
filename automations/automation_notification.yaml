@@ -122,6 +122,74 @@
           critical: 1
           volume: 0.1
 
+##### SHED DOOR #####
+
+- alias: 'Shed door opened not home'
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: binary_sensor.outdoor_shed_door
+    to: 'on'
+  condition:
+    - condition: state
+      entity_id: alarm_control_panel.ajax_alarm_status
+      state: 'armed_away'
+    - condition: state
+      entity_id: group.device_tracker_family
+      state: 'not_home'
+  action:
+    service: notify.mobile_app_davids_iphone
+    data:
+      title: 'Larmstatus'
+      message: 'Förrådsdörr öppen'
+      data:
+        sound:
+          name: default
+          critical: 1
+          volume: 0.5
+
+- alias: 'Shed door opened alarm armed night'
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: binary_sensor.outdoor_shed_door
+    to: 'on'
+  condition:
+    condition: state
+    entity_id: alarm_control_panel.ajax_alarm_status
+    state: 'armed_night'
+  action:
+    service: notify.mobile_app_davids_iphone
+    data:
+      title: 'Larmstatus'
+      message: 'Förrådsdörr öppen'
+      data:
+        sound:
+          name: default
+          critical: 1
+          volume: 0.5
+
+- alias: 'Shed door open alarm armed night activated'
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: alarm_control_panel.ajax_alarm_status
+    to: 'armed_night'
+  condition:
+    condition: state
+    entity_id: binary_sensor.outdoor_shed_door
+    state: 'on'
+  action:
+    service: notify.mobile_app_davids_iphone
+    data:
+      title: 'Larmstatus'
+      message: 'Förrådsdörr öppen'
+      data:
+        sound:
+          name: default
+          critical: 1
+          volume: 0.1
+
 ################# CCTV #################
 
 ##### OUTDOOR PORCH #####

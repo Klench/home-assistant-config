@@ -268,6 +268,17 @@
   action:
     service: script.go_to_bed_lights
 
+- alias: 'Wakeup nursery'
+  trigger:
+    platform: time
+    at: input_datetime.wakeup_nursery
+  action:
+    service: light.turn_on
+    data:
+      entity_id: light.bedroom_bedside_2
+      brightness_pct: 50
+      transition: 2
+
 ################# AWAY #################
 
 - alias: 'Away turn on lights'

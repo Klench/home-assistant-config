@@ -10,3 +10,7 @@ wakeup_weekend:
   name: Väckningstid
   has_time: true
   icon: mdi:alarm
+wakeup_nursery:
+  name: Väckningstid
+  has_time: true
+  icon: mdi:alarm

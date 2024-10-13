@@ -1060,6 +1060,12 @@ views:
         show_header_toggle: false
         entities:
           - type: section
+            label: 'Amning'
+          - input_datetime.wakeup_nursery
+          - entity: automation.wakeup_nursery
+            name: 'Aktivera'
+            icon: mdi:mother-nurse
+          - type: section
             label: 'Vardagar'
           - input_datetime.wakeup_weekdays
           - entity: automation.wakeup_weekdays
@@ -1440,3 +1446,10 @@ views:
 #             name: LED-belysning
 #           - automation.closing_bathroom_door
 #           - automation.opening_bathroom_door
+
+################# HOME SECTION #################
+
+  - icon: mdi:home-assistant
+    type: sections
+    cards:
+

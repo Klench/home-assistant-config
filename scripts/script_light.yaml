@@ -7,7 +7,6 @@ indoor_lights_bright:
       target:
         entity_id:
           - script.livingroom_bright
-          - script.bedroom_bright
           - script.hallway_bright
           - script.kitchen_bright
           - script.office_bright
@@ -421,9 +420,13 @@ childroom_light_dim:
     - condition: state
       entity_id: light.childroom_ceiling
       state: 'on'
-    - service: script.turn_on
-      target:
-        entity_id: script.childroom_night_light
+    - service: light.turn_on
+      data:
+        entity_id: light.childroom_led_strip
+        brightness_pct: 40
+        rgb_color: [255,0,0]
+        transition: 2
+        effect: None
     - service: light.turn_on
       data:
         entity_id: light.childroom_ceiling
@@ -440,6 +443,12 @@ childroom_light_dim:
     - service: light.turn_off
       target:
         entity_id: light.childroom_ceiling
+    - condition: state
+      entity_id: device_tracker.sela_ltjs4sl13
+      state: 'not_home'
+    - service: light.turn_off
+      target:
+        entity_id: light.office_ceiling
 
 childroom_wakeup:
   sequence:

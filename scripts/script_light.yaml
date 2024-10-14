@@ -39,11 +39,14 @@ indoor_lights_relaxed:
           entity_id: sensor.outdoor_temperature
           above: 20
         sequence:
-          - service: script.ikea_light_turn_on
+          - service: script.turn_on
+            target:
+              entity_id: script.ikea_light_turn_on
             data:
-              entity_id: light.hallway_ceiling_bottom_floor
-              brightness_pct: 1
-              kelvin: 2200
+              variables:
+                entity_id: light.hallway_ceiling_bottom_floor
+                brightness_pct: 1
+                kelvin: 2200
       default:
         - service: script.turn_on
           target:
@@ -74,11 +77,14 @@ indoor_lights_low_brightness:
             entity_id: light.kitchen_table
             brightness_pct: 50
             transition: 2
-        - service: script.ikea_light_turn_on
+        - service: script.turn_on
+          target:
+            entity_id: script.ikea_light_turn_on
           data:
-            entity_id: light.hallway_stair_group
-            brightness_pct: 1
-            kelvin: 2200
+            variables:
+              entity_id: light.hallway_stair_group
+              brightness_pct: 1
+              kelvin: 2200
         - service: script.turn_on
           target:
             entity_id:
@@ -175,8 +181,7 @@ advent_lights_turn_on:
       state: 'off'
     - service: script.turn_on
       target:
-        entity_id:
-          - script.childroom_advent_lights
+        entity_id: script.childroom_advent_lights
 
 go_to_bed_lights:
   sequence:
@@ -600,49 +605,70 @@ livingroom_wakeup:
 hallway_bright:
   alias: 'Hög ljusstyrka'
   sequence:
-    - service: script.ikea_light_turn_on
+    - service: script.turn_on
+      target:
+        entity_id: script.ikea_light_turn_on
       data:
-        entity_id:
-          - light.hallway_ceiling_top_floor
-          - light.hallway_ceiling_bottom_floor
-        brightness_pct: 100
-        kelvin: 3300
-    - service: script.ikea_light_turn_on
+        variables:
+          entity_id:
+            - light.hallway_ceiling_top_floor
+            - light.hallway_ceiling_bottom_floor
+          brightness_pct: 100
+          kelvin: 3300
+    - service: script.turn_on
+      target:
+        entity_id: script.ikea_light_turn_on
       data:
-        entity_id: light.hallway_stair_group
-        brightness_pct: 70
-        kelvin: 3300
+        variables:
+          entity_id: light.hallway_stair_group
+          brightness_pct: 70
+          kelvin: 3300
 
 hallway_top_floor_bright:
   sequence:
-    - service: script.ikea_light_turn_on
+    - service: script.turn_on
+      target:
+        entity_id: script.ikea_light_turn_on
       data:
-        entity_id: light.hallway_ceiling_top_floor
-        brightness_pct: 100
-        kelvin: 3300
-    - service: script.ikea_light_turn_on
+        variables:
+          entity_id: light.hallway_ceiling_top_floor
+          brightness_pct: 100
+          kelvin: 3300
+    - service: script.turn_on
+      target:
+        entity_id: script.ikea_light_turn_on
       data:
-        entity_id: light.hallway_stair_group
-        brightness_pct: 70
-        kelvin: 3300
+        variables:
+          entity_id: light.hallway_stair_group
+          brightness_pct: 70
+          kelvin: 3300
 
 hallway_bottom_floor_bright:
   sequence:
-    - service: script.ikea_light_turn_on
+    - service: script.turn_on
+      target:
+        entity_id: script.ikea_light_turn_on
       data:
-        entity_id: light.hallway_ceiling_bottom_floor
-        brightness_pct: 100
-        kelvin: 3300
-    - service: script.ikea_light_turn_on
+        variables:
+          entity_id: light.hallway_ceiling_bottom_floor
+          brightness_pct: 100
+          kelvin: 3300
+    - service: script.turn_on
+      target:
+        entity_id: script.ikea_light_turn_on
       data:
-        entity_id: light.hallway_stair_down
-        brightness_pct: 70
-        kelvin: 3300
-    - service: script.ikea_light_turn_on
+        variables:
+          entity_id: light.hallway_stair_down
+          brightness_pct: 70
+          kelvin: 3300
+    - service: script.turn_on
+      target:
+        entity_id: script.ikea_light_turn_on
       data:
-        entity_id: light.hallway_stair_up
-        brightness_pct: 100
-        kelvin: 3300
+        variables:
+          entity_id: light.hallway_stair_up
+          brightness_pct: 100
+          kelvin: 3300
     - service: light.turn_off
       target:
         entity_id: light.hallway_ceiling_top_floor
@@ -650,18 +676,24 @@ hallway_bottom_floor_bright:
 hallway_relaxed:
   alias: 'Mysbelysning'
   sequence:
-    - service: script.ikea_light_turn_on
+    - service: script.turn_on
+      target:
+        entity_id: script.ikea_light_turn_on
       data:
-        entity_id:
-          - light.hallway_ceiling_bottom_floor
-          - light.hallway_stair_up
-        brightness_pct: 1
-        kelvin: 2200
-    - service: script.ikea_light_turn_on
+        variables:
+          entity_id:
+            - light.hallway_ceiling_bottom_floor
+            - light.hallway_stair_up
+          brightness_pct: 1
+          kelvin: 2200
+    - service: script.turn_on
+      target:
+        entity_id: script.ikea_light_turn_on
       data:
-        entity_id: light.hallway_stair_down
-        brightness_pct: 30
-        kelvin: 2200
+        variables:
+          entity_id: light.hallway_stair_down
+          brightness_pct: 30
+          kelvin: 2200
     - condition: state
       entity_id: light.hallway_ceiling_top_floor
       state: 'on'
@@ -759,19 +791,25 @@ kitchen_advent_lights:
 
 kitchen_advent_lights_bright:
   sequence:
-    - service: script.ikea_light_turn_on
+    - service: script.turn_on
+      target:
+        entity_id: script.ikea_light_turn_on
       data:
-        entity_id: light.kitchen_window
-        brightness_pct: 100
-        kelvin: 2700
+        variables:
+          entity_id: light.kitchen_window
+          brightness_pct: 100
+          kelvin: 2700
 
 kitchen_advent_lights_relaxed:
   sequence:
-    - service: script.ikea_light_turn_on
+    - service: script.turn_on
+      target:
+        entity_id: script.ikea_light_turn_on
       data:
-        entity_id: light.kitchen_window
-        brightness_pct: 60
-        kelvin: 2300
+        variables:
+          entity_id: light.kitchen_window
+          brightness_pct: 60
+          kelvin: 2300
 
 ##### BATHROOM #####
 

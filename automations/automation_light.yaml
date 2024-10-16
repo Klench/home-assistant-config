@@ -276,7 +276,7 @@
     service: light.turn_on
     data:
       entity_id: light.bedroom_bedside_2
-      brightness_pct: 50
+      brightness_pct: 100
       transition: 2
 
 ################# AWAY #################

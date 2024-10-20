@@ -49,30 +49,23 @@ views:
         title: Belysning
         show_header_toggle: false
         entities:
-          - entity: script.indoor_lights_bright
-            icon: mdi:lightbulb-on-outline
-          - entity: script.indoor_lights_relaxed
-            icon: mdi:lightbulb-on
-          - entity: script.indoor_lights_low_brightness
-            icon: mdi:lightbulb-on
+          - script.indoor_lights_bright
+          - script.indoor_lights_relaxed
+          - script.indoor_lights_low_brightness
           - type: conditional
             conditions:
               - entity: input_boolean.enable_advent_light_automations
                 state: 'on'
             row:
               entity: script.advent_lights_turn_on
-              icon: mdi:star-david
-          - entity: script.indoor_lights_off
-            icon: mdi:lightbulb-off
+          - script.indoor_lights_off
 
       - type: entities
         title: Vardagsrum
         show_header_toggle: false
         entities:
-          - entity: script.livingroom_bright
-            icon: mdi:lightbulb-on-outline
-          - entity: script.livingroom_relaxed
-            icon: mdi:lightbulb-on
+          - script.livingroom_bright
+          - script.livingroom_relaxed
           - light.livingroom_dinner_table
           - light.livingroom_couch_table
           - light.livingroom_floor
@@ -108,12 +101,10 @@ views:
         show_header_toggle: false
         entities:
           - entity: script.hallway_bright
-            icon: mdi:lightbulb-on-outline
             double_tap_action:
               action: call-service
               service: script.hallway_bottom_floor_bright
-          - entity: script.hallway_relaxed
-            icon: mdi:lightbulb-on
+          - script.hallway_relaxed
           - light.hallway_ceiling_bottom_floor
           - light.hallway_ceiling_top_floor
           - entity: light.hallway_stair_group
@@ -127,12 +118,9 @@ views:
         title: Sovrum
         show_header_toggle: false
         entities:
-          - entity: script.bedroom_bright
-            icon: mdi:lightbulb-on-outline
-          - entity: script.bedroom_relaxed
-            icon: mdi:lightbulb-on
-          - entity: script.bedroom_low_brightness
-            icon: mdi:lightbulb-on
+          - script.bedroom_bright
+          - script.bedroom_relaxed
+          - script.bedroom_low_brightness
           - script.bedroom_nursery_light
           - light.bedroom_ceiling
           - light.bedroom_bedside
@@ -147,12 +135,9 @@ views:
         title: Barnrum
         show_header_toggle: false
         entities:
-          - entity: script.childroom_bright
-            icon: mdi:lightbulb-on-outline
-          - entity: script.childroom_relaxed
-            icon: mdi:lightbulb-on
-          - entity: script.childroom_night_light
-            icon: mdi:moon-waning-crescent
+          - script.childroom_bright
+          - script.childroom_relaxed
+          - script.childroom_night_light
           - light.childroom_ceiling
           - light.childroom_led_strip
           - type: conditional
@@ -166,12 +151,9 @@ views:
         title: Arbetsrum
         show_header_toggle: false
         entities:
-          - entity: script.office_bright
-            icon: mdi:lightbulb-on-outline
-          - entity: script.office_relaxed
-            icon: mdi:lightbulb-on
-          - entity: script.office_low_brightness
-            icon: mdi:lightbulb-on
+          - script.office_bright
+          - script.office_relaxed
+          - script.office_low_brightness
           - light.office_ceiling
           - light.office_desk
           - type: conditional
@@ -192,10 +174,8 @@ views:
         title: Kök
         show_header_toggle: false
         entities:
-          - entity: script.kitchen_bright
-            icon: mdi:lightbulb-on-outline
-          - entity: script.kitchen_relaxed
-            icon: mdi:lightbulb-on
+          - script.kitchen_bright
+          - script.kitchen_relaxed
           - light.kitchen_table
           - light.kitchen_ceiling
           - type: conditional
@@ -218,10 +198,8 @@ views:
         title: Badrum
         show_header_toggle: false
         entities:
-          - entity: script.bathroom_bright
-            icon: mdi:lightbulb-on-outline
-          - entity: script.bathroom_low_brightness
-            icon: mdi:lightbulb-on
+          - script.bathroom_bright
+          - script.bathroom_low_brightness
           - light.bathroom_ceiling
           - light.bathroom_mirror
 
@@ -267,8 +245,7 @@ views:
         title: Utomhus
         show_header_toggle: false
         entities:
-          - entity: script.turn_on_outdoor_lights
-            icon: mdi:lightbulb-on-outline
+          - script.turn_on_outdoor_lights
           - light.outdoor_main_entrance
           - light.outdoor_porch
           # - light.outdoor_front_ledstrip

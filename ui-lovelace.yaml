@@ -389,6 +389,14 @@ views:
                 entity_id: media_player.childroom_sonos
                 media_content_type: music
                 media_content_id: 'plex://{"library_name": "Musik", "album_name": "Gentle Game Lullabies"}'
+            - name: Instrumental Lullabies
+              icon: mdi:plex
+              type: service
+              id: media_player.play_media
+              data:
+                entity_id: media_player.childroom_sonos
+                media_content_type: music
+                media_content_id: 'plex://{"library_name": "Musik", "album_name": "Instrumental Lullabies"}'
             - name: Disney Guitar
               icon: mdi:plex
               type: service
@@ -397,14 +405,6 @@ views:
                 entity_id: media_player.childroom_sonos
                 media_content_type: playlist
                 media_content_id: 'plex://{"library_name": "Musik", "playlist_name": "Disney Guitar"}'
-            - name: Disney Piano
-              icon: mdi:plex
-              type: service
-              id: media_player.play_media
-              data:
-                entity_id: media_player.childroom_sonos
-                media_content_type: playlist
-                media_content_id: 'plex://{"library_name": "Musik", "playlist_name": "Disney Piano"}'
             - name: Bamses godnattstund
               icon: mdi:spotify
               type: music

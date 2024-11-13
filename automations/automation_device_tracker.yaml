@@ -213,7 +213,7 @@
   action:
     service: light.turn_off
     target:
-      entity_id: light.office_ceiling
+      area_id: arbetsrum
 
 - alias: 'Coming home during work hours'
   initial_state: on
@@ -242,15 +242,19 @@
       entity_id: person.david
       state: 'home'
   action:
-    service: light.turn_off
-    target:
-      entity_id: 
-      - light.hallway_ceiling_bottom_floor
-      - light.hallway_stair_group
-      - light.kitchen_table
-      - light.livingroom_couch_table
-      - light.livingroom_dinner_table
-      - light.livingroom_floor
-      - light.livingroom_window
-      - light.bedroom_bedside
-      - light.childroom_ceiling
+    - service: light.turn_off
+      target:
+        entity_id:
+          - light.hallway_ceiling_bottom_floor
+          - light.hallway_stair_group
+        area_id:
+          - kok
+          - vardagsrum
+          - sovrum
+          - barnrum
+    - condition: state
+      entity_id: media_player.kitchen_sonos
+      state: 'playing'
+    - service: media_player.media_pause
+      target:
+        entity_id: media_player.kitchen_sonos

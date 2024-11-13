@@ -131,7 +131,7 @@ conversation:
 
 wake_on_lan:
 
-camera:
+stream:
 
 calendar:
   - platform: caldav

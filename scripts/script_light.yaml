@@ -413,6 +413,18 @@ childroom_light_warm:
 childroom_light_dim:
   mode: restart
   sequence:
+    - choose:
+        conditions:
+          - condition: state
+            entity_id: switch.wol_vidar
+            state: 'off'
+          - condition: state
+            entity_id: device_tracker.sela_ltjs4sl13
+            state: 'not_home'
+        sequence:
+          service: light.turn_off
+          target:
+            area_id: arbetsrum
     - service: script.turn_on
       target:
         entity_id: script.play_child_room_night_music
@@ -448,12 +460,6 @@ childroom_light_dim:
     - service: light.turn_off
       target:
         entity_id: light.childroom_ceiling
-    - condition: state
-      entity_id: device_tracker.sela_ltjs4sl13
-      state: 'not_home'
-    - service: light.turn_off
-      target:
-        entity_id: light.office_ceiling
 
 childroom_wakeup:
   sequence:

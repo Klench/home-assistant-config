@@ -1393,20 +1393,34 @@ views:
           - automation.tv_off_group_speakers
           - input_boolean.enable_bathroom_floor_heater_automations
 
-################# CLIMATE #################
+################# MEATER #################
 
-  - icon: mdi:radiator
+  - icon: mdi:food-steak
     cards:
 
-      - type: entities
-        title: Golvvärme badrum
-        show_header_toggle: false
-        entities:
-          - input_boolean.bathroom_floor_heater_auto
+      - type: custom:auto-entities
+        card:
+          type: entities
+          title: Meater
+          show_header_toggle: false
+        filter:
+          include:
+            - entity_id: "sensor.meater*"
 
-      - type: thermostat
-        entity: climate.bathroom_floor
-        name: Termostat
+################# CLIMATE #################
+
+  # - icon: mdi:radiator
+  #   cards:
+
+  #     - type: entities
+  #       title: Golvvärme badrum
+  #       show_header_toggle: false
+  #       entities:
+  #         - input_boolean.bathroom_floor_heater_auto
+
+  #     - type: thermostat
+  #       entity: climate.bathroom_floor
+  #       name: Termostat
 
 # ################# ESPHome #################
 

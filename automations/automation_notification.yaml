@@ -354,4 +354,4 @@
       title: 'Web service status'
       message: 'A web service is down'
       data:
-        url: "/lovelace/5"
+        url: "/lovelace/6"

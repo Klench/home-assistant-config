@@ -131,6 +131,8 @@ conversation:
 
 wake_on_lan:
 
+camera:
+
 calendar:
   - platform: caldav
     username: !secret icloud_email
@@ -141,10 +143,10 @@ calendar:
 
 ################# ZHA #################
 
-zha:
-  zigpy_config:
-    ota:
-      ikea_provider: true
+# zha:
+#   zigpy_config:
+#     ota:
+#       ikea_provider: true
   # custom_quirks_path: /config/custom_quirks
 
 ################# SHELLY #################
@@ -249,13 +251,13 @@ monitor_docker:
   #       entity_id: media_player.kodi
   #       method: System.Reboot
 
-sonos:
-  media_player:
-    advertise_addr: !secret oden_ip
-    hosts:
-      - !secret kitchen_sonos_ip
-      - !secret livingroom_sonos_ip
-      - !secret childroom_sonos_ip
+# sonos:
+#   media_player:
+#     advertise_addr: !secret oden_ip
+#     hosts:
+#       - !secret kitchen_sonos_ip
+#       - !secret livingroom_sonos_ip
+#       - !secret childroom_sonos_ip
 
 # Local media source
 media_source:

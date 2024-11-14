@@ -226,7 +226,6 @@ views:
           volume: true
           power: true
           runtime: false
-          runtime_remaining: false
         idle_view:
           when_idle: true
           when_standby: true
@@ -271,12 +270,16 @@ views:
 
       - type: custom:mini-media-player
         entity: media_player.kitchen_sonos
+        artwork: full-cover
+        icon: mdi:speaker-multiple
+        volume_stateless: true
+        volume_step: 3
         hide:
           power: true
           source: true
           shuffle: false
-        artwork: full-cover
-        icon: mdi:speaker-multiple
+          volume_level: false
+          runtime: false
         speaker_group:
           platform: sonos
           sync_volume: true
@@ -294,10 +297,14 @@ views:
         entity: media_player.livingroom_sonos
         artwork: cover
         icon: mdi:speaker
+        volume_stateless: true
+        volume_step: 3
         hide:
           power: true
           source: true
           shuffle: false
+          volume_level: false
+          runtime: false
         speaker_group:
           platform: sonos
           show_group_count: false
@@ -343,6 +350,7 @@ views:
           source: true
           shuffle: false
           volume_level: false
+          runtime: false
         speaker_group:
           platform: sonos
           show_group_count: false

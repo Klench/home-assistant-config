@@ -246,7 +246,7 @@ monitor_docker:
   #   username: osmc
   #   password: !secret kodi_password
   #   turn_off_action:
-  #     service: kodi.call_method
+  #     action: kodi.call_method
   #     data:
   #       entity_id: media_player.kodi
   #       method: System.Reboot

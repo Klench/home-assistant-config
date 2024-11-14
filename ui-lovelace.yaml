@@ -102,15 +102,15 @@ views:
         entities:
           - entity: script.hallway_bright
             double_tap_action:
-              action: call-service
-              service: script.hallway_bottom_floor_bright
+              action: perform-action
+              perform_action: script.hallway_bottom_floor_bright
           - script.hallway_relaxed
           - light.hallway_ceiling_bottom_floor
           - light.hallway_ceiling_top_floor
           - entity: light.hallway_stair_group
             double_tap_action:
-              action: call-service
-              service: light.turn_off
+              action: perform-action
+              perform_action: light.turn_off
               target:
                 entity_id: light.hallway_stair_up
 
@@ -426,14 +426,14 @@ views:
                   name: 'Start'
                   icon: mdi:play
                   tap_action:
-                    action: call-service
-                    service: script.bedroom_music_timer_start
+                    action: perform-action
+                    perform_action: script.bedroom_music_timer_start
                 - type: button
                   name: 'Stopp'
                   icon: mdi:stop
                   tap_action:
-                    action: call-service
-                    service: script.bedroom_music_timer_cancel
+                    action: perform-action
+                    perform_action: script.bedroom_music_timer_cancel
                 - type: entity
                   entity: sensor.bedroom_music_timer_minutes
             - type: entities
@@ -582,8 +582,8 @@ views:
             icon: mdi:floor-plan
             icon_height: '50px'
             tap_action:
-              action: call-service
-              service: script.vacuum_clean_home_neato_d7
+              action: perform-action
+              perform_action: script.vacuum_clean_home_neato_d7
           - type: horizontal-stack
             title: Ovanvåning
             cards:
@@ -592,29 +592,29 @@ views:
                 name: Sovrum
                 icon: mdi:bed-double-outline
                 tap_action:
-                  action: call-service
-                  service: script.vacuum_clean_bedroom_neato_d7
+                  action: perform-action
+                  perform_action: script.vacuum_clean_bedroom_neato_d7
               - type: button
                 entity: script.vacuum_clean_childroom_neato_d7
                 name: Barnrum
                 icon: mdi:baby
                 tap_action:
-                  action: call-service
-                  service: script.vacuum_clean_childroom_neato_d7
+                  action: perform-action
+                  perform_action: script.vacuum_clean_childroom_neato_d7
               - type: button
                 entity: script.vacuum_clean_office_neato_d7
                 name: Arbetsrum
                 icon: mdi:desk
                 tap_action:
-                  action: call-service
-                  service: script.vacuum_clean_office_neato_d7
+                  action: perform-action
+                  perform_action: script.vacuum_clean_office_neato_d7
               - type: button
                 entity: script.vacuum_clean_hallway_neato_d7
                 name: Hall
                 icon: mdi:shoe-print
                 tap_action:
-                  action: call-service
-                  service: script.vacuum_clean_hallway_neato_d7
+                  action: perform-action
+                  perform_action: script.vacuum_clean_hallway_neato_d7
           - type: horizontal-stack
             title: Bottenvåning
             cards:
@@ -623,22 +623,22 @@ views:
                 name: Entré
                 icon: mdi:door
                 tap_action:
-                  action: call-service
-                  service: script.vacuum_clean_entrance_neato_d7
+                  action: perform-action
+                  perform_action: script.vacuum_clean_entrance_neato_d7
               - type: button
                 entity: script.vacuum_clean_livingroom_neato_d7
                 name: Vardagsrum
                 icon: mdi:sofa
                 tap_action:
-                  action: call-service
-                  service: script.vacuum_clean_livingroom_neato_d7
+                  action: perform-action
+                  perform_action: script.vacuum_clean_livingroom_neato_d7
               - type: button
                 entity: script.vacuum_clean_kitchen_neato_d7
                 name: Kök
                 icon: mdi:silverware-fork-knife
                 tap_action:
-                  action: call-service
-                  service: script.vacuum_clean_kitchen_neato_d7
+                  action: perform-action
+                  perform_action: script.vacuum_clean_kitchen_neato_d7
           - type: entities
             show_header_toggle: false
             entities:
@@ -1123,8 +1123,8 @@ views:
                   name: 'Lås upp'
                   icon: mdi:lock-open-variant
                   tap_action:
-                    action: call-service
-                    service: lock.unlock
+                    action: perform-action
+                    perform_action: lock.unlock
                     service_data:
                       entity_id: lock.sbw57s_door_lock
                     confirmation:
@@ -1138,8 +1138,8 @@ views:
                   name: 'Lås'
                   icon: mdi:lock
                   tap_action:
-                    action: call-service
-                    service: lock.lock
+                    action: perform-action
+                    perform_action: lock.lock
                     service_data:
                       entity_id: lock.sbw57s_door_lock
                     confirmation:
@@ -1161,8 +1161,8 @@ views:
                         {% endif %}
                       }
                   tap_action:
-                    action: call-service
-                    service: switch.turn_on
+                    action: perform-action
+                    perform_action: switch.turn_on
                     service_data:
                       entity_id: switch.sbw57s_heater
                     confirmation:
@@ -1176,8 +1176,8 @@ views:
                   name: 'Stoppa värmare'
                   icon: mdi:radiator-off
                   tap_action:
-                    action: call-service
-                    service: switch.turn_off
+                    action: perform-action
+                    perform_action: switch.turn_off
                     service_data:
                       entity_id: switch.sbw57s_heater
                     confirmation:
@@ -1186,8 +1186,8 @@ views:
                 name: 'Starta motor'
                 icon: mdi:engine
                 tap_action:
-                  action: call-service
-                  service: switch.turn_on
+                  action: perform-action
+                  perform_action: switch.turn_on
                   service_data:
                     entity_id: switch.sbw57s_engine
                   confirmation:

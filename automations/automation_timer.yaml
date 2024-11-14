@@ -2,8 +2,8 @@
 
 - alias: 'Pause bedroom music'
   initial_state: on
-  trigger:
-    platform: event
+  triggers:
+    trigger: event
     event_type: timer.finished
     event_data:
       entity_id: timer.childroom_music
@@ -14,22 +14,22 @@
     - condition: state
       entity_id: binary_sensor.childroom_sonos_is_grouped
       state: 'off'
-  action:
-    - service: python_script.media_player_volume_set
+  actions:
+    - action: python_script.media_player_volume_set
       data:
         entity_id: media_player.childroom_sonos
         volume_level: 0.01
-    - service: media_player.media_pause
+    - action: media_player.media_pause
       entity_id: media_player.childroom_sonos
-    - service: media_player.volume_set
+    - action: media_player.volume_set
       data:
         entity_id: media_player.childroom_sonos
         volume_level: 0.10
 
 - alias: 'Start bedroom music timer'
   initial_state: on
-  trigger:
-    platform: state
+  triggers:
+    trigger: state
     entity_id: script.indoor_lights_off
     to: 'on'
   condition:
@@ -45,36 +45,36 @@
     - condition: state
       entity_id: binary_sensor.relaxed_mode
       state: 'on'
-  action:
-    service: script.bedroom_music_timer_start
+  actions:
+    action: script.bedroom_music_timer_start
 
 ##### KITCHEN #####
 
 - alias: 'Kitchen coffee maker timer start'
-  trigger:
-    platform: state
+  triggers:
+    trigger: state
     entity_id: switch.kitchen_coffee_maker
     to: 'on'
-  action:
-    service: script.kitchen_coffee_maker_timer_start
+  actions:
+    action: script.kitchen_coffee_maker_timer_start
 
 - alias: 'Kitchen coffee maker timer cancel'
   initial_state: on
-  trigger:
-    platform: state
+  triggers:
+    trigger: state
     entity_id: switch.kitchen_coffee_maker
     to: 'off'
   condition:
     condition: state
     entity_id: timer.kitchen_coffee_maker
     state: 'active'
-  action:
-    service: script.kitchen_coffee_maker_timer_cancel
+  actions:
+    action: script.kitchen_coffee_maker_timer_cancel
 
 - alias: 'Timer turn off kitchen coffee maker'
   initial_state: on
-  trigger:
-    platform: event
+  triggers:
+    trigger: event
     event_type: timer.finished
     event_data:
       entity_id: timer.kitchen_coffee_maker
@@ -82,7 +82,7 @@
     condition: state
     entity_id: switch.kitchen_coffee_maker
     state: 'on'
-  action:
-    service: switch.turn_off
+  actions:
+    action: switch.turn_off
     target:
       entity_id: switch.kitchen_coffee_maker

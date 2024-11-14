@@ -1,6 +1,6 @@
 vacuum_clean_home_neato_d7:
   sequence:
-    - service: neato.custom_cleaning
+    - action: neato.custom_cleaning
       data:
         entity_id: vacuum.neato_d7
         mode: >
@@ -10,7 +10,7 @@ vacuum_clean_home_neato_d7:
 
 vacuum_clean_entrance_neato_d7:
   sequence:
-    - service: neato.custom_cleaning
+    - action: neato.custom_cleaning
       data:
         entity_id: vacuum.neato_d7
         mode: >
@@ -21,7 +21,7 @@ vacuum_clean_entrance_neato_d7:
 
 vacuum_clean_kitchen_neato_d7:
   sequence:
-    - service: neato.custom_cleaning
+    - action: neato.custom_cleaning
       data:
         entity_id: vacuum.neato_d7
         mode: >
@@ -32,7 +32,7 @@ vacuum_clean_kitchen_neato_d7:
 
 vacuum_clean_livingroom_neato_d7:
   sequence:
-    - service: neato.custom_cleaning
+    - action: neato.custom_cleaning
       data:
         entity_id: vacuum.neato_d7
         mode: >
@@ -43,7 +43,7 @@ vacuum_clean_livingroom_neato_d7:
 
 vacuum_clean_hallway_neato_d7:
   sequence:
-    - service: neato.custom_cleaning
+    - action: neato.custom_cleaning
       data:
         entity_id: vacuum.neato_d7
         mode: >
@@ -54,7 +54,7 @@ vacuum_clean_hallway_neato_d7:
 
 vacuum_clean_bedroom_neato_d7:
   sequence:
-    - service: neato.custom_cleaning
+    - action: neato.custom_cleaning
       data:
         entity_id: vacuum.neato_d7
         mode: >
@@ -65,7 +65,7 @@ vacuum_clean_bedroom_neato_d7:
 
 vacuum_clean_childroom_neato_d7:
   sequence:
-    - service: neato.custom_cleaning
+    - action: neato.custom_cleaning
       data:
         entity_id: vacuum.neato_d7
         mode: >
@@ -76,7 +76,7 @@ vacuum_clean_childroom_neato_d7:
 
 vacuum_clean_office_neato_d7:
   sequence:
-    - service: neato.custom_cleaning
+    - action: neato.custom_cleaning
       data:
         entity_id: vacuum.neato_d7
         mode: >

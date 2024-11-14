@@ -2,8 +2,8 @@
 
 - alias: 'Car heater started'
   initial_state: on
-  trigger:
-    platform: state
+  triggers:
+    trigger: state
     entity_id: switch.sbw57s_heater
     to: 'on'
   condition:
@@ -13,16 +13,16 @@
     - condition: state
       entity_id: person.david
       state: 'not_home'
-  action:
-    service: notify.mobile_app_davids_iphone
+  actions:
+    action: notify.mobile_app_davids_iphone
     data:
       title: 'Volvo V60'
       message: 'Klimatanläggning startad'
 
 - alias: 'Car heater audio notification'
   initial_state: on
-  trigger:
-    platform: state
+  triggers:
+    trigger: state
     entity_id: switch.sbw57s_heater
     to: 'on'
   condition:
@@ -32,8 +32,8 @@
     - condition: state
       entity_id: person.david
       state: 'home'
-  action:
-    service: script.sonos_tts
+  actions:
+    action: script.sonos_tts
     data:
       entity_id: media_player.kitchen_sonos
       volume: 0.1
@@ -41,15 +41,15 @@
 
 - alias: 'Low washer fluid'
   initial_state: on
-  trigger:
-    platform: time
+  triggers:
+    trigger: time
     at: '07:00:00'
   condition:
     condition: state
     entity_id: binary_sensor.sbw57s_washer_fluid
     state: 'on'
-  action:
-    service: notify.mobile_app_davids_iphone
+  actions:
+    action: notify.mobile_app_davids_iphone
     data:
       title: 'Volvo V60'
       message: 'Fyll på spolarvätska'
@@ -58,8 +58,8 @@
 
 - alias: 'Alarm not active'
   initial_state: on
-  trigger:
-    platform: state
+  triggers:
+    trigger: state
     entity_id: group.device_tracker_family
     to: 'not_home'
     for: "00:30:00"
@@ -67,12 +67,12 @@
     condition: template
     value_template: >
       {{ not is_state('alarm_control_panel.ajax_alarm_status','armed_away') }}
-  action:
+  actions:
     choose:
       - conditions: >
           {{ states.person.david.last_changed > states.person.nellie.last_changed }}
         sequence:
-          - service: notify.mobile_app_davids_iphone
+          - action: notify.mobile_app_davids_iphone
             data:
               message: 'Larmet är ej aktiverat'
               title: 'Larmstatus'
@@ -84,7 +84,7 @@
       - conditions: >
           {{ states.person.david.last_changed < states.person.nellie.last_changed }}
         sequence:
-          - service: notify.mobile_app_nellies_iphone
+          - action: notify.mobile_app_nellies_iphone
             data:
               message: 'Larmet är ej aktiverat'
               title: 'Larmstatus'
@@ -96,8 +96,8 @@
 
 - alias: 'Night mode not active'
   initial_state: on
-  trigger:
-    platform: state
+  triggers:
+    trigger: state
     entity_id: script.indoor_lights_off
     to: 'on'
   condition:
@@ -111,8 +111,8 @@
     - condition: template
       value_template: >
         {{ not is_state('alarm_control_panel.ajax_alarm_status','armed_night') }}
-  action:
-    service: notify.mobile_app_davids_iphone
+  actions:
+    action: notify.mobile_app_davids_iphone
     data:
       title: 'Larmstatus'
       message: 'Nattläge är ej aktiverat'
@@ -126,8 +126,8 @@
 
 - alias: 'Shed door opened not home'
   initial_state: on
-  trigger:
-    platform: state
+  triggers:
+    trigger: state
     entity_id: binary_sensor.outdoor_shed_door
     to: 'on'
   condition:
@@ -137,8 +137,8 @@
     - condition: state
       entity_id: group.device_tracker_family
       state: 'not_home'
-  action:
-    service: notify.mobile_app_davids_iphone
+  actions:
+    action: notify.mobile_app_davids_iphone
     data:
       title: 'Larmstatus'
       message: 'Förrådsdörr öppen'
@@ -150,16 +150,16 @@
 
 - alias: 'Shed door opened alarm armed night'
   initial_state: on
-  trigger:
-    platform: state
+  triggers:
+    trigger: state
     entity_id: binary_sensor.outdoor_shed_door
     to: 'on'
   condition:
     condition: state
     entity_id: alarm_control_panel.ajax_alarm_status
     state: 'armed_night'
-  action:
-    service: notify.mobile_app_davids_iphone
+  actions:
+    action: notify.mobile_app_davids_iphone
     data:
       title: 'Larmstatus'
       message: 'Förrådsdörr öppen'
@@ -171,16 +171,16 @@
 
 - alias: 'Shed door open alarm armed night activated'
   initial_state: on
-  trigger:
-    platform: state
+  triggers:
+    trigger: state
     entity_id: alarm_control_panel.ajax_alarm_status
     to: 'armed_night'
   condition:
     condition: state
     entity_id: binary_sensor.outdoor_shed_door
     state: 'on'
-  action:
-    service: notify.mobile_app_davids_iphone
+  actions:
+    action: notify.mobile_app_davids_iphone
     data:
       title: 'Larmstatus'
       message: 'Förrådsdörr öppen'
@@ -195,14 +195,14 @@
 ##### OUTDOOR PORCH #####
 
 - alias: 'Person detected notify Davids iPhone'
-  trigger:
-    platform: state
+  triggers:
+    trigger: state
     entity_id: sensor.asgari_1_person_count
   condition:
     condition: template
     value_template: '{{ trigger.to_state.state | int > trigger.from_state.state | int }}'
-  action:
-    service: notify.mobile_app_davids_iphone
+  actions:
+    action: notify.mobile_app_davids_iphone
     data:
       title: 'Övervakningskamera'
       message: 'Person detekterad'
@@ -215,14 +215,14 @@
             volume: 0.8
 
 - alias: 'Person detected notify Nellies iPhone'
-  trigger:
-    platform: state
+  triggers:
+    trigger: state
     entity_id: sensor.asgari_1_person_count
   condition:
     condition: template
     value_template: '{{ trigger.to_state.state | int > trigger.from_state.state | int }}'
-  action:
-    service: notify.mobile_app_nellies_iphone
+  actions:
+    action: notify.mobile_app_nellies_iphone
     data:
       title: 'Övervakningskamera'
       message: 'Person detekterad'
@@ -235,14 +235,14 @@
             volume: 0.8
 
 - alias: 'Person detected notify Sonos'
-  trigger:
-    platform: state
+  triggers:
+    trigger: state
     entity_id: sensor.asgari_1_person_count
   condition:
     condition: template
     value_template: '{{ trigger.to_state.state | int > trigger.from_state.state | int }}'
-  action:
-    service: script.sonos_play_local_media
+  actions:
+    action: script.sonos_play_local_media
     data:
       entity_id: media_player.livingroom_sonos
       media_filename: "US-EN-Morgan-Freeman-Motion-Detected.mp3"
@@ -251,33 +251,33 @@
 ##### CHILD ROOM #####
 
 - alias: 'Sound detected notify Davids iPhone'
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id: binary_sensor.deltaco_1_child_singing_sound
       to: 'on'
-    - platform: state
+    - trigger: state
       entity_id: binary_sensor.deltaco_1_crying_sound
       to: 'on'
-    - platform: state
+    - trigger: state
       entity_id: binary_sensor.deltaco_1_humming_sound
       to: 'on'
-    - platform: state
+    - trigger: state
       entity_id: binary_sensor.deltaco_1_scream_sound
       to: 'on'
-    - platform: state
+    - trigger: state
       entity_id: binary_sensor.deltaco_1_humming_sound
       to: 'on'
-    - platform: state
+    - trigger: state
       entity_id: binary_sensor.deltaco_1_singing_sound
       to: 'on'
-    - platform: state
+    - trigger: state
       entity_id: binary_sensor.deltaco_1_whispering_sound
       to: 'on'
-    - platform: state
+    - trigger: state
       entity_id: binary_sensor.deltaco_1_yell_sound
       to: 'on'
-  action:
-    service: notify.mobile_app_davids_iphone
+  actions:
+    action: notify.mobile_app_davids_iphone
     data:
       title: 'Barnrum'
       message: 'Ljud detekterat'
@@ -290,33 +290,33 @@
             volume: 0.8
 
 - alias: 'Sound detected notify Nellies iPhone'
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id: binary_sensor.deltaco_1_child_singing_sound
       to: 'on'
-    - platform: state
+    - trigger: state
       entity_id: binary_sensor.deltaco_1_crying_sound
       to: 'on'
-    - platform: state
+    - trigger: state
       entity_id: binary_sensor.deltaco_1_humming_sound
       to: 'on'
-    - platform: state
+    - trigger: state
       entity_id: binary_sensor.deltaco_1_scream_sound
       to: 'on'
-    - platform: state
+    - trigger: state
       entity_id: binary_sensor.deltaco_1_humming_sound
       to: 'on'
-    - platform: state
+    - trigger: state
       entity_id: binary_sensor.deltaco_1_singing_sound
       to: 'on'
-    - platform: state
+    - trigger: state
       entity_id: binary_sensor.deltaco_1_whispering_sound
       to: 'on'
-    - platform: state
+    - trigger: state
       entity_id: binary_sensor.deltaco_1_yell_sound
       to: 'on'
-  action:
-    service: notify.mobile_app_nellies_iphone
+  actions:
+    action: notify.mobile_app_nellies_iphone
     data:
       title: 'Barnrum'
       message: 'Ljud detekterat'
@@ -332,8 +332,8 @@
 
 - alias: 'Web service down'
   initial_state: on
-  trigger:
-    platform: time_pattern
+  triggers:
+    trigger: time_pattern
     minutes: "/5"
   condition:
     not:
@@ -348,8 +348,8 @@
         after: "04:00:00"
         before: "05:00:00"
         weekday: sun
-  action:
-    service: notify.mobile_app_davids_iphone
+  actions:
+    action: notify.mobile_app_davids_iphone
     data:
       title: 'Web service status'
       message: 'A web service is down'

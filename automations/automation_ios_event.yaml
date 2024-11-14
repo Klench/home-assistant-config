@@ -1,7 +1,7 @@
 - alias: 'Toggle coffee maker'
   initial_state: on
-  trigger:
-    - platform: event
+  triggers:
+    - trigger: event
       event_type: ios.action_fired
       event_data:
         actionID: 0AD13D57-0A4F-4973-8908-97A24064DAFE
@@ -10,15 +10,15 @@
         sourceDeviceName: Davids iPhone
         sourceDevicePermanentID: CFD2DEC1-8CF3-432F-AF78-7419632CC842
         triggerSource: appShortcut
-  action:
-    - service: switch.toggle
+  actions:
+    - action: switch.toggle
       target:
         entity_id: switch.kitchen_coffee_maker
 
 - alias: 'Play child room music'
   initial_state: on
-  trigger:
-    - platform: event
+  triggers:
+    - trigger: event
       event_type: ios.action_fired
       event_data:
         actionID: CADF83CD-087C-4737-8E5F-16D3DB61E40E
@@ -27,7 +27,7 @@
         sourceDeviceName: Davids iPhone
         sourceDevicePermanentID: CFD2DEC1-8CF3-432F-AF78-7419632CC842
         triggerSource: appShortcut
-    - platform: event
+    - trigger: event
       event_type: ios.action_fired
       event_data:
         actionID: 405DCC9E-1D43-4105-9757-390F31263579
@@ -36,21 +36,21 @@
         sourceDeviceName: Nellies iPhone
         sourceDevicePermanentID: 339E737F-6B8D-4568-8F98-3E422F7E98D8
         triggerSource: appShortcut
-  action:
-    - service: light.turn_off
+  actions:
+    - action: light.turn_off
       target:
         entity_id:
           - light.childroom_ceiling
           - light.hallway_ceiling_top_floor
           - light.hallway_stair_up
-    - service: script.turn_on
+    - action: script.turn_on
       target:
         entity_id: script.play_child_room_night_music
 
 - alias: 'Turn on PC'
   initial_state: on
-  trigger:
-    - platform: event
+  triggers:
+    - trigger: event
       event_type: ios.action_fired
       event_data:
         actionID: 184A8E4A-CE5B-4B01-B015-7A54F99814F3
@@ -59,7 +59,7 @@
         sourceDeviceName: Davids iPhone
         sourceDevicePermanentID: CFD2DEC1-8CF3-432F-AF78-7419632CC842
         triggerSource: appShortcut
-  action:
-    - service: switch.turn_on
+  actions:
+    - action: switch.turn_on
       target:
         entity_id: switch.wol_vidar

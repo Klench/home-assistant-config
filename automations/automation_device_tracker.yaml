@@ -1,16 +1,16 @@
 - alias: 'Leaving home'
   initial_state: on
-  trigger:
-    platform: state
+  triggers:
+    trigger: state
     entity_id: group.device_tracker_family
     to: 'not_home'
-  action:
-    service: script.indoor_lights_off
+  actions:
+    action: script.indoor_lights_off
 
 - alias: 'Coming home turn on lights bright'
   initial_state: on
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id: group.device_tracker_family
       to: 'home'
   condition:
@@ -31,15 +31,15 @@
         - condition: state
           entity_id: input_boolean.away_lights_active
           state: 'on'
-  action:
-    - service: script.bottom_floor_bright
-    - service: input_boolean.turn_off
+  actions:
+    - action: script.bottom_floor_bright
+    - action: input_boolean.turn_off
       data:
         entity_id: input_boolean.away_lights_active
     - condition: state
       entity_id: input_boolean.enable_advent_light_automations
       state: 'on'
-    - service: script.turn_on
+    - action: script.turn_on
       target:
         entity_id:
           - script.bedroom_advent_lights
@@ -48,8 +48,8 @@
 
 - alias: 'Coming home turn on lights relaxed'
   initial_state: on
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id: group.device_tracker_family
       to: 'home'
   condition:
@@ -70,19 +70,19 @@
         - condition: state
           entity_id: input_boolean.away_lights_active
           state: 'on'
-  action:
-    - service: script.indoor_lights_relaxed
-    - service: input_boolean.turn_off
+  actions:
+    - action: script.indoor_lights_relaxed
+    - action: input_boolean.turn_off
       data:
         entity_id: input_boolean.away_lights_active
 
 - alias: 'Coming home turn on hallway lights'
   initial_state: on
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id: group.device_tracker_family
       to: 'home'
-    - platform: state
+    - trigger: state
       entity_id: person.nellie
       to: 'home'
   condition:
@@ -106,45 +106,45 @@
         - condition: state
           entity_id: input_boolean.away_lights_active
           state: 'on'
-  action:
-    - service: script.hallway_bright
-    - service: input_boolean.turn_off
+  actions:
+    - action: script.hallway_bright
+    - action: input_boolean.turn_off
       data:
         entity_id: input_boolean.away_lights_active
     - condition: state
       entity_id: input_boolean.enable_advent_light_automations
       state: 'on'
-    - service: script.advent_lights_turn_on
+    - action: script.advent_lights_turn_on
 
 - alias: 'Coming home group Sonos speakers'
   initial_state: on
-  trigger:
-    platform: state
+  triggers:
+    trigger: state
     entity_id: group.device_tracker_family
     to: 'home'
   condition:
     condition: state
     entity_id: binary_sensor.livingroom_sonos_tv_active
     state: 'off'
-  action:
+  actions:
     - choose:
         - conditions:
             - condition: state
               entity_id: binary_sensor.relaxed_mode
               state: 'on'
           sequence:
-            - service: script.sonos_group_livingroom_speaker
-            - service: script.sonos_set_group_volume
+            - action: script.sonos_group_livingroom_speaker
+            - action: script.sonos_set_group_volume
               data:
                 volume: 0.2
-            - service: script.sonos_ungroup_childroom_speaker
-            - service: media_player.volume_set
+            - action: script.sonos_ungroup_childroom_speaker
+            - action: media_player.volume_set
               data:
                 entity_id: media_player.childroom_sonos
                 volume_level: 0.2
       default:
-        - service: script.sonos_group_all_speakers
-        - service: script.sonos_set_group_volume
+        - action: script.sonos_group_all_speakers
+        - action: script.sonos_set_group_volume
           data:
             volume: 0.2
 
@@ -152,8 +152,8 @@
 
 - alias: 'Start working'
   initial_state: on
-  trigger:
-    platform: state
+  triggers:
+    trigger: state
     entity_id: device_tracker.sela_ltjs4sl13
     to: 'home'
   condition:
@@ -162,18 +162,18 @@
       state: 'on'
     - condition: time
       before: '17:00:00'
-  action:
-    - service: script.office_bright
-    - service: script.hallway_top_floor_bright
-    - service: script.sonos_ungroup_childroom_speaker
-    - service: media_player.volume_set
+  actions:
+    - action: script.office_bright
+    - action: script.hallway_top_floor_bright
+    - action: script.sonos_ungroup_childroom_speaker
+    - action: media_player.volume_set
       data:
         entity_id: media_player.childroom_sonos
         volume_level: 0.40
     - condition: state
       entity_id: person.nellie
       state: 'not_home'
-    - service: light.turn_off
+    - action: light.turn_off
       target:
         entity_id: 
         - light.hallway_ceiling_bottom_floor
@@ -184,23 +184,23 @@
         - light.livingroom_window
         - light.bedroom_bedside
         - light.childroom_ceiling
-    - service: script.sonos_ungroup_childroom_speaker
+    - action: script.sonos_ungroup_childroom_speaker
 
 - alias: 'Stop working'
   initial_state: on
-  trigger:
-    platform: state
+  triggers:
+    trigger: state
     entity_id: device_tracker.sela_ltjs4sl13
     to: 'not_home'
-  action:
-    service: light.turn_off
+  actions:
+    action: light.turn_off
     target:
       entity_id: light.office_ceiling
 
 - alias: 'Leaving home during work hours'
   initial_state: on
-  trigger:
-    platform: state
+  triggers:
+    trigger: state
     entity_id: person.david
     to: 'not_home'
   condition:
@@ -210,28 +210,28 @@
     - condition: state
       entity_id: person.nellie
       state: 'home'
-  action:
-    service: light.turn_off
+  actions:
+    action: light.turn_off
     target:
       area_id: arbetsrum
 
 - alias: 'Coming home during work hours'
   initial_state: on
-  trigger:
-    platform: state
+  triggers:
+    trigger: state
     entity_id: device_tracker.davids_iphone
     to: 'home'
   condition:
     condition: state
     entity_id: device_tracker.sela_ltjs4sl13
     state: 'home'
-  action:
-    service: script.office_bright
+  actions:
+    action: script.office_bright
 
 - alias: 'Nellie leaving home during work hours'
   initial_state: on
-  trigger:
-    platform: state
+  triggers:
+    trigger: state
     entity_id: person.nellie
     to: 'not_home'
   condition:
@@ -241,8 +241,8 @@
     - condition: state
       entity_id: person.david
       state: 'home'
-  action:
-    - service: light.turn_off
+  actions:
+    - action: light.turn_off
       target:
         entity_id:
           - light.hallway_ceiling_bottom_floor
@@ -255,6 +255,6 @@
     - condition: state
       entity_id: media_player.kitchen_sonos
       state: 'playing'
-    - service: media_player.media_pause
+    - action: media_player.media_pause
       target:
         entity_id: media_player.kitchen_sonos

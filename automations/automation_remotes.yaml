@@ -4,8 +4,8 @@
 
 - alias: 'Hue switch bright'
   initial_state: on
-  trigger:
-    platform: event
+  triggers:
+    trigger: event
     event_type: hue_event
     event_data:
       id: "hallway_switch_button"
@@ -15,13 +15,13 @@
     condition: state
     entity_id: input_boolean.enable_hue_switch_hallway
     state: 'on'
-  action:
-    service: script.bottom_floor_bright
+  actions:
+    action: script.bottom_floor_bright
 
 - alias: 'Hue switch relaxed'
   initial_state: on
-  trigger:
-    platform: event
+  triggers:
+    trigger: event
     event_type: hue_event
     event_data:
       id: "hallway_switch_button"
@@ -31,21 +31,21 @@
     condition: state
     entity_id: input_boolean.enable_hue_switch_hallway
     state: 'on'
-  action:
-    - service: script.indoor_lights_relaxed
+  actions:
+    - action: script.indoor_lights_relaxed
     - condition: state
       entity_id: binary_sensor.childroom_sonos_is_grouped
       state: 'on'
-    - service: script.sonos_ungroup_childroom_speaker
-    - service: media_player.volume_set
+    - action: script.sonos_ungroup_childroom_speaker
+    - action: media_player.volume_set
       data:
         entity_id: media_player.childroom_sonos
         volume_level: 0.2
 
 - alias: 'Hue switch turn off lighs'
   initial_state: on
-  trigger:
-    platform: event
+  triggers:
+    trigger: event
     event_type: hue_event
     event_data:
       id: "hallway_switch_button"
@@ -55,13 +55,13 @@
     condition: state
     entity_id: input_boolean.enable_hue_switch_hallway
     state: 'on'
-  action:
-    service: script.indoor_lights_off
+  actions:
+    action: script.indoor_lights_off
 
 - alias: 'Hue switch low brightness'
   initial_state: on
-  trigger:
-    platform: event
+  triggers:
+    trigger: event
     event_type: hue_event
     event_data:
       id: "hallway_switch_button"
@@ -71,15 +71,15 @@
     condition: state
     entity_id: input_boolean.enable_hue_switch_hallway
     state: 'on'
-  action:
-    service: script.indoor_lights_low_brightness
+  actions:
+    action: script.indoor_lights_low_brightness
 
 ##### SONOS #####
 
 - alias: 'Hue switch group livingroom speaker'
   initial_state: on
-  trigger:
-    platform: event
+  triggers:
+    trigger: event
     event_type: hue_event
     event_data:
       id: "hallway_switch_button"
@@ -89,21 +89,21 @@
     condition: state
     entity_id: input_boolean.enable_hue_switch_hallway
     state: 'on'
-  action:
+  actions:
     choose:
       - conditions: >
           {{ is_state('binary_sensor.livingroom_sonos_is_grouped','off') }}
         sequence:
-          service: script.sonos_group_livingroom_speaker
+          action: script.sonos_group_livingroom_speaker
       - conditions: >
           {{ is_state('binary_sensor.livingroom_sonos_is_grouped','on') }}
         sequence:
-          service: script.sonos_ungroup_livingroom_speaker
+          action: script.sonos_ungroup_livingroom_speaker
 
 - alias: 'Hue switch group childroom speaker'
   initial_state: on
-  trigger:
-    platform: event
+  triggers:
+    trigger: event
     event_type: hue_event
     event_data:
       id: "hallway_switch_button"
@@ -113,21 +113,21 @@
     condition: state
     entity_id: input_boolean.enable_hue_switch_hallway
     state: 'on'
-  action:
+  actions:
     choose:
       - conditions: >
           {{ is_state('binary_sensor.childroom_sonos_is_grouped','off') }}
         sequence:
-          service: script.sonos_group_childroom_speaker
+          action: script.sonos_group_childroom_speaker
       - conditions: >
           {{ is_state('binary_sensor.childroom_sonos_is_grouped','on') }}
         sequence:
-          service: script.sonos_ungroup_childroom_speaker
+          action: script.sonos_ungroup_childroom_speaker
 
 - alias: 'Hue switch increase Sonos volume'
   initial_state: on
-  trigger:
-    platform: event
+  triggers:
+    trigger: event
     event_type: hue_event
     event_data:
       id: "hallway_switch_button"
@@ -137,7 +137,7 @@
     - condition: state
       entity_id: input_boolean.enable_hue_switch_hallway
       state: 'on'
-  action:
+  actions:
     - choose:
         - conditions:
             - condition: state
@@ -152,7 +152,7 @@
               entity_id: binary_sensor.livingroom_sonos_tv_active
               state: 'on'
           sequence:
-            - service: python_script.media_player_volume_set
+            - action: python_script.media_player_volume_set
               data:
                 entity_id: media_player.livingroom_sonos
                 volume_level: >
@@ -170,18 +170,18 @@
               entity_id: binary_sensor.childroom_sonos_is_grouped
               state: 'off'
           sequence:
-            - service: python_script.media_player_volume_set
+            - action: python_script.media_player_volume_set
               data:
                 entity_id: media_player.childroom_sonos
                 volume_level: >
                   {{ [((state_attr('media_player.childroom_sonos','volume_level') | float * 1.15 + 0.03) | round(2)), 1] | min }}
       default:
-        - service: script.sonos_increase_volume
+        - action: script.sonos_increase_volume
 
 - alias: 'Hue switch decrease Sonos volume'
   initial_state: on
-  trigger:
-    platform: event
+  triggers:
+    trigger: event
     event_type: hue_event
     event_data:
       id: "hallway_switch_button"
@@ -191,7 +191,7 @@
     - condition: state
       entity_id: input_boolean.enable_hue_switch_hallway
       state: 'on'
-  action:
+  actions:
     - choose:
         - conditions:
             - condition: state
@@ -206,7 +206,7 @@
               entity_id: binary_sensor.livingroom_sonos_tv_active
               state: 'on'
           sequence:
-            - service: python_script.media_player_volume_set
+            - action: python_script.media_player_volume_set
               data:
                 entity_id: media_player.livingroom_sonos
                 volume_level: >
@@ -224,13 +224,13 @@
               entity_id: binary_sensor.childroom_sonos_is_grouped
               state: 'off'
           sequence:
-            - service: python_script.media_player_volume_set
+            - action: python_script.media_player_volume_set
               data:
                 entity_id: media_player.childroom_sonos
                 volume_level: >
                   {{ [((state_attr('media_player.childroom_sonos','volume_level') | float * 0.85 - 0.03) | round(2)), 0.05] | max }}
       default:
-        - service: script.sonos_decrease_volume
+        - action: script.sonos_decrease_volume
 
 ################# IKEA #################
 
@@ -238,214 +238,214 @@
 
 - alias: 'Ikea button bedroom on'
   initial_state: on
-  trigger:
-    platform: event
+  triggers:
+    trigger: event
     event_type: zha_event
     event_data:
       device_id: 3b531df34853b38343b729aacef15e48
       command: 'on'
-  action:
-    service: script.bedroom_relaxed
+  actions:
+    action: script.bedroom_relaxed
 
 - alias: 'Ikea button bedroom on long press'
   initial_state: on
-  trigger:
-    platform: event
+  triggers:
+    trigger: event
     event_type: zha_event
     event_data:
       device_id: 3b531df34853b38343b729aacef15e48
       command: 'move_with_on_off'
-  action:
-    service: script.bedroom_low_brightness
+  actions:
+    action: script.bedroom_low_brightness
 
 - alias: 'Ikea button bedroom off'
   initial_state: on
-  trigger:
-    platform: event
+  triggers:
+    trigger: event
     event_type: zha_event
     event_data:
       device_id: 3b531df34853b38343b729aacef15e48
       command: 'off'
-  action:
-    - service: light.turn_off
+  actions:
+    - action: light.turn_off
       target:
         area_id: sovrum
 
 - alias: 'Ikea button bedroom off long press'
   initial_state: on
-  trigger:
-    platform: event
+  triggers:
+    trigger: event
     event_type: zha_event
     event_data:
       device_id: 3b531df34853b38343b729aacef15e48
       command: 'move'
-  action:
-    service: script.indoor_lights_off
+  actions:
+    action: script.indoor_lights_off
 
 - alias: 'Ikea styrbar bedroom on'
   initial_state: on
-  trigger:
-    platform: event
+  triggers:
+    trigger: event
     event_type: zha_event
     event_data:
       device_id: f423762e1c28755b0123cc7fd21c5fa7
       command: 'on'
-  action:
-    service: script.bedroom_relaxed
+  actions:
+    action: script.bedroom_relaxed
 
 - alias: 'Ikea styrbar bedroom on long press'
   initial_state: on
-  trigger:
-    platform: event
+  triggers:
+    trigger: event
     event_type: zha_event
     event_data:
       device_id: f423762e1c28755b0123cc7fd21c5fa7
       command: 'move_with_on_off'
-  action:
-    service: script.bedroom_low_brightness
+  actions:
+    action: script.bedroom_low_brightness
 
 - alias: 'Ikea styrbar bedroom off'
   initial_state: on
-  trigger:
-    platform: event
+  triggers:
+    trigger: event
     event_type: zha_event
     event_data:
       device_id: f423762e1c28755b0123cc7fd21c5fa7
       command: 'off'
-  action:
-    - service: light.turn_off
+  actions:
+    - action: light.turn_off
       target:
         area_id: sovrum
 
 - alias: 'Ikea styrbar bedroom off long press'
   initial_state: on
-  trigger:
-    platform: event
+  triggers:
+    trigger: event
     event_type: zha_event
     event_data:
       device_id: f423762e1c28755b0123cc7fd21c5fa7
       command: 'move'
-  action:
-    service: script.indoor_lights_off
+  actions:
+    action: script.indoor_lights_off
 
 - alias: 'Ikea styrbar bedroom increase press'
   initial_state: on
-  trigger:
-    platform: event
+  triggers:
+    trigger: event
     event_type: zha_event
     event_data:
       device_id: f423762e1c28755b0123cc7fd21c5fa7
       command: press
       args: [256, 13, 0]
-  action:
+  actions:
     choose:
       conditions:
         condition: state
         entity_id: light.bedroom_ceiling
         state: 'on'
       sequence:
-        service: light.turn_on
+        action: light.turn_on
         data:
           entity_id: light.bedroom_ceiling
           brightness: >
             {{ [state_attr('light.bedroom_ceiling','brightness') | int + 25, 255] | min }}
     default:
-      service: script.bedroom_nursery_light_high
+      action: script.bedroom_nursery_light_high
 
 - alias: 'Ikea styrbar bedroom decrease press'
   initial_state: on
-  trigger:
-    platform: event
+  triggers:
+    trigger: event
     event_type: zha_event
     event_data:
       device_id: f423762e1c28755b0123cc7fd21c5fa7
       command: press
       args: [257, 13, 0]
-  action:
+  actions:
     choose:
       conditions:
         condition: state
         entity_id: light.bedroom_ceiling
         state: 'on'
       sequence:
-        service: light.turn_on
+        action: light.turn_on
         data:
           entity_id: light.bedroom_ceiling
           brightness: >
             {{ [state_attr('light.bedroom_ceiling','brightness') | int - 25, 1] | max }}
     default:
-      service: script.bedroom_nursery_light
+      action: script.bedroom_nursery_light
 
 ##### CHILD ROOM #####
 
 - alias: 'Ikea button childroom toggle'
   initial_state: on
-  trigger:
-    platform: event
+  triggers:
+    trigger: event
     event_type: zha_event
     event_data:
       device_id: 44bc2855a0757d86e2bf3ca19df7db77
       command: 'toggle'
-  action:
-    service: light.toggle
+  actions:
+    action: light.toggle
     data:
       entity_id: light.childroom_ceiling
 
 - alias: 'Ikea button childroom bright'
   initial_state: on
-  trigger:
-    platform: event
+  triggers:
+    trigger: event
     event_type: zha_event
     event_data:
       device_id: 44bc2855a0757d86e2bf3ca19df7db77
       command: 'step_with_on_off'
-  action:
-    service: script.childroom_bright
+  actions:
+    action: script.childroom_bright
 
 - alias: 'Ikea button childroom relaxed'
   initial_state: on
-  trigger:
-    platform: event
+  triggers:
+    trigger: event
     event_type: zha_event
     event_data:
       device_id: 44bc2855a0757d86e2bf3ca19df7db77
       command: 'step'
-  action:
-    service: script.childroom_relaxed
+  actions:
+    action: script.childroom_relaxed
 
 - alias: 'Ikea button childroom light warm'
   initial_state: on
-  trigger:
-    platform: event
+  triggers:
+    trigger: event
     event_type: zha_event
     event_data:
       device_id: 44bc2855a0757d86e2bf3ca19df7db77
       command: 'move_with_on_off'
-  action:
-    service: script.childroom_light_warm
+  actions:
+    action: script.childroom_light_warm
 
 - alias: 'Ikea button childroom light turn off'
   initial_state: on
-  trigger:
-    platform: event
+  triggers:
+    trigger: event
     event_type: zha_event
     event_data:
       device_id: 44bc2855a0757d86e2bf3ca19df7db77
       command: 'move'
-  action:
-    service: script.childroom_light_dim
+  actions:
+    action: script.childroom_light_dim
 
 - alias: 'Ikea button childroom increase volume'
   initial_state: on
-  trigger:
-    platform: event
+  triggers:
+    trigger: event
     event_type: zha_event
     event_data:
       device_id: 44bc2855a0757d86e2bf3ca19df7db77
       command: 'press'
       args: [256, 13, 0]
-  action:
-    service: python_script.media_player_volume_set
+  actions:
+    action: python_script.media_player_volume_set
     data:
       entity_id: media_player.childroom_sonos
       volume_level: >
@@ -453,15 +453,15 @@
 
 - alias: 'Ikea button childroom decrease volume'
   initial_state: on
-  trigger:
-    platform: event
+  triggers:
+    trigger: event
     event_type: zha_event
     event_data:
       device_id: 44bc2855a0757d86e2bf3ca19df7db77
       command: 'press'
       args: [257, 13, 0]
-  action:
-    service: python_script.media_player_volume_set
+  actions:
+    action: python_script.media_player_volume_set
     data:
       entity_id: media_player.childroom_sonos
       volume_level: >
@@ -469,103 +469,103 @@
 
 - alias: 'Ikea button childroom ungroup speaker'
   initial_state: on
-  trigger:
-    platform: event
+  triggers:
+    trigger: event
     event_type: zha_event
     event_data:
       device_id: 44bc2855a0757d86e2bf3ca19df7db77
       command: 'hold'
       args: [3329, 0]
-  action:
-    service: script.sonos_ungroup_childroom_speaker
+  actions:
+    action: script.sonos_ungroup_childroom_speaker
 
 - alias: 'Ikea button childroom group speaker'
   initial_state: on
-  trigger:
-    platform: event
+  triggers:
+    trigger: event
     event_type: zha_event
     event_data:
       device_id: 44bc2855a0757d86e2bf3ca19df7db77
       command: 'hold'
       args: [3328, 0]
-  action:
-    service: script.sonos_group_childroom_speaker
+  actions:
+    action: script.sonos_group_childroom_speaker
 
 ##### OFFICE #####
 
 - alias: 'Ikea switch turn on Vidar'
   initial_state: on
-  trigger:
-    platform: event
+  triggers:
+    trigger: event
     event_type: zha_event
     event_data:
       device_id: 9f686575e6ad98784e2efbb0b4e78526
       command: 'on'
-  action:
-    service: switch.turn_on
+  actions:
+    action: switch.turn_on
     entity_id: switch.wol_vidar
 
 # - alias: 'Ikea switch turn off indoor lights'
 #   initial_state: on
-#   trigger:
-#     platform: event
+#   triggers:
+#     trigger: event
 #     event_type: zha_event
 #     event_data:
 #       device_id: 9f686575e6ad98784e2efbb0b4e78526
 #       command: 'off'
-#   action:
-#     service: script.indoor_lights_off
+#   actions:
+#     action: script.indoor_lights_off
 
 ##### KITCHEN #####
 
 - alias: 'Ikea switch turn on coffee maker'
   initial_state: on
-  trigger:
-    platform: event
+  triggers:
+    trigger: event
     event_type: zha_event
     event_data:
       device_id: 0e0ddda228abe1831c9056b2834b6454
       command: 'on'
-  action:
-    - service: switch.turn_on
+  actions:
+    - action: switch.turn_on
       target:
         entity_id: switch.kitchen_coffee_maker
-    # - service: script.kitchen_coffee_maker_timer_start
+    # - action: script.kitchen_coffee_maker_timer_start
 
 - alias: 'Ikea switch turn off coffee maker'
   initial_state: on
-  trigger:
-    platform: event
+  triggers:
+    trigger: event
     event_type: zha_event
     event_data:
       device_id: 0e0ddda228abe1831c9056b2834b6454
       command: 'off'
-  action:
-    service: switch.turn_off
+  actions:
+    action: switch.turn_off
     target:
       entity_id: switch.kitchen_coffee_maker
 
 - alias: 'Ikea switch turn on kitchen bright'
   initial_state: on
-  trigger:
-    platform: event
+  triggers:
+    trigger: event
     event_type: zha_event
     event_data:
       device_id: 0e0ddda228abe1831c9056b2834b6454
       command: 'move_with_on_off'
-  action:
-    service: script.kitchen_bright
+  actions:
+    action: script.kitchen_bright
 
 - alias: 'Ikea switch turn off kitchen lights'
   initial_state: on
-  trigger:
-    platform: event
+  triggers:
+    trigger: event
     event_type: zha_event
     event_data:
       device_id: 0e0ddda228abe1831c9056b2834b6454
       command: 'move'
-  action:
-    service: light.turn_off
+  actions:
+    action: light.turn_off
     target:
       entity_id: light.kitchen_table
 
@@ -575,8 +575,8 @@
 
 - alias: 'Shelly livingroom relaxed'
   initial_state: on
-  trigger:
-    platform: event
+  triggers:
+    trigger: event
     event_type: shellyforhass.click
     event_data:
       entity_id: binary_sensor.livingroom_shelly_2_switch
@@ -585,13 +585,13 @@
     condition: template
     value_template: >
       {{ is_state('light.livingroom_couch_table','on') and not is_state_attr('light.livingroom_couch_table','brightness',76) }}
-  action:
-    service: script.livingroom_relaxed
+  actions:
+    action: script.livingroom_relaxed
 
 - alias: 'Shelly livingroom bright'
   initial_state: on
-  trigger:
-    platform: event
+  triggers:
+    trigger: event
     event_type: shellyforhass.click
     event_data:
       entity_id: binary_sensor.livingroom_shelly_2_switch
@@ -600,13 +600,13 @@
     condition: template
     value_template: >
       {{ is_state('light.livingroom_couch_table','off') or is_state_attr('light.livingroom_couch_table','brightness',76) }}
-  action:
-    service: script.livingroom_bright
+  actions:
+    action: script.livingroom_bright
 
 - alias: 'Shelly livingroom relaxed long press'
   initial_state: on
-  trigger:
-    platform: event
+  triggers:
+    trigger: event
     event_type: shellyforhass.click
     event_data:
       entity_id: binary_sensor.livingroom_shelly_2_switch
@@ -615,13 +615,13 @@
     condition: state
     entity_id: light.livingroom_couch_table
     state: 'off'
-  action:
-    service: script.livingroom_relaxed
+  actions:
+    action: script.livingroom_relaxed
 
 - alias: 'Shelly livingroom turn off lights'
   initial_state: on
-  trigger:
-    platform: event
+  triggers:
+    trigger: event
     event_type: shellyforhass.click
     event_data:
       entity_id: binary_sensor.livingroom_shelly_2_switch
@@ -630,7 +630,7 @@
     condition: state
     entity_id: light.livingroom_couch_table
     state: 'on'
-  action:
-    - service: light.turn_off
+  actions:
+    - action: light.turn_off
       target:
         area_id: vardagsrum

@@ -1,6 +1,6 @@
 - alias: 'Enable Sonos alarm'
-  trigger:
-    platform: time
+  triggers:
+    trigger: time
     at: '03:00:00'
   condition:
     - condition: state
@@ -9,24 +9,24 @@
     - condition: state
       entity_id: automation.wakeup_weekdays
       state: 'on'
-  action:
-    service: script.sonos_set_alarm
+  actions:
+    action: script.sonos_set_alarm
 
 - alias: 'Skip song tracks'
   initial_state: on
-  trigger:
-    platform: template
+  triggers:
+    trigger: template
     value_template: >
       {{ state_attr('media_player.childroom_sonos','media_title')|regex_search('Perfect', ignorecase=False) }}
-  action:
-    service: media_player.media_next_track
+  actions:
+    action: media_player.media_next_track
     data:
       entity_id: media_player.childroom_sonos
 
 - alias: 'Activate repeat on Sonos bedroom'
   initial_state: on
-  trigger:
-    platform: state
+  triggers:
+    trigger: state
     entity_id: media_player.childroom_sonos
     to: 'playing'
     for: "00:00:05"
@@ -37,16 +37,16 @@
     - condition: template
       value_template: >
         {{ is_state_attr('media_player.childroom_sonos','repeat','off') and is_state_attr('media_player.childroom_sonos','media_content_type','music') }}
-  action:
-    service: media_player.repeat_set
+  actions:
+    action: media_player.repeat_set
     data:
       entity_id: media_player.childroom_sonos
       repeat: all
 
 - alias: 'TV off group speakers'
   initial_state: on
-  trigger:
-    platform: state
+  triggers:
+    trigger: state
     entity_id: binary_sensor.livingroom_sonos_tv_active
     to: 'off'
   condition:
@@ -58,13 +58,13 @@
       - condition: state
         entity_id: media_player.livingroom_sonos
         state: 'playing'
-  action:
-    service: script.sonos_group_livingroom_speaker
+  actions:
+    action: script.sonos_group_livingroom_speaker
 
 - alias: 'TV off disable night mode'
   initial_state: on
-  trigger:
-    platform: state
+  triggers:
+    trigger: state
     entity_id: binary_sensor.livingroom_sonos_tv_active
     to: 'off'
   condition:
@@ -76,8 +76,8 @@
       - condition: state
         entity_id: switch.sonos_livingroom_speech_enhancement
         state: 'on'
-  action:
-    service: switch.turn_off
+  actions:
+    action: switch.turn_off
     target:
       entity_id:
         - switch.sonos_livingroom_night_sound
@@ -85,36 +85,36 @@
 
 - alias: 'Leaving home pause Sonos kitchen'
   initial_state: on
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id: group.device_tracker_family
       to: 'not_home'
-    - platform: state
+    - trigger: state
       entity_id: alarm_control_panel.ajax_alarm_status
       to: 'armed_away'
   condition:
     condition: state
     entity_id: media_player.kitchen_sonos
     state: 'playing'
-  action:
-    - service: python_script.media_player_volume_set
+  actions:
+    - action: python_script.media_player_volume_set
       data:
         entity_id: media_player.kitchen_sonos
         set_group_volume: true
         volume_level: 0.01
-    - service: media_player.media_pause
+    - action: media_player.media_pause
       entity_id: media_player.kitchen_sonos
-    - service: script.sonos_set_group_volume
+    - action: script.sonos_set_group_volume
       data:
         volume: 0.2
 
 - alias: 'Leaving home pause Sonos childroom'
   initial_state: on
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id: group.device_tracker_family
       to: 'not_home'
-    - platform: state
+    - trigger: state
       entity_id: alarm_control_panel.ajax_alarm_status
       to: 'armed_away'
   condition:
@@ -124,6 +124,6 @@
     - condition: state
       entity_id: binary_sensor.childroom_sonos_is_grouped
       state: 'off'
-  action:
-    service: media_player.media_pause
+  actions:
+    action: media_player.media_pause
     entity_id: media_player.childroom_sonos

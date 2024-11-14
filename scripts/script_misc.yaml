@@ -2,7 +2,7 @@
 
 bedroom_music_timer_start:
   sequence:
-    - service: timer.start
+    - action: timer.start
       data:
         entity_id: timer.childroom_music
         duration: >
@@ -10,19 +10,19 @@ bedroom_music_timer_start:
 
 bedroom_music_timer_cancel:
   sequence:
-    - service: timer.cancel
+    - action: timer.cancel
       data:
         entity_id: timer.childroom_music
 
 kitchen_coffee_maker_timer_start:
   sequence:
-    - service: timer.start
+    - action: timer.start
       data:
         entity_id: timer.kitchen_coffee_maker
         duration: '01:00:00'
 
 kitchen_coffee_maker_timer_cancel:
   sequence:
-    - service: timer.cancel
+    - action: timer.cancel
       data:
         entity_id: timer.kitchen_coffee_maker

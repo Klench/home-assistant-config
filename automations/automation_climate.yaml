@@ -2,30 +2,30 @@
 
 - alias: 'Bathroom floor heater manual off'
   initial_state: on
-  trigger:
-    platform: state
+  triggers:
+    trigger: state
     entity_id: input_boolean.bathroom_floor_heater_auto
     to: 'off'
-  action:
-    service: script.turn_on
+  actions:
+    action: script.turn_on
     target:
       entity_id: script.bathroom_floor_heater_turn_off
 
 - alias: 'Bathroom floor heater manual auto'
   initial_state: on
-  trigger:
-    platform: state
+  triggers:
+    trigger: state
     entity_id: input_boolean.bathroom_floor_heater_auto
     to: 'on'
-  action:
-    service: script.turn_on
+  actions:
+    action: script.turn_on
     target:
       entity_id: script.bathroom_floor_heater_auto
 
 - alias: 'Bathroom floor heater away'
   initial_state: on
-  trigger:
-    platform: state
+  triggers:
+    trigger: state
     entity_id: group.device_tracker_family
     to: 'not_home'
   condition:
@@ -35,15 +35,15 @@
     - condition: state
       entity_id: input_boolean.enable_bathroom_floor_heater_automations
       state: 'on'
-  action:
-    service: script.turn_on
+  actions:
+    action: script.turn_on
     target:
       entity_id: script.bathroom_floor_heater_turn_off
 
 - alias: 'Bathroom floor heater home'
   initial_state: on
-  trigger:
-    platform: state
+  triggers:
+    trigger: state
     entity_id: group.device_tracker_family
     to: 'home'
   condition:
@@ -53,7 +53,7 @@
     - condition: state
       entity_id: input_boolean.enable_bathroom_floor_heater_automations
       state: 'on'
-  action:
-    service: script.turn_on
+  actions:
+    action: script.turn_on
     target:
       entity_id: script.bathroom_floor_heater_auto

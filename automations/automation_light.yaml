@@ -1,8 +1,8 @@
 ################# TIME #################
 
 - alias: 'Evening bright'
-  trigger:
-    platform: sun
+  triggers:
+    trigger: sun
     event: sunset
     offset: '-01:00:00'
   condition:
@@ -14,56 +14,56 @@
       state: 'off'
     - condition: time
       before: '19:00:00'
-  action:
-    service: script.bottom_floor_bright
+  actions:
+    action: script.bottom_floor_bright
 
 - alias: 'Evening relaxed'
-  trigger:
-    platform: state
+  triggers:
+    trigger: state
     entity_id: binary_sensor.relaxed_mode
     to: 'on'
   condition:
     condition: state
     entity_id: group.device_tracker_family
     state: 'home'
-  action:
-    - service: script.indoor_lights_relaxed
+  actions:
+    - action: script.indoor_lights_relaxed
     - condition: state
       entity_id: binary_sensor.childroom_sonos_is_grouped
       state: 'on'
-    - service: script.sonos_ungroup_childroom_speaker
+    - action: script.sonos_ungroup_childroom_speaker
     - condition: template
       value_template: >
         {{ state_attr('media_player.childroom_sonos','volume_level') > 0.10 }}
-    - service: media_player.volume_set
+    - action: media_player.volume_set
       data:
         entity_id: media_player.childroom_sonos
         volume_level: 0.10
 
 - alias: 'Hallway bright'
-  trigger:
-    platform: time
+  triggers:
+    trigger: time
     at: '09:00:00'
   condition:
     condition: state
     entity_id: group.device_tracker_family
     state: 'home'
-  action:
-    service: script.hallway_bright
+  actions:
+    action: script.hallway_bright
 
 - alias: 'Child room night light'
-  trigger:
-    platform: time
+  triggers:
+    trigger: time
     at: '21:30:00'
-  action:
-    service: script.childroom_night_light
+  actions:
+    action: script.childroom_night_light
 
 - alias: 'Child room morning wakeup light'
-  trigger:
-    platform: time
+  triggers:
+    trigger: time
     at: '07:00:00'
-  action:
-    service: light.turn_on
+  actions:
+    action: light.turn_on
     data:
       entity_id: light.childroom_led_strip
       brightness_pct: 12
@@ -73,8 +73,8 @@
 
 - alias: 'Advent lights workday'
   initial_state: on
-  trigger:
-    platform: time
+  triggers:
+    trigger: time
     at: '06:45:00'
   condition:
     - condition: state
@@ -83,13 +83,13 @@
     - condition: state
       entity_id: binary_sensor.workday_sensor
       state: 'on'
-  action:
-    service: script.advent_lights_turn_on
+  actions:
+    action: script.advent_lights_turn_on
 
 - alias: 'Advent lights weekend'
   initial_state: on
-  trigger:
-    platform: time
+  triggers:
+    trigger: time
     at: '08:15:00'
   condition:
     - condition: state
@@ -98,14 +98,14 @@
     - condition: state
       entity_id: binary_sensor.workday_sensor
       state: 'off'
-  action:
-    service: script.advent_lights_turn_on
+  actions:
+    action: script.advent_lights_turn_on
 
 ################# SUNSET/SUNRISE #################
 
 - alias: 'Sunset'
-  trigger:
-    platform: sun
+  triggers:
+    trigger: sun
     event: sunset
   condition:
     - condition: state
@@ -117,15 +117,15 @@
     - condition: state
       entity_id: binary_sensor.relaxed_mode
       state: 'off'
-  action:
-    service: script.turn_on
+  actions:
+    action: script.turn_on
     target:
       entity_id: script.window_lights
 
 - alias: 'Bright after sunset bedroom'
   initial_state: off
-  trigger:
-    platform: state
+  triggers:
+    trigger: state
     entity_id: script.bedroom_bright
     to: 'on'
   condition:
@@ -134,16 +134,16 @@
     - condition: state
       entity_id: input_boolean.window_lights_after_sunset
       state: 'on'
-  action:
-    service: light.turn_on
+  actions:
+    action: light.turn_on
     data:
       entity_id: light.bedroom_bedside
       brightness_pct: 100
 
 - alias: 'Bright after sunset livingroom'
   initial_state: on
-  trigger:
-    platform: state
+  triggers:
+    trigger: state
     entity_id: script.livingroom_bright
     to: 'on'
   condition:
@@ -152,8 +152,8 @@
     - condition: state
       entity_id: input_boolean.window_lights_after_sunset
       state: 'on'
-  action:
-    service: light.turn_on
+  actions:
+    action: light.turn_on
     target:
       entity_id:
         - light.livingroom_window
@@ -161,25 +161,25 @@
 
 - alias: 'Outdoor lights at sunset'
   initial_state: on
-  trigger:
-    platform: sun
+  triggers:
+    trigger: sun
     event: sunset
     offset: "00:05:00"
-  action:
-    service: script.turn_on_outdoor_lights
+  actions:
+    action: script.turn_on_outdoor_lights
 
 - alias: 'Outdoor lights at sunrise'
   initial_state: on
-  trigger:
-    platform: sun
+  triggers:
+    trigger: sun
     event: sunrise
-  action:
-    service: script.turn_off_outdoor_lights
+  actions:
+    action: script.turn_off_outdoor_lights
 
 - alias: 'Outdoor lights when sun above horizon'
   initial_state: on
-  trigger:
-    platform: time_pattern
+  triggers:
+    trigger: time_pattern
     minutes: "/30"
   condition:
     - condition: state
@@ -191,25 +191,25 @@
         - light.outdoor_porch
       match: any
       state: 'on'
-  action:
-    - service: script.turn_off_outdoor_lights
+  actions:
+    - action: script.turn_off_outdoor_lights
 
 - alias: 'Turn off child room night light at sunrise'
   initial_state: on
-  trigger:
-    platform: sun
+  triggers:
+    trigger: sun
     event: sunrise
     offset: '02:00:00'
-  action:
-    service: light.turn_off
+  actions:
+    action: light.turn_off
     target:
       entity_id: light.childroom_led_strip
 
 ################# WAKEUP/BED #################
 
 - alias: 'Wakeup weekdays'
-  trigger:
-    platform: template
+  triggers:
+    trigger: template
     value_template: >
       {{ now() >= today_at(states('input_datetime.wakeup_weekdays')) - timedelta(minutes = 30) }}
   condition:
@@ -226,12 +226,12 @@
           - condition: state
             entity_id: group.device_tracker_family
             state: 'home'
-  action:
-    service: script.wakeup_lights
+  actions:
+    action: script.wakeup_lights
 
 - alias: 'Wakeup weekend'
-  trigger:
-    platform: template
+  triggers:
+    trigger: template
     value_template: >
       {{ now() >= today_at(states('input_datetime.wakeup_weekend')) - timedelta(minutes = 30) }}
   condition:
@@ -242,38 +242,38 @@
     - condition: state
       entity_id: group.device_tracker_family
       state: 'home'
-  action:
-    service: script.wakeup_lights
+  actions:
+    action: script.wakeup_lights
 
 - alias: 'Go to bed weekdays'
-  trigger:
-    platform: time
+  triggers:
+    trigger: time
     at: '23:00:00'
   condition:
     condition: state
     entity_id: binary_sensor.workday_sensor_offset
     state: 'on'
-  action:
-    service: script.go_to_bed_lights
+  actions:
+    action: script.go_to_bed_lights
 
 - alias: 'Go to bed weekend'
-  trigger:
-    platform: time
+  triggers:
+    trigger: time
     at: '23:59:00'
   condition:
     condition: time
     weekday:
       - fri
       - sat
-  action:
-    service: script.go_to_bed_lights
+  actions:
+    action: script.go_to_bed_lights
 
 - alias: 'Wakeup nursery'
-  trigger:
-    platform: time
+  triggers:
+    trigger: time
     at: input_datetime.wakeup_nursery
-  action:
-    service: light.turn_on
+  actions:
+    action: light.turn_on
     data:
       entity_id: light.bedroom_bedside_2
       brightness_pct: 100
@@ -283,8 +283,8 @@
 
 - alias: 'Away turn on lights'
   initial_state: on
-  trigger:
-    platform: sun
+  triggers:
+    trigger: sun
     event: sunset
   condition:
     - condition: state
@@ -293,16 +293,16 @@
     - condition: state
       entity_id: group.device_tracker_family
       state: 'not_home'
-  action:
-    - service: script.enable_away_lights
-    - service: input_boolean.turn_on
+  actions:
+    - action: script.enable_away_lights
+    - action: input_boolean.turn_on
       data:
         entity_id: input_boolean.away_lights_active
 
 - alias: 'Leaving home turn on lights'
   initial_state: on
-  trigger:
-    platform: state
+  triggers:
+    trigger: state
     entity_id: group.device_tracker_family
     to: 'not_home'
   condition:
@@ -311,16 +311,16 @@
       state: 'on'
     - condition: sun
       after: sunset
-  action:
-    - service: script.enable_away_lights
-    - service: input_boolean.turn_on
+  actions:
+    - action: script.enable_away_lights
+    - action: input_boolean.turn_on
       data:
         entity_id: input_boolean.away_lights_active
 
 - alias: 'Away turn off lights'
   initial_state: on
-  trigger:
-    platform: time
+  triggers:
+    trigger: time
     at: '23:30:00'
   condition:
     - condition: state
@@ -329,9 +329,9 @@
     - condition: state
       entity_id: group.indoor_lights
       state: 'on'
-  action:
-    - service: script.indoor_lights_off
-    - service: input_boolean.turn_off
+  actions:
+    - action: script.indoor_lights_off
+    - action: input_boolean.turn_off
       target:
         entity_id: input_boolean.away_lights_active
 
@@ -339,8 +339,8 @@
 
 - alias: 'Increase bathroom ceiling light brightness'
   initial_state: on
-  trigger:
-    platform: state
+  triggers:
+    trigger: state
     entity_id: light.bathroom_ceiling
     to: 'on'
   condition:
@@ -350,8 +350,8 @@
     - condition: time
       after: '06:30:00'
       before: '18:00:00'
-  action:
-    service: light.turn_on
+  actions:
+    action: light.turn_on
     data:
       entity_id: light.bathroom_ceiling
       brightness_pct: 100
@@ -360,8 +360,8 @@
 
 - alias: 'Hallway top floor motion hallway bright'
   initial_state: on
-  trigger:
-    platform: state
+  triggers:
+    trigger: state
     entity_id: binary_sensor.hallway_top_floor_motion
     to: 'on'
   condition:
@@ -395,13 +395,13 @@
     - condition: template
       value_template: >
         {{ not (is_state('binary_sensor.childroom_sonos_is_grouped','off') and is_state('media_player.childroom_sonos','playing')) }}
-  action:
-    service: script.hallway_top_floor_bright
+  actions:
+    action: script.hallway_top_floor_bright
 
 - alias: 'Hallway top floor motion rooms bright'
   initial_state: on
-  trigger:
-    platform: state
+  triggers:
+    trigger: state
     entity_id: binary_sensor.hallway_top_floor_motion
     to: 'on'
   condition:
@@ -435,8 +435,8 @@
     - condition: template
       value_template: >
         {{ is_state_attr('light.livingroom_couch_table','brightness',255) }}
-  action:
-    - service: script.turn_on
+  actions:
+    - action: script.turn_on
       target:
         entity_id: script.office_bright
     # - condition: time
@@ -445,7 +445,7 @@
     # - condition: template
     #   value_template: >
     #     {{ not (is_state('binary_sensor.childroom_sonos_is_grouped','off') and is_state('media_player.childroom_sonos','playing')) }}
-    # - service: script.turn_on
+    # - action: script.turn_on
     #   target:
     #     entity_id:
     #       - script.childroom_bright
@@ -454,8 +454,8 @@
 
 - alias: 'Turn off top floor lights not in use'
   initial_state: on
-  trigger:
-    platform: time_pattern
+  triggers:
+    trigger: time_pattern
     minutes: "/30"
   condition:
     - condition: time
@@ -478,11 +478,11 @@
       entity_id: device_tracker.sela_ltjs4sl13
       state: 'not_home'
       for: "00:30:00"
-  action:
-    - service: script.turn_on
+  actions:
+    - action: script.turn_on
       target:
         entity_id: script.hallway_bottom_floor_bright
-    - service: light.turn_off
+    - action: light.turn_off
       target:
         entity_id:
           - light.office_ceiling
@@ -492,8 +492,8 @@
 
 - alias: 'Tor turning off'
   initial_state: on
-  trigger:
-    platform: state
+  triggers:
+    trigger: state
     entity_id: switch.wol_vidar
     to: 'off'
   condition:
@@ -503,13 +503,13 @@
     - condition: state
       entity_id: binary_sensor.relaxed_mode
       state: 'on'
-  action:
-    service: script.office_low_brightness
+  actions:
+    action: script.office_low_brightness
 
 - alias: 'Tor turning on'
   initial_state: on
-  trigger:
-    platform: state
+  triggers:
+    trigger: state
     entity_id: switch.wol_vidar
     to: 'on'
   condition:
@@ -519,13 +519,13 @@
     - condition: state
       entity_id: binary_sensor.relaxed_mode
       state: 'on'
-  action:
-    service: script.office_relaxed
+  actions:
+    action: script.office_relaxed
 
 - alias: 'Davids iPhone charging'
   initial_state: on
-  trigger:
-    platform: state
+  triggers:
+    trigger: state
     entity_id: sensor.davids_iphone_battery_state
     to: 'Charging'
     for: '00:01:00'
@@ -539,19 +539,19 @@
     - condition: state
       entity_id: light.office_desk
       state: 'on'
-  action:
-    service: script.office_low_brightness
+  actions:
+    action: script.office_low_brightness
 
 ################# CREATE LIGHT GROUPS #################
 
 - alias: 'Create light groups'
   initial_state: on
-  trigger:
-    platform: homeassistant
+  triggers:
+    trigger: homeassistant
     event: start
-  action:
-    - service: script.create_indoor_lights_group
+  actions:
+    - action: script.create_indoor_lights_group
       data:
         exclude_area_id: ['utomhus']
         exclude_entity_id: ['light.childroom_led_strip']
-    - service: script.create_all_lights_group
+    - action: script.create_all_lights_group

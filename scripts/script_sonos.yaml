@@ -3,32 +3,32 @@
 sonos_group_all_speakers:
   alias: Sonos group all speakers
   sequence:
-    - service: media_player.volume_set
+    - action: media_player.volume_set
       data:
         entity_id:
           - media_player.livingroom_sonos
           - media_player.childroom_sonos
         volume_level: 0.0
-    - service: media_player.join
+    - action: media_player.join
       data:
         entity_id: media_player.kitchen_sonos
         group_members:
           - media_player.childroom_sonos
           - media_player.livingroom_sonos
-    - service: script.sonos_sync_group_volume
+    - action: script.sonos_sync_group_volume
 
 sonos_group_speaker:
   alias: Sonos group speaker
   sequence:
-    - service: media_player.volume_set
+    - action: media_player.volume_set
       data:
         entity_id: "{{ sonos_entity }}"
         volume_level: 0.0
-    - service: media_player.join
+    - action: media_player.join
       data:
         entity_id: media_player.kitchen_sonos
         group_members: "{{ sonos_entity }}"
-    - service: python_script.media_player_volume_set
+    - action: python_script.media_player_volume_set
       data:
         entity_id: "{{ sonos_entity }}"
         volume_level: >
@@ -37,14 +37,14 @@ sonos_group_speaker:
 sonos_ungroup_speaker:
   alias: Sonos ungroup speaker
   sequence:
-    - service: python_script.media_player_volume_set
+    - action: python_script.media_player_volume_set
       data:
         entity_id: "{{ sonos_entity }}"
         volume_level: 0.01
-    - service: media_player.unjoin
+    - action: media_player.unjoin
       data:
         entity_id: "{{ sonos_entity }}"
-    - service: media_player.volume_set
+    - action: media_player.volume_set
       data:
         entity_id: "{{ sonos_entity }}"
         volume_level: 0.10
@@ -52,28 +52,28 @@ sonos_ungroup_speaker:
 sonos_group_livingroom_speaker:
   alias: Sonos group livingroom speaker
   sequence:
-    - service: script.sonos_group_speaker
+    - action: script.sonos_group_speaker
       data:
         sonos_entity: media_player.livingroom_sonos
 
 sonos_group_childroom_speaker:
   alias: Sonos group childroom speaker
   sequence:
-    - service: script.sonos_group_speaker
+    - action: script.sonos_group_speaker
       data:
         sonos_entity: media_player.childroom_sonos
 
 sonos_ungroup_livingroom_speaker:
   alias: Sonos group livingroom speaker
   sequence:
-    - service: script.sonos_ungroup_speaker
+    - action: script.sonos_ungroup_speaker
       data:
         sonos_entity: media_player.livingroom_sonos
 
 sonos_ungroup_childroom_speaker:
   alias: Sonos ungroup childroom speaker
   sequence:
-    - service: script.sonos_ungroup_speaker
+    - action: script.sonos_ungroup_speaker
       data:
         sonos_entity: media_player.childroom_sonos
 
@@ -82,7 +82,7 @@ sonos_ungroup_childroom_speaker:
 sonos_set_group_volume:
   alias: Sonos set group volume
   sequence:
-    - service: python_script.media_player_volume_set
+    - action: python_script.media_player_volume_set
       data:
         entity_id: media_player.kitchen_sonos
         set_group_volume: true
@@ -91,7 +91,7 @@ sonos_set_group_volume:
 sonos_sync_group_volume:
   alias: Sonos sync group volume
   sequence:
-    - service: python_script.media_player_volume_set
+    - action: python_script.media_player_volume_set
       data:
         entity_id: media_player.kitchen_sonos
         set_group_volume: true
@@ -101,7 +101,7 @@ sonos_sync_group_volume:
 sonos_increase_volume:
   alias: 'Sonos increase volume'
   sequence:
-    - service: python_script.media_player_volume_set
+    - action: python_script.media_player_volume_set
       data:
         entity_id: media_player.kitchen_sonos
         set_group_volume: true
@@ -111,7 +111,7 @@ sonos_increase_volume:
 sonos_decrease_volume:
   alias: 'Sonos decrease volume'
   sequence:
-    - service: python_script.media_player_volume_set
+    - action: python_script.media_player_volume_set
       data:
         entity_id: media_player.kitchen_sonos
         set_group_volume: true
@@ -123,7 +123,7 @@ sonos_decrease_volume:
 sonos_tts:
   alias: "Sonos TTS script"
   sequence:
-    - service: media_player.play_media
+    - action: media_player.play_media
       data:
         entity_id: "{{ entity_id }}"
         media_content_id: >
@@ -136,7 +136,7 @@ sonos_tts:
 sonos_play_local_media:
   alias: 'Sonos play local media'
   sequence:
-    - service: media_player.play_media
+    - action: media_player.play_media
       data:
         entity_id: "{{ entity_id }}"
         media_content_id: >
@@ -157,33 +157,33 @@ play_child_room_night_music:
       - conditions: >
           {{ is_state('binary_sensor.childroom_sonos_is_grouped','on') }}
         sequence:
-          - service: python_script.media_player_volume_set
+          - action: python_script.media_player_volume_set
             data:
               entity_id: media_player.childroom_sonos
               volume_level: 0
-          - service: script.sonos_ungroup_childroom_speaker
-          - service: media_player.volume_set
+          - action: script.sonos_ungroup_childroom_speaker
+          - action: media_player.volume_set
             data:
               entity_id: media_player.childroom_sonos
               volume_level: 0.05
           - delay: '00:00:01'
-          - service: media_player.media_play
+          - action: media_player.media_play
             target:
               entity_id: media_player.childroom_sonos
       default:
-        - service: media_player.volume_set
+        - action: media_player.volume_set
           data:
             entity_id: media_player.childroom_sonos
             volume_level: 0.05
         - delay: '00:00:01'
-        - service: media_player.media_play
+        - action: media_player.media_play
           target:
             entity_id: media_player.childroom_sonos
 
 sonos_set_alarm:
   alias: 'Sonos set alarm'
   sequence:
-    - service: sonos.update_alarm
+    - action: sonos.update_alarm
       data:
         entity_id: media_player.childroom_sonos
         alarm_id: 7
@@ -194,7 +194,7 @@ sonos_set_alarm:
 sonos_disable_alarm:
   alias: 'Sonos disable alarm'
   sequence:
-    - service: sonos.update_alarm
+    - action: sonos.update_alarm
       data:
         entity_id: media_player.childroom_sonos
         alarm_id: 7
@@ -204,7 +204,7 @@ sonos_disable_alarm:
 
 sonos_reset_sound_levels:
   sequence:
-    - service: number.set_value
+    - action: number.set_value
       data:
         entity_id:
           - number.sonos_kitchen_bass

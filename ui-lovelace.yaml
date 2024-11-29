@@ -272,8 +272,6 @@ views:
         entity: media_player.kitchen_sonos
         artwork: full-cover
         icon: mdi:speaker-multiple
-        volume_stateless: true
-        volume_step: 3
         hide:
           power: true
           source: true

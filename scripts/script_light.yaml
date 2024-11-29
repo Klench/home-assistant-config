@@ -744,16 +744,25 @@ hallway_wakeup:
 kitchen_bright:
   alias: 'Hög ljusstyrka'
   sequence:
-    - action: light.turn_on
-      data:
-        entity_id: light.kitchen_table
-        brightness_pct: 90
-        kelvin: 2500
-        transition: 2
-    - condition: state
-      entity_id: input_boolean.enable_advent_light_automations
-      state: 'on'
-    - action: script.kitchen_advent_lights_bright
+    if: 
+      - condition: state
+        entity_id: input_boolean.enable_advent_light_automations
+        state: 'on'
+    then:
+      - action: light.turn_on
+        data:
+          entity_id: light.kitchen_table
+          brightness_pct: 70
+          kelvin: 2500
+          transition: 2
+      - action: script.kitchen_advent_lights_bright
+    else:
+      - action: light.turn_on
+        data:
+          entity_id: light.kitchen_table
+          brightness_pct: 90
+          kelvin: 2500
+          transition: 2
 
 kitchen_relaxed:
   alias: 'Mysbelysning'
@@ -787,13 +796,13 @@ kitchen_wakeup:
 kitchen_advent_lights:
   sequence:
     if:
-      - condition: state
-        entity_id: binary_sensor.relaxed_mode
-        state: 'on'
+      condition: state
+      entity_id: binary_sensor.relaxed_mode
+      state: 'on'
     then:
-      - action: script.kitchen_advent_lights_relaxed
+      action: script.kitchen_advent_lights_relaxed
     else:
-      - action: script.kitchen_advent_lights_bright
+      action: script.kitchen_advent_lights_bright
 
 kitchen_advent_lights_bright:
   sequence:

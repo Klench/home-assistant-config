@@ -531,9 +531,12 @@ livingroom_bright:
   sequence:
     - action: light.turn_on
       data:
-        entity_id:
-          - light.livingroom_dinner_table
-          - light.livingroom_couch_table
+        entity_id: light.livingroom_dinner_table
+        brightness_pct: 70
+        transition: 2
+    - action: light.turn_on
+      data:
+        entity_id: light.livingroom_couch_table
         brightness_pct: 100
         transition: 2
     - action: light.turn_on
@@ -786,12 +789,24 @@ kitchen_relaxed:
 
 kitchen_wakeup:
   sequence:
-    - action: light.turn_on
-      data:
-        entity_id: light.kitchen_table
-        brightness_pct: 100
-        kelvin: 2200
-        transition: 1800
+    if: 
+      - condition: state
+        entity_id: input_boolean.enable_advent_light_automations
+        state: 'on'
+    then:
+      - action: light.turn_on
+        data:
+          entity_id: light.kitchen_table
+          brightness_pct: 80
+          kelvin: 2200
+          transition: 1800
+    else:
+      - action: light.turn_on
+        data:
+          entity_id: light.kitchen_table
+          brightness_pct: 100
+          kelvin: 2200
+          transition: 1800
 
 kitchen_advent_lights:
   sequence:

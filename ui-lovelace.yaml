@@ -93,6 +93,8 @@ views:
             conditions:
               - entity: input_boolean.enable_advent_light_automations
                 state: 'on'
+              - entity: light.livingroom_christmas_tree
+                state: 'available'
             row:
               entity: light.livingroom_christmas_tree
 
@@ -486,7 +488,8 @@ views:
 
       - type: custom:frigate-card
         live:
-          auto_unmute: selected
+          auto_unmute:
+            - selected
         menu:
           buttons:
             expand:
@@ -496,10 +499,6 @@ views:
             live_provider: go2rtc
           - camera_entity: camera.deltaco_1
             live_provider: go2rtc
-            # go2rtc:
-            #   stream: deltaco-1
-            #   modes:
-            #     - mse
 
       - type: horizontal-stack
         cards:

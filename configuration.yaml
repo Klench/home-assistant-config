@@ -42,8 +42,6 @@ lovelace:
       type: module
     - url: /hacsfiles/lovelace-card-mod/card-mod.js
       type: module
-    - url: /hacsfiles/transmission-card/transmission-card.js
-      type: module
     - url: /hacsfiles/vacuum-card/vacuum-card.js
       type: module
     - url: /hacsfiles/zha-network-card/zha-network-card.js
@@ -148,32 +146,6 @@ calendar:
 #     ota:
 #       ikea_provider: true
   # custom_quirks_path: /config/custom_quirks
-
-################# SHELLY #################
-
-shelly:
-  host_ip: !secret oden_ip
-  mqtt_server_host: !secret oden_ip
-  mqtt_server_username: !secret mqtt_username
-  mqtt_server_password: !secret mqtt_password
-  version: true
-  attributes:
-    - default
-    - firmware_version
-    - latest_fw_version
-  devices:
-    - id: "E098068CEEBD"
-      name: Shelly vardagsrum
-      entity_id: livingroom_shelly
-      upgrade_switch: true
-      sensors:
-        - current_consumption
-        - rssi_level
-        - uptime
-        - device_temp
-        - over_temp
-        - switch
-        - voltage
 
 ################# DOCKER MONITOR #################
 

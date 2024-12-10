@@ -1,7 +1,3 @@
-- platform: switch
-  name: Livingroom window
-  entity_id: switch.livingroom_shelly_1
-
 - platform: group
   name: 'Hallway ceiling top floor'
   unique_id: hallway-ceiling-top-floor

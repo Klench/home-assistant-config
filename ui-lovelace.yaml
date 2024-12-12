@@ -490,6 +490,9 @@ views:
         live:
           auto_unmute:
             - selected
+          display:
+            mode: grid
+            grid_columns: 1
         menu:
           buttons:
             expand:

@@ -348,7 +348,7 @@
       value_template: >
         {{ state_attr('light.bathroom_ceiling','brightness') < 255 }}
     - condition: time
-      after: '06:30:00'
+      after: '07:00:00'
       before: '18:00:00'
   actions:
     action: light.turn_on

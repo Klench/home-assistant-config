@@ -413,7 +413,7 @@
   actions:
     action: script.childroom_relaxed
 
-- alias: 'Ikea button childroom light warm'
+- alias: 'Ikea button childroom window light toggle'
   initial_state: on
   triggers:
     trigger: event
@@ -422,7 +422,9 @@
       device_id: 44bc2855a0757d86e2bf3ca19df7db77
       command: 'move_with_on_off'
   actions:
-    action: script.childroom_light_warm
+    action: light.toggle
+    data:
+      entity_id: light.childroom_window
 
 - alias: 'Ikea button childroom light turn off'
   initial_state: on

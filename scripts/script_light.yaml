@@ -395,34 +395,18 @@ childroom_night_light:
         transition: 2
         effect: None
 
-childroom_light_warm:
-  sequence:
-    - action: light.turn_on
-      data:
-        entity_id: light.childroom_ceiling
-        kelvin: 2200
-        transition: 2
-    - action: script.turn_on
-      target:
-        entity_id: script.childroom_night_light
-    - action: light.turn_off
-      entity_id:
-        - light.hallway_ceiling_top_floor
-        - light.hallway_stair_up
-
 childroom_light_dim:
   mode: restart
   sequence:
-    - choose:
-        conditions:
-          - condition: state
-            entity_id: switch.wol_vidar
-            state: 'off'
-          - condition: state
-            entity_id: device_tracker.sela_ltjs4sl13
-            state: 'not_home'
-        sequence:
-          action: light.turn_off
+    - if:
+        - condition: state
+          entity_id: switch.wol_vidar
+          state: 'off'
+        - condition: state
+          entity_id: device_tracker.sela_ltjs4sl13
+          state: 'not_home'
+      then:
+        - action: light.turn_off
           target:
             area_id: arbetsrum
     - action: script.turn_on
@@ -431,35 +415,46 @@ childroom_light_dim:
     - action: light.turn_off
       target:
         entity_id:
-          - light.childroom_window
           - light.hallway_ceiling_top_floor
           - light.hallway_stair_up
-    - condition: state
-      entity_id: light.childroom_ceiling
-      state: 'on'
-    - action: light.turn_on
-      data:
-        entity_id: light.childroom_led_strip
-        brightness_pct: 40
-        rgb_color: [255,0,0]
-        transition: 2
-        effect: None
-    - action: light.turn_on
-      data:
-        entity_id: light.childroom_ceiling
-        kelvin: 2200
-        transition: 2
-    - delay: '00:00:02'
-    - action: light.turn_on
-      data:
-        entity_id: light.childroom_ceiling
-        brightness_pct: 20
-        kelvin: 2200
-        transition: 600
+    - if:
+        - condition: time
+          after: '18:00:00'
+      then:
+        - action: light.turn_on
+          data:
+            entity_id: light.childroom_led_strip
+            brightness_pct: 40
+            rgb_color: [255,0,0]
+            transition: 2
+            effect: None
+      else:
+        - action: light.turn_off
+          target:
+            entity_id: light.childroom_window
+    - if:
+        - condition: state
+          entity_id: light.childroom_ceiling
+          state: 'on'
+      then:
+        - action: light.turn_on
+          data:
+            entity_id: light.childroom_ceiling
+            kelvin: 2200
+            transition: 2
+        - delay: '00:00:02'
+        - action: light.turn_on
+          data:
+            entity_id: light.childroom_ceiling
+            brightness_pct: 20
+            kelvin: 2200
+            transition: 600
     - delay: '00:10:00'
     - action: light.turn_off
       target:
-        entity_id: light.childroom_ceiling
+        entity_id:
+          - light.childroom_ceiling
+          - light.childroom_window
 
 childroom_wakeup:
   sequence:

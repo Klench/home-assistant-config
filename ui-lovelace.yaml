@@ -54,7 +54,8 @@ views:
           - script.indoor_lights_low_brightness
           - type: conditional
             conditions:
-              - entity: input_boolean.enable_advent_light_automations
+              - condition: state
+                entity: input_boolean.enable_advent_light_automations
                 state: 'on'
             row:
               entity: script.advent_lights_turn_on
@@ -71,13 +72,15 @@ views:
           - light.livingroom_floor
           - type: conditional
             conditions:
-              - entity: input_boolean.enable_advent_light_automations
+              - condition: state
+                entity: input_boolean.enable_advent_light_automations
                 state: 'off'
             row:
               entity: light.livingroom_window
           - type: conditional
             conditions:
-              - entity: input_boolean.enable_advent_light_automations
+              - condition: state
+                entity: input_boolean.enable_advent_light_automations
                 state: 'on'
             row:
               entity: light.livingroom_window
@@ -85,16 +88,19 @@ views:
               icon: mdi:star-david
           - type: conditional
             conditions:
-              - entity: input_boolean.enable_advent_light_automations
+              - condition: state
+                entity: input_boolean.enable_advent_light_automations
                 state: 'on'
             row:
               entity: light.livingroom_menorah
           - type: conditional
             conditions:
-              - entity: input_boolean.enable_advent_light_automations
+              - condition: state
+                entity: input_boolean.enable_advent_light_automations
                 state: 'on'
-              - entity: light.livingroom_christmas_tree
-                state: 'available'
+              - condition: state
+                entity: light.livingroom_christmas_tree
+                state_not: 'unavailable'
             row:
               entity: light.livingroom_christmas_tree
 
@@ -128,7 +134,8 @@ views:
           - light.bedroom_bedside
           - type: conditional
             conditions:
-              - entity: input_boolean.enable_advent_light_automations
+              - condition: state
+                entity: input_boolean.enable_advent_light_automations
                 state: 'on'
             row:
               entity: light.bedroom_menorah
@@ -144,7 +151,8 @@ views:
           - light.childroom_led_strip
           - type: conditional
             conditions:
-              - entity: input_boolean.enable_advent_light_automations
+              - condition: state
+                entity: input_boolean.enable_advent_light_automations
                 state: 'on'
             row:
               entity: light.childroom_window
@@ -160,13 +168,15 @@ views:
           - light.office_desk
           - type: conditional
             conditions:
-              - entity: input_boolean.enable_advent_light_automations
+              - condition: state
+                entity: input_boolean.enable_advent_light_automations
                 state: 'off'
             row:
               entity: light.office_window
           - type: conditional
             conditions:
-              - entity: input_boolean.enable_advent_light_automations
+              - condition: state
+                entity: input_boolean.enable_advent_light_automations
                 state: 'on'
             row:
               entity: light.office_window
@@ -182,7 +192,8 @@ views:
           - light.kitchen_ceiling
           - type: conditional
             conditions:
-              - entity: input_boolean.enable_advent_light_automations
+              - condition: state
+                entity: input_boolean.enable_advent_light_automations
                 state: 'on'
             row:
               entity: light.kitchen_window
@@ -1391,6 +1402,7 @@ views:
           - automation.evening_relaxed
           - automation.hallway_bright
           - automation.child_room_night_light
+          - automation.child_room_morning_wakeup_light
           - input_boolean.enable_advent_light_automations
           - automation.sunset
           - input_boolean.window_lights_after_sunset

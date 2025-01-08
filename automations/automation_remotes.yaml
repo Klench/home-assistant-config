@@ -318,7 +318,6 @@
         area_id: sovrum
 
 - alias: 'Ikea styrbar bedroom off long press'
-  initial_state: on
   triggers:
     trigger: event
     event_type: zha_event
@@ -579,9 +578,11 @@
   initial_state: on
   triggers:
     trigger: event
-    event_type: shellyforhass.click
+    event_type: shelly.click
     event_data:
-      entity_id: binary_sensor.livingroom_shelly_2_switch
+      device_id: aad1e36ae5e1a5709dd95de24f0c5fea
+      device: shellyswitch25-E098068CEEBD
+      channel: 2
       click_type: single
   condition:
     condition: template
@@ -594,9 +595,11 @@
   initial_state: on
   triggers:
     trigger: event
-    event_type: shellyforhass.click
+    event_type: shelly.click
     event_data:
-      entity_id: binary_sensor.livingroom_shelly_2_switch
+      device_id: aad1e36ae5e1a5709dd95de24f0c5fea
+      device: shellyswitch25-E098068CEEBD
+      channel: 2
       click_type: single
   condition:
     condition: template
@@ -609,9 +612,11 @@
   initial_state: on
   triggers:
     trigger: event
-    event_type: shellyforhass.click
+    event_type: shelly.click
     event_data:
-      entity_id: binary_sensor.livingroom_shelly_2_switch
+      device_id: aad1e36ae5e1a5709dd95de24f0c5fea
+      device: shellyswitch25-E098068CEEBD
+      channel: 2
       click_type: long
   condition:
     condition: state
@@ -624,9 +629,11 @@
   initial_state: on
   triggers:
     trigger: event
-    event_type: shellyforhass.click
+    event_type: shelly.click
     event_data:
-      entity_id: binary_sensor.livingroom_shelly_2_switch
+      device_id: aad1e36ae5e1a5709dd95de24f0c5fea
+      device: shellyswitch25-E098068CEEBD
+      channel: 2
       click_type: long
   condition:
     condition: state

@@ -4,6 +4,8 @@ automation.enable_sonos_alarm:
   icon: mdi:speaker-wireless
 automation.wakeup_weekend:
   icon: mdi:weather-sunny
+automation.child_room_morning_wakeup_light:
+  icon: mdi:weather-sunny
 automation.go_to_bed_weekdays:
   icon: mdi:weather-night
 automation.go_to_bed_weekend:

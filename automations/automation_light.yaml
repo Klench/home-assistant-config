@@ -58,19 +58,6 @@
   actions:
     action: script.childroom_night_light
 
-- alias: 'Child room morning wakeup light'
-  triggers:
-    trigger: time
-    at: '07:00:00'
-  actions:
-    action: light.turn_on
-    data:
-      entity_id: light.childroom_led_strip
-      brightness_pct: 12
-      rgb_color: [0,0,255]
-      transition: 2
-      effect: None
-
 - alias: 'Advent lights workday'
   initial_state: on
   triggers:
@@ -228,6 +215,23 @@
             state: 'home'
   actions:
     action: script.wakeup_lights
+
+- alias: 'Child room morning wakeup light'
+  triggers:
+    trigger: time
+    at: '07:00:00'
+  condition:
+    condition: state
+    entity_id: binary_sensor.workday_sensor
+    state: 'on'
+  actions:
+    action: light.turn_on
+    data:
+      entity_id: light.childroom_led_strip
+      brightness_pct: 12
+      rgb_color: [0,0,255]
+      transition: 2
+      effect: None
 
 - alias: 'Wakeup weekend'
   triggers:

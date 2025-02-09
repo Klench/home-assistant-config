@@ -58,4 +58,7 @@ neighbours/
 #  Visual Studio Code settings
 .vscode/
 
+# Backups
+backups/
+
 # End of https://www.gitignore.io/api/homeassistant

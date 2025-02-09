@@ -479,7 +479,7 @@
       state: 'off'
       for: "00:30:00"
     - condition: state
-      entity_id: device_tracker.sela_ltjs4sl13
+      entity_id: device_tracker.sela_lt6ywwb54
       state: 'not_home'
       for: "00:30:00"
   actions:

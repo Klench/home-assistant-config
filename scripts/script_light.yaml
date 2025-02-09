@@ -403,7 +403,7 @@ childroom_light_dim:
           entity_id: switch.wol_vidar
           state: 'off'
         - condition: state
-          entity_id: device_tracker.sela_ltjs4sl13
+          entity_id: device_tracker.sela_lt6ywwb54
           state: 'not_home'
       then:
         - action: light.turn_off

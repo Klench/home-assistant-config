@@ -101,7 +101,7 @@
           entity_id: group.indoor_lights
           state: 'off'
         - condition: state
-          entity_id: device_tracker.sela_ltjs4sl13
+          entity_id: device_tracker.sela_lt6ywwb54
           state: 'home'
         - condition: state
           entity_id: input_boolean.away_lights_active
@@ -154,7 +154,7 @@
   initial_state: on
   triggers:
     trigger: state
-    entity_id: device_tracker.sela_ltjs4sl13
+    entity_id: device_tracker.sela_lt6ywwb54
     to: 'home'
   condition:
     - condition: state
@@ -190,7 +190,7 @@
   initial_state: on
   triggers:
     trigger: state
-    entity_id: device_tracker.sela_ltjs4sl13
+    entity_id: device_tracker.sela_lt6ywwb54
     to: 'not_home'
   actions:
     action: light.turn_off
@@ -205,7 +205,7 @@
     to: 'not_home'
   condition:
     - condition: state
-      entity_id: device_tracker.sela_ltjs4sl13
+      entity_id: device_tracker.sela_lt6ywwb54
       state: 'home'
     - condition: state
       entity_id: person.nellie
@@ -223,7 +223,7 @@
     to: 'home'
   condition:
     condition: state
-    entity_id: device_tracker.sela_ltjs4sl13
+    entity_id: device_tracker.sela_lt6ywwb54
     state: 'home'
   actions:
     action: script.office_bright
@@ -236,7 +236,7 @@
     to: 'not_home'
   condition:
     - condition: state
-      entity_id: device_tracker.sela_ltjs4sl13
+      entity_id: device_tracker.sela_lt6ywwb54
       state: 'home'
     - condition: state
       entity_id: person.david

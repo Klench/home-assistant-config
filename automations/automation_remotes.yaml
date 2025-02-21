@@ -420,10 +420,53 @@
     event_data:
       device_id: 44bc2855a0757d86e2bf3ca19df7db77
       command: 'move_with_on_off'
+  conditions:
+    condition: state
+    entity_id: input_boolean.enable_advent_light_automations
+    state: 'on'
   actions:
     action: light.toggle
     data:
       entity_id: light.childroom_window
+
+- alias: 'Ikea button childroom led strip disco'
+  initial_state: on
+  triggers:
+    trigger: event
+    event_type: zha_event
+    event_data:
+      device_id: 44bc2855a0757d86e2bf3ca19df7db77
+      command: 'move_with_on_off'
+  conditions:
+    condition: state
+    entity_id: input_boolean.enable_advent_light_automations
+    state: 'off'
+  actions:
+    - choose:
+        - conditions:
+            condition: state
+            entity_id: light.childroom_led_strip
+            state: 'off'
+          sequence:
+            - action: light.turn_on
+              data:
+                entity_id: light.childroom_led_strip
+                brightness_pct: 100
+                effect: 'Random Effect with Custom Values'
+            - condition: state
+              entity_id: binary_sensor.childroom_sonos_is_grouped
+              state: 'on'
+            - action: script.turn_on
+              target:
+                entity_id: script.sonos_ungroup_childroom_speaker
+        - conditions:
+            condition: state
+            entity_id: light.childroom_led_strip
+            state: 'on'
+          sequence:
+            - action: light.turn_off
+              target:
+                entity_id: light.childroom_led_strip
 
 - alias: 'Ikea button childroom light turn off'
   initial_state: on
@@ -494,28 +537,70 @@
 
 ##### OFFICE #####
 
-- alias: 'Ikea switch turn on Vidar'
+- alias: 'Office switch turn on'
   initial_state: on
   triggers:
     trigger: event
     event_type: zha_event
     event_data:
-      device_id: 9f686575e6ad98784e2efbb0b4e78526
+      device_id: 0e0ddda228abe1831c9056b2834b6454
       command: 'on'
   actions:
-    action: switch.turn_on
-    entity_id: switch.wol_vidar
+    if:
+      condition: state
+      entity_id: binary_sensor.relaxed_mode
+      state: 'off'
+    then:
+      action: script.turn_on
+      target:
+        entity_id: script.office_bright
+    else:
+      action: script.turn_on
+      target:
+        entity_id: script.office_relaxed
 
-# - alias: 'Ikea switch turn off indoor lights'
-#   initial_state: on
-#   triggers:
-#     trigger: event
-#     event_type: zha_event
-#     event_data:
-#       device_id: 9f686575e6ad98784e2efbb0b4e78526
-#       command: 'off'
-#   actions:
-#     action: script.indoor_lights_off
+- alias: 'Office switch turn off'
+  initial_state: on
+  triggers:
+    trigger: event
+    event_type: zha_event
+    event_data:
+      device_id: 0e0ddda228abe1831c9056b2834b6454
+      command: 'off'
+  actions:
+    action: light.turn_off
+    target:
+      area_id: arbetsrum
+
+- alias: 'Office switch turn on hold'
+  initial_state: on
+  triggers:
+    trigger: event
+    event_type: zha_event
+    event_data:
+      device_id: 0e0ddda228abe1831c9056b2834b6454
+      command: 'move_with_on_off'
+  conditions:
+    condition: state
+    entity_id: binary_sensor.relaxed_mode
+    state: 'off'
+  actions:
+    action: script.turn_on
+    target:
+      entity_id: script.hallway_top_floor_bright
+
+- alias: 'Office switch turn off hold'
+  initial_state: on
+  triggers:
+    trigger: event
+    event_type: zha_event
+    event_data:
+      device_id: 0e0ddda228abe1831c9056b2834b6454
+      command: 'move'
+  actions:
+    action: script.turn_on
+    target:
+      entity_id: script.indoor_lights_low_brightness
 
 ##### KITCHEN #####
 
@@ -525,7 +610,7 @@
     trigger: event
     event_type: zha_event
     event_data:
-      device_id: 0e0ddda228abe1831c9056b2834b6454
+      device_id: ba91148bbaa6400dc4a15b0b42004ddb
       command: 'on'
   actions:
     - action: switch.turn_on
@@ -539,7 +624,7 @@
     trigger: event
     event_type: zha_event
     event_data:
-      device_id: 0e0ddda228abe1831c9056b2834b6454
+      device_id: ba91148bbaa6400dc4a15b0b42004ddb
       command: 'off'
   actions:
     action: switch.turn_off
@@ -552,7 +637,7 @@
     trigger: event
     event_type: zha_event
     event_data:
-      device_id: 0e0ddda228abe1831c9056b2834b6454
+      device_id: ba91148bbaa6400dc4a15b0b42004ddb
       command: 'move_with_on_off'
   actions:
     action: script.kitchen_bright
@@ -563,12 +648,12 @@
     trigger: event
     event_type: zha_event
     event_data:
-      device_id: 0e0ddda228abe1831c9056b2834b6454
+      device_id: ba91148bbaa6400dc4a15b0b42004ddb
       command: 'move'
   actions:
     action: light.turn_off
     target:
-      entity_id: light.kitchen_table
+      area_id: kok
 
 ################# SHELLY #################
 

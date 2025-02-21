@@ -292,6 +292,9 @@ bedroom_low_brightness:
         entity_id: light.bedroom_bedside
         brightness_pct: 1
         transition: 2
+    - action: light.turn_off
+      target:
+        entity_id: light.bedroom_ceiling
 
 bedroom_nursery_light:
   alias: 'Amningsbelysning'

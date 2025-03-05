@@ -13,7 +13,7 @@
     - trigger: state
       entity_id: group.device_tracker_family
       to: 'home'
-  condition:
+  conditions:
     - condition: state
       entity_id: input_boolean.coming_home_turn_on_lights
       state: 'on'
@@ -52,7 +52,7 @@
     - trigger: state
       entity_id: group.device_tracker_family
       to: 'home'
-  condition:
+  conditions:
     - condition: state
       entity_id: input_boolean.coming_home_turn_on_lights
       state: 'on'
@@ -85,7 +85,7 @@
     - trigger: state
       entity_id: person.nellie
       to: 'home'
-  condition:
+  conditions:
     - condition: state
       entity_id: input_boolean.coming_home_turn_on_lights
       state: 'on'
@@ -122,7 +122,7 @@
     trigger: state
     entity_id: group.device_tracker_family
     to: 'home'
-  condition:
+  conditions:
     condition: state
     entity_id: binary_sensor.livingroom_sonos_tv_active
     state: 'off'
@@ -156,7 +156,7 @@
     trigger: state
     entity_id: device_tracker.sela_lt6ywwb54
     to: 'home'
-  condition:
+  conditions:
     - condition: state
       entity_id: binary_sensor.workday_sensor
       state: 'on'
@@ -203,7 +203,7 @@
     trigger: state
     entity_id: person.david
     to: 'not_home'
-  condition:
+  conditions:
     - condition: state
       entity_id: device_tracker.sela_lt6ywwb54
       state: 'home'
@@ -221,7 +221,7 @@
     trigger: state
     entity_id: device_tracker.davids_iphone
     to: 'home'
-  condition:
+  conditions:
     condition: state
     entity_id: device_tracker.sela_lt6ywwb54
     state: 'home'
@@ -234,7 +234,7 @@
     trigger: state
     entity_id: person.nellie
     to: 'not_home'
-  condition:
+  conditions:
     - condition: state
       entity_id: device_tracker.sela_lt6ywwb54
       state: 'home'

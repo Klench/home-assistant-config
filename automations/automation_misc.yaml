@@ -5,7 +5,7 @@
     trigger: state
     entity_id: media_player.plex_vardagsrum
     to: 'playing'
-  condition:
+  conditions:
     condition: and
     conditions:
       - condition: or
@@ -31,7 +31,7 @@
     trigger: state
     entity_id: script.indoor_lights_off
     to: 'on'
-  condition:
+  conditions:
     - condition: state
       entity_id: binary_sensor.relaxed_mode
       state: 'on'

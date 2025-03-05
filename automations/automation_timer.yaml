@@ -7,7 +7,7 @@
     event_type: timer.finished
     event_data:
       entity_id: timer.childroom_music
-  condition:
+  conditions:
     - condition: state
       entity_id: media_player.childroom_sonos
       state: 'playing'
@@ -32,7 +32,7 @@
     trigger: state
     entity_id: script.indoor_lights_off
     to: 'on'
-  condition:
+  conditions:
     - condition: state
       entity_id: media_player.childroom_sonos
       state: 'playing'
@@ -64,7 +64,7 @@
     trigger: state
     entity_id: switch.kitchen_coffee_maker
     to: 'off'
-  condition:
+  conditions:
     condition: state
     entity_id: timer.kitchen_coffee_maker
     state: 'active'
@@ -78,7 +78,7 @@
     event_type: timer.finished
     event_data:
       entity_id: timer.kitchen_coffee_maker
-  condition:
+  conditions:
     condition: state
     entity_id: switch.kitchen_coffee_maker
     state: 'on'

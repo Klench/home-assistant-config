@@ -11,7 +11,7 @@
       id: "hallway_switch_button"
       type: "short_release"
       subtype: 1
-  condition:
+  conditions:
     condition: state
     entity_id: input_boolean.enable_hue_switch_hallway
     state: 'on'
@@ -27,7 +27,7 @@
       id: "hallway_switch_button"
       type: "long_release"
       subtype: 1
-  condition:
+  conditions:
     condition: state
     entity_id: input_boolean.enable_hue_switch_hallway
     state: 'on'
@@ -51,7 +51,7 @@
       id: "hallway_switch_button"
       type: "short_release"
       subtype: 4
-  condition:
+  conditions:
     condition: state
     entity_id: input_boolean.enable_hue_switch_hallway
     state: 'on'
@@ -67,7 +67,7 @@
       id: "hallway_switch_button"
       type: "long_release"
       subtype: 4
-  condition:
+  conditions:
     condition: state
     entity_id: input_boolean.enable_hue_switch_hallway
     state: 'on'
@@ -85,7 +85,7 @@
       id: "hallway_switch_button"
       type: "long_release"
       subtype: 2
-  condition:
+  conditions:
     condition: state
     entity_id: input_boolean.enable_hue_switch_hallway
     state: 'on'
@@ -109,7 +109,7 @@
       id: "hallway_switch_button"
       type: "long_release"
       subtype: 3
-  condition:
+  conditions:
     condition: state
     entity_id: input_boolean.enable_hue_switch_hallway
     state: 'on'
@@ -133,7 +133,7 @@
       id: "hallway_switch_button"
       type: "short_release"
       subtype: 2
-  condition:
+  conditions:
     - condition: state
       entity_id: input_boolean.enable_hue_switch_hallway
       state: 'on'
@@ -187,7 +187,7 @@
       id: "hallway_switch_button"
       type: "short_release"
       subtype: 3
-  condition:
+  conditions:
     - condition: state
       entity_id: input_boolean.enable_hue_switch_hallway
       state: 'on'
@@ -668,7 +668,7 @@
       device: shellyswitch25-E098068CEEBD
       channel: 2
       click_type: single
-  condition:
+  conditions:
     condition: template
     value_template: >
       {{ is_state('light.livingroom_couch_table','on') and not is_state_attr('light.livingroom_couch_table','brightness',76) }}
@@ -685,7 +685,7 @@
       device: shellyswitch25-E098068CEEBD
       channel: 2
       click_type: single
-  condition:
+  conditions:
     condition: template
     value_template: >
       {{ is_state('light.livingroom_couch_table','off') or is_state_attr('light.livingroom_couch_table','brightness',76) }}
@@ -702,7 +702,7 @@
       device: shellyswitch25-E098068CEEBD
       channel: 2
       click_type: long
-  condition:
+  conditions:
     condition: state
     entity_id: light.livingroom_couch_table
     state: 'off'
@@ -719,7 +719,7 @@
       device: shellyswitch25-E098068CEEBD
       channel: 2
       click_type: long
-  condition:
+  conditions:
     condition: state
     entity_id: light.livingroom_couch_table
     state: 'on'

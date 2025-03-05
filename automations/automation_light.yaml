@@ -5,7 +5,7 @@
     trigger: sun
     event: sunset
     offset: '-01:00:00'
-  condition:
+  conditions:
     - condition: state
       entity_id: group.device_tracker_family
       state: 'home'
@@ -22,7 +22,7 @@
     trigger: state
     entity_id: binary_sensor.relaxed_mode
     to: 'on'
-  condition:
+  conditions:
     condition: state
     entity_id: group.device_tracker_family
     state: 'home'
@@ -44,7 +44,7 @@
   triggers:
     trigger: time
     at: '09:00:00'
-  condition:
+  conditions:
     condition: state
     entity_id: group.device_tracker_family
     state: 'home'
@@ -63,7 +63,7 @@
   triggers:
     trigger: time
     at: '06:45:00'
-  condition:
+  conditions:
     - condition: state
       entity_id: input_boolean.enable_advent_light_automations
       state: 'on'
@@ -78,7 +78,7 @@
   triggers:
     trigger: time
     at: '08:15:00'
-  condition:
+  conditions:
     - condition: state
       entity_id: input_boolean.enable_advent_light_automations
       state: 'on'
@@ -94,7 +94,7 @@
   triggers:
     trigger: sun
     event: sunset
-  condition:
+  conditions:
     - condition: state
       entity_id: group.device_tracker_family
       state: 'home'
@@ -115,7 +115,7 @@
     trigger: state
     entity_id: script.bedroom_bright
     to: 'on'
-  condition:
+  conditions:
     - condition: sun
       after: sunset
     - condition: state
@@ -133,7 +133,7 @@
     trigger: state
     entity_id: script.livingroom_bright
     to: 'on'
-  condition:
+  conditions:
     - condition: sun
       after: sunset
     - condition: state
@@ -168,7 +168,7 @@
   triggers:
     trigger: time_pattern
     minutes: "/30"
-  condition:
+  conditions:
     - condition: state
       entity_id: sun.sun
       state: "above_horizon"
@@ -199,7 +199,7 @@
     trigger: template
     value_template: >
       {{ now() >= today_at(states('input_datetime.wakeup_weekdays')) - timedelta(minutes = 30) }}
-  condition:
+  conditions:
     condition: or
     conditions:
       - condition: state
@@ -220,7 +220,7 @@
   triggers:
     trigger: time
     at: '07:00:00'
-  condition:
+  conditions:
     condition: state
     entity_id: binary_sensor.workday_sensor
     state: 'on'
@@ -238,7 +238,7 @@
     trigger: template
     value_template: >
       {{ now() >= today_at(states('input_datetime.wakeup_weekend')) - timedelta(minutes = 30) }}
-  condition:
+  conditions:
     - condition: time
       weekday:
         - sat
@@ -253,7 +253,7 @@
   triggers:
     trigger: time
     at: '23:00:00'
-  condition:
+  conditions:
     condition: state
     entity_id: binary_sensor.workday_sensor_offset
     state: 'on'
@@ -264,7 +264,7 @@
   triggers:
     trigger: time
     at: '23:59:00'
-  condition:
+  conditions:
     condition: time
     weekday:
       - fri
@@ -290,7 +290,7 @@
   triggers:
     trigger: sun
     event: sunset
-  condition:
+  conditions:
     - condition: state
       entity_id: input_boolean.enable_away_lights
       state: 'on'
@@ -309,7 +309,7 @@
     trigger: state
     entity_id: group.device_tracker_family
     to: 'not_home'
-  condition:
+  conditions:
     - condition: state
       entity_id: input_boolean.enable_away_lights
       state: 'on'
@@ -326,7 +326,7 @@
   triggers:
     trigger: time
     at: '23:30:00'
-  condition:
+  conditions:
     - condition: state
       entity_id: group.device_tracker_family
       state: 'not_home'
@@ -347,7 +347,7 @@
     trigger: state
     entity_id: light.bathroom_ceiling
     to: 'on'
-  condition:
+  conditions:
     - condition: template
       value_template: >
         {{ state_attr('light.bathroom_ceiling','brightness') < 255 }}
@@ -368,7 +368,7 @@
     trigger: state
     entity_id: binary_sensor.hallway_top_floor_motion
     to: 'on'
-  condition:
+  conditions:
     - condition: state
       entity_id: input_boolean.enable_hue_motion_sensor_hallway
       state: 'on'
@@ -408,7 +408,7 @@
     trigger: state
     entity_id: binary_sensor.hallway_top_floor_motion
     to: 'on'
-  condition:
+  conditions:
     - condition: state
       entity_id: input_boolean.enable_hue_motion_sensor_hallway
       state: 'on'
@@ -461,7 +461,7 @@
   triggers:
     trigger: time_pattern
     minutes: "/30"
-  condition:
+  conditions:
     - condition: time
       after: '08:00:00'
       before: '18:00:00'
@@ -500,7 +500,7 @@
     trigger: state
     entity_id: switch.wol_vidar
     to: 'off'
-  condition:
+  conditions:
     - condition: state
       entity_id: light.office_desk
       state: 'on'
@@ -516,7 +516,7 @@
     trigger: state
     entity_id: switch.wol_vidar
     to: 'on'
-  condition:
+  conditions:
     - condition: state
       entity_id: light.office_desk
       state: 'on'
@@ -533,7 +533,7 @@
     entity_id: sensor.davids_iphone_battery_state
     to: 'Charging'
     for: '00:01:00'
-  condition:
+  conditions:
     - condition: time
       after: '22:00:00'
       before: '06:00:00'

@@ -6,7 +6,7 @@
     trigger: state
     entity_id: switch.sbw57s_heater
     to: 'on'
-  condition:
+  conditions:
     - condition: state
       entity_id: device_tracker.sbw57s
       state: 'not_home'
@@ -25,7 +25,7 @@
     trigger: state
     entity_id: switch.sbw57s_heater
     to: 'on'
-  condition:
+  conditions:
     - condition: state
       entity_id: device_tracker.sbw57s
       state: 'home'
@@ -44,7 +44,7 @@
   triggers:
     trigger: time
     at: '07:00:00'
-  condition:
+  conditions:
     condition: state
     entity_id: binary_sensor.sbw57s_washer_fluid
     state: 'on'
@@ -63,7 +63,7 @@
     entity_id: group.device_tracker_family
     to: 'not_home'
     for: "00:30:00"
-  condition:
+  conditions:
     condition: template
     value_template: >
       {{ not is_state('alarm_control_panel.ajax_alarm_status','armed_away') }}
@@ -100,7 +100,7 @@
     trigger: state
     entity_id: script.indoor_lights_off
     to: 'on'
-  condition:
+  conditions:
     - condition: state
       entity_id: group.device_tracker_family
       state: 'home'
@@ -130,7 +130,7 @@
     trigger: state
     entity_id: binary_sensor.outdoor_shed_door
     to: 'on'
-  condition:
+  conditions:
     - condition: state
       entity_id: alarm_control_panel.ajax_alarm_status
       state: 'armed_away'
@@ -154,7 +154,7 @@
     trigger: state
     entity_id: binary_sensor.outdoor_shed_door
     to: 'on'
-  condition:
+  conditions:
     condition: state
     entity_id: alarm_control_panel.ajax_alarm_status
     state: 'armed_night'
@@ -175,7 +175,7 @@
     trigger: state
     entity_id: alarm_control_panel.ajax_alarm_status
     to: 'armed_night'
-  condition:
+  conditions:
     condition: state
     entity_id: binary_sensor.outdoor_shed_door
     state: 'on'
@@ -198,7 +198,7 @@
   triggers:
     trigger: state
     entity_id: sensor.asgari_1_person_count
-  condition:
+  conditions:
     condition: template
     value_template: '{{ trigger.to_state.state | int > trigger.from_state.state | int }}'
   actions:
@@ -218,7 +218,7 @@
   triggers:
     trigger: state
     entity_id: sensor.asgari_1_person_count
-  condition:
+  conditions:
     condition: template
     value_template: '{{ trigger.to_state.state | int > trigger.from_state.state | int }}'
   actions:
@@ -238,7 +238,7 @@
   triggers:
     trigger: state
     entity_id: sensor.asgari_1_person_count
-  condition:
+  conditions:
     condition: template
     value_template: '{{ trigger.to_state.state | int > trigger.from_state.state | int }}'
   actions:
@@ -334,8 +334,8 @@
   initial_state: on
   triggers:
     trigger: time_pattern
-    minutes: "/5"
-  condition:
+    minutes: "/10"
+  conditions:
     not:
       - condition: state
         entity_id:

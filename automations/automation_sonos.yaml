@@ -2,7 +2,7 @@
   triggers:
     trigger: time
     at: '03:00:00'
-  condition:
+  conditions:
     - condition: state
       entity_id: binary_sensor.workday_sensor
       state: 'on'
@@ -30,7 +30,7 @@
     entity_id: media_player.childroom_sonos
     to: 'playing'
     for: "00:00:05"
-  condition:
+  conditions:
     - condition: state
       entity_id: binary_sensor.childroom_sonos_is_grouped
       state: 'off'
@@ -49,7 +49,7 @@
     trigger: state
     entity_id: binary_sensor.livingroom_sonos_tv_active
     to: 'off'
-  condition:
+  conditions:
     condition: not
     conditions:
       - condition: state
@@ -67,7 +67,7 @@
     trigger: state
     entity_id: binary_sensor.livingroom_sonos_tv_active
     to: 'off'
-  condition:
+  conditions:
     condition: or
     conditions:
       - condition: state
@@ -92,7 +92,7 @@
     - trigger: state
       entity_id: alarm_control_panel.ajax_alarm_status
       to: 'armed_away'
-  condition:
+  conditions:
     condition: state
     entity_id: media_player.kitchen_sonos
     state: 'playing'
@@ -117,7 +117,7 @@
     - trigger: state
       entity_id: alarm_control_panel.ajax_alarm_status
       to: 'armed_away'
-  condition:
+  conditions:
     - condition: state
       entity_id: media_player.childroom_sonos
       state: 'playing'

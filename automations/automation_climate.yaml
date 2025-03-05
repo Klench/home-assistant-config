@@ -28,7 +28,7 @@
     trigger: state
     entity_id: group.device_tracker_family
     to: 'not_home'
-  condition:
+  conditions:
     - condition: state
       entity_id: input_boolean.bathroom_floor_heater_auto
       state: 'on'
@@ -46,7 +46,7 @@
     trigger: state
     entity_id: group.device_tracker_family
     to: 'home'
-  condition:
+  conditions:
     - condition: state
       entity_id: input_boolean.bathroom_floor_heater_auto
       state: 'on'

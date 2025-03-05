@@ -211,18 +211,6 @@ monitor_docker:
 
 ################# MEDIA PLAYERS #################
 
-# media_player:
-  # - platform: kodi
-  #   host: !secret kodi_ip
-  #   port: 80
-  #   username: osmc
-  #   password: !secret kodi_password
-  #   turn_off_action:
-  #     action: kodi.call_method
-  #     data:
-  #       entity_id: media_player.kodi
-  #       method: System.Reboot
-
 # sonos:
 #   media_player:
 #     advertise_addr: !secret oden_ip

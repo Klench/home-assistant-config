@@ -2,279 +2,460 @@ title: Stenman
 
 views:
 
-################# HOME #################
+################# HOME - SECTIONS #################
 
   - icon: mdi:home-assistant
-    cards:
+    type: sections
+    sections:
 
-      - type: glance
-        state_color: false
-        entities:
-          - person.david
-          - person.nellie
-          - entity: sensor.plex_oden
-            name: Plex
-            icon: mdi:plex
-            double_tap_action:
-              action: navigate
-              navigation_path: /lovelace/8
-          - entity: sensor.outdoor_temperature
-            double_tap_action:
-              action: navigate
-              navigation_path: /lovelace/4
-          - alarm_control_panel.ajax_alarm_status
-          - entity: sensor.car_status
-            double_tap_action:
-              action: navigate
-              navigation_path: /lovelace/9
-          - entity: sensor.sbw57s_battery_level
-            name: 'Batteri'
-          - entity: binary_sensor.sbw57s_battery_charging
-            name: 'Status'
-          - entity: sensor.sbw57s_range
-            name: 'Räckvidd'
-          - entity: switch.sbw57s_heater
-            name: 'Klimat'
-            card_mod:
-              style: |
-                :host {
-                  {% if states('sensor.outdoor_temperature') | float > 15 %}
-                  --card-mod-icon: mdi:air-conditioner;
-                  {% else %}
-                  --card-mod-icon: mdi:radiator;
-                  {% endif %}
-                }
+    - cards:
+        - type: glance
+          state_color: false
+          entities:
+            - person.david
+            - person.nellie
+            - entity: sensor.plex_oden
+              name: Plex
+              icon: mdi:plex
+              double_tap_action:
+                action: navigate
+                navigation_path: /lovelace/8
+            - entity: sensor.outdoor_temperature
+              double_tap_action:
+                action: navigate
+                navigation_path: /lovelace/4
+            - alarm_control_panel.ajax_alarm_status
+            - entity: sensor.car_status
+              double_tap_action:
+                action: navigate
+                navigation_path: /lovelace/9
+            - entity: sensor.sbw57s_battery_level
+              name: 'Batteri'
+            - entity: binary_sensor.sbw57s_battery_charging
+              name: 'Status'
+            - entity: sensor.sbw57s_range
+              name: 'Räckvidd'
+            - entity: switch.sbw57s_heater
+              name: 'Klimat'
+              card_mod:
+                style: |
+                  :host {
+                    {% if states('sensor.outdoor_temperature') | float > 15 %}
+                    --card-mod-icon: mdi:air-conditioner;
+                    {% else %}
+                    --card-mod-icon: mdi:radiator;
+                    {% endif %}
+                  }
 
-      - type: entities
-        title: Belysning
-        show_header_toggle: false
-        entities:
-          - script.indoor_lights_bright
-          - script.indoor_lights_relaxed
-          - script.indoor_lights_low_brightness
-          - type: conditional
-            conditions:
-              - condition: state
-                entity: input_boolean.enable_advent_light_automations
-                state: 'on'
-            row:
-              entity: script.advent_lights_turn_on
-          - script.indoor_lights_off
+    - cards:
+        - type: tile
+          entity: script.indoor_lights_bright
+          hide_state: true
+          icon_tap_action:
+            action: toggle
+        - type: tile
+          entity: script.indoor_lights_relaxed
+          hide_state: true
+          icon_tap_action:
+            action: toggle
+        - type: tile
+          entity: script.indoor_lights_low_brightness
+          hide_state: true
+          icon_tap_action:
+            action: toggle
+        - type: tile
+          entity: script.indoor_lights_off
+          hide_state: true
+          icon_tap_action:
+            action: toggle
+          visibility:
+            - condition: state
+              entity: input_boolean.enable_advent_light_automations
+              state: 'off'
+        - type: tile
+          entity: script.advent_lights_turn_on
+          hide_state: true
+          icon_tap_action:
+            action: toggle
+          visibility:
+            - condition: state
+              entity: input_boolean.enable_advent_light_automations
+              state: 'on'
+        - type: tile
+          entity: script.indoor_lights_off
+          hide_state: true
+          icon_tap_action:
+            action: toggle
+          visibility:
+            - condition: state
+              entity: input_boolean.enable_advent_light_automations
+              state: 'on'
+          grid_options:
+            columns: full
+      title: Belysning
 
-      - type: entities
-        title: Vardagsrum
-        show_header_toggle: false
-        entities:
-          - script.livingroom_bright
-          - script.livingroom_relaxed
-          - light.livingroom_dinner_table
-          - light.livingroom_couch_table
-          - light.livingroom_floor
-          - type: conditional
-            conditions:
-              - condition: state
-                entity: input_boolean.enable_advent_light_automations
-                state: 'off'
-            row:
-              entity: light.livingroom_window
-          - type: conditional
-            conditions:
-              - condition: state
-                entity: input_boolean.enable_advent_light_automations
-                state: 'on'
-            row:
-              entity: light.livingroom_window
-              name: 'Fönsterlampa'
-              icon: mdi:star-david
-          - type: conditional
-            conditions:
-              - condition: state
-                entity: input_boolean.enable_advent_light_automations
-                state: 'on'
-            row:
-              entity: light.livingroom_menorah
-          - type: conditional
-            conditions:
-              - condition: state
-                entity: input_boolean.enable_advent_light_automations
-                state: 'on'
-              - condition: state
-                entity: light.livingroom_christmas_tree
-                state_not: 'unavailable'
-            row:
+    - cards:
+        - type: tile
+          entity: script.livingroom_bright
+          hide_state: true
+          icon_tap_action:
+            action: toggle
+        - type: tile
+          entity: script.livingroom_relaxed
+          hide_state: true
+          icon_tap_action:
+            action: toggle
+        - type: tile
+          entity: light.livingroom_dinner_table
+          features:
+            - type: "light-brightness"
+          features_position: inline
+        - type: tile
+          entity: light.livingroom_couch_table
+          features:
+            - type: "light-brightness"
+          features_position: inline
+        - type: tile
+          entity: light.livingroom_floor
+        - type: tile
+          entity: light.livingroom_window
+          visibility:
+            - condition: state
+              entity: input_boolean.enable_advent_light_automations
+              state: 'off'
+        - type: tile
+          entity: light.livingroom_window
+          icon: mdi:star-david
+          name: 'Fönsterlampa'
+          visibility:
+            - condition: state
+              entity: input_boolean.enable_advent_light_automations
+              state: 'on'
+        - type: tile
+          entity: light.livingroom_menorah
+          visibility:
+            - condition: state
+              entity: input_boolean.enable_advent_light_automations
+              state: 'on'
+            - condition: state
               entity: light.livingroom_christmas_tree
+              state: 'unavailable'
+          grid_options:
+            columns: full
+        - type: tile
+          entity: light.livingroom_menorah
+          visibility:
+            - condition: state
+              entity: input_boolean.enable_advent_light_automations
+              state: 'on'
+            - condition: state
+              entity: light.livingroom_christmas_tree
+              state_not: 'unavailable'
+        - type: tile
+          entity: light.livingroom_christmas_tree
+          visibility:
+            - condition: state
+              entity: input_boolean.enable_advent_light_automations
+              state: 'on'
+            - condition: state
+              entity: light.livingroom_christmas_tree
+              state_not: 'unavailable'
+      title: Vardagsrum
 
-      - type: entities
-        title: Hall
-        show_header_toggle: false
-        entities:
-          - entity: script.hallway_bright
-            double_tap_action:
-              action: perform-action
-              perform_action: script.hallway_bottom_floor_bright
-          - script.hallway_relaxed
-          - light.hallway_ceiling_bottom_floor
-          - light.hallway_ceiling_top_floor
-          - entity: light.hallway_stair_group
-            double_tap_action:
-              action: perform-action
-              perform_action: light.turn_off
-              target:
-                entity_id: light.hallway_stair_up
+    - cards:
+        - type: tile
+          entity: script.hallway_bright
+          hide_state: true
+          icon_tap_action:
+            action: toggle
+          icon_double_tap_action:
+            action: perform-action
+            perform_action: script.hallway_bottom_floor_bright
+        - type: tile
+          entity: script.hallway_relaxed
+          hide_state: true
+          icon_tap_action:
+            action: toggle
+        - type: tile
+          entity: light.hallway_ceiling_bottom_floor
+          features:
+            - type: "light-brightness"
+          features_position: inline
+        - type: tile
+          entity: light.hallway_ceiling_top_floor
+          features:
+            - type: "light-brightness"
+          features_position: inline
+        - type: tile
+          entity: light.hallway_stair_group
+          features:
+            - type: "light-brightness"
+          features_position: inline
+          icon_double_tap_action:
+            action: perform-action
+            perform_action: light.turn_off
+            target:
+              entity_id: light.hallway_stair_up
+      title: Hall
 
-      - type: entities
-        title: Sovrum
-        show_header_toggle: false
-        entities:
-          - script.bedroom_bright
-          - script.bedroom_relaxed
-          - script.bedroom_low_brightness
-          - script.bedroom_nursery_light
-          - light.bedroom_ceiling
-          - light.bedroom_bedside
-          - type: conditional
-            conditions:
-              - condition: state
-                entity: input_boolean.enable_advent_light_automations
-                state: 'on'
-            row:
-              entity: light.bedroom_menorah
+    - cards:
+        - type: tile
+          entity: script.bedroom_bright
+          hide_state: true
+          icon_tap_action:
+            action: toggle
+        - type: tile
+          entity: script.bedroom_relaxed
+          hide_state: true
+          icon_tap_action:
+            action: toggle
+        - type: tile
+          entity: script.bedroom_low_brightness
+          hide_state: true
+          icon_tap_action:
+            action: toggle
+        - type: tile
+          entity: script.bedroom_nursery_light
+          hide_state: true
+          icon_tap_action:
+            action: toggle
+        - type: tile
+          entity: light.bedroom_ceiling
+          features:
+            - type: "light-brightness"
+          features_position: inline
+        - type: tile
+          entity: light.bedroom_bedside
+          features:
+            - type: "light-brightness"
+          features_position: inline
+          visibility:
+            - condition: state
+              entity: input_boolean.enable_advent_light_automations
+              state: 'off'
+        - type: tile
+          entity: light.bedroom_bedside
+          visibility:
+            - condition: state
+              entity: input_boolean.enable_advent_light_automations
+              state: 'on'
+        - type: tile
+          entity: light.bedroom_menorah
+          visibility:
+            - condition: state
+              entity: input_boolean.enable_advent_light_automations
+              state: 'on'
+      title: Sovrum
 
-      - type: entities
-        title: Barnrum
-        show_header_toggle: false
-        entities:
-          - script.childroom_bright
-          - script.childroom_relaxed
-          - script.childroom_night_light
-          - light.childroom_ceiling
-          - light.childroom_led_strip
-          - type: conditional
-            conditions:
-              - condition: state
-                entity: input_boolean.enable_advent_light_automations
-                state: 'on'
-            row:
-              entity: light.childroom_window
+    - cards:
+        - type: tile
+          entity: script.childroom_bright
+          hide_state: true
+          icon_tap_action:
+            action: toggle
+        - type: tile
+          entity: script.childroom_relaxed
+          hide_state: true
+          icon_tap_action:
+            action: toggle
+        - type: tile
+          entity: script.childroom_night_light
+          hide_state: true
+          icon_tap_action:
+            action: toggle
+        - type: tile
+          entity: script.childroom_disco
+          hide_state: true
+          icon_tap_action:
+            action: toggle
+        - type: tile
+          entity: light.childroom_ceiling
+          features:
+            - type: "light-brightness"
+          features_position: inline
+        - type: tile
+          entity: light.childroom_led_strip
+          features:
+            - type: "light-brightness"
+          features_position: inline
+          visibility:
+            - condition: state
+              entity: input_boolean.enable_advent_light_automations
+              state: 'off'
+        - type: tile
+          entity: light.childroom_led_strip
+          visibility:
+            - condition: state
+              entity: input_boolean.enable_advent_light_automations
+              state: 'on'
+        - type: tile
+          entity: light.childroom_window
+          visibility:
+            - condition: state
+              entity: input_boolean.enable_advent_light_automations
+              state: 'on'
+      title: Barnrum
 
-      - type: entities
-        title: Arbetsrum
-        show_header_toggle: false
-        entities:
-          - script.office_bright
-          - script.office_relaxed
-          - script.office_low_brightness
-          - light.office_ceiling
-          - light.office_desk
-          - type: conditional
-            conditions:
-              - condition: state
-                entity: input_boolean.enable_advent_light_automations
-                state: 'off'
-            row:
-              entity: light.office_window
-          - type: conditional
-            conditions:
-              - condition: state
-                entity: input_boolean.enable_advent_light_automations
-                state: 'on'
-            row:
-              entity: light.office_window
-              icon: mdi:star-david
+    - cards:
+        - type: tile
+          entity: script.office_bright
+          hide_state: true
+          icon_tap_action:
+            action: toggle
+        - type: tile
+          entity: script.office_relaxed
+          hide_state: true
+          icon_tap_action:
+            action: toggle
+        - type: tile
+          entity: script.office_low_brightness
+          hide_state: true
+          icon_tap_action:
+            action: toggle
+        - type: tile
+          entity: light.office_ceiling
+        - type: tile
+          entity: light.office_desk
+        - type: tile
+          entity: light.office_window
+          visibility:
+            - condition: state
+              entity: input_boolean.enable_advent_light_automations
+              state: 'off'
+        - type: tile
+          entity: light.office_window
+          icon: mdi:star-david
+          visibility:
+            - condition: state
+              entity: input_boolean.enable_advent_light_automations
+              state: 'on'
+      title: Arbetsrum
 
-      - type: entities
-        title: Kök
-        show_header_toggle: false
-        entities:
-          - script.kitchen_bright
-          - script.kitchen_relaxed
-          - light.kitchen_table
-          - light.kitchen_ceiling
-          - type: conditional
-            conditions:
-              - condition: state
-                entity: input_boolean.enable_advent_light_automations
-                state: 'on'
-            row:
-              entity: light.kitchen_window
-          - entity: switch.kitchen_coffee_maker
-          - type: conditional
-            conditions:
-              - entity: timer.kitchen_coffee_maker
-                state: 'active'
-            row:
+    - cards:
+        - type: tile
+          entity: script.kitchen_bright
+          hide_state: true
+          icon_tap_action:
+            action: toggle
+        - type: tile
+          entity: script.kitchen_relaxed
+          hide_state: true
+          icon_tap_action:
+            action: toggle
+        - type: tile
+          entity: light.kitchen_table
+          features:
+            - type: "light-brightness"
+          features_position: inline
+        - type: tile
+          entity: light.kitchen_window
+          features:
+            - type: "light-brightness"
+          features_position: inline
+          visibility:
+            - condition: state
+              entity: input_boolean.enable_advent_light_automations
+              state: 'on'
+        - type: tile
+          entity: switch.kitchen_coffee_maker
+        - type: tile
+          entity: light.kitchen_ceiling
+        - type: custom:timer-bar-card
+          entity: timer.kitchen_coffee_maker
+          name: Timer
+          mushroom:
+            color: amber
+          grid_options:
+            columns: full
+          visibility:
+            - condition: state
               entity: timer.kitchen_coffee_maker
-              name: Timer
-              type: custom:timer-bar-card
+              state: 'active'
+      title: Kök
 
-      - type: entities
-        title: Badrum
-        show_header_toggle: false
-        entities:
-          - script.bathroom_bright
-          - script.bathroom_low_brightness
-          - light.bathroom_ceiling
-          - light.bathroom_mirror
+    - cards:
+        - type: tile
+          entity: script.bathroom_bright
+          hide_state: true
+          icon_tap_action:
+            action: toggle
+        - type: tile
+          entity: script.bathroom_low_brightness
+          hide_state: true
+          icon_tap_action:
+            action: toggle
+        - type: tile
+          entity: light.bathroom_ceiling
+        - type: tile
+          entity: light.bathroom_mirror
+      title: Badrum
 
-      - type: custom:mini-media-player
-        entity: media_player.spotify
-        icon: mdi:spotify
-        replace_mute: stop
-        artwork: full-cover
-        hide:
-          volume: true
-          power: true
-          progress: true
-        idle_view:
-          when_idle: true
-          when_paused: true
-          when_standby: true
+    - cards:
+        - type: tile
+          entity: script.turn_on_outdoor_lights
+          hide_state: true
+          icon_tap_action:
+            action: toggle
+        - type: tile
+          entity: binary_sensor.outdoor_shed_door
+        - type: tile
+          entity: light.outdoor_main_entrance
+        - type: tile
+          entity: light.outdoor_porch
+      title: Utomhus
 
-      - type: custom:mini-media-player
-        entity: media_player.livingroom_apple_tv
-        icon: mdi:television
-        replace_mute: stop
-        artwork: full-cover
-        hide:
-          volume: true
-          power: true
-          runtime: false
-        idle_view:
-          when_idle: true
-          when_standby: true
+    - cards:
+        - type: custom:mini-media-player
+          entity: media_player.spotify
+          icon: mdi:spotify
+          replace_mute: stop
+          artwork: full-cover
+          hide:
+            volume: true
+            power: true
+            progress: true
+          idle_view:
+            when_idle: true
+            when_paused: true
+            when_standby: true
+        - type: custom:mini-media-player
+          entity: media_player.livingroom_apple_tv
+          icon: mdi:television
+          replace_mute: stop
+          artwork: full-cover
+          hide:
+            volume: true
+            power: true
+            runtime: false
+          idle_view:
+            when_idle: true
+            when_standby: true
+      title: Media
 
-      # - type: custom:list-card
-      #   columns:
-      #     - title: ' '
-      #       field: day
-      #     - field: food
-      #       title: ' '
-      #   entity: sensor.skolmaten_villanskolan
-      #   feed_attribute: entries
-      #   title: Matsedel Junibacken
+    # - cards:
+    #     - type: custom:list-card
+    #   columns:
+    #     - title: ' '
+    #       field: day
+    #     - field: food
+    #       title: ' '
+    #   entity: sensor.skolmaten_villanskolan
+    #   feed_attribute: entries
+    #   title: Matsedel
 
-      - type: entities
-        title: Utomhus
-        show_header_toggle: false
-        entities:
-          - script.turn_on_outdoor_lights
-          - light.outdoor_main_entrance
-          - light.outdoor_porch
-          # - light.outdoor_front_ledstrip
-          - binary_sensor.outdoor_shed_door
-
-      - type: custom:auto-entities
-        show_empty: false
-        card:
-          type: entities
-          title: Gästnätverk
-          show_header_toggle: false
-        filter:
-          include:
-            - domain: device_tracker
-              state: home
-              attributes:
-                essid: "Stenman_guest"
+    - cards:
+        - type: custom:auto-entities
+          show_empty: false
+          card:
+            type: entities
+            title: Gästnätverk
+            show_header_toggle: false
+          filter:
+            include:
+              - domain: device_tracker
+                state: home
+                attributes:
+                  essid: "Stenman_guest"
 
 ################# SONOS #################
 
@@ -497,7 +678,7 @@ views:
           entities:
             - switch.docker_frigate
 
-      - type: custom:frigate-card
+      - type: custom:advanced-camera-card
         live:
           auto_unmute:
             - selected

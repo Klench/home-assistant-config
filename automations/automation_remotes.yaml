@@ -447,17 +447,9 @@
             entity_id: light.childroom_led_strip
             state: 'off'
           sequence:
-            - action: light.turn_on
-              data:
-                entity_id: light.childroom_led_strip
-                brightness_pct: 100
-                effect: 'Random Effect with Custom Values'
-            - condition: state
-              entity_id: binary_sensor.childroom_sonos_is_grouped
-              state: 'on'
             - action: script.turn_on
               target:
-                entity_id: script.sonos_ungroup_childroom_speaker
+                entity_id: script.childroom_disco
         - conditions:
             condition: state
             entity_id: light.childroom_led_strip

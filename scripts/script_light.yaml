@@ -503,7 +503,9 @@ office_low_brightness:
         transition: 2
     - action: light.turn_off
       target:
-        entity_id: light.office_window
+        entity_id:
+          - light.office_ceiling
+          - light.office_window
 
 office_advent_lights:
   sequence:
@@ -555,17 +557,18 @@ livingroom_relaxed:
       data:
         entity_id: light.livingroom_dinner_table
         brightness_pct: 10
+        transition: 5
     - action: light.turn_on
       data:
         entity_id: light.livingroom_couch_table
         brightness_pct: 30
-        transition: 2
+        transition: 5
     - action: light.turn_on
       data:
         entity_id: light.livingroom_floor
         brightness_pct: 40
         kelvin: 2200
-        transition: 2
+        transition: 5
     - action: light.turn_on
       target:
         entity_id: 
@@ -693,6 +696,7 @@ hallway_relaxed:
             - light.hallway_stair_up
           brightness_pct: 1
           kelvin: 2200
+          transition: 5
     - action: script.turn_on
       target:
         entity_id: script.ikea_light_turn_on
@@ -701,13 +705,13 @@ hallway_relaxed:
           entity_id: light.hallway_stair_down
           brightness_pct: 30
           kelvin: 2200
+          transition: 5
     - condition: state
       entity_id: light.hallway_ceiling_top_floor
       state: 'on'
     - action: light.turn_off
-      data:
+      target:
         entity_id: light.hallway_ceiling_top_floor
-        transition: 2
 
 hallway_wakeup:
   sequence:
@@ -773,13 +777,13 @@ kitchen_relaxed:
         entity_id: light.kitchen_table
         brightness_pct: 70
         kelvin: 2200
-        transition: 2
+        transition: 5
     - action: light.turn_on
       data:
         entity_id: light.kitchen_ceiling
         brightness_pct: 40
         kelvin: 2200
-        transition: 2
+        transition: 5
     - condition: state
       entity_id: input_boolean.enable_advent_light_automations
       state: 'on'
@@ -838,6 +842,7 @@ kitchen_advent_lights_relaxed:
           entity_id: light.kitchen_window
           brightness_pct: 60
           kelvin: 2300
+          transition: 5
 
 ##### BATHROOM #####
 
@@ -924,9 +929,9 @@ ikea_light_turn_on:
         data:
           entity_id: "{{ entity_id }}"
           brightness_pct: "{{ brightness_pct }}"
-          transition: 1
+          transition: "{{ transition - 1 }}"
       - delay:
-          milliseconds: 1100
+          milliseconds: "{{ (transition - 1) * 1000 + 100 }}"
       - action: light.turn_on
         data:
           entity_id: "{{ entity_id }}"

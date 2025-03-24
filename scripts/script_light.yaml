@@ -47,6 +47,7 @@ indoor_lights_relaxed:
                 entity_id: light.hallway_ceiling_bottom_floor
                 brightness_pct: 1
                 kelvin: 2200
+                transition: 2
       default:
         - action: script.turn_on
           target:
@@ -85,6 +86,7 @@ indoor_lights_low_brightness:
               entity_id: light.hallway_stair_group
               brightness_pct: 1
               kelvin: 2200
+              transition: 2
         - action: script.turn_on
           target:
             entity_id:
@@ -625,6 +627,7 @@ hallway_bright:
             - light.hallway_ceiling_bottom_floor
           brightness_pct: 100
           kelvin: 3300
+          transition: 2
     - action: script.turn_on
       target:
         entity_id: script.ikea_light_turn_on
@@ -633,6 +636,7 @@ hallway_bright:
           entity_id: light.hallway_stair_group
           brightness_pct: 70
           kelvin: 3300
+          transition: 2
 
 hallway_top_floor_bright:
   sequence:
@@ -644,6 +648,7 @@ hallway_top_floor_bright:
           entity_id: light.hallway_ceiling_top_floor
           brightness_pct: 100
           kelvin: 3300
+          transition: 2
     - action: script.turn_on
       target:
         entity_id: script.ikea_light_turn_on
@@ -652,6 +657,7 @@ hallway_top_floor_bright:
           entity_id: light.hallway_stair_group
           brightness_pct: 70
           kelvin: 3300
+          transition: 2
 
 hallway_bottom_floor_bright:
   sequence:
@@ -663,6 +669,7 @@ hallway_bottom_floor_bright:
           entity_id: light.hallway_ceiling_bottom_floor
           brightness_pct: 100
           kelvin: 3300
+          transition: 2
     - action: script.turn_on
       target:
         entity_id: script.ikea_light_turn_on
@@ -671,6 +678,7 @@ hallway_bottom_floor_bright:
           entity_id: light.hallway_stair_down
           brightness_pct: 70
           kelvin: 3300
+          transition: 2
     - action: script.turn_on
       target:
         entity_id: script.ikea_light_turn_on
@@ -679,6 +687,7 @@ hallway_bottom_floor_bright:
           entity_id: light.hallway_stair_up
           brightness_pct: 100
           kelvin: 3300
+          transition: 2
     - action: light.turn_off
       target:
         entity_id: light.hallway_ceiling_top_floor
@@ -831,6 +840,7 @@ kitchen_advent_lights_bright:
           entity_id: light.kitchen_window
           brightness_pct: 100
           kelvin: 2700
+          transition: 2
 
 kitchen_advent_lights_relaxed:
   sequence:

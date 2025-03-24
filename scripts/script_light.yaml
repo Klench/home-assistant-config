@@ -46,7 +46,7 @@ indoor_lights_relaxed:
               variables:
                 entity_id: light.hallway_ceiling_bottom_floor
                 brightness_pct: 1
-                kelvin: 2200
+                color_temp_kelvin: 2200
                 transition: 2
       default:
         - action: script.turn_on
@@ -85,7 +85,7 @@ indoor_lights_low_brightness:
             variables:
               entity_id: light.hallway_stair_group
               brightness_pct: 1
-              kelvin: 2200
+              color_temp_kelvin: 2200
               transition: 2
         - action: script.turn_on
           target:
@@ -103,7 +103,7 @@ indoor_lights_low_brightness:
         data:
           entity_id: light.livingroom_floor
           brightness_pct: 100
-          kelvin: 2700
+          color_temp_kelvin: 2700
           transition: 2
 
 indoor_lights_off:
@@ -230,7 +230,7 @@ watching_tv_lights:
       data:
         entity_id: light.livingroom_floor
         brightness: 144
-        kelvin: 2200
+        color_temp_kelvin: 2200
         transition: 2
     - action: light.turn_off
       target:
@@ -265,7 +265,7 @@ bedroom_bright:
       data:
         entity_id: light.bedroom_ceiling
         brightness_pct: 80
-        kelvin: 2700
+        color_temp_kelvin: 2700
     - condition: state
       entity_id: input_boolean.enable_advent_light_automations
       state: 'on'
@@ -362,7 +362,7 @@ childroom_bright:
       data:
         entity_id: light.childroom_ceiling
         brightness_pct: 100
-        kelvin: 2700
+        color_temp_kelvin: 2700
         transition: 2
     - condition: state
       entity_id: input_boolean.enable_advent_light_automations
@@ -376,7 +376,7 @@ childroom_relaxed:
       data:
         entity_id: light.childroom_ceiling
         brightness_pct: 30
-        kelvin: 2200
+        color_temp_kelvin: 2200
         transition: 2
     - condition: state
       entity_id: input_boolean.enable_advent_light_automations
@@ -445,14 +445,14 @@ childroom_light_dim:
         - action: light.turn_on
           data:
             entity_id: light.childroom_ceiling
-            kelvin: 2200
+            color_temp_kelvin: 2200
             transition: 2
         - delay: '00:00:02'
         - action: light.turn_on
           data:
             entity_id: light.childroom_ceiling
             brightness_pct: 20
-            kelvin: 2200
+            color_temp_kelvin: 2200
             transition: 600
     - delay: '00:10:00'
     - action: light.turn_off
@@ -467,7 +467,7 @@ childroom_wakeup:
       data:
         entity_id: light.childroom_ceiling
         brightness_pct: 100
-        kelvin: 2700
+        color_temp_kelvin: 2700
         transition: 1800
 
 ##### OFFICE #####
@@ -545,7 +545,7 @@ livingroom_bright:
       data:
         entity_id: light.livingroom_floor
         brightness_pct: 100
-        kelvin: 2700
+        color_temp_kelvin: 2700
         transition: 2
     - condition: state
       entity_id: input_boolean.enable_advent_light_automations
@@ -569,7 +569,7 @@ livingroom_relaxed:
       data:
         entity_id: light.livingroom_floor
         brightness_pct: 40
-        kelvin: 2200
+        color_temp_kelvin: 2200
         transition: 5
     - action: light.turn_on
       target:
@@ -586,7 +586,7 @@ livingroom_low_brightness:
       data:
         entity_id: light.livingroom_floor
         brightness_pct: 20
-        kelvin: 2200
+        color_temp_kelvin: 2200
         transition: 2
     - action: light.turn_on
       data:
@@ -609,7 +609,7 @@ livingroom_wakeup:
       data:
         entity_id: light.livingroom_floor
         brightness_pct: 100
-        kelvin: 2700
+        color_temp_kelvin: 2700
         transition: 1800
 
 ##### HALLWAY #####
@@ -626,7 +626,7 @@ hallway_bright:
             - light.hallway_ceiling_top_floor
             - light.hallway_ceiling_bottom_floor
           brightness_pct: 100
-          kelvin: 3300
+          color_temp_kelvin: 3300
           transition: 2
     - action: script.turn_on
       target:
@@ -635,7 +635,7 @@ hallway_bright:
         variables:
           entity_id: light.hallway_stair_group
           brightness_pct: 70
-          kelvin: 3300
+          color_temp_kelvin: 3300
           transition: 2
 
 hallway_top_floor_bright:
@@ -647,7 +647,7 @@ hallway_top_floor_bright:
         variables:
           entity_id: light.hallway_ceiling_top_floor
           brightness_pct: 100
-          kelvin: 3300
+          color_temp_kelvin: 3300
           transition: 2
     - action: script.turn_on
       target:
@@ -656,7 +656,7 @@ hallway_top_floor_bright:
         variables:
           entity_id: light.hallway_stair_group
           brightness_pct: 70
-          kelvin: 3300
+          color_temp_kelvin: 3300
           transition: 2
 
 hallway_bottom_floor_bright:
@@ -668,7 +668,7 @@ hallway_bottom_floor_bright:
         variables:
           entity_id: light.hallway_ceiling_bottom_floor
           brightness_pct: 100
-          kelvin: 3300
+          color_temp_kelvin: 3300
           transition: 2
     - action: script.turn_on
       target:
@@ -677,7 +677,7 @@ hallway_bottom_floor_bright:
         variables:
           entity_id: light.hallway_stair_down
           brightness_pct: 70
-          kelvin: 3300
+          color_temp_kelvin: 3300
           transition: 2
     - action: script.turn_on
       target:
@@ -686,7 +686,7 @@ hallway_bottom_floor_bright:
         variables:
           entity_id: light.hallway_stair_up
           brightness_pct: 100
-          kelvin: 3300
+          color_temp_kelvin: 3300
           transition: 2
     - action: light.turn_off
       target:
@@ -704,7 +704,7 @@ hallway_relaxed:
             - light.hallway_ceiling_bottom_floor
             - light.hallway_stair_up
           brightness_pct: 1
-          kelvin: 2200
+          color_temp_kelvin: 2200
           transition: 5
     - action: script.turn_on
       target:
@@ -713,7 +713,7 @@ hallway_relaxed:
         variables:
           entity_id: light.hallway_stair_down
           brightness_pct: 30
-          kelvin: 2200
+          color_temp_kelvin: 2200
           transition: 5
     - condition: state
       entity_id: light.hallway_ceiling_top_floor
@@ -738,7 +738,7 @@ hallway_wakeup:
         entity_id:
           - light.hallway_ceiling_bottom_floor
           - light.hallway_stair_group
-        kelvin: 3300
+        color_temp_kelvin: 3300
         transition: 1
     - delay:
         milliseconds: 1100
@@ -767,7 +767,7 @@ kitchen_bright:
         data:
           entity_id: light.kitchen_table
           brightness_pct: 70
-          kelvin: 2500
+          color_temp_kelvin: 2500
           transition: 2
       - action: script.kitchen_advent_lights_bright
     else:
@@ -775,7 +775,7 @@ kitchen_bright:
         data:
           entity_id: light.kitchen_table
           brightness_pct: 90
-          kelvin: 2500
+          color_temp_kelvin: 2500
           transition: 2
 
 kitchen_relaxed:
@@ -785,13 +785,13 @@ kitchen_relaxed:
       data:
         entity_id: light.kitchen_table
         brightness_pct: 70
-        kelvin: 2200
+        color_temp_kelvin: 2200
         transition: 5
     - action: light.turn_on
       data:
         entity_id: light.kitchen_ceiling
         brightness_pct: 40
-        kelvin: 2200
+        color_temp_kelvin: 2200
         transition: 5
     - condition: state
       entity_id: input_boolean.enable_advent_light_automations
@@ -809,14 +809,14 @@ kitchen_wakeup:
         data:
           entity_id: light.kitchen_table
           brightness_pct: 80
-          kelvin: 2200
+          color_temp_kelvin: 2200
           transition: 1800
     else:
       - action: light.turn_on
         data:
           entity_id: light.kitchen_table
           brightness_pct: 100
-          kelvin: 2200
+          color_temp_kelvin: 2200
           transition: 1800
 
 kitchen_advent_lights:
@@ -839,7 +839,7 @@ kitchen_advent_lights_bright:
         variables:
           entity_id: light.kitchen_window
           brightness_pct: 100
-          kelvin: 2700
+          color_temp_kelvin: 2700
           transition: 2
 
 kitchen_advent_lights_relaxed:
@@ -851,7 +851,7 @@ kitchen_advent_lights_relaxed:
         variables:
           entity_id: light.kitchen_window
           brightness_pct: 60
-          kelvin: 2300
+          color_temp_kelvin: 2300
           transition: 5
 
 ##### BATHROOM #####
@@ -945,5 +945,5 @@ ikea_light_turn_on:
       - action: light.turn_on
         data:
           entity_id: "{{ entity_id }}"
-          kelvin: "{{ kelvin }}"
+          color_temp_kelvin: "{{ color_temp_kelvin }}"
           transition: 1

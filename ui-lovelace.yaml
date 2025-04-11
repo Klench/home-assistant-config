@@ -259,7 +259,7 @@ views:
           icon_tap_action:
             action: toggle
         - type: tile
-          entity: script.childroom_night_light
+          entity: script.childroom_light_dim
           hide_state: true
           icon_tap_action:
             action: toggle
@@ -472,6 +472,15 @@ views:
           shuffle: false
           volume_level: false
           runtime: false
+        shortcuts:
+          columns: 2
+          buttons:
+            - icon: mdi:volume-minus
+              type: script
+              id: script.sonos_decrease_volume
+            - icon: mdi:volume-plus
+              type: script
+              id: script.sonos_increase_volume
         speaker_group:
           platform: sonos
           sync_volume: true
@@ -488,7 +497,7 @@ views:
       - type: custom:mini-media-player
         entity: media_player.livingroom_sonos
         artwork: cover
-        icon: mdi:speaker
+        icon: mdi:soundbar
         volume_stateless: true
         volume_step: 3
         hide:

@@ -402,6 +402,11 @@ views:
           entity: light.outdoor_main_entrance
         - type: tile
           entity: light.outdoor_porch
+          icon_double_tap_action:
+            action: perform-action
+            perform_action: light.toggle
+            target:
+              entity_id: light.outdoor_porch_3
       title: Utomhus
 
     - cards:
@@ -431,6 +436,44 @@ views:
             when_idle: true
             when_standby: true
       title: Media
+
+    - cards:
+        - type: tile
+          entity: switch.battery_charging_station
+          visibility:
+            - condition: state
+              entity: switch.battery_charging_station
+              state_not: 'unavailable'
+        - type: tile
+          entity: timer.battery_charging_station
+          name: Timer
+          visibility:
+            - condition: state
+              entity: switch.battery_charging_station
+              state_not: 'unavailable'
+        - type: custom:mini-graph-card
+          entities:
+            - entity: sensor.battery_charging_station_power
+              color: blue
+              show:
+                extrema: true
+                labels: true
+                fill: fade
+                average: true
+          hours_to_show: 4
+          points_per_hour: 30
+          hour24: true
+          animate: true
+          decimals: 1
+          font_size_header: 18
+          visibility:
+            - condition: state
+              entity: switch.battery_charging_station
+              state_not: 'unavailable'
+            - condition: numeric_state
+              entity: sensor.battery_charging_station_power
+              above: 1
+      title: Batteriladdning
 
     # - cards:
     #     - type: custom:list-card

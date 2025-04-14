@@ -86,3 +86,40 @@
     action: switch.turn_off
     target:
       entity_id: switch.kitchen_coffee_maker
+
+##### BATTERY CHARGING STATION #####
+
+- alias: 'Battery charging station timer start'
+  initial_state: on
+  triggers:
+    trigger: state
+    entity_id: switch.battery_charging_station
+    to: 'on'
+  actions:
+    action: timer.start
+    data:
+      entity_id: timer.battery_charging_station
+      duration: '04:00:00'
+
+- alias: 'Battery charging station timer cancel'
+  initial_state: on
+  triggers:
+    trigger: state
+    entity_id: switch.battery_charging_station
+    from: 'on'
+  actions:
+    action: timer.cancel
+    target:
+      entity_id: timer.battery_charging_station
+
+- alias: 'Battery charging station turn off'
+  initial_state: on
+  triggers:
+    trigger: event
+    event_type: timer.finished
+    event_data:
+      entity_id: timer.battery_charging_station
+  actions:
+    action: switch.turn_off
+    target:
+      entity_id: switch.battery_charging_station

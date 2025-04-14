@@ -116,6 +116,9 @@ indoor_lights_off:
       data:
         volume: 0.1
     - action: script.sonos_reset_sound_levels
+    - action: switch.turn_off
+      target:
+        entity_id: switch.battery_charging_station
     - condition: state
       entity_id: binary_sensor.relaxed_mode
       state: 'off'

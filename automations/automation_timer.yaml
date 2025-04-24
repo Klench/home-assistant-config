@@ -99,7 +99,7 @@
     action: timer.start
     data:
       entity_id: timer.battery_charging_station
-      duration: '04:00:00'
+      duration: '10:00:00'
 
 - alias: 'Battery charging station timer cancel'
   initial_state: on

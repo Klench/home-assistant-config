@@ -49,12 +49,12 @@
       friendly_name: Bilen
       icon_template: mdi:car
       value_template: >
-        {% if is_state('binary_sensor.sbw57s_engine','on') %}
+        {% if is_state('binary_sensor.volvo_sbw57s_engine_status','on') %}
           Aktiv
-        {% elif not is_state('binary_sensor.sbw57s_engine','on') and is_state('device_tracker.sbw57s','not_home') %}
+        {% elif not is_state('binary_sensor.volvo_sbw57s_engine_status','on') and is_state('device_tracker.volvo_sbw57s','not_home') %}
           Borta
-        {% elif not is_state('binary_sensor.sbw57s_engine','on') and is_state('device_tracker.sbw57s','home') %}
+        {% elif not is_state('binary_sensor.volvo_sbw57s_engine_status','on') and is_state('device_tracker.volvo_sbw57s','home') %}
           Hemma
         {% else %}
-          {{ states('device_tracker.sbw57s') }}
+          {{ states('device_tracker.volvo_sbw57s') }}
         {% endif %}

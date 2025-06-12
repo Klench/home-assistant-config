@@ -29,23 +29,24 @@ views:
               double_tap_action:
                 action: navigate
                 navigation_path: /lovelace/9
-            - entity: sensor.sbw57s_battery_level
+            - entity: sensor.volvo_sbw57s_battery_charge_level
               name: 'Batteri'
-            - entity: binary_sensor.sbw57s_battery_charging
+            - entity: sensor.volvo_sbw57s_charging_system_status
               name: 'Status'
-            - entity: sensor.sbw57s_range
+            - entity: sensor.volvo_sbw57s_distance_to_empty_tank
               name: 'Räckvidd'
-            - entity: switch.sbw57s_heater
-              name: 'Klimat'
-              card_mod:
-                style: |
-                  :host {
-                    {% if states('sensor.outdoor_temperature') | float > 15 %}
-                    --card-mod-icon: mdi:air-conditioner;
-                    {% else %}
-                    --card-mod-icon: mdi:radiator;
-                    {% endif %}
-                  }
+            - entity: lock.volvo_sbw57s_lock
+            # - entity: switch.sbw57s_heater
+            #   name: 'Klimat'
+            #   card_mod:
+            #     style: |
+            #       :host {
+            #         {% if states('sensor.outdoor_temperature') | float > 15 %}
+            #         --card-mod-icon: mdi:air-conditioner;
+            #         {% else %}
+            #         --card-mod-icon: mdi:radiator;
+            #         {% endif %}
+            #       }
 
     - cards:
         - type: tile

@@ -46,7 +46,7 @@
     at: '07:00:00'
   conditions:
     condition: state
-    entity_id: binary_sensor.sbw57s_washer_fluid
+    entity_id: binary_sensor.volvo_sbw57s_washer_fluid_level_warning
     state: 'on'
   actions:
     action: notify.mobile_app_davids_iphone

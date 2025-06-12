@@ -17,8 +17,6 @@ homeassistant:
   customize: !include customize.yaml
   # Local media directory
   media_dirs:
-    music: /media/music
-    audiobooks: /media/audiobooks
     local_media: /config/media
   auth_providers:
     - type: homeassistant
@@ -70,7 +68,7 @@ config:
 
 http:
   use_x_forwarded_for: true
-  trusted_proxies: 172.0.0.0/8
+  trusted_proxies: 192.168.2.2
 
 python_script:
 

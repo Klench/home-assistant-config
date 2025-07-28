@@ -9,7 +9,10 @@
         action: script.sonos_enable_night_mode
       turn_off:
         action: script.sonos_disable_night_mode
-
+- platform: wake_on_lan
+  name: WOL Oden
+  mac: !secret oden_mac
+  host: !secret oden_ip
 - platform: wake_on_lan
   name: WOL Vidar
   mac: !secret vidar_mac

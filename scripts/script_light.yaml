@@ -482,6 +482,8 @@ office_bright:
       data:
         entity_id: light.office_ceiling
         brightness_pct: 100
+        color_temp_kelvin: 3500
+        transition: 2
 
 office_relaxed:
   alias: 'Mysbelysning'
@@ -489,7 +491,7 @@ office_relaxed:
     - action: light.turn_on
       data:
         entity_id: light.office_desk
-        brightness_pct: 40
+        brightness_pct: 10
         transition: 2
     - action: light.turn_on
       data:
@@ -537,7 +539,8 @@ livingroom_bright:
     - action: light.turn_on
       data:
         entity_id: light.livingroom_dinner_table
-        brightness_pct: 70
+        brightness_pct: 100
+        color_temp_kelvin: 2700
         transition: 2
     - action: light.turn_on
       data:
@@ -561,7 +564,8 @@ livingroom_relaxed:
     - action: light.turn_on
       data:
         entity_id: light.livingroom_dinner_table
-        brightness_pct: 10
+        brightness_pct: 40
+        color_temp_kelvin: 2200
         transition: 5
     - action: light.turn_on
       data:

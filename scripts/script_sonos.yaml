@@ -137,8 +137,9 @@ sonos_play_local_media:
   alias: 'Sonos play local media'
   sequence:
     - action: media_player.play_media
-      data:
+      target:
         entity_id: "{{ entity_id }}"
+      data:
         media_content_id: >
           {{ "media-source://media_source/local_media/" ~ media_filename }}
         media_content_type: music

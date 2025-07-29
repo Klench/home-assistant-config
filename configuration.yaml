@@ -68,7 +68,7 @@ config:
 
 http:
   use_x_forwarded_for: true
-  trusted_proxies: 192.168.2.2
+  trusted_proxies: !secret oden_ip
 
 python_script:
 
@@ -141,85 +141,23 @@ calendar:
     calendars:
       - Family
 
+################# SONOS #################
+
+# sonos:
+#   media_player:
+#     advertise_addr: !secret brage_ip
+#     hosts:
+#       - !secret kitchen_sonos_ip
+#       - !secret livingroom_sonos_ip
+#       - !secret childroom_sonos_ip
+
 ################# ZHA #################
 
 # zha:
 #   zigpy_config:
 #     ota:
-#       ikea_provider: true
-  # custom_quirks_path: /config/custom_quirks
-
-################# DOCKER MONITOR #################
-
-monitor_docker:
-  - containers:
-      - code-server
-      - code-server-ha
-      - duplicati
-      - glances
-      - home-assistant
-      - mariadb
-      - nextcloud
-      - pihole
-      - PlexMediaServer
-      - qbittorrentvpn
-      - resilio-sync
-      - unifi-controller
-      - frigate
-      - authelia
-      - traefik
-      - redis
-      - WordPress
-      - wyoming-piper
-      - wyoming-whisper
-      - ApacheGuacamole
-      - ESPHome
-    rename:
-      code-server: Code Server appdata
-      code-server-ha: Code Server HA
-      duplicati: Duplicati
-      glances: Glances
-      home-assistant: Home Assistant
-      mariadb: MariaDB
-      nextcloud: Nextcloud
-      pihole: Pi-hole
-      qbittorrentvpn: qBittorrent VPN
-      resilio-sync: Resilio Sync
-      unifi-controller: UniFi Controller
-      frigate: Frigate
-      authelia: Authelia
-      traefik: Traefik
-      redis: Redis
-      wyoming-piper: Wyoming Piper
-      wyoming-whisper: Wyoming Whisper
-      apacheguacamole: Apache Guacamole
-    monitored_conditions:
-      - version
-      - containers_total
-      - containers_running
-      - containers_paused
-      - containers_stopped
-      - containers_1cpu_percentage
-      - containers_memory
-      - state
-      - uptime
-      - 1cpu_percentage
-      - memory
-      - network_speed_up
-      - network_speed_down
-      - network_total_up
-      - network_total_down
-    sensorname: "{sensor}"
-
-################# MEDIA PLAYERS #################
-
-# sonos:
-#   media_player:
-#     advertise_addr: !secret oden_ip
-#     hosts:
-#       - !secret kitchen_sonos_ip
-#       - !secret livingroom_sonos_ip
-#       - !secret childroom_sonos_ip
+#       extra_providers:
+#         - type: ikea
 
 # Local media source
 media_source:

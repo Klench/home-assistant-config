@@ -494,7 +494,7 @@
 
 ################# MISC #################
 
-- alias: 'Tor turning off'
+- alias: 'Gaming PC turning off'
   initial_state: on
   triggers:
     trigger: state
@@ -510,7 +510,7 @@
   actions:
     action: script.office_low_brightness
 
-- alias: 'Tor turning on'
+- alias: 'Gaming PC turning on'
   initial_state: on
   triggers:
     trigger: state

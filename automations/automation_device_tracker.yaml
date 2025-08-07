@@ -163,7 +163,7 @@
     - condition: time
       before: '17:00:00'
   actions:
-    - action: script.office_bright
+    - action: script.office_work_light
     - action: script.hallway_top_floor_bright
     - action: script.sonos_ungroup_childroom_speaker
     - action: media_player.volume_set
@@ -226,7 +226,7 @@
     entity_id: device_tracker.sela_lt6ywwb54
     state: 'home'
   actions:
-    action: script.office_bright
+    action: script.office_work_light
 
 - alias: 'Nellie leaving home during work hours'
   initial_state: on

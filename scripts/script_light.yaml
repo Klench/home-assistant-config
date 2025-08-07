@@ -482,6 +482,16 @@ office_bright:
       data:
         entity_id: light.office_ceiling
         brightness_pct: 100
+        color_temp_kelvin: 2700
+        transition: 2
+
+office_work_light:
+  alias: 'Arbetsbelysning'
+  sequence:
+    - action: light.turn_on
+      data:
+        entity_id: light.office_ceiling
+        brightness_pct: 100
         color_temp_kelvin: 3500
         transition: 2
 

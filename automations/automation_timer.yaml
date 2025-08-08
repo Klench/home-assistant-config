@@ -52,11 +52,31 @@
 
 - alias: 'Kitchen coffee maker timer start'
   triggers:
-    trigger: state
-    entity_id: switch.kitchen_coffee_maker
-    to: 'on'
+    - trigger: state
+      entity_id: switch.kitchen_coffee_maker
+      to: 'on'
+      id: "state"
+    - trigger: event
+      event_type: zha_event
+      event_data:
+        device_id: ba91148bbaa6400dc4a15b0b42004ddb
+        command: 'on'
+      id: "remote"
   actions:
-    action: script.kitchen_coffee_maker_timer_start
+    choose:
+      - conditions:
+          - condition: trigger
+            id: "state"
+        sequence:
+          action: script.kitchen_coffee_maker_timer_start
+      - conditions:
+        - condition: trigger
+          id: "remote"
+        - condition: state
+          entity_id: switch.kitchen_coffee_maker
+          state: 'on'
+        sequence:
+          action: script.kitchen_coffee_maker_timer_start
 
 - alias: 'Kitchen coffee maker timer cancel'
   initial_state: on

@@ -1,5 +1,5 @@
 - alias: 'Leaving home'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: state
     entity_id: group.device_tracker_family
@@ -8,7 +8,7 @@
     action: script.indoor_lights_off
 
 - alias: 'Coming home turn on lights bright'
-  initial_state: on
+  initial_state: true
   triggers:
     - trigger: state
       entity_id: group.device_tracker_family
@@ -47,7 +47,7 @@
           - script.childroom_advent_lights
 
 - alias: 'Coming home turn on lights relaxed'
-  initial_state: on
+  initial_state: true
   triggers:
     - trigger: state
       entity_id: group.device_tracker_family
@@ -77,7 +77,7 @@
         entity_id: input_boolean.away_lights_active
 
 - alias: 'Coming home turn on hallway lights'
-  initial_state: on
+  initial_state: true
   triggers:
     - trigger: state
       entity_id: group.device_tracker_family
@@ -117,7 +117,7 @@
     - action: script.advent_lights_turn_on
 
 - alias: 'Coming home group Sonos speakers'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: state
     entity_id: group.device_tracker_family
@@ -151,7 +151,7 @@
 ################# SONOS #################
 
 - alias: 'Start working'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: state
     entity_id: device_tracker.sela_lt6ywwb54
@@ -187,7 +187,7 @@
     - action: script.sonos_ungroup_childroom_speaker
 
 - alias: 'Stop working'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: state
     entity_id: device_tracker.sela_lt6ywwb54
@@ -198,7 +198,7 @@
       entity_id: light.office_ceiling
 
 - alias: 'Leaving home during work hours'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: state
     entity_id: person.david
@@ -216,7 +216,7 @@
       area_id: arbetsrum
 
 - alias: 'Coming home during work hours'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: state
     entity_id: device_tracker.davids_iphone
@@ -229,7 +229,7 @@
     action: script.office_work_light
 
 - alias: 'Nellie leaving home during work hours'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: state
     entity_id: person.nellie

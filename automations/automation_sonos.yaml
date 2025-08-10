@@ -13,7 +13,7 @@
     action: script.sonos_set_alarm
 
 - alias: 'Skip song tracks'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: template
     value_template: >
@@ -24,7 +24,7 @@
       entity_id: media_player.childroom_sonos
 
 - alias: 'Activate repeat on Sonos bedroom'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: state
     entity_id: media_player.childroom_sonos
@@ -44,7 +44,7 @@
       repeat: all
 
 - alias: 'TV off group speakers'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: state
     entity_id: binary_sensor.livingroom_sonos_tv_active
@@ -62,7 +62,7 @@
     action: script.sonos_group_livingroom_speaker
 
 - alias: 'TV off disable night mode'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: state
     entity_id: binary_sensor.livingroom_sonos_tv_active
@@ -84,7 +84,7 @@
         - switch.sonos_livingroom_speech_enhancement
 
 - alias: 'Leaving home pause Sonos kitchen'
-  initial_state: on
+  initial_state: true
   triggers:
     - trigger: state
       entity_id: group.device_tracker_family
@@ -109,7 +109,7 @@
         volume: 0.2
 
 - alias: 'Leaving home pause Sonos childroom'
-  initial_state: on
+  initial_state: true
   triggers:
     - trigger: state
       entity_id: group.device_tracker_family

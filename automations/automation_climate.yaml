@@ -1,7 +1,7 @@
 ################# BATHROOM FLOOR HEATER #################
 
 - alias: 'Bathroom floor heater manual off'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: state
     entity_id: input_boolean.bathroom_floor_heater_auto
@@ -12,7 +12,7 @@
       entity_id: script.bathroom_floor_heater_turn_off
 
 - alias: 'Bathroom floor heater manual auto'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: state
     entity_id: input_boolean.bathroom_floor_heater_auto
@@ -23,7 +23,7 @@
       entity_id: script.bathroom_floor_heater_auto
 
 - alias: 'Bathroom floor heater away'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: state
     entity_id: group.device_tracker_family
@@ -41,7 +41,7 @@
       entity_id: script.bathroom_floor_heater_turn_off
 
 - alias: 'Bathroom floor heater home'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: state
     entity_id: group.device_tracker_family

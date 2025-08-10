@@ -3,7 +3,7 @@
 ##### LIGHTS #####
 
 - alias: 'Hue switch bright'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: event
     event_type: hue_event
@@ -19,7 +19,7 @@
     action: script.bottom_floor_bright
 
 - alias: 'Hue switch relaxed'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: event
     event_type: hue_event
@@ -43,7 +43,7 @@
         volume_level: 0.2
 
 - alias: 'Hue switch turn off lighs'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: event
     event_type: hue_event
@@ -59,7 +59,7 @@
     action: script.indoor_lights_off
 
 - alias: 'Hue switch low brightness'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: event
     event_type: hue_event
@@ -77,7 +77,7 @@
 ##### SONOS #####
 
 - alias: 'Hue switch group livingroom speaker'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: event
     event_type: hue_event
@@ -101,7 +101,7 @@
           action: script.sonos_ungroup_livingroom_speaker
 
 - alias: 'Hue switch group childroom speaker'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: event
     event_type: hue_event
@@ -125,7 +125,7 @@
           action: script.sonos_ungroup_childroom_speaker
 
 - alias: 'Hue switch increase Sonos volume'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: event
     event_type: hue_event
@@ -179,7 +179,7 @@
         - action: script.sonos_increase_volume
 
 - alias: 'Hue switch decrease Sonos volume'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: event
     event_type: hue_event
@@ -237,7 +237,7 @@
 ##### BEDROOM #####
 
 - alias: 'Ikea button bedroom on'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: event
     event_type: zha_event
@@ -248,7 +248,7 @@
     action: script.bedroom_relaxed
 
 - alias: 'Ikea button bedroom on long press'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: event
     event_type: zha_event
@@ -259,7 +259,7 @@
     action: script.bedroom_low_brightness
 
 - alias: 'Ikea button bedroom off'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: event
     event_type: zha_event
@@ -282,7 +282,7 @@
     action: script.indoor_lights_off
 
 - alias: 'Ikea styrbar bedroom on'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: event
     event_type: zha_event
@@ -293,7 +293,7 @@
     action: script.bedroom_relaxed
 
 - alias: 'Ikea styrbar bedroom on long press'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: event
     event_type: zha_event
@@ -304,7 +304,7 @@
     action: script.bedroom_low_brightness
 
 - alias: 'Ikea styrbar bedroom off'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: event
     event_type: zha_event
@@ -327,7 +327,7 @@
     action: script.indoor_lights_off
 
 - alias: 'Ikea styrbar bedroom increase press'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: event
     event_type: zha_event
@@ -351,7 +351,7 @@
       action: script.bedroom_nursery_light_high
 
 - alias: 'Ikea styrbar bedroom decrease press'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: event
     event_type: zha_event
@@ -377,7 +377,7 @@
 ##### CHILD ROOM #####
 
 - alias: 'Ikea button childroom toggle'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: event
     event_type: zha_event
@@ -390,7 +390,7 @@
       entity_id: light.childroom_ceiling
 
 - alias: 'Ikea button childroom bright'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: event
     event_type: zha_event
@@ -401,7 +401,7 @@
     action: script.childroom_bright
 
 - alias: 'Ikea button childroom relaxed'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: event
     event_type: zha_event
@@ -412,7 +412,7 @@
     action: script.childroom_relaxed
 
 - alias: 'Ikea button childroom window light toggle'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: event
     event_type: zha_event
@@ -429,7 +429,7 @@
       entity_id: light.childroom_window
 
 - alias: 'Ikea button childroom led strip disco'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: event
     event_type: zha_event
@@ -460,7 +460,7 @@
                 entity_id: light.childroom_led_strip
 
 - alias: 'Ikea button childroom light turn off'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: event
     event_type: zha_event
@@ -471,7 +471,7 @@
     action: script.childroom_light_dim
 
 - alias: 'Ikea button childroom increase volume'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: event
     event_type: zha_event
@@ -487,7 +487,7 @@
         {{ [((state_attr('media_player.childroom_sonos','volume_level') | float * 1.15 + 0.03) | round(2)), 1] | min }}
 
 - alias: 'Ikea button childroom decrease volume'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: event
     event_type: zha_event
@@ -503,7 +503,7 @@
         {{ [((state_attr('media_player.childroom_sonos','volume_level') | float * 0.85 - 0.03) | round(2)), 0.05] | max }}
 
 - alias: 'Ikea button childroom ungroup speaker'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: event
     event_type: zha_event
@@ -515,7 +515,7 @@
     action: script.sonos_ungroup_childroom_speaker
 
 - alias: 'Ikea button childroom group speaker'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: event
     event_type: zha_event
@@ -529,7 +529,7 @@
 ##### OFFICE #####
 
 - alias: 'Office switch turn on'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: event
     event_type: zha_event
@@ -551,7 +551,7 @@
         entity_id: script.office_relaxed
 
 - alias: 'Office switch turn off'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: event
     event_type: zha_event
@@ -564,7 +564,7 @@
       area_id: arbetsrum
 
 - alias: 'Office switch turn on hold'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: event
     event_type: zha_event
@@ -581,7 +581,7 @@
       entity_id: script.hallway_top_floor_bright
 
 - alias: 'Office switch turn off hold'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: event
     event_type: zha_event
@@ -596,7 +596,7 @@
 ##### KITCHEN #####
 
 - alias: 'Ikea switch turn on coffee maker'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: event
     event_type: zha_event
@@ -609,7 +609,7 @@
         entity_id: switch.kitchen_coffee_maker
 
 - alias: 'Ikea switch turn off coffee maker'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: event
     event_type: zha_event
@@ -622,7 +622,7 @@
       entity_id: switch.kitchen_coffee_maker
 
 - alias: 'Ikea switch turn on kitchen bright'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: event
     event_type: zha_event
@@ -633,7 +633,7 @@
     action: script.kitchen_bright
 
 - alias: 'Ikea switch turn off kitchen lights'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: event
     event_type: zha_event
@@ -650,7 +650,7 @@
 ##### LIVINGROOM #####
 
 - alias: 'Shelly livingroom relaxed'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: event
     event_type: shelly.click
@@ -667,7 +667,7 @@
     action: script.livingroom_relaxed
 
 - alias: 'Shelly livingroom bright'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: event
     event_type: shelly.click
@@ -684,7 +684,7 @@
     action: script.livingroom_bright
 
 - alias: 'Shelly livingroom relaxed long press'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: event
     event_type: shelly.click
@@ -701,7 +701,7 @@
     action: script.livingroom_relaxed
 
 - alias: 'Shelly livingroom turn off lights'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: event
     event_type: shelly.click

@@ -1,5 +1,5 @@
 - alias: 'Toggle coffee maker'
-  initial_state: on
+  initial_state: true
   triggers:
     - trigger: event
       event_type: ios.action_fired
@@ -16,7 +16,7 @@
         entity_id: switch.kitchen_coffee_maker
 
 - alias: 'Play child room music'
-  initial_state: on
+  initial_state: true
   triggers:
     - trigger: event
       event_type: ios.action_fired
@@ -48,7 +48,7 @@
         entity_id: script.play_child_room_night_music
 
 - alias: 'Turn on PC'
-  initial_state: on
+  initial_state: true
   triggers:
     - trigger: event
       event_type: ios.action_fired

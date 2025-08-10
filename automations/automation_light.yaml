@@ -59,7 +59,7 @@
     action: script.childroom_night_light
 
 - alias: 'Advent lights workday'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: time
     at: '06:45:00'
@@ -74,7 +74,7 @@
     action: script.advent_lights_turn_on
 
 - alias: 'Advent lights weekend'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: time
     at: '08:15:00'
@@ -110,7 +110,7 @@
       entity_id: script.window_lights
 
 - alias: 'Bright after sunset bedroom'
-  initial_state: off
+  initial_state: false
   triggers:
     trigger: state
     entity_id: script.bedroom_bright
@@ -128,7 +128,7 @@
       brightness_pct: 100
 
 - alias: 'Bright after sunset livingroom'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: state
     entity_id: script.livingroom_bright
@@ -147,7 +147,7 @@
         - light.office_window
 
 - alias: 'Outdoor lights at sunset'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: sun
     event: sunset
@@ -156,7 +156,7 @@
     action: script.turn_on_outdoor_lights
 
 - alias: 'Outdoor lights at sunrise'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: sun
     event: sunrise
@@ -164,7 +164,7 @@
     action: script.turn_off_outdoor_lights
 
 - alias: 'Outdoor lights when sun above horizon'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: time_pattern
     minutes: "/30"
@@ -182,7 +182,7 @@
     - action: script.turn_off_outdoor_lights
 
 - alias: 'Turn off child room night light at sunrise'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: sun
     event: sunrise
@@ -286,7 +286,7 @@
 ################# AWAY #################
 
 - alias: 'Away turn on lights'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: sun
     event: sunset
@@ -304,7 +304,7 @@
         entity_id: input_boolean.away_lights_active
 
 - alias: 'Leaving home turn on lights'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: state
     entity_id: group.device_tracker_family
@@ -322,7 +322,7 @@
         entity_id: input_boolean.away_lights_active
 
 - alias: 'Away turn off lights'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: time
     at: '23:30:00'
@@ -342,7 +342,7 @@
 ################# BATHROOM #################
 
 - alias: 'Increase bathroom ceiling light brightness'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: state
     entity_id: light.bathroom_ceiling
@@ -363,7 +363,7 @@
 ################# MOTION SENSOR #################
 
 - alias: 'Hallway top floor motion hallway bright'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: state
     entity_id: binary_sensor.hallway_top_floor_motion
@@ -403,7 +403,7 @@
     action: script.hallway_top_floor_bright
 
 - alias: 'Hallway top floor motion rooms bright'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: state
     entity_id: binary_sensor.hallway_top_floor_motion
@@ -457,7 +457,7 @@
 ################# TURN OFF TOP FLOOR LIGHTS NOT IN USE #################
 
 - alias: 'Turn off top floor lights not in use'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: time_pattern
     minutes: "/30"
@@ -495,7 +495,7 @@
 ################# MISC #################
 
 - alias: 'Gaming PC turning off'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: state
     entity_id: switch.wol_vidar
@@ -511,7 +511,7 @@
     action: script.office_low_brightness
 
 - alias: 'Gaming PC turning on'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: state
     entity_id: switch.wol_vidar
@@ -527,7 +527,7 @@
     action: script.office_relaxed
 
 - alias: 'Davids iPhone charging'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: state
     entity_id: sensor.davids_iphone_battery_state
@@ -549,7 +549,7 @@
 ################# CREATE LIGHT GROUPS #################
 
 - alias: 'Create light groups'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: homeassistant
     event: start

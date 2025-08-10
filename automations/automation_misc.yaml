@@ -26,7 +26,7 @@
     action: script.watching_tv_lights
 
 - alias: 'Decrease child room music volume when turning indoor lights off'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: state
     entity_id: script.indoor_lights_off

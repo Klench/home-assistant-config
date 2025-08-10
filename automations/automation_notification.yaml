@@ -1,7 +1,7 @@
 ################# CAR #################
 
 - alias: 'Car heater started'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: state
     entity_id: switch.sbw57s_heater
@@ -20,7 +20,7 @@
       message: 'Klimatanläggning startad'
 
 - alias: 'Car heater audio notification'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: state
     entity_id: switch.sbw57s_heater
@@ -40,7 +40,7 @@
       message: 'Klimatanläggning startad'
 
 - alias: 'Low washer fluid'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: time
     at: '07:00:00'
@@ -57,7 +57,7 @@
 ################# ALARM #################
 
 - alias: 'Alarm not active'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: state
     entity_id: group.device_tracker_family
@@ -95,7 +95,7 @@
                   volume: 0.5
 
 - alias: 'Night mode not active'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: state
     entity_id: script.indoor_lights_off
@@ -125,7 +125,7 @@
 ##### SHED DOOR #####
 
 - alias: 'Shed door opened not home'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: state
     entity_id: binary_sensor.outdoor_shed_door
@@ -149,7 +149,7 @@
           volume: 0.5
 
 - alias: 'Shed door opened alarm armed night'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: state
     entity_id: binary_sensor.outdoor_shed_door
@@ -170,7 +170,7 @@
           volume: 0.5
 
 - alias: 'Shed door open alarm armed night activated'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: state
     entity_id: alarm_control_panel.ajax_alarm_status
@@ -331,7 +331,7 @@
 ################# TRAEFIK STATUS #################
 
 - alias: 'Web service down'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: time_pattern
     minutes: "/10"

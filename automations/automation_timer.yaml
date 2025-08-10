@@ -1,7 +1,7 @@
 ##### CHILD ROOM #####
 
 - alias: 'Pause bedroom music'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: event
     event_type: timer.finished
@@ -27,7 +27,7 @@
         volume_level: 0.10
 
 - alias: 'Start bedroom music timer'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: state
     entity_id: script.indoor_lights_off
@@ -79,7 +79,7 @@
           action: script.kitchen_coffee_maker_timer_start
 
 - alias: 'Kitchen coffee maker timer cancel'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: state
     entity_id: switch.kitchen_coffee_maker
@@ -92,7 +92,7 @@
     action: script.kitchen_coffee_maker_timer_cancel
 
 - alias: 'Timer turn off kitchen coffee maker'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: event
     event_type: timer.finished
@@ -110,7 +110,7 @@
 ##### BATTERY CHARGING STATION #####
 
 - alias: 'Battery charging station timer start'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: state
     entity_id: switch.battery_charging_station
@@ -122,7 +122,7 @@
       duration: '10:00:00'
 
 - alias: 'Battery charging station timer cancel'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: state
     entity_id: switch.battery_charging_station
@@ -133,7 +133,7 @@
       entity_id: timer.battery_charging_station
 
 - alias: 'Battery charging station turn off'
-  initial_state: on
+  initial_state: true
   triggers:
     trigger: event
     event_type: timer.finished

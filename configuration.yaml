@@ -62,6 +62,8 @@ lovelace:
       type: module
     - url: /hacsfiles/flex-table-card/flex-table-card.js
       type: module
+    - url: /hacsfiles/skolmat-card/skolmat-card.js
+      type: module
 
 # Enables configuration UI
 config:

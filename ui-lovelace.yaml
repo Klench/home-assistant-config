@@ -483,17 +483,6 @@ views:
           header_font: https://fonts.googleapis.com/css2?family=Roboto
       title: Skolmat
 
-    # - cards:
-    #     - type: custom:list-card
-    #   columns:
-    #     - title: ' '
-    #       field: day
-    #     - field: food
-    #       title: ' '
-    #   entity: sensor.skolmaten_villanskolan
-    #   feed_attribute: entries
-    #   title: Matsedel
-
     - cards:
         - type: custom:auto-entities
           show_empty: false

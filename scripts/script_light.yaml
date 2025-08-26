@@ -466,11 +466,17 @@ childroom_light_dim:
 
 childroom_wakeup:
   sequence:
+    # - action: light.turn_on
+    #   data:
+    #     entity_id: light.childroom_ceiling
+    #     brightness_pct: 1
+    #     color_temp_kelvin: 2200
+    #     transition: 2
     - action: light.turn_on
       data:
         entity_id: light.childroom_ceiling
-        brightness_pct: 100
-        color_temp_kelvin: 2700
+        brightness_pct: 30
+        color_temp_kelvin: 2200
         transition: 1800
 
 ##### OFFICE #####

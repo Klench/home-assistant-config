@@ -7,8 +7,12 @@
   id: nellie
   device_trackers:
     - device_tracker.nellies_iphone
-    # - device_tracker.nellies_iphone_wifi
+    - device_tracker.nellies_iphone_wifi
 - name: Lennart
   id: lennart
   device_trackers:
-    - device_tracker.galaxy_s10e
+    - device_tracker.lennarts_s23
+- name: Carina
+  id: carina
+  device_trackers:
+    - device_tracker.galaxy_a70

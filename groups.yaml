@@ -6,6 +6,7 @@ device_tracker_family:
     - person.david
     - person.nellie
     - person.lennart
+    - person.carina
 sonos_all_speakers:
   name: "Sonos all speakers"
   entities:

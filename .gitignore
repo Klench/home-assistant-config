@@ -28,6 +28,7 @@ secrets.yaml
 tradfri.conf
 .DS_Store
 .HA_VERSION
+.ha_run.lock
 .homekit.state
 .ios.conf
 .trakt.conf

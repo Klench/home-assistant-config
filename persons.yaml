@@ -15,4 +15,4 @@
 - name: Carina
   id: carina
   device_trackers:
-    - device_tracker.galaxy_a70
+    - device_tracker.carinas_s25

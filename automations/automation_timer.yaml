@@ -6,24 +6,24 @@
     trigger: event
     event_type: timer.finished
     event_data:
-      entity_id: timer.childroom_music
+      entity_id: timer.girlroom_music
   conditions:
     - condition: state
-      entity_id: media_player.childroom_sonos
+      entity_id: media_player.girlroom_sonos
       state: 'playing'
     - condition: state
-      entity_id: binary_sensor.childroom_sonos_is_grouped
+      entity_id: binary_sensor.girlroom_sonos_is_grouped
       state: 'off'
   actions:
     - action: python_script.media_player_volume_set
       data:
-        entity_id: media_player.childroom_sonos
+        entity_id: media_player.girlroom_sonos
         volume_level: 0.01
     - action: media_player.media_pause
-      entity_id: media_player.childroom_sonos
+      entity_id: media_player.girlroom_sonos
     - action: media_player.volume_set
       data:
-        entity_id: media_player.childroom_sonos
+        entity_id: media_player.girlroom_sonos
         volume_level: 0.10
 
 - alias: 'Start bedroom music timer'
@@ -34,19 +34,19 @@
     to: 'on'
   conditions:
     - condition: state
-      entity_id: media_player.childroom_sonos
+      entity_id: media_player.girlroom_sonos
       state: 'playing'
     - condition: state
-      entity_id: timer.childroom_music
+      entity_id: timer.girlroom_music
       state: 'idle'
     - condition: state
-      entity_id: binary_sensor.childroom_sonos_is_grouped
+      entity_id: binary_sensor.girlroom_sonos_is_grouped
       state: 'off'
     - condition: state
       entity_id: binary_sensor.relaxed_mode
       state: 'on'
   actions:
-    action: script.bedroom_music_timer_start
+    action: script.girlroom_music_timer_start
 
 ##### KITCHEN #####
 

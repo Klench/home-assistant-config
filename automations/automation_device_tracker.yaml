@@ -44,7 +44,7 @@
         entity_id:
           - script.bedroom_advent_lights
           - script.office_advent_lights
-          - script.childroom_advent_lights
+          - script.girlroom_advent_lights
 
 - alias: 'Coming home turn on lights relaxed'
   initial_state: true
@@ -137,10 +137,10 @@
             - action: script.sonos_set_group_volume
               data:
                 volume: 0.2
-            - action: script.sonos_ungroup_childroom_speaker
+            - action: script.sonos_ungroup_girlroom_speaker
             - action: media_player.volume_set
               data:
-                entity_id: media_player.childroom_sonos
+                entity_id: media_player.girlroom_sonos
                 volume_level: 0.2
       default:
         - action: script.sonos_group_all_speakers
@@ -163,12 +163,15 @@
     - condition: time
       before: '17:00:00'
   actions:
-    - action: script.office_work_light
-    - action: script.hallway_top_floor_bright
-    - action: script.sonos_ungroup_childroom_speaker
-    - action: media_player.volume_set
+    - action: script.turn_on
+      target:
+        entity_id: 
+          - script.bedroom_work_light
+          - script.hallway_top_floor_bright
+          - script.sonos_ungroup_girlroom_speaker
+    - action: alarm_control_panel.alarm_arm_away
       data:
-        entity_id: media_player.childroom_sonos
+        entity_id: media_player.girlroom_sonos
         volume_level: 0.40
     - condition: state
       entity_id: person.nellie
@@ -183,8 +186,7 @@
         - light.livingroom_floor
         - light.livingroom_window
         - light.bedroom_bedside
-        - light.childroom_ceiling
-    - action: script.sonos_ungroup_childroom_speaker
+        - light.girlroom_ceiling
 
 - alias: 'Stop working'
   initial_state: true
@@ -195,7 +197,7 @@
   actions:
     action: light.turn_off
     target:
-      entity_id: light.office_ceiling
+      entity_id: light.bedroom_ceiling
 
 - alias: 'Leaving home during work hours'
   initial_state: true
@@ -213,7 +215,7 @@
   actions:
     action: light.turn_off
     target:
-      area_id: arbetsrum
+      area_id: sovrum
 
 - alias: 'Coming home during work hours'
   initial_state: true
@@ -226,7 +228,7 @@
     entity_id: device_tracker.sela_lt6ywwb54
     state: 'home'
   actions:
-    action: script.office_work_light
+    action: script.bedroom_work_light
 
 - alias: 'Nellie leaving home during work hours'
   initial_state: true
@@ -250,8 +252,8 @@
         area_id:
           - kok
           - vardagsrum
-          - sovrum
-          - barnrum
+          - pojkrum
+          - flickrum
     - condition: state
       entity_id: media_player.kitchen_sonos
       state: 'playing'

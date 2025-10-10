@@ -34,12 +34,12 @@
   actions:
     - action: script.indoor_lights_relaxed
     - condition: state
-      entity_id: binary_sensor.childroom_sonos_is_grouped
+      entity_id: binary_sensor.girlroom_sonos_is_grouped
       state: 'on'
-    - action: script.sonos_ungroup_childroom_speaker
+    - action: script.sonos_ungroup_girlroom_speaker
     - action: media_player.volume_set
       data:
-        entity_id: media_player.childroom_sonos
+        entity_id: media_player.girlroom_sonos
         volume_level: 0.2
 
 - alias: 'Hue switch turn off lighs'
@@ -100,7 +100,7 @@
         sequence:
           action: script.sonos_ungroup_livingroom_speaker
 
-- alias: 'Hue switch group childroom speaker'
+- alias: 'Hue switch group girlroom speaker'
   initial_state: true
   triggers:
     trigger: event
@@ -116,13 +116,13 @@
   actions:
     choose:
       - conditions: >
-          {{ is_state('binary_sensor.childroom_sonos_is_grouped','off') }}
+          {{ is_state('binary_sensor.girlroom_sonos_is_grouped','off') }}
         sequence:
-          action: script.sonos_group_childroom_speaker
+          action: script.sonos_group_girlroom_speaker
       - conditions: >
-          {{ is_state('binary_sensor.childroom_sonos_is_grouped','on') }}
+          {{ is_state('binary_sensor.girlroom_sonos_is_grouped','on') }}
         sequence:
-          action: script.sonos_ungroup_childroom_speaker
+          action: script.sonos_ungroup_girlroom_speaker
 
 - alias: 'Hue switch increase Sonos volume'
   initial_state: true
@@ -164,17 +164,17 @@
                 - 'paused'
                 - 'idle'
             - condition: state
-              entity_id: media_player.childroom_sonos
+              entity_id: media_player.girlroom_sonos
               state: 'playing'
             - condition: state
-              entity_id: binary_sensor.childroom_sonos_is_grouped
+              entity_id: binary_sensor.girlroom_sonos_is_grouped
               state: 'off'
           sequence:
             - action: python_script.media_player_volume_set
               data:
-                entity_id: media_player.childroom_sonos
+                entity_id: media_player.girlroom_sonos
                 volume_level: >
-                  {{ [((state_attr('media_player.childroom_sonos','volume_level') | float * 1.15 + 0.03) | round(2)), 1] | min }}
+                  {{ [((state_attr('media_player.girlroom_sonos','volume_level') | float * 1.15 + 0.03) | round(2)), 1] | min }}
       default:
         - action: script.sonos_increase_volume
 
@@ -218,17 +218,17 @@
                 - 'paused'
                 - 'idle'
             - condition: state
-              entity_id: media_player.childroom_sonos
+              entity_id: media_player.girlroom_sonos
               state: 'playing'
             - condition: state
-              entity_id: binary_sensor.childroom_sonos_is_grouped
+              entity_id: binary_sensor.girlroom_sonos_is_grouped
               state: 'off'
           sequence:
             - action: python_script.media_player_volume_set
               data:
-                entity_id: media_player.childroom_sonos
+                entity_id: media_player.girlroom_sonos
                 volume_level: >
-                  {{ [((state_attr('media_player.childroom_sonos','volume_level') | float * 0.85 - 0.03) | round(2)), 0.05] | max }}
+                  {{ [((state_attr('media_player.girlroom_sonos','volume_level') | float * 0.85 - 0.03) | round(2)), 0.05] | max }}
       default:
         - action: script.sonos_decrease_volume
 
@@ -290,7 +290,7 @@
       device_id: f423762e1c28755b0123cc7fd21c5fa7
       command: 'on'
   actions:
-    action: script.bedroom_relaxed
+    action: script.bedroom_bright
 
 - alias: 'Ikea styrbar bedroom on long press'
   initial_state: true
@@ -301,7 +301,7 @@
       device_id: f423762e1c28755b0123cc7fd21c5fa7
       command: 'move_with_on_off'
   actions:
-    action: script.bedroom_low_brightness
+    action: script.bedroom_relaxed
 
 - alias: 'Ikea styrbar bedroom off'
   initial_state: true
@@ -324,7 +324,7 @@
       device_id: f423762e1c28755b0123cc7fd21c5fa7
       command: 'move'
   actions:
-    action: script.indoor_lights_off
+    action: script.bedroom_low_brightness
 
 - alias: 'Ikea styrbar bedroom increase press'
   initial_state: true
@@ -374,9 +374,9 @@
     default:
       action: script.bedroom_nursery_light
 
-##### CHILD ROOM #####
+##### GIRL ROOM #####
 
-- alias: 'Ikea button childroom toggle'
+- alias: 'Ikea button girlroom toggle'
   initial_state: true
   triggers:
     trigger: event
@@ -387,9 +387,9 @@
   actions:
     action: light.toggle
     data:
-      entity_id: light.childroom_ceiling
+      entity_id: light.girlroom_ceiling
 
-- alias: 'Ikea button childroom bright'
+- alias: 'Ikea button girlroom bright'
   initial_state: true
   triggers:
     trigger: event
@@ -398,9 +398,9 @@
       device_id: 44bc2855a0757d86e2bf3ca19df7db77
       command: 'step_with_on_off'
   actions:
-    action: script.childroom_bright
+    action: script.girlroom_bright
 
-- alias: 'Ikea button childroom relaxed'
+- alias: 'Ikea button girlroom relaxed'
   initial_state: true
   triggers:
     trigger: event
@@ -409,9 +409,9 @@
       device_id: 44bc2855a0757d86e2bf3ca19df7db77
       command: 'step'
   actions:
-    action: script.childroom_relaxed
+    action: script.girlroom_relaxed
 
-- alias: 'Ikea button childroom window light toggle'
+- alias: 'Ikea button girlroom window light toggle'
   initial_state: true
   triggers:
     trigger: event
@@ -426,9 +426,9 @@
   actions:
     action: light.toggle
     data:
-      entity_id: light.childroom_window
+      entity_id: light.girlroom_menorah
 
-- alias: 'Ikea button childroom led strip disco'
+- alias: 'Ikea button girlroom led strip disco'
   initial_state: true
   triggers:
     trigger: event
@@ -444,22 +444,22 @@
     - choose:
         - conditions:
             condition: state
-            entity_id: light.childroom_led_strip
+            entity_id: light.girlroom_led_strip
             state: 'off'
           sequence:
             - action: script.turn_on
               target:
-                entity_id: script.childroom_disco
+                entity_id: script.girlroom_disco
         - conditions:
             condition: state
-            entity_id: light.childroom_led_strip
+            entity_id: light.girlroom_led_strip
             state: 'on'
           sequence:
             - action: light.turn_off
               target:
-                entity_id: light.childroom_led_strip
+                entity_id: light.girlroom_led_strip
 
-- alias: 'Ikea button childroom light turn off'
+- alias: 'Ikea button girlroom light turn off'
   initial_state: true
   triggers:
     trigger: event
@@ -468,9 +468,9 @@
       device_id: 44bc2855a0757d86e2bf3ca19df7db77
       command: 'move'
   actions:
-    action: script.childroom_light_dim
+    action: script.girlroom_light_dim
 
-- alias: 'Ikea button childroom increase volume'
+- alias: 'Ikea button girlroom increase volume'
   initial_state: true
   triggers:
     trigger: event
@@ -482,11 +482,11 @@
   actions:
     action: python_script.media_player_volume_set
     data:
-      entity_id: media_player.childroom_sonos
+      entity_id: media_player.girlroom_sonos
       volume_level: >
-        {{ [((state_attr('media_player.childroom_sonos','volume_level') | float * 1.15 + 0.03) | round(2)), 1] | min }}
+        {{ [((state_attr('media_player.girlroom_sonos','volume_level') | float * 1.15 + 0.03) | round(2)), 1] | min }}
 
-- alias: 'Ikea button childroom decrease volume'
+- alias: 'Ikea button girlroom decrease volume'
   initial_state: true
   triggers:
     trigger: event
@@ -498,11 +498,11 @@
   actions:
     action: python_script.media_player_volume_set
     data:
-      entity_id: media_player.childroom_sonos
+      entity_id: media_player.girlroom_sonos
       volume_level: >
-        {{ [((state_attr('media_player.childroom_sonos','volume_level') | float * 0.85 - 0.03) | round(2)), 0.05] | max }}
+        {{ [((state_attr('media_player.girlroom_sonos','volume_level') | float * 0.85 - 0.03) | round(2)), 0.05] | max }}
 
-- alias: 'Ikea button childroom ungroup speaker'
+- alias: 'Ikea button girlroom ungroup speaker'
   initial_state: true
   triggers:
     trigger: event
@@ -512,9 +512,9 @@
       command: 'hold'
       args: [3329, 0]
   actions:
-    action: script.sonos_ungroup_childroom_speaker
+    action: script.sonos_ungroup_girlroom_speaker
 
-- alias: 'Ikea button childroom group speaker'
+- alias: 'Ikea button girlroom group speaker'
   initial_state: true
   triggers:
     trigger: event
@@ -524,11 +524,11 @@
       command: 'hold'
       args: [3328, 0]
   actions:
-    action: script.sonos_group_childroom_speaker
+    action: script.sonos_group_girlroom_speaker
 
-##### OFFICE #####
+##### BOY ROOM #####
 
-- alias: 'Office switch turn on'
+- alias: 'Boy room switch turn on'
   initial_state: true
   triggers:
     trigger: event
@@ -537,18 +537,9 @@
       device_id: 0e0ddda228abe1831c9056b2834b6454
       command: 'on'
   actions:
-    if:
-      condition: state
-      entity_id: binary_sensor.relaxed_mode
-      state: 'off'
-    then:
-      action: script.turn_on
-      target:
-        entity_id: script.office_bright
-    else:
-      action: script.turn_on
-      target:
-        entity_id: script.office_relaxed
+    action: script.turn_on
+    target:
+      entity_id: script.boyroom_bright
 
 - alias: 'Office switch turn off'
   initial_state: true
@@ -561,9 +552,9 @@
   actions:
     action: light.turn_off
     target:
-      area_id: arbetsrum
+      area_id: pojkrum
 
-- alias: 'Office switch turn on hold'
+- alias: 'Boy room switch turn on hold'
   initial_state: true
   triggers:
     trigger: event
@@ -571,14 +562,10 @@
     event_data:
       device_id: 0e0ddda228abe1831c9056b2834b6454
       command: 'move_with_on_off'
-  conditions:
-    condition: state
-    entity_id: binary_sensor.relaxed_mode
-    state: 'off'
   actions:
     action: script.turn_on
     target:
-      entity_id: script.hallway_top_floor_bright
+      entity_id: script.boyroom_relaxed
 
 - alias: 'Office switch turn off hold'
   initial_state: true
@@ -591,7 +578,7 @@
   actions:
     action: script.turn_on
     target:
-      entity_id: script.indoor_lights_low_brightness
+      entity_id: script.boyroom_light_dim
 
 ##### KITCHEN #####
 

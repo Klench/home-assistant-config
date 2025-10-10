@@ -1,8 +1,8 @@
 wakeup_override:
   name: Manuell överskridning
   icon: mdi:alarm-check
-  initial: off
-childroom_wakeup:
+  initial: false
+childrooms_wakeup:
   name: Barnrum
   icon: mdi:teddy-bear
 coming_home_turn_on_lights:

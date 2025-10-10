@@ -9,11 +9,18 @@ indoor_lights_bright:
           - script.livingroom_bright
           - script.hallway_bright
           - script.kitchen_bright
-          - script.office_bright
+          # - script.bedroom_bright
     - condition: template
       value_template: >
-        {{ not (is_state('binary_sensor.childroom_sonos_is_grouped','off') and is_state('media_player.childroom_sonos','playing')) }}
-    - action: script.childroom_bright
+        {{ not (is_state('binary_sensor.girlroom_sonos_is_grouped','off') and is_state('media_player.girlroom_sonos','playing')) }}
+    - condition: time
+      after: '08:00:00'
+      before: '18:00:00'
+    - action: script.turn_on
+      target:
+        entity_id:
+          - script.boyroom_bright
+          - script.girlroom_bright
 
 bottom_floor_bright:
   sequence:
@@ -31,29 +38,9 @@ indoor_lights_relaxed:
       target:
         entity_id:
           - script.livingroom_relaxed
+          - script.hallway_relaxed
           - script.kitchen_relaxed
-          - script.childroom_night_light
-    - choose:
-        conditions:
-          condition: numeric_state
-          entity_id: sensor.outdoor_temperature
-          above: 20
-        sequence:
-          - action: script.turn_on
-            target:
-              entity_id: script.ikea_light_turn_on
-            data:
-              variables:
-                entity_id: light.hallway_ceiling_bottom_floor
-                brightness_pct: 1
-                color_temp_kelvin: 2200
-                transition: 2
-      default:
-        - action: script.turn_on
-          target:
-            entity_id:
-              - script.hallway_relaxed
-              - script.office_relaxed
+          # - script.bedroom_relaxed
 
 indoor_lights_low_brightness:
   alias: 'Låg ljusstyrka'
@@ -92,7 +79,6 @@ indoor_lights_low_brightness:
             entity_id:
               - script.livingroom_low_brightness
               - script.bathroom_low_brightness
-              - script.office_low_brightness
     default:
       - action: script.turn_on
         target:
@@ -119,12 +105,18 @@ indoor_lights_off:
     - action: switch.turn_off
       target:
         entity_id: switch.battery_charging_station
-    - condition: state
-      entity_id: binary_sensor.relaxed_mode
-      state: 'off'
-    - action: light.turn_off
-      target:
-        entity_id: light.childroom_led_strip
+    - if:
+        condition: state
+        entity_id: binary_sensor.relaxed_mode
+        state: 'off'
+      then:
+        action: light.turn_off
+        target:
+          entity_id: light.boyroom_led_strip
+      else:
+        action: script.turn_on
+        target:
+          entity_id: script.boyroom_night_light
 
 wakeup_lights:
   sequence:
@@ -134,9 +126,9 @@ wakeup_lights:
           - script.livingroom_wakeup
           - script.hallway_wakeup
           - script.kitchen_wakeup
-          - script.office_wakeup
+          - script.bedroom_wakeup
     - condition: state
-      entity_id: input_boolean.childroom_wakeup
+      entity_id: input_boolean.childrooms_wakeup
       state: 'on'
     - condition: or
       conditions:
@@ -148,7 +140,9 @@ wakeup_lights:
           state: 'on'
     - action: script.turn_on
       target:
-        entity_id: script.childroom_wakeup
+        entity_id:
+          - script.boyroom_wakeup
+          - script.girlroom_wakeup
 
 window_lights:
   sequence:
@@ -156,15 +150,10 @@ window_lights:
       data:
         entity_id:
           - light.livingroom_window
-          - light.office_window
+          - light.bedroom_window
     - condition: state
       entity_id: input_boolean.enable_advent_light_automations
       state: 'on'
-    - action: light.turn_on
-      target:
-        entity_id:
-          - light.childroom_window
-          - light.bedroom_advent_light
     - action: script.turn_on
       target:
         entity_id: script.kitchen_advent_lights
@@ -175,10 +164,9 @@ advent_lights_turn_on:
     - action: script.turn_on
       target:
         entity_id:
-          - script.bedroom_advent_lights
-          - script.office_advent_lights
           - script.livingroom_advent_lights
           - script.kitchen_advent_lights
+          - script.bedroom_advent_lights
     - condition: time
       after: '07:30:00'
     - condition: state
@@ -186,24 +174,9 @@ advent_lights_turn_on:
       state: 'off'
     - action: script.turn_on
       target:
-        entity_id: script.childroom_advent_lights
-
-go_to_bed_lights:
-  sequence:
-    - action: light.turn_off
-      data:
-        entity_id: light.bedroom_ceiling
-        transition: 300
-    - action: light.turn_off
-      data:
         entity_id:
-          - light.livingroom_ceiling
-          - light.livingroom_floor
-        transition: 1800
-    - delay: '00:30'
-    - action: light.turn_off
-      data:
-        entity_id: light.hallway_ceiling_group
+          - script.boyroom_advent_lights
+          - script.girlroom_advent_lights
 
 enable_away_lights:
   sequence:
@@ -215,31 +188,14 @@ enable_away_lights:
           - script.kitchen_relaxed
           - script.livingroom_relaxed
     - action: light.turn_on
-      data:
-        entity_id:
-          - light.bedroom_bedside
-          - light.office_window
-        brightness_pct: 100
+      target:
+        entity_id: light.bedroom_window
     - condition: state
       entity_id: input_boolean.enable_advent_light_automations
       state: 'on'
     - action: script.turn_on
       target:
         entity_id: script.advent_lights_turn_on
-
-watching_tv_lights:
-  sequence:
-    - action: light.turn_on
-      data:
-        entity_id: light.livingroom_floor
-        brightness: 144
-        color_temp_kelvin: 2200
-        transition: 2
-    - action: light.turn_off
-      target:
-        entity_id:
-          - light.livingroom_ceiling
-          - light.livingroom_window
 
 create_indoor_lights_group:
     sequence:
@@ -259,7 +215,249 @@ create_all_lights_group:
           entities: >
             {%- for light in states.light %}{%- if loop.first %}{%- else %}, {% endif %}{{ light.entity_id }}{%- if loop.last %}{% endif %}{%- endfor %}
 
-##### BEDROOM #####
+##### BOY ROOM #####
+
+boyroom_bright:
+  alias: 'Hög ljusstyrka'
+  sequence:
+    - action: light.turn_on
+      target:
+        entity_id: light.boyroom_ceiling
+      data:
+        brightness_pct: 100
+        color_temp_kelvin: 2700
+        transition: 2
+    - condition: state
+      entity_id: input_boolean.enable_advent_light_automations
+      state: 'on'
+    - action: script.boyroom_advent_lights
+
+boyroom_relaxed:
+  alias: 'Mysbelysning'
+  sequence:
+    - action: light.turn_on
+      target:
+        entity_id: light.boyroom_ceiling
+      data:
+        brightness_pct: 30
+        color_temp_kelvin: 2200
+        transition: 2
+    # - action: light.turn_on
+    #   data:
+    #     entity_id: light.boyroom_bedside
+    #     brightness_pct: 100
+    - condition: state
+      entity_id: input_boolean.enable_advent_light_automations
+      state: 'on'
+    - action: script.boyroom_advent_lights
+
+boyroom_advent_lights:
+  sequence:
+    - action: light.turn_on
+      target:
+        entity_id: light.boyroom_window
+
+# boyroom_low_brightness:
+#   alias: 'Låg ljusstyrka'
+#   sequence:
+#     - action: light.turn_on
+#       data:
+#         entity_id: light.boyroom_bedside
+#         brightness_pct: 1
+#         transition: 2
+#     - action: light.turn_off
+#       target:
+#         entity_id: light.boyroom_ceiling
+
+boyroom_night_light:
+  alias: 'Nattbelysning'
+  sequence:
+    - action: light.turn_on
+      data:
+        entity_id: light.boyroom_led_strip
+        brightness_pct: 20
+        rgb_color: [255,0,0]
+        transition: 2
+        effect: None
+
+boyroom_wakeup:
+  sequence:
+    - action: light.turn_on
+      target:
+        entity_id: light.boyroom_ceiling
+      data:
+        brightness_pct: 20
+        color_temp_kelvin: 2200
+        transition: 600
+
+boyroom_light_dim:
+  alias: 'Läggdags'
+  mode: restart
+  sequence:
+    - action: light.turn_off
+      target:
+        entity_id:
+          - light.hallway_ceiling_top_floor
+          - light.hallway_stair_group
+    - action: light.turn_on
+      data:
+        entity_id: light.boyroom_led_strip
+        brightness_pct: 40
+        rgb_color: [255,0,0]
+        transition: 2
+        effect: None
+    - if:
+        - condition: state
+          entity_id: light.boyroom_ceiling
+          state: 'on'
+      then:
+        - action: light.turn_on
+          data:
+            entity_id: light.boyroom_ceiling
+            color_temp_kelvin: 2200
+            transition: 2
+        - delay: '00:00:02'
+        - action: light.turn_on
+          data:
+            entity_id: light.boyroom_ceiling
+            brightness_pct: 20
+            color_temp_kelvin: 2200
+            transition: 600
+    - delay: '00:10:00'
+    - action: light.turn_off
+      target:
+        entity_id:
+          - light.boyroom_ceiling
+          - light.boyoom_window
+
+boyroom_disco:
+  alias: 'Disco'
+  sequence:
+    - action: light.turn_on
+      data:
+        entity_id: light.boyroom_led_strip
+        brightness_pct: 100
+        effect: 'Random Effect with Custom Values'
+
+##### GIRL ROOM #####
+
+girlroom_bright:
+  alias: 'Hög ljusstyrka'
+  sequence:
+    - action: script.turn_on
+      target:
+        entity_id: script.ikea_light_turn_on
+      data:
+        variables:
+          entity_id: light.girlroom_ceiling
+          brightness_pct: 100
+          color_temp_kelvin: 2700
+          transition: 2
+    - condition: state
+      entity_id: input_boolean.enable_advent_light_automations
+      state: 'on'
+    - action: script.girlroom_advent_lights
+
+girlroom_relaxed:
+  alias: 'Mysbelysning'
+  sequence:
+    - action: script.turn_on
+      target:
+        entity_id: script.ikea_light_turn_on
+      data:
+        variables:
+          entity_id: light.girlroom_ceiling
+          brightness_pct: 30
+          color_temp_kelvin: 2200
+          transition: 2
+    - condition: state
+      entity_id: input_boolean.enable_advent_light_automations
+      state: 'on'
+    - action: script.girlroom_advent_lights
+
+girlroom_advent_lights:
+  sequence:
+    - action: light.turn_on
+      target:
+        entity_id: light.girlroom_menorah
+
+girlroom_night_light:
+  alias: 'Nattbelysning'
+  sequence:
+    - action: light.turn_on
+      data:
+        entity_id: light.girlroom_ceiling
+        brightness_pct: 1
+        rgb_color: [255,1,1]
+        transition: 2
+    - delay:
+          milliseconds: 2100
+    - action: light.turn_on
+      data:
+        entity_id: light.girlroom_ceiling
+        brightness_pct: 1
+        rgb_color: [255,1,1]
+        transition: 2
+
+girlroom_light_dim:
+  alias: 'Läggdags'
+  mode: restart
+  sequence:
+    - action: script.turn_on
+      target:
+        entity_id: script.play_girlroom_night_music
+    - action: light.turn_off
+      target:
+        entity_id:
+          - light.hallway_ceiling_top_floor
+          - light.hallway_stair_group
+    - if:
+        - condition: state
+          entity_id: light.girlroom_ceiling
+          state: 'on'
+      then:
+        - action: light.turn_on
+          data:
+            entity_id: light.girlroom_ceiling
+            color_temp_kelvin: 2200
+            transition: 2
+        - delay: '00:00:02'
+        - action: light.turn_on
+          data:
+            entity_id: light.girlroom_ceiling
+            brightness_pct: 20
+            color_temp_kelvin: 2200
+            transition: 600
+    - delay: '00:10:00'
+    - action: script.turn_on
+      target:
+        entity_id: script.girlroom_night_light
+    - action: light.turn_off
+      target:
+        entity_id: light.girlroom_menorah
+
+girlroom_wakeup:
+  sequence:
+    - action: script.turn_on
+      target:
+        entity_id: script.girlroom_night_light
+
+girlroom_disco:
+  alias: 'Disco'
+  sequence:
+    - action: light.turn_on
+      data:
+        entity_id: light.girlroom_ceiling
+        brightness_pct: 100
+        effect: 'colorloop'
+    - condition: state
+      entity_id: binary_sensor.girlroom_sonos_is_grouped
+      state: 'on'
+    - action: script.turn_on
+      target:
+        entity_id: script.sonos_ungroup_girlroom_speaker
+
+##### BEDROOM/OFFICE #####
 
 bedroom_bright:
   alias: 'Hög ljusstyrka'
@@ -267,12 +465,32 @@ bedroom_bright:
     - action: light.turn_on
       data:
         entity_id: light.bedroom_ceiling
-        brightness_pct: 80
+        brightness_pct: 100
         color_temp_kelvin: 2700
-    - condition: state
-      entity_id: input_boolean.enable_advent_light_automations
-      state: 'on'
-    - action: script.bedroom_advent_lights
+        transition: 2
+    - condition: template
+      value_template: "{{not is_state_attr('light.bedroom_bedside','brightness',254) }}"
+    - action: light.turn_off
+      target:
+        entity_id: light.bedroom_bedside
+
+bedroom_work_light:
+  alias: 'Arbetsbelysning'
+  sequence:
+    - action: light.turn_on
+      data:
+        entity_id: light.bedroom_ceiling
+        brightness_pct: 100
+        color_temp_kelvin: 3500
+        transition: 2
+    - action: light.turn_on
+      data:
+        entity_id: light.bedroom_desk
+        brightness_pct: 60
+        transition: 2
+    - action: light.turn_off
+      target:
+        entity_id: light.bedroom_bedside
 
 bedroom_relaxed:
   alias: 'Mysbelysning'
@@ -281,269 +499,49 @@ bedroom_relaxed:
       data:
         entity_id: light.bedroom_bedside
         brightness_pct: 100
+        transition: 2
+    - action: light.turn_on
+      data:
+        entity_id: light.bedroom_desk
+        brightness_pct: 10
+        transition: 2
+    - action: light.turn_on
+      target:
+        entity_id: light.bedroom_window
     - action: light.turn_off
       target:
         entity_id: light.bedroom_ceiling
-    - condition: state
-      entity_id: input_boolean.enable_advent_light_automations
-      state: 'on'
-    - action: script.bedroom_advent_lights
 
 bedroom_low_brightness:
   alias: 'Låg ljusstyrka'
   sequence:
     - action: light.turn_on
       data:
-        entity_id: light.bedroom_bedside
+        entity_id:
+          - light.bedroom_bedside
+          - light.bedroom_desk
         brightness_pct: 1
         transition: 2
     - action: light.turn_off
       target:
-        entity_id: light.bedroom_ceiling
-
-bedroom_nursery_light:
-  alias: 'Amningsbelysning'
-  sequence:
-    - action: light.turn_off
-      target:
-        entity_id: light.bedroom_bedside
-    - action: light.turn_on
-      data:
-        entity_id: light.bedroom_ceiling
-        brightness_pct: 1
-        rgb_color: [255,1,1]
-        transition: 2
-    - delay:
-          milliseconds: 2100
-    - action: light.turn_on
-      data:
-        entity_id: light.bedroom_ceiling
-        brightness_pct: 1
-        rgb_color: [255,1,1]
-        transition: 2
-
-bedroom_nursery_light_high:
-  sequence:
-    - action: light.turn_off
-      target:
-        entity_id: light.bedroom_bedside
-    - action: light.turn_on
-      data:
-        entity_id: light.bedroom_ceiling
-        brightness_pct: 50
-        rgb_color: [255,1,1]
-        transition: 2
-    - delay:
-          milliseconds: 2100
-    - action: light.turn_on
-      data:
-        entity_id: light.bedroom_ceiling
-        brightness_pct: 50
-        rgb_color: [255,1,1]
-        transition: 2
+        entity_id:
+          - light.bedroom_ceiling
+          - light.bedroom_window
 
 bedroom_advent_lights:
   sequence:
     - action: light.turn_on
       target:
-        entity_id: light.bedroom_menorah
+        entity_id: light.bedroom_window
 
 bedroom_wakeup:
-  sequence:
-    - action: light.turn_on
-      data:
-        entity_id: light.bedroom_bedside
-        brightness_pct: 50
-        transition: 1800
-
-##### CHILD ROOM #####
-
-childroom_bright:
-  alias: 'Hög ljusstyrka'
-  sequence:
-    - action: light.turn_on
-      data:
-        entity_id: light.childroom_ceiling
-        brightness_pct: 100
-        color_temp_kelvin: 2700
-        transition: 2
-    - condition: state
-      entity_id: input_boolean.enable_advent_light_automations
-      state: 'on'
-    - action: script.childroom_advent_lights
-
-childroom_relaxed:
-  alias: 'Mysbelysning'
-  sequence:
-    - action: light.turn_on
-      data:
-        entity_id: light.childroom_ceiling
-        brightness_pct: 30
-        color_temp_kelvin: 2200
-        transition: 2
-    - condition: state
-      entity_id: input_boolean.enable_advent_light_automations
-      state: 'on'
-    - action: script.childroom_advent_lights
-
-childroom_advent_lights:
-  sequence:
-    - action: light.turn_on
-      target:
-        entity_id: light.childroom_window
-
-childroom_night_light:
-  alias: 'Nattbelysning'
-  sequence:
-    - action: light.turn_on
-      data:
-        entity_id: light.childroom_led_strip
-        brightness_pct: 20
-        rgb_color: [255,0,0]
-        transition: 2
-        effect: None
-
-childroom_light_dim:
-  mode: restart
-  sequence:
-    - if:
-        - condition: state
-          entity_id: switch.wol_vidar
-          state: 'off'
-        - condition: state
-          entity_id: device_tracker.sela_lt6ywwb54
-          state: 'not_home'
-      then:
-        - action: light.turn_off
-          target:
-            area_id: arbetsrum
-    - action: script.turn_on
-      target:
-        entity_id: script.play_child_room_night_music
-    - action: light.turn_off
-      target:
-        entity_id:
-          - light.hallway_ceiling_top_floor
-          - light.hallway_stair_group
-    - if:
-        - condition: time
-          after: '18:00:00'
-      then:
-        - action: light.turn_on
-          data:
-            entity_id: light.childroom_led_strip
-            brightness_pct: 40
-            rgb_color: [255,0,0]
-            transition: 2
-            effect: None
-      else:
-        - action: light.turn_off
-          target:
-            entity_id: light.childroom_window
-    - if:
-        - condition: state
-          entity_id: light.childroom_ceiling
-          state: 'on'
-      then:
-        - action: light.turn_on
-          data:
-            entity_id: light.childroom_ceiling
-            color_temp_kelvin: 2200
-            transition: 2
-        - delay: '00:00:02'
-        - action: light.turn_on
-          data:
-            entity_id: light.childroom_ceiling
-            brightness_pct: 20
-            color_temp_kelvin: 2200
-            transition: 600
-    - delay: '00:10:00'
-    - action: light.turn_off
-      target:
-        entity_id:
-          - light.childroom_ceiling
-          - light.childroom_window
-
-childroom_wakeup:
-  sequence:
-    # - action: light.turn_on
-    #   data:
-    #     entity_id: light.childroom_ceiling
-    #     brightness_pct: 1
-    #     color_temp_kelvin: 2200
-    #     transition: 2
-    - action: light.turn_on
-      data:
-        entity_id: light.childroom_ceiling
-        brightness_pct: 30
-        color_temp_kelvin: 2200
-        transition: 1800
-
-##### OFFICE #####
-
-office_bright:
-  alias: 'Hög ljusstyrka'
-  sequence:
-    - action: light.turn_on
-      data:
-        entity_id: light.office_ceiling
-        brightness_pct: 100
-        color_temp_kelvin: 2700
-        transition: 2
-
-office_work_light:
-  alias: 'Arbetsbelysning'
-  sequence:
-    - action: light.turn_on
-      data:
-        entity_id: light.office_ceiling
-        brightness_pct: 100
-        color_temp_kelvin: 3500
-        transition: 2
-
-office_relaxed:
-  alias: 'Mysbelysning'
-  sequence:
-    - action: light.turn_on
-      data:
-        entity_id: light.office_desk
-        brightness_pct: 10
-        transition: 2
-    - action: light.turn_on
-      data:
-        entity_id: light.office_window
-    - action: light.turn_off
-      data:
-        entity_id: light.office_ceiling
-
-office_low_brightness:
-  alias: 'Låg ljusstyrka'
-  sequence:
-    - action: light.turn_on
-      data:
-        entity_id: light.office_desk
-        brightness_pct: 1
-        transition: 2
-    - action: light.turn_off
-      target:
-        entity_id:
-          - light.office_ceiling
-          - light.office_window
-
-office_advent_lights:
-  sequence:
-    - action: light.turn_on
-      target:
-        entity_id: light.office_window
-
-office_wakeup:
   sequence:
     - condition: state
       entity_id: sun.sun
       state: 'below_horizon'
     - action: light.turn_on
       data:
-        entity_id: light.office_ceiling
+        entity_id: light.bedroom_ceiling
         brightness_pct: 30
         transition: 1800
 

@@ -21,7 +21,7 @@
       friendly_name: 'Hallway switch updated'
       value_template: >
         {{ state_attr('remote.hallway_switch','last_updated') }}
-    bedroom_music_timer_duration:
+    girl_music_timer_duration:
       value_template: >
         {{ "00:%0.02d:00" | format(states('input_number.bedroom_music_timer_minutes') | int) }}
     bedroom_music_timer_minutes:

@@ -1,32 +1,18 @@
-childroom_disco:
-  sequence:
-    - action: light.turn_on
-      data:
-        entity_id: light.childroom_led_strip
-        brightness_pct: 100
-        effect: 'Random Effect with Custom Values'
-    - condition: state
-      entity_id: binary_sensor.childroom_sonos_is_grouped
-      state: 'on'
-    - action: script.turn_on
-      target:
-        entity_id: script.sonos_ungroup_childroom_speaker
-
 ################# TIMER #################
 
-bedroom_music_timer_start:
+girlroom_music_timer_start:
   sequence:
     - action: timer.start
       data:
-        entity_id: timer.childroom_music
+        entity_id: timer.girlroom_music
         duration: >
-          {{ states('sensor.bedroom_music_timer_duration') }}
+          {{ states('sensor.girl_music_timer_duration') }}
 
 bedroom_music_timer_cancel:
   sequence:
     - action: timer.cancel
       data:
-        entity_id: timer.childroom_music
+        entity_id: timer.girlroom_music
 
 kitchen_coffee_maker_timer_start:
   sequence:

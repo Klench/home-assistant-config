@@ -40,12 +40,12 @@
     - action: light.turn_off
       target:
         entity_id:
-          - light.childroom_ceiling
+          - light.girlroom_ceiling
           - light.hallway_ceiling_top_floor
           - light.hallway_stair_up
     - action: script.turn_on
       target:
-        entity_id: script.play_child_room_night_music
+        entity_id: script.play_girlroom_night_music
 
 - alias: 'Turn on PC'
   initial_state: true

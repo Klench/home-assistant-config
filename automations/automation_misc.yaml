@@ -36,16 +36,16 @@
       entity_id: binary_sensor.relaxed_mode
       state: 'on'
     - condition: state
-      entity_id: media_player.childroom_sonos
+      entity_id: media_player.girlroom_sonos
       state: 'playing'
     - condition: state
-      entity_id: binary_sensor.childroom_sonos_is_grouped
+      entity_id: binary_sensor.girlroom_sonos_is_grouped
       state: 'off'
     - condition: template
       value_template: >
-        {{ state_attr('media_player.childroom_sonos','volume_level') > 0.03 }}
+        {{ state_attr('media_player.girlroom_sonos','volume_level') > 0.03 }}
   actions:
     action: python_script.media_player_volume_set
     data:
-      entity_id: media_player.childroom_sonos
+      entity_id: media_player.girlroom_sonos
       volume_level: 0.03

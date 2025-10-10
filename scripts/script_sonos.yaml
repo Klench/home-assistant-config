@@ -7,13 +7,13 @@ sonos_group_all_speakers:
       data:
         entity_id:
           - media_player.livingroom_sonos
-          - media_player.childroom_sonos
+          - media_player.girlroom_sonos
         volume_level: 0.0
     - action: media_player.join
       data:
         entity_id: media_player.kitchen_sonos
         group_members:
-          - media_player.childroom_sonos
+          - media_player.girlroom_sonos
           - media_player.livingroom_sonos
     - action: script.sonos_sync_group_volume
 
@@ -56,12 +56,12 @@ sonos_group_livingroom_speaker:
       data:
         sonos_entity: media_player.livingroom_sonos
 
-sonos_group_childroom_speaker:
-  alias: Sonos group childroom speaker
+sonos_group_girlroom_speaker:
+  alias: Sonos group girlroom speaker
   sequence:
     - action: script.sonos_group_speaker
       data:
-        sonos_entity: media_player.childroom_sonos
+        sonos_entity: media_player.girlroom_sonos
 
 sonos_ungroup_livingroom_speaker:
   alias: Sonos group livingroom speaker
@@ -70,12 +70,12 @@ sonos_ungroup_livingroom_speaker:
       data:
         sonos_entity: media_player.livingroom_sonos
 
-sonos_ungroup_childroom_speaker:
-  alias: Sonos ungroup childroom speaker
+sonos_ungroup_girlroom_speaker:
+  alias: Sonos ungroup girlroom speaker
   sequence:
     - action: script.sonos_ungroup_speaker
       data:
-        sonos_entity: media_player.childroom_sonos
+        sonos_entity: media_player.girlroom_sonos
 
 ##### VOLUME #####
 
@@ -151,42 +151,42 @@ sonos_play_local_media:
 
 ##### PLAY MUSIC #####
 
-play_child_room_night_music:
+play_girlroom_night_music:
   alias: 'Play child room night music'
   sequence:
     - choose:
       - conditions: >
-          {{ is_state('binary_sensor.childroom_sonos_is_grouped','on') }}
+          {{ is_state('binary_sensor.girlroom_sonos_is_grouped','on') }}
         sequence:
           - action: python_script.media_player_volume_set
             data:
-              entity_id: media_player.childroom_sonos
+              entity_id: media_player.girlroom_sonos
               volume_level: 0
-          - action: script.sonos_ungroup_childroom_speaker
+          - action: script.sonos_ungroup_girlroom_speaker
           - action: media_player.volume_set
             data:
-              entity_id: media_player.childroom_sonos
+              entity_id: media_player.girlroom_sonos
               volume_level: 0.05
           - delay: '00:00:01'
           - action: media_player.media_play
             target:
-              entity_id: media_player.childroom_sonos
+              entity_id: media_player.girlroom_sonos
       default:
         - action: media_player.volume_set
           data:
-            entity_id: media_player.childroom_sonos
+            entity_id: media_player.girlroom_sonos
             volume_level: 0.05
         - delay: '00:00:01'
         - action: media_player.media_play
           target:
-            entity_id: media_player.childroom_sonos
+            entity_id: media_player.girlroom_sonos
 
 sonos_set_alarm:
   alias: 'Sonos set alarm'
   sequence:
     - action: sonos.update_alarm
       data:
-        entity_id: media_player.childroom_sonos
+        entity_id: media_player.girlroom_sonos
         alarm_id: 7
         time: >
           {{ states('sensor.alarm_clock_time_weekdays') }}
@@ -197,7 +197,7 @@ sonos_disable_alarm:
   sequence:
     - action: sonos.update_alarm
       data:
-        entity_id: media_player.childroom_sonos
+        entity_id: media_player.girlroom_sonos
         alarm_id: 7
         enabled: false
 
@@ -209,7 +209,7 @@ sonos_reset_sound_levels:
       data:
         entity_id:
           - number.sonos_kitchen_bass
-          - number.sonos_childroom_bass
+          - number.sonos_girlroom_bass
           - number.sonos_livingroom_bass
           - number.sonos_livingroom_audio_delay
         value: 0

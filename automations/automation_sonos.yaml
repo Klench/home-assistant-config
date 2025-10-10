@@ -17,30 +17,30 @@
   triggers:
     trigger: template
     value_template: >
-      {{ state_attr('media_player.childroom_sonos','media_title')|regex_search('Perfect', ignorecase=False) }}
+      {{ state_attr('media_player.girlroom_sonos','media_title')|regex_search('Perfect', ignorecase=False) }}
   actions:
     action: media_player.media_next_track
     data:
-      entity_id: media_player.childroom_sonos
+      entity_id: media_player.girlroom_sonos
 
 - alias: 'Activate repeat on Sonos bedroom'
   initial_state: true
   triggers:
     trigger: state
-    entity_id: media_player.childroom_sonos
+    entity_id: media_player.girlroom_sonos
     to: 'playing'
     for: "00:00:05"
   conditions:
     - condition: state
-      entity_id: binary_sensor.childroom_sonos_is_grouped
+      entity_id: binary_sensor.girlroom_sonos_is_grouped
       state: 'off'
     - condition: template
       value_template: >
-        {{ is_state_attr('media_player.childroom_sonos','repeat','off') and is_state_attr('media_player.childroom_sonos','media_content_type','music') }}
+        {{ is_state_attr('media_player.girlroom_sonos','repeat','off') and is_state_attr('media_player.girlroom_sonos','media_content_type','music') }}
   actions:
     action: media_player.repeat_set
     data:
-      entity_id: media_player.childroom_sonos
+      entity_id: media_player.girlroom_sonos
       repeat: all
 
 - alias: 'TV off group speakers'
@@ -108,7 +108,7 @@
       data:
         volume: 0.2
 
-- alias: 'Leaving home pause Sonos childroom'
+- alias: 'Leaving home pause Sonos girlroom'
   initial_state: true
   triggers:
     - trigger: state
@@ -119,11 +119,11 @@
       to: 'armed_away'
   conditions:
     - condition: state
-      entity_id: media_player.childroom_sonos
+      entity_id: media_player.girlroom_sonos
       state: 'playing'
     - condition: state
-      entity_id: binary_sensor.childroom_sonos_is_grouped
+      entity_id: binary_sensor.girlroom_sonos_is_grouped
       state: 'off'
   actions:
     action: media_player.media_pause
-    entity_id: media_player.childroom_sonos
+    entity_id: media_player.girlroom_sonos

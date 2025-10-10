@@ -216,10 +216,18 @@ views:
           icon_tap_action:
             action: toggle
         - type: tile
-          entity: script.bedroom_nursery_light
-          hide_state: true
-          icon_tap_action:
-            action: toggle
+          entity: light.bedroom_window
+          visibility:
+            - condition: state
+              entity: input_boolean.enable_advent_light_automations
+              state: 'off'
+        - type: tile
+          entity: light.bedroom_window
+          icon: mdi:star-david
+          visibility:
+            - condition: state
+              entity: input_boolean.enable_advent_light_automations
+              state: 'on'
         - type: tile
           entity: light.bedroom_ceiling
           features:
@@ -235,47 +243,40 @@ views:
               entity: input_boolean.enable_advent_light_automations
               state: 'off'
         - type: tile
-          entity: light.bedroom_bedside
-          visibility:
-            - condition: state
-              entity: input_boolean.enable_advent_light_automations
-              state: 'on'
-        - type: tile
-          entity: light.bedroom_menorah
-          visibility:
-            - condition: state
-              entity: input_boolean.enable_advent_light_automations
-              state: 'on'
+          entity: light.bedroom_desk
+          features:
+            - type: "light-brightness"
+          features_position: inline
       title: Sovrum
 
     - cards:
         - type: tile
-          entity: script.childroom_bright
+          entity: script.boyroom_bright
           hide_state: true
           icon_tap_action:
             action: toggle
         - type: tile
-          entity: script.childroom_relaxed
+          entity: script.boyroom_relaxed
           hide_state: true
           icon_tap_action:
             action: toggle
         - type: tile
-          entity: script.childroom_light_dim
+          entity: script.boyroom_light_dim
           hide_state: true
           icon_tap_action:
             action: toggle
         - type: tile
-          entity: script.childroom_disco
+          entity: script.boyroom_disco
           hide_state: true
           icon_tap_action:
             action: toggle
         - type: tile
-          entity: light.childroom_ceiling
+          entity: light.boyroom_ceiling
           features:
             - type: "light-brightness"
           features_position: inline
         - type: tile
-          entity: light.childroom_led_strip
+          entity: light.boyroom_led_strip
           features:
             - type: "light-brightness"
           features_position: inline
@@ -284,53 +285,46 @@ views:
               entity: input_boolean.enable_advent_light_automations
               state: 'off'
         - type: tile
-          entity: light.childroom_led_strip
+          entity: light.boyroom_window
           visibility:
             - condition: state
               entity: input_boolean.enable_advent_light_automations
               state: 'on'
-        - type: tile
-          entity: light.childroom_window
-          visibility:
-            - condition: state
-              entity: input_boolean.enable_advent_light_automations
-              state: 'on'
-      title: Barnrum
+      title: Pojkrum
 
     - cards:
         - type: tile
-          entity: script.office_bright
+          entity: script.girlroom_bright
           hide_state: true
           icon_tap_action:
             action: toggle
         - type: tile
-          entity: script.office_relaxed
+          entity: script.girlroom_relaxed
           hide_state: true
           icon_tap_action:
             action: toggle
         - type: tile
-          entity: script.office_low_brightness
+          entity: script.girlroom_light_dim
           hide_state: true
           icon_tap_action:
             action: toggle
         - type: tile
-          entity: light.office_ceiling
+          entity: script.girlroom_disco
+          hide_state: true
+          icon_tap_action:
+            action: toggle
         - type: tile
-          entity: light.office_desk
+          entity: light.girlroom_ceiling
+          features:
+            - type: "light-brightness"
+          features_position: inline
         - type: tile
-          entity: light.office_window
-          visibility:
-            - condition: state
-              entity: input_boolean.enable_advent_light_automations
-              state: 'off'
-        - type: tile
-          entity: light.office_window
-          icon: mdi:star-david
+          entity: light.girlroom_menorah
           visibility:
             - condition: state
               entity: input_boolean.enable_advent_light_automations
               state: 'on'
-      title: Arbetsrum
+      title: Flickrum
 
     - cards:
         - type: tile
@@ -531,7 +525,7 @@ views:
               name: Kök
             - entity_id: media_player.livingroom_sonos
               name: Vardagsrum
-            - entity_id: media_player.childroom_sonos
+            - entity_id: media_player.girlroom_sonos
               name: Barnrum
 
       - type: custom:mini-media-player
@@ -581,7 +575,7 @@ views:
               id: spotify:playlist:0cz5GpTRGnMYrqtEj3639f
 
       - type: custom:mini-media-player
-        entity: media_player.childroom_sonos
+        entity: media_player.girlroom_sonos
         artwork: cover
         icon: mdi:speaker
         volume_stateless: true
@@ -603,7 +597,7 @@ views:
               type: service
               id: media_player.play_media
               data:
-                entity_id: media_player.childroom_sonos
+                entity_id: media_player.girlroom_sonos
                 media_content_type: music
                 media_content_id: 'plex://{"library_name": "Musik", "album_name": "Rainy Day Piano"}'
             - name: White Noise Lullabies
@@ -611,7 +605,7 @@ views:
               type: service
               id: media_player.play_media
               data:
-                entity_id: media_player.childroom_sonos
+                entity_id: media_player.girlroom_sonos
                 media_content_type: music
                 media_content_id: 'plex://{"library_name": "Musik", "album_name": "Soothing Lullabies with White Noise"}'
             - name: Relaxing film music
@@ -619,7 +613,7 @@ views:
               type: service
               id: media_player.play_media
               data:
-                entity_id: media_player.childroom_sonos
+                entity_id: media_player.girlroom_sonos
                 media_content_type: music
                 media_content_id: 'plex://{"library_name": "Musik", "album_name": "Relaxing film music"}'
             - name: Gregorian Chant
@@ -627,7 +621,7 @@ views:
               type: service
               id: media_player.play_media
               data:
-                entity_id: media_player.childroom_sonos
+                entity_id: media_player.girlroom_sonos
                 media_content_type: music
                 media_content_id: 'plex://{"library_name": "Musik", "album_name": "Gregorian Chant"}'
             - name: Worship Lullabies
@@ -635,7 +629,7 @@ views:
               type: service
               id: media_player.play_media
               data:
-                entity_id: media_player.childroom_sonos
+                entity_id: media_player.girlroom_sonos
                 media_content_type: music
                 media_content_id: 'plex://{"library_name": "Musik", "album_name": "Worship Lullabies"}'
             - name: Gentle Game Lullabies
@@ -643,7 +637,7 @@ views:
               type: service
               id: media_player.play_media
               data:
-                entity_id: media_player.childroom_sonos
+                entity_id: media_player.girlroom_sonos
                 media_content_type: music
                 media_content_id: 'plex://{"library_name": "Musik", "album_name": "Gentle Game Lullabies"}'
             - name: Instrumental Lullabies
@@ -651,7 +645,7 @@ views:
               type: service
               id: media_player.play_media
               data:
-                entity_id: media_player.childroom_sonos
+                entity_id: media_player.girlroom_sonos
                 media_content_type: music
                 media_content_id: 'plex://{"library_name": "Musik", "album_name": "Instrumental Lullabies"}'
             - name: Disney Guitar
@@ -659,7 +653,7 @@ views:
               type: service
               id: media_player.play_media
               data:
-                entity_id: media_player.childroom_sonos
+                entity_id: media_player.girlroom_sonos
                 media_content_type: playlist
                 media_content_id: 'plex://{"library_name": "Musik", "playlist_name": "Disney Guitar"}'
             - name: Bamses godnattstund
@@ -669,9 +663,9 @@ views:
 
       - type: conditional
         conditions:
-          - entity: media_player.childroom_sonos
+          - entity: media_player.girlroom_sonos
             state: 'playing'
-          - entity: binary_sensor.childroom_sonos_is_grouped
+          - entity: binary_sensor.girlroom_sonos_is_grouped
             state: 'off'
         card:
           type: vertical-stack
@@ -684,7 +678,7 @@ views:
                   icon: mdi:play
                   tap_action:
                     action: perform-action
-                    perform_action: script.bedroom_music_timer_start
+                    perform_action: script.girlroom_music_timer_start
                 - type: button
                   name: 'Stopp'
                   icon: mdi:stop
@@ -695,7 +689,7 @@ views:
                   entity: sensor.bedroom_music_timer_minutes
             - type: entities
               entities:
-                - entity: timer.childroom_music
+                - entity: timer.girlroom_music
                   name: Status
                   icon: mdi:timelapse
                   state_color: true
@@ -707,6 +701,9 @@ views:
         show_header_toggle: false
         entities:
           - type: section
+            label: Kök
+          - number.sonos_kitchen_bass
+          - type: section
             label: Vardagsrum
           - entity: switch.sonos_livingroom_night_sound
             state_color: true
@@ -714,11 +711,8 @@ views:
             state_color: true
           - number.sonos_livingroom_bass
           - type: section
-            label: Kök
-          - number.sonos_kitchen_bass
-          - type: section
-            label: Barnrum
-          - number.sonos_childroom_bass
+            label: Flickrum
+          - number.sonos_girlroom_bass
 
 ################# CAMERA #################
 
@@ -852,12 +846,12 @@ views:
                   action: perform-action
                   perform_action: script.vacuum_clean_bedroom_neato_d7
               - type: button
-                entity: script.vacuum_clean_childroom_neato_d7
+                entity: script.vacuum_clean_girlroom_neato_d7
                 name: Barnrum
                 icon: mdi:baby
                 tap_action:
                   action: perform-action
-                  perform_action: script.vacuum_clean_childroom_neato_d7
+                  perform_action: script.vacuum_clean_girlroom_neato_d7
               - type: button
                 entity: script.vacuum_clean_office_neato_d7
                 name: Arbetsrum
@@ -1091,7 +1085,7 @@ views:
           - input_datetime.wakeup_weekdays
           - entity: automation.wakeup_weekdays
             name: 'Aktivera'
-          - input_boolean.childroom_wakeup
+          - input_boolean.childrooms_wakeup
           - entity: automation.enable_sonos_alarm
             name: 'Sonos alarm'
           - input_boolean.wakeup_override

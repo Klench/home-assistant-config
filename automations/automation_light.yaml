@@ -29,15 +29,15 @@
   actions:
     - action: script.indoor_lights_relaxed
     - condition: state
-      entity_id: binary_sensor.childroom_sonos_is_grouped
+      entity_id: binary_sensor.girlroom_sonos_is_grouped
       state: 'on'
-    - action: script.sonos_ungroup_childroom_speaker
+    - action: script.sonos_ungroup_girlroom_speaker
     - condition: template
       value_template: >
-        {{ state_attr('media_player.childroom_sonos','volume_level') > 0.10 }}
+        {{ state_attr('media_player.girlroom_sonos','volume_level') > 0.10 }}
     - action: media_player.volume_set
       data:
-        entity_id: media_player.childroom_sonos
+        entity_id: media_player.girlroom_sonos
         volume_level: 0.10
 
 - alias: 'Hallway bright'
@@ -51,12 +51,12 @@
   actions:
     action: script.hallway_bright
 
-- alias: 'Child room night light'
+- alias: 'Girl room night light'
   triggers:
     trigger: time
     at: '21:30:00'
   actions:
-    action: script.childroom_night_light
+    action: script.girlroom_night_light
 
 - alias: 'Advent lights workday'
   initial_state: true
@@ -181,7 +181,7 @@
   actions:
     - action: script.turn_off_outdoor_lights
 
-- alias: 'Turn off child room night light at sunrise'
+- alias: 'Turn off girl room night light at sunrise'
   initial_state: true
   triggers:
     trigger: sun
@@ -190,7 +190,7 @@
   actions:
     action: light.turn_off
     target:
-      entity_id: light.childroom_led_strip
+      entity_id: light.girlroom_led_strip
 
 ################# WAKEUP/BED #################
 
@@ -216,7 +216,7 @@
   actions:
     action: script.wakeup_lights
 
-- alias: 'Child room morning wakeup light'
+- alias: 'Girl room morning wakeup light'
   triggers:
     trigger: time
     at: '07:00:00'
@@ -227,7 +227,7 @@
   actions:
     action: light.turn_on
     data:
-      entity_id: light.childroom_led_strip
+      entity_id: light.girlroom_led_strip
       brightness_pct: 12
       rgb_color: [0,0,255]
       transition: 2
@@ -271,17 +271,6 @@
       - sat
   actions:
     action: script.go_to_bed_lights
-
-- alias: 'Wakeup nursery'
-  triggers:
-    trigger: time
-    at: input_datetime.wakeup_nursery
-  actions:
-    action: light.turn_on
-    data:
-      entity_id: light.bedroom_bedside_2
-      brightness_pct: 100
-      transition: 2
 
 ################# AWAY #################
 
@@ -398,7 +387,7 @@
         {{ is_state_attr('light.hallway_ceiling_bottom_floor','brightness',255) }}
     - condition: template
       value_template: >
-        {{ not (is_state('binary_sensor.childroom_sonos_is_grouped','off') and is_state('media_player.childroom_sonos','playing')) }}
+        {{ not (is_state('binary_sensor.girlroom_sonos_is_grouped','off') and is_state('media_player.girlroom_sonos','playing')) }}
   actions:
     action: script.hallway_top_floor_bright
 
@@ -413,7 +402,7 @@
       entity_id: input_boolean.enable_hue_motion_sensor_hallway
       state: 'on'
     - condition: state
-      entity_id: light.office_ceiling
+      entity_id: light.bedroom_ceiling
       state: 'off'
     - condition: state
       entity_id: binary_sensor.relaxed_mode
@@ -442,17 +431,7 @@
   actions:
     - action: script.turn_on
       target:
-        entity_id: script.office_bright
-    # - condition: time
-    #   before: '11:00:00'
-    #   after: '16:00:00'
-    # - condition: template
-    #   value_template: >
-    #     {{ not (is_state('binary_sensor.childroom_sonos_is_grouped','off') and is_state('media_player.childroom_sonos','playing')) }}
-    # - action: script.turn_on
-    #   target:
-    #     entity_id:
-    #       - script.childroom_bright
+        entity_id: script.bedroom_bright
 
 ################# TURN OFF TOP FLOOR LIGHTS NOT IN USE #################
 
@@ -470,7 +449,7 @@
         entity_id: light.hallway_ceiling_top_floor
         state: 'on'
       - condition: state
-        entity_id: media_player.childroom_sonos
+        entity_id: media_player.girlroom_sonos
         state: 'playing'
     - condition: state
       entity_id:
@@ -488,9 +467,7 @@
         entity_id: script.hallway_bottom_floor_bright
     - action: light.turn_off
       target:
-        entity_id:
-          - light.office_ceiling
-          - light.childroom_ceiling
+        entity_id: light.bedroom_ceiling
 
 ################# MISC #################
 
@@ -502,13 +479,13 @@
     to: 'off'
   conditions:
     - condition: state
-      entity_id: light.office_desk
+      entity_id: light.bedroom_desk
       state: 'on'
     - condition: state
       entity_id: binary_sensor.relaxed_mode
       state: 'on'
   actions:
-    action: script.office_low_brightness
+    action: script.bedroom_low_brightness
 
 - alias: 'Gaming PC turning on'
   initial_state: true
@@ -518,13 +495,13 @@
     to: 'on'
   conditions:
     - condition: state
-      entity_id: light.office_desk
+      entity_id: light.bedroom_desk
       state: 'on'
     - condition: state
       entity_id: binary_sensor.relaxed_mode
       state: 'on'
   actions:
-    action: script.office_relaxed
+    action: script.bedroom_relaxed
 
 - alias: 'Davids iPhone charging'
   initial_state: true
@@ -541,10 +518,10 @@
       entity_id: switch.wol_vidar
       state: 'off'
     - condition: state
-      entity_id: light.office_desk
+      entity_id: light.bedroom_desk
       state: 'on'
   actions:
-    action: script.office_low_brightness
+    action: script.bedroom_low_brightness
 
 ################# CREATE LIGHT GROUPS #################
 
@@ -557,5 +534,5 @@
     - action: script.create_indoor_lights_group
       data:
         exclude_area_id: ['utomhus']
-        exclude_entity_id: ['light.childroom_led_strip']
+        exclude_entity_id: ['light.boyroom_led_strip']
     - action: script.create_all_lights_group

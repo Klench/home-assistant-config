@@ -151,7 +151,7 @@ calendar:
 #     hosts:
 #       - !secret kitchen_sonos_ip
 #       - !secret livingroom_sonos_ip
-#       - !secret childroom_sonos_ip
+#       - !secret girlroom_sonos_ip
 
 ################# ZHA #################
 

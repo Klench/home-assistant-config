@@ -17,6 +17,6 @@
     livingroom_sonos_is_grouped:
       value_template: >
         {{ not is_state_attr('media_player.livingroom_sonos','group_members',['media_player.livingroom_sonos']) }}
-    childroom_sonos_is_grouped:
+    girlroom_sonos_is_grouped:
       value_template: >
-        {{ not is_state_attr('media_player.childroom_sonos','group_members',['media_player.childroom_sonos']) }}
+        {{ not is_state_attr('media_player.girlroom_sonos','group_members',['media_player.girlroom_sonos']) }}

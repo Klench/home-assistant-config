@@ -63,7 +63,7 @@ vacuum_clean_bedroom_neato_d7:
           {{ states('sensor.vacuum_extra_care_neato') }}
         zone: Bedroom
 
-vacuum_clean_childroom_neato_d7:
+vacuum_clean_girlroom_neato_d7:
   sequence:
     - action: neato.custom_cleaning
       data:
@@ -72,7 +72,7 @@ vacuum_clean_childroom_neato_d7:
           {{ states('sensor.vacuum_mode_neato') }}
         navigation: >
           {{ states('sensor.vacuum_extra_care_neato') }}
-        zone: Childroom
+        zone: girlroom
 
 vacuum_clean_office_neato_d7:
   sequence:

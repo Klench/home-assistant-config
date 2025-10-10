@@ -11,7 +11,7 @@ sonos_all_speakers:
   name: "Sonos all speakers"
   entities:
     - media_player.kitchen_sonos
-    - media_player.childroom_sonos
+    - media_player.girlroom_sonos
     - media_player.livingroom_sonos
 wifi:
   name: "Wi-Fi"

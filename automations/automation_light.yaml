@@ -189,9 +189,8 @@
 
 - alias: 'Wakeup weekdays'
   triggers:
-    trigger: template
-    value_template: >
-      {{ now() >= today_at(states('input_datetime.wakeup_weekdays')) - timedelta(minutes = 30) }}
+    trigger: time
+    at: input_datetime.wakeup_weekdays
   conditions:
     condition: or
     conditions:
@@ -211,9 +210,8 @@
 
 - alias: 'Wakeup weekend'
   triggers:
-    trigger: template
-    value_template: >
-      {{ now() >= today_at(states('input_datetime.wakeup_weekend')) - timedelta(minutes = 30) }}
+    trigger: time
+    at: input_datetime.wakeup_weekend
   conditions:
     - condition: time
       weekday:

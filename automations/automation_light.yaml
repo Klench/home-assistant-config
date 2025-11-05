@@ -51,13 +51,6 @@
   actions:
     action: script.hallway_bright
 
-- alias: 'Girl room night light'
-  triggers:
-    trigger: time
-    at: '21:30:00'
-  actions:
-    action: script.girlroom_night_light
-
 - alias: 'Advent lights workday'
   initial_state: true
   triggers:
@@ -181,7 +174,7 @@
   actions:
     - action: script.turn_off_outdoor_lights
 
-- alias: 'Turn off girl room night light at sunrise'
+- alias: 'Turn off boy room night light at sunrise'
   initial_state: true
   triggers:
     trigger: sun
@@ -190,7 +183,7 @@
   actions:
     action: light.turn_off
     target:
-      entity_id: light.girlroom_led_strip
+      entity_id: light.boyroom_led_strip
 
 ################# WAKEUP/BED #################
 
@@ -216,23 +209,6 @@
   actions:
     action: script.wakeup_lights
 
-- alias: 'Girl room morning wakeup light'
-  triggers:
-    trigger: time
-    at: '07:00:00'
-  conditions:
-    condition: state
-    entity_id: binary_sensor.workday_sensor
-    state: 'on'
-  actions:
-    action: light.turn_on
-    data:
-      entity_id: light.girlroom_led_strip
-      brightness_pct: 12
-      rgb_color: [0,0,255]
-      transition: 2
-      effect: None
-
 - alias: 'Wakeup weekend'
   triggers:
     trigger: template
@@ -249,28 +225,39 @@
   actions:
     action: script.wakeup_lights
 
-- alias: 'Go to bed weekdays'
+- alias: 'Boy room morning wakeup light workday'
   triggers:
     trigger: time
-    at: '23:00:00'
+    at: '06:30:00'
   conditions:
     condition: state
-    entity_id: binary_sensor.workday_sensor_offset
+    entity_id: binary_sensor.workday_sensor
     state: 'on'
   actions:
-    action: script.go_to_bed_lights
+    action: light.turn_on
+    data:
+      entity_id: light.boyroom_led_strip
+      brightness_pct: 12
+      rgb_color: [0,0,255]
+      transition: 2
+      effect: None
 
-- alias: 'Go to bed weekend'
+- alias: 'Boy room morning wakeup light weekend'
   triggers:
     trigger: time
-    at: '23:59:00'
+    at: '07:15:00'
   conditions:
-    condition: time
-    weekday:
-      - fri
-      - sat
+    condition: state
+    entity_id: binary_sensor.workday_sensor
+    state: 'off'
   actions:
-    action: script.go_to_bed_lights
+    action: light.turn_on
+    data:
+      entity_id: light.boyroom_led_strip
+      brightness_pct: 12
+      rgb_color: [0,0,255]
+      transition: 2
+      effect: None
 
 ################# AWAY #################
 
@@ -458,7 +445,7 @@
       state: 'off'
       for: "00:30:00"
     - condition: state
-      entity_id: device_tracker.sela_lt6ywwb54
+      entity_id: device_tracker.work_laptop
       state: 'not_home'
       for: "00:30:00"
   actions:

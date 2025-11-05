@@ -428,7 +428,7 @@
     data:
       entity_id: light.girlroom_menorah
 
-- alias: 'Ikea button girlroom led strip disco'
+- alias: 'Ikea button girlroom disco'
   initial_state: true
   triggers:
     trigger: event
@@ -441,23 +441,9 @@
     entity_id: input_boolean.enable_advent_light_automations
     state: 'off'
   actions:
-    - choose:
-        - conditions:
-            condition: state
-            entity_id: light.girlroom_led_strip
-            state: 'off'
-          sequence:
-            - action: script.turn_on
-              target:
-                entity_id: script.girlroom_disco
-        - conditions:
-            condition: state
-            entity_id: light.girlroom_led_strip
-            state: 'on'
-          sequence:
-            - action: light.turn_off
-              target:
-                entity_id: light.girlroom_led_strip
+    - action: script.turn_on
+      target:
+        entity_id: script.girlroom_disco
 
 - alias: 'Ikea button girlroom light turn off'
   initial_state: true
@@ -541,7 +527,7 @@
     target:
       entity_id: script.boyroom_bright
 
-- alias: 'Office switch turn off'
+- alias: 'Boy room switch turn off'
   initial_state: true
   triggers:
     trigger: event

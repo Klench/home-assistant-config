@@ -188,7 +188,7 @@ views:
             - type: "light-brightness"
           features_position: inline
         - type: tile
-          entity: light.hallway_stair_group
+          entity: light.hallway_stair
           features:
             - type: "light-brightness"
           features_position: inline
@@ -215,19 +215,19 @@ views:
           hide_state: true
           icon_tap_action:
             action: toggle
-        - type: tile
-          entity: light.bedroom_window
-          visibility:
-            - condition: state
-              entity: input_boolean.enable_advent_light_automations
-              state: 'off'
-        - type: tile
-          entity: light.bedroom_window
-          icon: mdi:star-david
-          visibility:
-            - condition: state
-              entity: input_boolean.enable_advent_light_automations
-              state: 'on'
+        # - type: tile
+        #   entity: light.bedroom_window
+        #   visibility:
+        #     - condition: state
+        #       entity: input_boolean.enable_advent_light_automations
+        #       state: 'off'
+        # - type: tile
+        #   entity: light.bedroom_window
+        #   icon: mdi:star-david
+        #   visibility:
+        #     - condition: state
+        #       entity: input_boolean.enable_advent_light_automations
+        #       state: 'on'
         - type: tile
           entity: light.bedroom_ceiling
           features:
@@ -277,15 +277,15 @@ views:
           features_position: inline
         - type: tile
           entity: light.boyroom_led_strip
-          features:
-            - type: "light-brightness"
-          features_position: inline
+        - type: tile
+          entity: light.boyroom_window
           visibility:
             - condition: state
               entity: input_boolean.enable_advent_light_automations
               state: 'off'
         - type: tile
           entity: light.boyroom_window
+          icon: mdi:star-david
           visibility:
             - condition: state
               entity: input_boolean.enable_advent_light_automations
@@ -719,16 +719,6 @@ views:
   - icon: mdi:cctv
     cards:
 
-      - type: conditional
-        conditions:
-          - entity: switch.docker_frigate
-            state: 'off'
-        card:
-          type: entities
-          title: Aktivera Frigate
-          entities:
-            - switch.docker_frigate
-
       - type: custom:advanced-camera-card
         live:
           auto_unmute:
@@ -743,6 +733,10 @@ views:
         cameras:
           - camera_entity: camera.asgari_1
             live_provider: go2rtc
+            # go2rtc:
+            #   modes:
+            #     - mse
+            #     - webrtc
           - camera_entity: camera.deltaco_1
             live_provider: go2rtc
 
@@ -1074,12 +1068,6 @@ views:
         title: Väckning
         show_header_toggle: false
         entities:
-          - type: section
-            label: 'Amning'
-          - input_datetime.wakeup_nursery
-          - entity: automation.wakeup_nursery
-            name: 'Aktivera'
-            icon: mdi:mother-nurse
           - type: section
             label: 'Vardagar'
           - input_datetime.wakeup_weekdays
@@ -1413,22 +1401,19 @@ views:
           - entity: automation.kitchen_coffee_maker_timer_start
             icon: mdi:coffee-maker
           - automation.wakeup_weekdays
+          - input_boolean.childrooms_wakeup
           - automation.enable_sonos_alarm
           - automation.wakeup_weekend
-          - automation.go_to_bed_weekdays
-          - automation.go_to_bed_weekend
           - automation.evening_bright
           - automation.evening_relaxed
           - automation.hallway_bright
-          - automation.child_room_night_light
-          - automation.child_room_morning_wakeup_light
           - input_boolean.enable_advent_light_automations
           - automation.sunset
           - input_boolean.window_lights_after_sunset
           - input_boolean.enable_away_lights
           - input_boolean.coming_home_turn_on_lights
           - automation.leaving_home
-          - automation.watching_tv
+          # - automation.watching_tv
           - automation.tv_off_group_speakers
           - input_boolean.enable_bathroom_floor_heater_automations
 

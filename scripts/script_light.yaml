@@ -70,7 +70,7 @@ indoor_lights_low_brightness:
             entity_id: script.ikea_light_turn_on
           data:
             variables:
-              entity_id: light.hallway_stair_group
+              entity_id: light.hallway_stair
               brightness_pct: 1
               color_temp_kelvin: 2200
               transition: 2
@@ -126,10 +126,9 @@ wakeup_lights:
           - script.livingroom_wakeup
           - script.hallway_wakeup
           - script.kitchen_wakeup
-          - script.bedroom_wakeup
     - condition: state
-      entity_id: input_boolean.childrooms_wakeup
-      state: 'on'
+      entity_id: sun.sun
+      state: 'below_horizon'
     - condition: or
       conditions:
         - condition: state
@@ -138,6 +137,12 @@ wakeup_lights:
         - condition: state
           entity_id: input_boolean.wakeup_override
           state: 'on'
+    - action: script.turn_on
+      target:
+        entity_id: script.bedroom_wakeup
+    - condition: state
+      entity_id: input_boolean.childrooms_wakeup
+      state: 'on'
     - action: script.turn_on
       target:
         entity_id:
@@ -242,10 +247,9 @@ boyroom_relaxed:
         brightness_pct: 30
         color_temp_kelvin: 2200
         transition: 2
-    # - action: light.turn_on
-    #   data:
-    #     entity_id: light.boyroom_bedside
-    #     brightness_pct: 100
+    - action: light.turn_on
+      target:
+        entity_id: light.boyroom_window
     - condition: state
       entity_id: input_boolean.enable_advent_light_automations
       state: 'on'
@@ -298,7 +302,16 @@ boyroom_light_dim:
       target:
         entity_id:
           - light.hallway_ceiling_top_floor
-          - light.hallway_stair_group
+          - light.hallway_stair
+    - action: script.turn_on
+      target:
+        entity_id: script.ikea_light_turn_on
+      data:
+        variables:
+          entity_id: light.hallway_ceiling_bottom_floor
+          brightness_pct: 30
+          color_temp_kelvin: 2700
+          transition: 2
     - action: light.turn_on
       data:
         entity_id: light.boyroom_led_strip
@@ -323,12 +336,12 @@ boyroom_light_dim:
             brightness_pct: 20
             color_temp_kelvin: 2200
             transition: 600
-    - delay: '00:10:00'
+    - delay: '00:15:00'
     - action: light.turn_off
       target:
         entity_id:
           - light.boyroom_ceiling
-          - light.boyoom_window
+          - light.boyroom_window
 
 boyroom_disco:
   alias: 'Disco'
@@ -410,7 +423,16 @@ girlroom_light_dim:
       target:
         entity_id:
           - light.hallway_ceiling_top_floor
-          - light.hallway_stair_group
+          - light.hallway_stair
+    - action: script.turn_on
+      target:
+        entity_id: script.ikea_light_turn_on
+      data:
+        variables:
+          entity_id: light.hallway_ceiling_bottom_floor
+          brightness_pct: 30
+          color_temp_kelvin: 2700
+          transition: 2
     - if:
         - condition: state
           entity_id: light.girlroom_ceiling
@@ -450,12 +472,18 @@ girlroom_disco:
         entity_id: light.girlroom_ceiling
         brightness_pct: 100
         effect: 'colorloop'
-    - condition: state
-      entity_id: binary_sensor.girlroom_sonos_is_grouped
-      state: 'on'
     - action: script.turn_on
       target:
         entity_id: script.sonos_ungroup_girlroom_speaker
+    - action: python_script.media_player_volume_set
+      data:
+        entity_id: media_player.girlroom_sonos
+        volume_level: 0.4
+    - action: media_player.play_media
+      data:
+        entity_id: media_player.girlroom_sonos
+        media_content_type: music
+        media_content_id: spotify:track:6dUregFbvUNqHP5nphqesK
 
 ##### BEDROOM/OFFICE #####
 
@@ -468,8 +496,11 @@ bedroom_bright:
         brightness_pct: 100
         color_temp_kelvin: 2700
         transition: 2
+    - action: light.turn_off
+      target:
+        entity_id: light.bedroom_desk
     - condition: template
-      value_template: "{{not is_state_attr('light.bedroom_bedside','brightness',254) }}"
+      value_template: "{{ not is_state_attr('light.bedroom_bedside','brightness',254) }}"
     - action: light.turn_off
       target:
         entity_id: light.bedroom_bedside
@@ -536,13 +567,10 @@ bedroom_advent_lights:
 
 bedroom_wakeup:
   sequence:
-    - condition: state
-      entity_id: sun.sun
-      state: 'below_horizon'
     - action: light.turn_on
       data:
-        entity_id: light.bedroom_ceiling
-        brightness_pct: 30
+        entity_id: light.bedroom_desk
+        brightness_pct: 10
         transition: 1800
 
 ##### LIVINGROOM #####
@@ -654,7 +682,7 @@ hallway_bright:
         entity_id: script.ikea_light_turn_on
       data:
         variables:
-          entity_id: light.hallway_stair_group
+          entity_id: light.hallway_stair
           brightness_pct: 70
           color_temp_kelvin: 3300
           transition: 2
@@ -675,7 +703,7 @@ hallway_top_floor_bright:
         entity_id: script.ikea_light_turn_on
       data:
         variables:
-          entity_id: light.hallway_stair_group
+          entity_id: light.hallway_stair
           brightness_pct: 70
           color_temp_kelvin: 3300
           transition: 2
@@ -723,25 +751,27 @@ hallway_relaxed:
         variables:
           entity_id:
             - light.hallway_ceiling_bottom_floor
-            - light.hallway_stair_up
+            # - light.hallway_stair_up
           brightness_pct: 1
           color_temp_kelvin: 2200
           transition: 5
-    - action: script.turn_on
-      target:
-        entity_id: script.ikea_light_turn_on
-      data:
-        variables:
-          entity_id: light.hallway_stair_down
-          brightness_pct: 30
-          color_temp_kelvin: 2200
-          transition: 5
+    # - action: script.turn_on
+    #   target:
+    #     entity_id: script.ikea_light_turn_on
+    #   data:
+    #     variables:
+    #       entity_id: light.hallway_stair_down
+    #       brightness_pct: 30
+    #       color_temp_kelvin: 2200
+    #       transition: 5
     - condition: state
       entity_id: light.hallway_ceiling_top_floor
       state: 'on'
     - action: light.turn_off
       target:
-        entity_id: light.hallway_ceiling_top_floor
+        entity_id:
+          - light.hallway_ceiling_top_floor
+          - light.hallway_stair
 
 hallway_wakeup:
   sequence:
@@ -749,7 +779,7 @@ hallway_wakeup:
       data:
         entity_id:
           - light.hallway_ceiling_bottom_floor
-          - light.hallway_stair_group
+          - light.hallway_stair
         brightness_pct: 1
         transition: 1
     - delay:
@@ -758,7 +788,7 @@ hallway_wakeup:
       data:
         entity_id:
           - light.hallway_ceiling_bottom_floor
-          - light.hallway_stair_group
+          - light.hallway_stair
         color_temp_kelvin: 3300
         transition: 1
     - delay:
@@ -770,7 +800,7 @@ hallway_wakeup:
         transition: 1800
     - action: light.turn_on
       data:
-        entity_id: light.hallway_stair_group
+        entity_id: light.hallway_stair
         brightness_pct: 70
         transition: 1800
 

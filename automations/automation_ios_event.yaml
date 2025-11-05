@@ -1,4 +1,4 @@
-- alias: 'Toggle coffee maker'
+- alias: 'Start coffee maker'
   initial_state: true
   triggers:
     - trigger: event
@@ -11,7 +11,7 @@
         sourceDevicePermanentID: CFD2DEC1-8CF3-432F-AF78-7419632CC842
         triggerSource: appShortcut
   actions:
-    - action: switch.toggle
+    - action: switch.turn_on
       target:
         entity_id: switch.kitchen_coffee_maker
 

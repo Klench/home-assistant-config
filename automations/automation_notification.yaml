@@ -339,11 +339,15 @@
     not:
       - condition: state
         entity_id:
-          - sensor.docker_traefik_state
-          - sensor.docker_authelia_state
-          - sensor.docker_mariadb_state
-          - sensor.docker_wordpress_state
-        state: 'running'
+          - binary_sensor.traefik_status
+          - binary_sensor.authelia_status
+          - binary_sensor.redis_status
+          - binary_sensor.mariadb_status
+          - binary_sensor.wordpress_status
+          - binary_sensor.adguard_home_status
+          - binary_sensor.honeygain_status
+          - binary_sensor.plexmediaserver_status
+        state: 'on'
       - condition: time
         after: "04:00:00"
         before: "05:00:00"

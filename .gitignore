@@ -55,11 +55,13 @@ themes/
 blueprints/
 .storage/
 neighbours/
+.local/
 
 #  Visual Studio Code settings
 .vscode/
 
 # Backups
 backups/
+storage_backup.tar.gz
 
 # End of https://www.gitignore.io/api/homeassistant

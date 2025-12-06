@@ -215,19 +215,8 @@ views:
           hide_state: true
           icon_tap_action:
             action: toggle
-        # - type: tile
-        #   entity: light.bedroom_window
-        #   visibility:
-        #     - condition: state
-        #       entity: input_boolean.enable_advent_light_automations
-        #       state: 'off'
-        # - type: tile
-        #   entity: light.bedroom_window
-        #   icon: mdi:star-david
-        #   visibility:
-        #     - condition: state
-        #       entity: input_boolean.enable_advent_light_automations
-        #       state: 'on'
+        - type: tile
+          entity: light.bedroom_desk
         - type: tile
           entity: light.bedroom_ceiling
           features:
@@ -238,15 +227,25 @@ views:
           features:
             - type: "light-brightness"
           features_position: inline
+          # visibility:
+          #   - condition: state
+          #     entity: input_boolean.enable_advent_light_automations
+          #     state: 'off'
+        # - type: tile
+        #   entity: light.bedroom_window
+        #   visibility:
+        #     - condition: state
+        #       entity: input_boolean.enable_advent_light_automations
+        #       state: 'off'
+        - type: tile
+          entity: light.bedroom_window
+          icon: mdi:menorah
           visibility:
             - condition: state
               entity: input_boolean.enable_advent_light_automations
-              state: 'off'
-        - type: tile
-          entity: light.bedroom_desk
-          features:
-            - type: "light-brightness"
-          features_position: inline
+              state: 'on'
+          grid_options:
+            columns: full
       title: Sovrum
 
     - cards:
@@ -320,6 +319,8 @@ views:
           features_position: inline
         - type: tile
           entity: light.girlroom_menorah
+          grid_options:
+            columns: full
           visibility:
             - condition: state
               entity: input_boolean.enable_advent_light_automations
@@ -727,16 +728,13 @@ views:
             mode: grid
             grid_columns: 1
         menu:
+          position: right
           buttons:
             expand:
               enabled: true
         cameras:
           - camera_entity: camera.asgari_1
             live_provider: go2rtc
-            # go2rtc:
-            #   modes:
-            #     - mse
-            #     - webrtc
           - camera_entity: camera.deltaco_1
             live_provider: go2rtc
 

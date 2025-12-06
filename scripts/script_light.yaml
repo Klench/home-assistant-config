@@ -161,7 +161,9 @@ window_lights:
       state: 'on'
     - action: script.turn_on
       target:
-        entity_id: script.kitchen_advent_lights
+        entity_id:
+          - script.kitchen_advent_lights
+          - script.boyroom_advent_lights
 
 advent_lights_turn_on:
   alias: 'Adventsbelysning'
@@ -240,6 +242,13 @@ boyroom_bright:
 boyroom_relaxed:
   alias: 'Mysbelysning'
   sequence:
+    if:
+      condition: state
+      entity_id: input_boolean.enable_advent_light_automations
+      state: 'on'
+    then:
+    - action: script.boyroom_advent_lights
+    else:
     - action: light.turn_on
       target:
         entity_id: light.boyroom_ceiling
@@ -250,10 +259,6 @@ boyroom_relaxed:
     - action: light.turn_on
       target:
         entity_id: light.boyroom_window
-    - condition: state
-      entity_id: input_boolean.enable_advent_light_automations
-      state: 'on'
-    - action: script.boyroom_advent_lights
 
 boyroom_advent_lights:
   sequence:
@@ -629,6 +634,35 @@ livingroom_relaxed:
       state: 'on'
     - action: script.livingroom_advent_lights
 
+livingroom_dinner_lights:
+  alias: 'Middagsbelysbning'
+  sequence:
+    - action: light.turn_on
+      data:
+        entity_id: light.livingroom_dinner_table
+        brightness_pct: 60
+        color_temp_kelvin: 2500
+        transition: 5
+    - action: light.turn_on
+      data:
+        entity_id: light.livingroom_couch_table
+        brightness_pct: 70
+        transition: 5
+    - action: light.turn_on
+      data:
+        entity_id: light.livingroom_floor
+        brightness_pct: 70
+        color_temp_kelvin: 2500
+        transition: 5
+    - action: light.turn_on
+      target:
+        entity_id:
+          - light.livingroom_window
+    - condition: state
+      entity_id: input_boolean.enable_advent_light_automations
+      state: 'on'
+    - action: script.livingroom_advent_lights
+
 livingroom_low_brightness:
   sequence:
     - action: light.turn_on
@@ -773,6 +807,31 @@ hallway_relaxed:
           - light.hallway_ceiling_top_floor
           - light.hallway_stair
 
+hallway_dinner_lights:
+  alias: 'Middagsbelysning'
+  sequence:
+    - action: script.turn_on
+      target:
+        entity_id: script.ikea_light_turn_on
+      data:
+        variables:
+          entity_id: light.hallway_ceiling_bottom_floor
+          brightness_pct: 50
+          color_temp_kelvin: 2700
+          transition: 5
+    - action: script.turn_on
+      target:
+        entity_id: script.ikea_light_turn_on
+      data:
+        variables:
+          entity_id: light.hallway_stair
+          brightness_pct: 50
+          color_temp_kelvin: 2700
+          transition: 5
+    - action: light.turn_off
+      target:
+        entity_id: light.hallway_ceiling_top_floor
+
 hallway_wakeup:
   sequence:
     - action: light.turn_on
@@ -843,6 +902,26 @@ kitchen_relaxed:
         entity_id: light.kitchen_ceiling
         brightness_pct: 40
         color_temp_kelvin: 2200
+        transition: 5
+    - condition: state
+      entity_id: input_boolean.enable_advent_light_automations
+      state: 'on'
+    - action: script.kitchen_advent_lights_relaxed
+
+kitchen_dinner_lights:
+  alias: 'Middagsbelysning'
+  sequence:
+    - action: light.turn_on
+      data:
+        entity_id: light.kitchen_table
+        brightness_pct: 70
+        color_temp_kelvin: 2400
+        transition: 5
+    - action: light.turn_on
+      data:
+        entity_id: light.kitchen_ceiling
+        brightness_pct: 40
+        color_temp_kelvin: 2400
         transition: 5
     - condition: state
       entity_id: input_boolean.enable_advent_light_automations

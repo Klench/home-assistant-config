@@ -1,0 +1,86 @@
+- sensor:
+  - default_entity_id: sensor.outdoor_temperature
+    name: 'Utomhus'
+    icon: mdi:thermometer
+    unit_of_measurement: '°C'
+    state: >
+      {{ (state_attr('weather.met_hem','temp  erature') * 0.4 + state_attr('weather.smhi_hem','temperature') * 0.6) | round(1) }}
+  - default_entity_id: sensor.hallway_switch_updated
+    name: 'Hallway switch updated'
+    state: >
+      {{ state_attr('remote.hallway_switch','last_updated') }}
+  - default_entity_id: sensor.girl_music_timer_duration
+    state: >
+      {{ "00:%0.02d:00" | format(states('input_number.bedroom_music_timer_minutes') | int) }}
+  - default_entity_id: sensor.bedroom_music_timer_minutes
+    name: 'Längd'
+    icon: mdi:timer-outline
+    unit_of_measurement: 'min'
+    state: >
+      {{ states('input_number.bedroom_music_timer_minutes') | round(0) }}
+  - default_entity_id: sensor.vacuum_mode_neato
+    state: >
+      {% if is_state('input_boolean.vacuum_eco_mode','on') %}
+        {{ 1 }}
+      {% else %}
+        {{ 2 }}
+      {% endif %}
+  - default_entity_id: sensor.vacuum_extra_care_neato
+    state: >
+      {% if is_state('input_boolean.vacuum_extra_care','on') %}
+        {{ 2 }}
+      {% else %}
+        {{ 1 }}
+      {% endif %}
+  - default_entity_id: sensor.ups_power_delivery
+    name: UPS Power Delivery
+    icon: mdi:flash
+    unit_of_measurement: W
+    state: >
+      {{ ((states('sensor.ups_load') | int) * 0.01 * 330) | int }}
+  - default_entity_id: sensor.car_status
+    name: Bilen
+    icon: mdi:car
+    state: >
+      {% if is_state('binary_sensor.volvo_sbw57s_engine_status','on') %}
+        Aktiv
+      {% elif not is_state('binary_sensor.volvo_sbw57s_engine_status','on') and is_state('device_tracker.volvo_sbw57s','not_home') %}
+        Borta
+      {% elif not is_state('binary_sensor.volvo_sbw57s_engine_status','on') and is_state('device_tracker.volvo_sbw57s','home') %}
+        Hemma
+      {% else %}
+        {{ states('device_tracker.volvo_sbw57s') }}
+      {% endif %}
+
+- binary_sensor:
+  - default_entity_id: binary_sensor.sonos_night_mode
+    name: 'Status'
+    icon: mdi:check-circle-outline
+    state: >
+      {{ state_attr('media_player.livingroom_sonos','night_sound') }}
+  - default_entity_id: binary_sensor.relaxed_mode
+    state: >
+      {{ states('sensor.time') > states('input_datetime.relaxed_mode') or now() < today_at("06:00") }}
+  - default_entity_id: binary_sensor.livingroom_sonos_tv_active
+    state: >
+      {{ is_state_attr('media_player.livingroom_sonos','source','TV') }}
+  - default_entity_id: binary_sensor.kitchen_sonos_is_grouped
+    state: >
+      {{ not is_state_attr('media_player.kitchen_sonos','group_members',['media_player.kitchen_sonos']) }}
+  - default_entity_id: binary_sensor.livingroom_sonos_is_grouped
+    state: >
+      {{ not is_state_attr('media_player.livingroom_sonos','group_members',['media_player.livingroom_sonos']) }}
+  - default_entity_id: binary_sensor.girlroom_sonos_is_grouped
+    state: >
+      {{ not is_state_attr('media_player.girlroom_sonos','group_members',['media_player.girlroom_sonos']) }}
+
+- switch:
+  - default_entity_id: switch.sonos_night_mode
+    name: 'Nattläge'
+    icon: mdi:sleep
+    state: >
+      {{ state_attr('media_player.livingroom_sonos','night_sound') }}
+    turn_on:
+      action: script.sonos_enable_night_mode
+    turn_off:
+      action: script.sonos_disable_night_mode

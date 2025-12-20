@@ -473,7 +473,7 @@ views:
 
     - cards:
         - type: custom:skolmat-card
-          entity: sensor.school_food
+          entity: sensor.sodra_utmarkens_skola
           header: short
           header_font: https://fonts.googleapis.com/css2?family=Roboto
       title: Skolmat

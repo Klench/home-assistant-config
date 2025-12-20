@@ -3,8 +3,3 @@
     - 'time'
     - 'date'
     - 'date_time'
-
-- platform: skolmat
-  name: "Södra Utmarkens skola"
-  url: "https://skolmaten.se/sodra-utmarkens-skola"
-  unique_id: "skolmaten"

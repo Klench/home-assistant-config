@@ -4,7 +4,7 @@
     icon: mdi:thermometer
     unit_of_measurement: '°C'
     state: >
-      {{ (state_attr('weather.met_hem','temp  erature') * 0.4 + state_attr('weather.smhi_hem','temperature') * 0.6) | round(1) }}
+      {{ (state_attr('weather.met_hem','temperature') * 0.4 + state_attr('weather.smhi_hem','temperature') * 0.6) | round(1) }}
   - default_entity_id: sensor.hallway_switch_updated
     name: 'Hallway switch updated'
     state: >

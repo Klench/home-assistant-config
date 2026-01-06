@@ -269,19 +269,19 @@ views:
           hide_state: true
           icon_tap_action:
             action: toggle
-        - type: tile
-          entity: light.boyroom_ceiling
-          features:
-            - type: "light-brightness"
-          features_position: inline
-        - type: tile
-          entity: light.boyroom_led_strip
+          visibility:
+            - condition: state
+              entity: light.boyroom_led_strip
+              state_not: 'unavailable'
         - type: tile
           entity: light.boyroom_window
           visibility:
             - condition: state
               entity: input_boolean.enable_advent_light_automations
               state: 'off'
+            - condition: state
+              entity: light.boyroom_led_strip
+              state: 'unavailable'
         - type: tile
           entity: light.boyroom_window
           icon: mdi:star-david
@@ -289,6 +289,39 @@ views:
             - condition: state
               entity: input_boolean.enable_advent_light_automations
               state: 'on'
+            - condition: state
+              entity: light.boyroom_led_strip
+              state: 'unavailable'
+        - type: tile
+          entity: light.boyroom_ceiling
+          features:
+            - type: "light-brightness"
+          features_position: inline
+        - type: tile
+          entity: light.boyroom_led_strip
+          visibility:
+            - condition: state
+              entity: light.boyroom_led_strip
+              state_not: 'unavailable'
+        - type: tile
+          entity: light.boyroom_window
+          visibility:
+            - condition: state
+              entity: input_boolean.enable_advent_light_automations
+              state: 'off'
+            - condition: state
+              entity: light.boyroom_led_strip
+              state_not: 'unavailable'
+        - type: tile
+          entity: light.boyroom_window
+          icon: mdi:star-david
+          visibility:
+            - condition: state
+              entity: input_boolean.enable_advent_light_automations
+              state: 'on'
+            - condition: state
+              entity: light.boyroom_led_strip
+              state_not: 'unavailable'
       title: Pojkrum
 
     - cards:
@@ -1398,10 +1431,6 @@ views:
           - input_boolean.enable_hue_motion_sensor_hallway
           - entity: automation.kitchen_coffee_maker_timer_start
             icon: mdi:coffee-maker
-          - automation.wakeup_weekdays
-          - input_boolean.childrooms_wakeup
-          - automation.enable_sonos_alarm
-          - automation.wakeup_weekend
           - automation.evening_bright
           - automation.evening_relaxed
           - automation.hallway_bright

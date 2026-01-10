@@ -80,6 +80,9 @@ history:
 # Enables my Home Assistant integration
 my:
 
+# Enable the cloud component
+cloud:
+
 # View events in a logbook
 logbook:
   exclude:

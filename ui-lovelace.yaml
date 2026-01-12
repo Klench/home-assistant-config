@@ -28,14 +28,14 @@ views:
             - entity: sensor.car_status
               double_tap_action:
                 action: navigate
-                navigation_path: /lovelace/9
-            - entity: sensor.volvo_sbw57s_battery_charge_level
+                navigation_path: /config/devices/device/f5e4b9e7ee79cc8b9396957ebf1b2e88
+            - entity: sensor.volvo_v60_battery
               name: 'Batteri'
-            - entity: sensor.volvo_sbw57s_charging_system_status
+            - entity: sensor.volvo_v60_charging_connection_status
               name: 'Status'
-            - entity: sensor.volvo_sbw57s_distance_to_empty_tank
+            - entity: sensor.volvo_v60_distance_to_empty_tank
               name: 'Räckvidd'
-            - entity: lock.volvo_sbw57s_lock
+            - entity: lock.volvo_v60_lock
             # - entity: switch.sbw57s_heater
             #   name: 'Klimat'
             #   card_mod:
@@ -1143,162 +1143,6 @@ views:
         clock: 24
         image_style: fanart
         hide_empty: true
-
-################# CAR #################
-
-  - icon: mdi:car
-    cards:
-
-      - type: vertical-stack
-        cards:
-          - type: glance
-            entities:
-              - entity: binary_sensor.sbw57s_door_lock
-                name: Dörrar
-              - entity: switch.sbw57s_heater
-                name: 'Klimat'
-                card_mod:
-                  style: |
-                    :host {
-                      {% if states('sensor.outdoor_temperature') | float > 15 %}
-                      --card-mod-icon: mdi:air-conditioner;
-                      {% else %}
-                      --card-mod-icon: mdi:radiator;
-                      {% endif %}
-                    }
-              - entity: binary_sensor.sbw57s_engine
-                name: Motor
-                icon: mdi:engine
-          - type: horizontal-stack
-            cards:
-              - type: conditional
-                conditions:
-                  - entity: lock.sbw57s_door_lock
-                    state: 'locked'
-                card:
-                  type: button
-                  name: 'Lås upp'
-                  icon: mdi:lock-open-variant
-                  tap_action:
-                    action: perform-action
-                    perform_action: lock.unlock
-                    service_data:
-                      entity_id: lock.sbw57s_door_lock
-                    confirmation:
-                      text: 'Vill du låsa upp bilen?'
-              - type: conditional
-                conditions:
-                  - entity: lock.sbw57s_door_lock
-                    state: 'unlocked'
-                card:
-                  type: button
-                  name: 'Lås'
-                  icon: mdi:lock
-                  tap_action:
-                    action: perform-action
-                    perform_action: lock.lock
-                    service_data:
-                      entity_id: lock.sbw57s_door_lock
-                    confirmation:
-                      text: 'Vill du låsa bilen?'
-              - type: conditional
-                conditions:
-                  - entity: switch.sbw57s_heater
-                    state: 'off'
-                card:
-                  type: button
-                  name: 'Klimat'
-                  card_mod:
-                    style: |
-                      :host {
-                        {% if states('sensor.outdoor_temperature') | float > 15 %}
-                        --card-mod-icon: mdi:air-conditioner;
-                        {% else %}
-                        --card-mod-icon: mdi:radiator;
-                        {% endif %}
-                      }
-                  tap_action:
-                    action: perform-action
-                    perform_action: switch.turn_on
-                    service_data:
-                      entity_id: switch.sbw57s_heater
-                    confirmation:
-                      text: 'Vill du starta förkonditionering?'
-              - type: conditional
-                conditions:
-                  - entity: switch.sbw57s_heater
-                    state: 'on'
-                card:
-                  type: button
-                  name: 'Stoppa värmare'
-                  icon: mdi:radiator-off
-                  tap_action:
-                    action: perform-action
-                    perform_action: switch.turn_off
-                    service_data:
-                      entity_id: switch.sbw57s_heater
-                    confirmation:
-                      text: 'Vill du stänga av parkeringsvärmaren?'
-              - type: button
-                name: 'Starta motor'
-                icon: mdi:engine
-                tap_action:
-                  action: perform-action
-                  perform_action: switch.turn_on
-                  service_data:
-                    entity_id: switch.sbw57s_engine
-                  confirmation:
-                    text: 'Vill du starta motorn?'
-
-      - type: entities
-        title: Hybriddrivlina
-        show_header_toggle: false
-        entities:
-          - sensor.sbw57s_battery_level
-          - sensor.sbw57s_battery_range
-          - binary_sensor.sbw57s_plug_status
-          - binary_sensor.sbw57s_battery_charging
-          - sensor.sbw57s_time_to_fully_charged
-
-      - type: entities
-        title: Översikt
-        show_header_toggle: false
-        entities:
-          - binary_sensor.sbw57s_doors
-          - binary_sensor.sbw57s_windows
-          - binary_sensor.sbw57s_hood
-          - binary_sensor.sbw57s_brake_fluid
-          - binary_sensor.sbw57s_bulbs
-          - binary_sensor.sbw57s_service
-          - binary_sensor.sbw57s_washer_fluid
-          - sensor.sbw57s_fuel_level
-          - sensor.sbw57s_fuel_amount
-          - sensor.sbw57s_range
-          - sensor.sbw57s_fuel_consumption
-
-      - type: entities
-        title: Detaljer
-        show_header_toggle: false
-        entities:
-          - sensor.sbw57s_last_trip
-          - sensor.sbw57s_odometer
-          - sensor.sbw57s_trip_meter_1
-          - sensor.sbw57s_trip_meter_2
-          - sensor.sbw57s_average_speed
-          - binary_sensor.sbw57s_front_left_door
-          - binary_sensor.sbw57s_front_right_door
-          - binary_sensor.sbw57s_rear_left_door
-          - binary_sensor.sbw57s_rear_right_door
-          - binary_sensor.sbw57s_hood
-          - binary_sensor.sbw57s_tailgate
-          - binary_sensor.sbw57s_front_left_window
-          - binary_sensor.sbw57s_front_right_window
-          - binary_sensor.sbw57s_rear_left_window
-          - binary_sensor.sbw57s_rear_right_window
-          - binary_sensor.sbw57s_front_left_tire
-          - binary_sensor.sbw57s_front_right_tire
-          - binary_sensor.sbw57s_rear_left_tire
-          - binary_sensor.sbw57s_rear_right_tire
 
 ################# QBITTORRENT #################
 

@@ -42,14 +42,14 @@
     name: Bilen
     icon: mdi:car
     state: >
-      {% if is_state('binary_sensor.volvo_sbw57s_engine_status','on') %}
+      {% if is_state('binary_sensor.volvo_v60_engine_status','on') %}
         Aktiv
-      {% elif not is_state('binary_sensor.volvo_sbw57s_engine_status','on') and is_state('device_tracker.volvo_sbw57s','not_home') %}
+      {% elif not is_state('binary_sensor.volvo_v60_engine_status','on') and is_state('device_tracker.volvo_v60','not_home') %}
         Borta
-      {% elif not is_state('binary_sensor.volvo_sbw57s_engine_status','on') and is_state('device_tracker.volvo_sbw57s','home') %}
+      {% elif not is_state('binary_sensor.volvo_v60_engine_status','on') and is_state('device_tracker.volvo_v60','home') %}
         Hemma
       {% else %}
-        {{ states('device_tracker.volvo_sbw57s') }}
+        {{ states('device_tracker.volvo_v60') }}
       {% endif %}
 
 - binary_sensor:

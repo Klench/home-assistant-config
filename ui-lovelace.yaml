@@ -828,98 +828,98 @@ views:
 
 ################# ROBOT VACUUM #################
 
-  - icon: mdi:robot-vacuum-variant
-    cards:
+  # - icon: mdi:robot-vacuum-variant
+  #   cards:
 
-      - type: custom:vacuum-card
-        entity: vacuum.neato_d7
-        map: camera.neato_d7_cleaning_map
-        stats:
-          default:
-            - attribute: clean_start
-              subtitle: Starttid
-            - attribute: clean_stop
-              subtitle: Sluttid
-            - attribute: clean_area
-              unit: 'm2'
-              subtitle: Cleaning area
-          cleaning:
-            - attribute: clean_start
-              subtitle: Starttid
-            - attribute: clean_area
-              unit: 'm2'
-              subtitle: Cleaning area
+  #     - type: custom:vacuum-card
+  #       entity: vacuum.neato_d7
+  #       map: camera.neato_d7_cleaning_map
+  #       stats:
+  #         default:
+  #           - attribute: clean_start
+  #             subtitle: Starttid
+  #           - attribute: clean_stop
+  #             subtitle: Sluttid
+  #           - attribute: clean_area
+  #             unit: 'm2'
+  #             subtitle: Cleaning area
+  #         cleaning:
+  #           - attribute: clean_start
+  #             subtitle: Starttid
+  #           - attribute: clean_area
+  #             unit: 'm2'
+  #             subtitle: Cleaning area
 
-      - type: vertical-stack
-        cards:
-          - type: button
-            entity: script.vacuum_clean_home_neato_d7
-            name: Nuvarande våningsplan
-            icon: mdi:floor-plan
-            icon_height: '50px'
-            tap_action:
-              action: perform-action
-              perform_action: script.vacuum_clean_home_neato_d7
-          - type: horizontal-stack
-            title: Ovanvåning
-            cards:
-              - type: button
-                entity: script.vacuum_clean_bedroom_neato_d7
-                name: Sovrum
-                icon: mdi:bed-double-outline
-                tap_action:
-                  action: perform-action
-                  perform_action: script.vacuum_clean_bedroom_neato_d7
-              - type: button
-                entity: script.vacuum_clean_girlroom_neato_d7
-                name: Barnrum
-                icon: mdi:baby
-                tap_action:
-                  action: perform-action
-                  perform_action: script.vacuum_clean_girlroom_neato_d7
-              - type: button
-                entity: script.vacuum_clean_office_neato_d7
-                name: Arbetsrum
-                icon: mdi:desk
-                tap_action:
-                  action: perform-action
-                  perform_action: script.vacuum_clean_office_neato_d7
-              - type: button
-                entity: script.vacuum_clean_hallway_neato_d7
-                name: Hall
-                icon: mdi:shoe-print
-                tap_action:
-                  action: perform-action
-                  perform_action: script.vacuum_clean_hallway_neato_d7
-          - type: horizontal-stack
-            title: Bottenvåning
-            cards:
-              - type: button
-                entity: script.vacuum_clean_entrance_neato_d7
-                name: Entré
-                icon: mdi:door
-                tap_action:
-                  action: perform-action
-                  perform_action: script.vacuum_clean_entrance_neato_d7
-              - type: button
-                entity: script.vacuum_clean_livingroom_neato_d7
-                name: Vardagsrum
-                icon: mdi:sofa
-                tap_action:
-                  action: perform-action
-                  perform_action: script.vacuum_clean_livingroom_neato_d7
-              - type: button
-                entity: script.vacuum_clean_kitchen_neato_d7
-                name: Kök
-                icon: mdi:silverware-fork-knife
-                tap_action:
-                  action: perform-action
-                  perform_action: script.vacuum_clean_kitchen_neato_d7
-          - type: entities
-            show_header_toggle: false
-            entities:
-              - input_boolean.vacuum_eco_mode
-              - input_boolean.vacuum_extra_care
+  #     - type: vertical-stack
+  #       cards:
+  #         - type: button
+  #           entity: script.vacuum_clean_home_neato_d7
+  #           name: Nuvarande våningsplan
+  #           icon: mdi:floor-plan
+  #           icon_height: '50px'
+  #           tap_action:
+  #             action: perform-action
+  #             perform_action: script.vacuum_clean_home_neato_d7
+  #         - type: horizontal-stack
+  #           title: Ovanvåning
+  #           cards:
+  #             - type: button
+  #               entity: script.vacuum_clean_bedroom_neato_d7
+  #               name: Sovrum
+  #               icon: mdi:bed-double-outline
+  #               tap_action:
+  #                 action: perform-action
+  #                 perform_action: script.vacuum_clean_bedroom_neato_d7
+  #             - type: button
+  #               entity: script.vacuum_clean_girlroom_neato_d7
+  #               name: Barnrum
+  #               icon: mdi:baby
+  #               tap_action:
+  #                 action: perform-action
+  #                 perform_action: script.vacuum_clean_girlroom_neato_d7
+  #             - type: button
+  #               entity: script.vacuum_clean_office_neato_d7
+  #               name: Arbetsrum
+  #               icon: mdi:desk
+  #               tap_action:
+  #                 action: perform-action
+  #                 perform_action: script.vacuum_clean_office_neato_d7
+  #             - type: button
+  #               entity: script.vacuum_clean_hallway_neato_d7
+  #               name: Hall
+  #               icon: mdi:shoe-print
+  #               tap_action:
+  #                 action: perform-action
+  #                 perform_action: script.vacuum_clean_hallway_neato_d7
+  #         - type: horizontal-stack
+  #           title: Bottenvåning
+  #           cards:
+  #             - type: button
+  #               entity: script.vacuum_clean_entrance_neato_d7
+  #               name: Entré
+  #               icon: mdi:door
+  #               tap_action:
+  #                 action: perform-action
+  #                 perform_action: script.vacuum_clean_entrance_neato_d7
+  #             - type: button
+  #               entity: script.vacuum_clean_livingroom_neato_d7
+  #               name: Vardagsrum
+  #               icon: mdi:sofa
+  #               tap_action:
+  #                 action: perform-action
+  #                 perform_action: script.vacuum_clean_livingroom_neato_d7
+  #             - type: button
+  #               entity: script.vacuum_clean_kitchen_neato_d7
+  #               name: Kök
+  #               icon: mdi:silverware-fork-knife
+  #               tap_action:
+  #                 action: perform-action
+  #                 perform_action: script.vacuum_clean_kitchen_neato_d7
+  #         - type: entities
+  #           show_header_toggle: false
+  #           entities:
+  #             - input_boolean.vacuum_eco_mode
+  #             - input_boolean.vacuum_extra_care
 
 ################# WEATHER #################
 

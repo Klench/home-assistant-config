@@ -356,9 +356,9 @@
     - condition: state
       entity_id: input_boolean.enable_hue_motion_sensor_hallway
       state: 'on'
-    - condition: state
-      entity_id: light.bedroom_ceiling
-      state: 'off'
+    - condition: template
+      value_template: >
+        {{ expand(area_entities('sovrum') | select('match', 'light')) | selectattr('state', 'eq', 'on') | list | count == 0 }}
     - condition: state
       entity_id: binary_sensor.relaxed_mode
       state: 'off'
@@ -384,7 +384,16 @@
       value_template: >
         {{ is_state_attr('light.livingroom_couch_table','brightness',255) }}
   actions:
-    - action: script.turn_on
+    if:
+      condition: state
+      entity_id: sun.sun
+      state: "below_horizon"
+    then:
+      action: script.turn_on
+      target:
+        entity_id: script.bedroom_relaxed
+    else:
+      action: script.turn_on
       target:
         entity_id: script.bedroom_bright
 

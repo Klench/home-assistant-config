@@ -847,7 +847,7 @@ hallway_wakeup:
     - action: light.turn_on
       data:
         entity_id:
-          - light.hallway_ceiling_bottom_floor
+          - light.hallway_ceiling_group
           - light.hallway_stair
         brightness_pct: 1
         transition: 1
@@ -856,7 +856,7 @@ hallway_wakeup:
     - action: light.turn_on
       data:
         entity_id:
-          - light.hallway_ceiling_bottom_floor
+          - light.hallway_ceiling_group
           - light.hallway_stair
         color_temp_kelvin: 3300
         transition: 1
@@ -864,7 +864,7 @@ hallway_wakeup:
         milliseconds: 1100
     - action: light.turn_on
       data:
-        entity_id: light.hallway_ceiling_bottom_floor
+        entity_id: light.hallway_ceiling_group
         brightness_pct: 100
         transition: 1800
     - action: light.turn_on

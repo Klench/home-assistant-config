@@ -1,9 +1,10 @@
 bathroom_floor_heater_turn_off:
   sequence:
-    action: climate.set_hvac_mode
-    data:
-      entity_id: climate.bathroom_floor
-      hvac_mode: 'heat'
+    - action: climate.set_temperature
+      data:
+        entity_id: climate.bathroom_floor
+        hvac_mode: 'heat'
+        temperature: 16
 
 bathroom_floor_heater_auto:
   sequence:

@@ -1304,18 +1304,18 @@ views:
 
 ################# CLIMATE #################
 
-  # - icon: mdi:radiator
-  #   cards:
+  - icon: mdi:radiator
+    cards:
 
-  #     - type: entities
-  #       title: Golvvärme badrum
-  #       show_header_toggle: false
-  #       entities:
-  #         - input_boolean.bathroom_floor_heater_auto
+      - type: entities
+        title: Golvvärme badrum
+        show_header_toggle: false
+        entities:
+          - input_boolean.bathroom_floor_heater_auto
 
-  #     - type: thermostat
-  #       entity: climate.bathroom_floor
-  #       name: Termostat
+      - type: thermostat
+        entity: climate.bathroom_floor
+        name: Termostat
 
 # ################# ESPHome #################
 

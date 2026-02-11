@@ -28,7 +28,14 @@ frontend:
     - /hacsfiles/hass-hue-icons/hass-hue-icons.js
 
 lovelace:
-  mode: yaml
+  resource_mode: yaml
+  dashboards:
+    lovelace:
+      mode: yaml
+      filename: ui-lovelace.yaml
+      title: Översikt
+      icon: mdi:view-dashboard
+      show_in_sidebar: true
   resources:
     - url: /hacsfiles/mini-media-player/mini-media-player-bundle.js
       type: module
@@ -177,6 +184,15 @@ panel_custom:
     config:
       # Where you want to redirect to
       target: /config/logs
+  - name: panel-redirect
+    # url_path needs to be unique for each panel_custom config
+    url_path: redirect-tools
+    sidebar_title: Utvecklarverktyg
+    sidebar_icon: mdi:tools
+    module_url: /local/panel-redirect.js
+    config:
+      # Where you want to redirect to
+      target: /config/developer-tools/yaml
 
 ################# INCLUDE #################
 

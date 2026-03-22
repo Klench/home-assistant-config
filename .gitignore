@@ -38,6 +38,7 @@ tradfri.conf
 *.db-journal
 *.pid
 tts
+.cache/
 
 # automatically downloaded dependencies
 deps

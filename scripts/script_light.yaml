@@ -878,25 +878,37 @@ hallway_wakeup:
 kitchen_bright:
   alias: 'Hög ljusstyrka'
   sequence:
-    if: 
-      - condition: state
-        entity_id: input_boolean.enable_advent_light_automations
-        state: 'on'
-    then:
-      - action: light.turn_on
-        data:
-          entity_id: light.kitchen_table
-          brightness_pct: 70
-          color_temp_kelvin: 2500
-          transition: 2
-      - action: script.kitchen_advent_lights_bright
-    else:
-      - action: light.turn_on
-        data:
-          entity_id: light.kitchen_table
-          brightness_pct: 90
-          color_temp_kelvin: 2500
-          transition: 2
+    - if:
+        - condition: state
+          entity_id: input_boolean.enable_advent_light_automations
+          state: 'on'
+      then:
+        - action: light.turn_on
+          data:
+            entity_id: light.kitchen_table
+            brightness_pct: 70
+            color_temp_kelvin: 2500
+            transition: 2
+        - action: light.turn_off
+          target:
+            entity_id: light.kitchen_wall
+        - action: script.kitchen_advent_lights_bright
+      else:
+        - action: light.turn_on
+          data:
+            entity_id: light.kitchen_table
+            brightness_pct: 90
+            color_temp_kelvin: 2500
+            transition: 2
+        - action: light.turn_on
+          data:
+            entity_id: light.kitchen_wall
+            brightness_pct: 50
+            color_temp_kelvin: 2500
+            transition: 2
+    - action: light.turn_off
+      target:
+        entity_id: light.kitchen_ceiling
 
 kitchen_relaxed:
   alias: 'Mysbelysning'
@@ -909,8 +921,10 @@ kitchen_relaxed:
         transition: 5
     - action: light.turn_on
       data:
-        entity_id: light.kitchen_ceiling
-        brightness_pct: 40
+        entity_id:
+          - light.kitchen_wall
+          - light.kitchen_ceiling
+        brightness_pct: 30
         color_temp_kelvin: 2200
         transition: 5
     - condition: state
@@ -929,7 +943,9 @@ kitchen_dinner_lights:
         transition: 5
     - action: light.turn_on
       data:
-        entity_id: light.kitchen_ceiling
+        entity_id:
+          - light.kitchen_ceiling
+          - light.kitchen_wall
         brightness_pct: 40
         color_temp_kelvin: 2400
         transition: 5
@@ -957,6 +973,12 @@ kitchen_wakeup:
           entity_id: light.kitchen_table
           brightness_pct: 100
           color_temp_kelvin: 2200
+          transition: 1800
+      - action: light.turn_on
+        data:
+          entity_id: light.kitchen_wall
+          brightness_pct: 50
+          color_temp_kelvin: 2400
           transition: 1800
 
 kitchen_advent_lights:

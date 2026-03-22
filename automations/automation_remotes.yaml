@@ -520,57 +520,125 @@
 
 ##### BOY ROOM #####
 
-- alias: 'Boy room switch turn on'
+- alias: 'Boy room remote turn on'
   initial_state: true
   triggers:
-    trigger: event
-    event_type: zha_event
-    event_data:
-      device_id: 0e0ddda228abe1831c9056b2834b6454
-      command: 'on'
+    trigger: state
+    entity_id: event.boyroom_light_remote_1
+    not_from:
+      - unavailable
+    not_to:
+      - unavailable
+      - unknown
+    # - trigger: event
+    #   event_type: zha_event
+    #   event_data:
+    #     device_id: 0e0ddda228abe1831c9056b2834b6454
+    #     command: 'on'
+  conditions:
+    condition: state
+    entity_id: event.boyroom_light_remote_1
+    state: multi_press_1
+    attribute: event_type
   actions:
     action: script.turn_on
     target:
       entity_id: script.boyroom_bright
 
-- alias: 'Boy room switch turn off'
+- alias: 'Boy room remote turn off'
   initial_state: true
   triggers:
-    trigger: event
-    event_type: zha_event
-    event_data:
-      device_id: 0e0ddda228abe1831c9056b2834b6454
-      command: 'off'
+    trigger: state
+    entity_id: event.boyroom_light_remote_2
+    not_from:
+      - unavailable
+    not_to:
+      - unavailable
+      - unknown
+    # - trigger: event
+    #   event_type: zha_event
+    #   event_data:
+    #     device_id: 0e0ddda228abe1831c9056b2834b6454
+    #     command: 'off'
+  conditions:
+    condition: state
+    entity_id: event.boyroom_light_remote_2
+    state: multi_press_1
+    attribute: event_type
   actions:
     action: light.turn_off
     target:
       area_id: pojkrum
 
-- alias: 'Boy room switch turn on hold'
+- alias: 'Boy room remote turn on long press'
   initial_state: true
   triggers:
-    trigger: event
-    event_type: zha_event
-    event_data:
-      device_id: 0e0ddda228abe1831c9056b2834b6454
-      command: 'move_with_on_off'
+    trigger: state
+    entity_id: event.boyroom_light_remote_1
+    not_from:
+      - unavailable
+    not_to:
+      - unavailable
+      - unknown
+    # - trigger: event
+    #   event_type: zha_event
+    #   event_data:
+    #     device_id: 0e0ddda228abe1831c9056b2834b6454
+    #     command: 'move_with_on_off'
+  conditions:
+    condition: state
+    entity_id: event.boyroom_light_remote_1
+    state: long_press
+    attribute: event_type
   actions:
     action: script.turn_on
     target:
       entity_id: script.boyroom_relaxed
 
-- alias: 'Office switch turn off hold'
+- alias: 'Boy room remote turn off long press'
   initial_state: true
   triggers:
-    trigger: event
-    event_type: zha_event
-    event_data:
-      device_id: 0e0ddda228abe1831c9056b2834b6454
-      command: 'move'
+    trigger: state
+    entity_id: event.boyroom_light_remote_2
+    not_from:
+      - unavailable
+    not_to:
+      - unavailable
+      - unknown
+    # - trigger: event
+    #   event_type: zha_event
+    #   event_data:
+    #     device_id: 0e0ddda228abe1831c9056b2834b6454
+    #     command: 'move'
+  conditions:
+    condition: state
+    entity_id: event.boyroom_light_remote_2
+    state: long_press
+    attribute: event_type
   actions:
     action: script.turn_on
     target:
       entity_id: script.boyroom_light_dim
+
+- alias: 'Boy room remote turn on double press'
+  initial_state: true
+  triggers:
+    trigger: state
+    entity_id: event.boyroom_light_remote_1
+    not_from:
+      - unavailable
+    not_to:
+      - unavailable
+      - unknown
+  conditions:
+    condition: state
+    entity_id: event.boyroom_light_remote_1
+    state: multi_press_2
+    attribute: event_type
+  actions:
+    action: script.turn_on
+    target:
+      entity_id: script.boyroom_disco
 
 ##### KITCHEN #####
 

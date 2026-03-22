@@ -331,7 +331,6 @@
 ################# TRAEFIK STATUS #################
 
 - alias: 'Web service down'
-  initial_state: true
   triggers:
     trigger: time_pattern
     minutes: "/10"
@@ -358,4 +357,4 @@
       title: 'Web service status'
       message: 'A web service is down'
       data:
-        url: "/lovelace/6"
+        url: "/lovelace/5"

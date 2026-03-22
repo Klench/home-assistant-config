@@ -19,11 +19,11 @@ views:
               icon: mdi:plex
               double_tap_action:
                 action: navigate
-                navigation_path: /lovelace/8
+                navigation_path: /lovelace/7
             - entity: sensor.outdoor_temperature
               double_tap_action:
                 action: navigate
-                navigation_path: /lovelace/4
+                navigation_path: /lovelace/3
             - alarm_control_panel.ajax_alarm_status
             - entity: sensor.car_status
               double_tap_action:
@@ -373,6 +373,11 @@ views:
             action: toggle
         - type: tile
           entity: light.kitchen_table
+          features:
+            - type: "light-brightness"
+          features_position: inline
+        - type: tile
+          entity: light.kitchen_wall
           features:
             - type: "light-brightness"
           features_position: inline

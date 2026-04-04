@@ -970,6 +970,11 @@ views:
       - type: button
         entity: group.wifi
 
+      - type: tile
+        entity: image.stenman_guest_qr_code
+        hide_state: true
+        title: QR kod gästnätverk
+
 ################# UNRAID #################
 
   - icon: mdi:server-network
@@ -985,6 +990,14 @@ views:
           - switch.wol_vidar
           - switch.wol_rpi_3b
           - group.wifi
+          - entity: image.stenman_guest_qr_code
+            card_mod:
+              style:
+                hui-generic-entity-row:
+                  $: |
+                    .text-content:not(.info) {
+                      display: none
+                        }
 
       - type: entities
         title: Unraid

@@ -62,8 +62,9 @@ indoor_lights_low_brightness:
               - light.hallway_ceiling_group
         - action: light.turn_on
           data:
-            entity_id: light.kitchen_table
-            brightness_pct: 50
+            entity_id: light.kitchen_wall
+            brightness_pct: 30
+            color_temp_kelvin: 2200
             transition: 2
         - action: script.turn_on
           target:
@@ -808,9 +809,6 @@ hallway_relaxed:
     #       brightness_pct: 30
     #       color_temp_kelvin: 2200
     #       transition: 5
-    - condition: state
-      entity_id: light.hallway_ceiling_top_floor
-      state: 'on'
     - action: light.turn_off
       target:
         entity_id:

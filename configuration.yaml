@@ -51,8 +51,6 @@ lovelace:
       type: module
     - url: /hacsfiles/vacuum-card/vacuum-card.js
       type: module
-    - url: /hacsfiles/zha-network-card/zha-network-card.js
-      type: module
     - url: /hacsfiles/lovelace-horizon-card/lovelace-horizon-card.js
       type: module
     - url: /hacsfiles/timer-bar-card/timer-bar-card.js
